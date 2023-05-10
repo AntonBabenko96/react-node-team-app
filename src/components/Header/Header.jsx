@@ -1,9 +1,10 @@
-import styles from './Header.module.scss';
+import style from './Header.module.scss';
 
 export default function Header() {
   return (
     <div className="container">
-      <div className={styles.header}>Hello World</div>
+      <div className={style.header}>Hello BC43</div>
+      <p className={style.text}>This is the finish line</p>
     </div>
   );
 }
