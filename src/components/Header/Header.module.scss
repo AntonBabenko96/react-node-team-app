@@ -5,3 +5,9 @@
   @include main-font(600, 36px, 1.2, 0.1em);
   text-align: center;
 }
+
+.text {
+  color: getColor('full-green');
+  @include main-font(600, 36px, 1.2, 0.1em);
+  text-align: center;
+}
