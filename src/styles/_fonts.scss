@@ -1,0 +1,28 @@
+@mixin main-font(
+  $weight,
+  $size,
+  $height,
+  $letter: 0em,
+  $style: normal,
+  $transform: none
+) {
+  font-family: 'Manrope', sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $height;
+  letter-spacing: $letter;
+  font-style: $style;
+  text-transform: $transform;
+}
+// ========  How to use:  ==============
+// К примеру есть следующие стили из секции hero:
+// font-family: 'Poppins';
+// font-style: normal;
+// font-weight: 400;
+// font-size: 72px;
+// line-height: 108px;
+
+// Вот что мы пишем в scss:
+// @include main-font(400, 72px, 108,
+// =============================================
+// Порядок задания свойств в скобочках -- font-weight, font-size, font-height, font-style (если ничего не передать, будет normal), text-transform (если ничего не передать, будет none)

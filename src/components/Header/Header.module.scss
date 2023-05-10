@@ -1,0 +1,7 @@
+@import '../../styles/styles.scss';
+
+.header {
+  color: getColor('full-red');
+  @include main-font(600, 36px, 1.2, 0.1em);
+  text-align: center;
+}
