@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import AuthBtn from './AuthBtn/AuthBtn';
 import styles from './AuthNav.module.scss';
-import paw from '../../../img/svg/pawprint.svg';
 
 const AuthNav = () => {
   return (
