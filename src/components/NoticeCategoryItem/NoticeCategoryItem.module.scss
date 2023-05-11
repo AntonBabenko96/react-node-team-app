@@ -1,0 +1,112 @@
+@import '../../styles/styles.scss';
+
+.item {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 0px 0px 40px 40px;
+  background-color: #ffffff;
+  position: relative;
+
+  @include media-min(tablet) {
+    max-width: 336px;
+  }
+}
+
+.category {
+  width: 126px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border-radius: 0px 16px 16px 0px;
+  justify-content: center;
+  position: absolute;
+  top: 16px;
+  left: 0;
+  background-color: getColor('light-blue');
+}
+
+.categoryText {
+  @include main-font(500, 14px, calc(19 / 14));
+}
+
+.favorite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: getColor('full-blue');
+  background-color: getColor('light-blue');
+}
+
+.favoriteIcon {
+  width: 24px;
+  height: 24px;
+  stroke: getColor('full-blue');
+  fill: transparent;
+}
+
+.img {
+  width: 280px;
+  height: 288px;
+}
+
+.wrapper {
+  display: flex;
+  gap: 12px;
+  position: absolute;
+  top: 248px;
+  left: 8px;
+}
+
+.box {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 28px;
+  padding: 2px 4px;
+  border-radius: 16px;
+  background-color: getColor('light-blue');
+}
+
+.info {
+  @include main-font(600, 12px, calc(16 / 12));
+}
+
+.infoIcon {
+  width: 24px;
+  height: 24px;
+  stroke: getColor('full-blue');
+  fill: transparent;
+}
+
+.title {
+  width: 231px;
+  margin-left: 20px;
+  @include main-font(700, 24px, calc(33 / 24));
+}
+
+.btn {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 24px;
+  width: 248px;
+  padding: 8px 28px;
+  border: 2px solid getColor('full-blue');
+  border-radius: 40px;
+  color: getColor('full-blue');
+  background-color: inherit;
+  @include main-font(600, 16px, calc(21 / 16));
+}

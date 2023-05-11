@@ -1,7 +1,7 @@
 import { ReactComponent as SearchIcon } from 'img/svg/search.svg';
 import { ReactComponent as CrossIcon } from 'img/svg/cross.svg';
 
-export default function Search () {
+export default function NoticesSearch () {
     return (
         <form>
             <input type="text" placeholder='Search'/>
