@@ -1,5 +1,5 @@
+import AuthNav from './AuthNav/AuthNav';
 import Navigation from './Navigation/Navigation';
-import style from './Header.module.scss';
 import { useState } from 'react';
 import Modal from 'components/Modal/Modal';
 import styles from './Header.module.scss';
@@ -11,10 +11,11 @@ export default function Header() {
     setShowModal(!showModal);
   };
   return (
-    <header className={style.header}>
-      <div className={`container ${style.headerInner}`}>
+    <header className={styles.header}>
+      <div className={`container ${styles.headerInner}`}>
         <button onClick={toggleModal}>MODAL</button>
         <Navigation />
+        <AuthNav />
         {showModal && (
           <Modal onClose={toggleModal}>
             <div className={styles.modal__wrapper}>
