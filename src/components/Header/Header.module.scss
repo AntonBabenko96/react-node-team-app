@@ -11,3 +11,147 @@
   @include main-font(600, 36px, 1.2, 0.1em);
   text-align: center;
 }
+// @import '/src/shared/styles/variables';
+
+.header__container {
+  width: 100%;
+  min-height: 60px;
+  padding: 15px 0;
+  background-color: #ffffff;
+
+  @media screen and (max-width: 767px) {
+    position: fixed;
+    z-index: 10000000;
+  }
+
+  @media screen and (min-width: 768px) {
+    min-height: 80px;
+    padding: 20px 0;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.containerInner {
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  @media screen and (min-width: 768px) {
+    height: 40px;
+  }
+}
+
+.logoBox {
+  display: flex;
+  gap: 20px;
+  min-width: 120px;
+  text-decoration: none;
+
+  @media screen and (min-width: 768px) {
+    min-width: 180px;
+  }
+}
+
+.img__wallet {
+  @media screen and (min-width: 768px) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.text__wallet {
+  display: flex;
+  align-items: center;
+  font-style: normal;
+  font-family: PoppinsBold;
+  font-size: 22px;
+  line-height: calc(33 / 22);
+  color: getColor('text-color');
+
+  @media screen and (min-width: 768px) {
+    font-size: 30px;
+    line-height: calc(45 / 30);
+  }
+}
+// ________________________________________
+.exitBox {
+  display: flex;
+  min-width: 106px;
+  align-items: center;
+  justify-content: flex-end;
+
+  @media screen and (min-width: 768px) {
+    min-width: 160px;
+  }
+}
+.name {
+  display: flex;
+  font-family: CirceRegular;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: calc(27 / 18);
+  text-align: right;
+  color: getColor('secondary-text-color');
+}
+.vector {
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: block;
+    margin: 0 12px;
+  }
+}
+.button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-family: CirceRegular;
+  font-style: normal;
+  font-size: 18px;
+  line-height: calc(27 / 18);
+  color: getColor('secondary-text-color');
+  cursor: pointer;
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: block;
+    margin-left: 8px;
+  }
+}
+
+.exit {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 8px;
+  @media screen and (min-width: 768px) {
+    margin-left: 0;
+  }
+}
+// _____________________________
+.button__question {
+}
+
+.button__wrapper {
+  @media screen and (max-width: 767.9px) {
+    gap: 25px;
+  }
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.question {
+  font-family: CirceBold;
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 90px;
+  padding: 10px;
+  color: getColor('text-color');
+}
