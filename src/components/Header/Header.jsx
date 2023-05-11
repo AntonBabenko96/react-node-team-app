@@ -1,10 +1,12 @@
 import style from './Header.module.scss';
+import Navigation from './Navigation/Navigation';
 
 export default function Header() {
   return (
-    <div className="container">
-      <div className={style.header}>Hello BC43</div>
-      <p className={style.text}>This is the finish line</p>
-    </div>
+    <header>
+      <div className="container">
+        <Navigation />
+      </div>
+    </header>
   );
 }
