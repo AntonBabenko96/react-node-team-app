@@ -20,7 +20,15 @@
 .login {
   width: 165px;
   background: getColor('full-yellow');
-  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+
+  @include media-min('mobile-resp') {
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
   &:hover,
   &:focus {
     background-color: getColor('full-white');
@@ -29,11 +37,21 @@
 }
 
 .register {
-  width: 142px;
+  width: 165px;
+
   color: getColor('full-yellow');
+  @include media-min('tablet') {
+    width: 142px;
+  }
+
   &:hover,
   &:focus {
     background-color: getColor('full-yellow');
     color: getColor('full-white');
   }
+}
+
+.login:hover .paw,
+.login:focus .paw {
+  fill: getColor('full-yellow');
 }

@@ -1,6 +1,6 @@
 import AuthNav from './AuthNav/AuthNav';
-import style from './Header.module.scss';
 import Navigation from './Navigation/Navigation';
+import style from './Header.module.scss';
 
 export default function Header() {
   return (

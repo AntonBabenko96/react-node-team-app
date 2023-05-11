@@ -1,5 +1,19 @@
+@import '../../../styles/styles.scss';
+
 .navList {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  @include media-min('mobile-resp') {
+    flex-direction: row;
+  }
+}
+
+.paw {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  fill: getColor('full-white');
 }
