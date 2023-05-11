@@ -1,5 +1,5 @@
-import { ReactComponent as SearchIcon } from 'images/svg/search.svg';
-import { ReactComponent as CrossIcon } from 'images/svg/cross.svg';
+import { ReactComponent as SearchIcon } from 'img/svg/search.svg';
+import { ReactComponent as CrossIcon } from 'img/svg/cross.svg';
 
 export default function Search () {
     return (

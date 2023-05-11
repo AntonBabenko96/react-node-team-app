@@ -1,8 +1,8 @@
-import { ReactComponent as FavoriteIcon } from "images/svg/heart.svg";
-import { ReactComponent as LocationIcon } from "images/svg/location.svg";
-import { ReactComponent as ClockIcon } from "images/svg/clock.svg";
-import { ReactComponent as MaleIcon } from "images/svg/male.svg";
-import kitten from "images/kitten.jpg";
+import { ReactComponent as FavoriteIcon } from "img/svg/heart.svg";
+import { ReactComponent as LocationIcon } from "img/svg/location.svg";
+import { ReactComponent as ClockIcon } from "img/svg/clock.svg";
+import { ReactComponent as MaleIcon } from "img/svg/male.svg";
+import kitten from "img/kitten.jpg";
 
 export default function NoticeItem({category, place, age, sex, kind}) {
     return (<li>
