@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/react-node-team-app/static/css/main.76ac7741.css",
-    "main.js": "/react-node-team-app/static/js/main.85e4a1a7.js",
+    "main.css": "/react-node-team-app/static/css/main.7834c269.css",
+    "main.js": "/react-node-team-app/static/js/main.7b61c6e8.js",
     "static/media/logo.svg": "/react-node-team-app/static/media/logo.6e2f51eeb062dc6472f5e4aa1de019f4.svg",
     "index.html": "/react-node-team-app/index.html",
-    "main.76ac7741.css.map": "/react-node-team-app/static/css/main.76ac7741.css.map",
-    "main.85e4a1a7.js.map": "/react-node-team-app/static/js/main.85e4a1a7.js.map"
+    "main.7834c269.css.map": "/react-node-team-app/static/css/main.7834c269.css.map",
+    "main.7b61c6e8.js.map": "/react-node-team-app/static/js/main.7b61c6e8.js.map"
   },
   "entrypoints": [
-    "static/css/main.76ac7741.css",
-    "static/js/main.85e4a1a7.js"
+    "static/css/main.7834c269.css",
+    "static/js/main.7b61c6e8.js"
   ]
 }
