@@ -8,8 +8,9 @@ export default function SharedLayout() {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route path="/user" element={<UserPage />} />
+        <Route path="/" element={<HomePage />}>
+          <Route path="/user" element={<UserPage />} />
+        </Route>
       </Routes>
     </>
   );
