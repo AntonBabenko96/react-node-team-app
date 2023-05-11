@@ -1,4 +1,6 @@
-import NoticeItem from "./NoticeItem/NoticeItem"
+import NoticeCategoryItem from "components/NoticeCategoryItem/NoticeCategoryItem"
+
+import styles from "./NoticesCategoriesList.module.scss"
 
 const tempNotices = [
     {
@@ -12,7 +14,7 @@ const tempNotices = [
     },
     {
         id: 2,
-        category: "sell",
+        category: "in good hands",
         imageURL: "",
         place: "Lviv",
         age: "1 year",
@@ -57,13 +59,12 @@ const tempNotices = [
     }
 ]
 
-export default function NoticesList() {
-    // const elements = tempNotices.map(item => console.log(item.id))
+export default function NoticesCategoriesList() {
     const elements = tempNotices.map(({id, category, place, age, sex, kind }) => {
-        return <NoticeItem key={id} category={category} place={place} age={age} sex={sex} kind={kind}/>
+        return <NoticeCategoryItem key={id} category={category} place={place} age={age} sex={sex} kind={kind}/>
     })
 
-    return <ul>
+    return <ul className={styles.list}>
         {elements}
     </ul>
 }
