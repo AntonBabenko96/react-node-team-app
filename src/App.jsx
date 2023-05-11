@@ -8,5 +8,4 @@ export const App = () => {
   return  <BrowserRouter>
   <SharedLayout />
 </BrowserRouter>
-
 };
