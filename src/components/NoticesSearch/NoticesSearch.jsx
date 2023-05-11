@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 // import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import {BsSearch} from "react-icons/bs"
+// import {BsSearch} from "react-icons/bs"
 
-import style from './NoticesSearch.module.scss'
+import style from './NoticesSearch.module.scss';
 
 export default function NoticesSearch() {
   const [hasClose, setHasClose] = useState(false);
@@ -20,7 +19,7 @@ export default function NoticesSearch() {
     }
 
     // SetSearchParams({ search: query });
-  }, [query, ]);
+  }, [query]);
 
   const handleInput = event => {
     setHasClose(true);
@@ -44,37 +43,36 @@ export default function NoticesSearch() {
     <>
       <div className={style.box}>
         <input
-        className={style.input}
+          className={style.input}
           name="findpets"
           type="text"
           value={query}
           placeholder="Search"
           onChange={handleInput}
         />
-         {!hasClose ? (
-            <button type='submit' onClick={onClickSearch}></button>
+        {!hasClose ? (
+          <button type="submit" onClick={onClickSearch}></button>
         ) : (
-            <button type='submit' onClick={onClick}></button>
+          <button type="submit" onClick={onClick}></button>
         )}
       </div>
     </>
   );
 }
 
-import { ReactComponent as SearchIcon } from 'img/svg/search.svg';
-import { ReactComponent as CrossIcon } from 'img/svg/cross.svg';
+// import { ReactComponent as SearchIcon } from 'img/svg/search.svg';
+// import { ReactComponent as CrossIcon } from 'img/svg/cross.svg';
 
-export default function NoticesSearch () {
-    return (
-        <form>
-            <input type="text" placeholder='Search'/>
-            <button>
-                <SearchIcon/>
-            </button>
-            <button type='button'>
-                <CrossIcon/>
-            </button>
-        </form>
-    )
-}
-
+// export default function NoticesSearch () {
+//     return (
+//         <form>
+//             <input type="text" placeholder='Search'/>
+//             <button>
+//                 <SearchIcon/>
+//             </button>
+//             <button type='button'>
+//                 <CrossIcon/>
+//             </button>
+//         </form>
+//     )
+// }
