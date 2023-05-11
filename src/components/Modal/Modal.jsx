@@ -24,7 +24,7 @@ const Modal = ({ children, onClose }) => {
     <div onClick={handleClose} className={css.overlay}>
       <div className={css.modal}>
         <button className={css.button} type="button" onClick={onClose}>
-          <CloseIcon color="secondary" />
+          <CloseIcon color="primary" />
         </button>
         {children}
       </div>
