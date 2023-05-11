@@ -1,0 +1,49 @@
+@import '../../../../styles/colors';
+
+.headerNav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: -100%;
+  right: 0;
+  top: 57.6px;
+  bottom: 0;
+  width: 100%;
+  height: calc(100vh - 57.6px);
+  z-index: 10;
+  transition: left 1s;
+
+  @media (min-width: 1280px) {
+    flex-direction: row;
+    position: static;
+    gap: 40px;
+    margin-left: 159px;
+    height: auto;
+    width: auto;
+  }
+
+  .active {
+    left: 0;
+  }
+
+  .link {
+    &:global(.active) {
+      color: getColor('full-yellow');
+    }
+  }
+}
+
+.burger {
+  position: absolute;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-color: getColor('full-yellow');
+
+  @media (min-width: 1280px) {
+    display: none;
+  }
+}

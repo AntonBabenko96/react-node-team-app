@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "text": "News",
+    "link": "/news",
+    "private": false
+  },
+  {
+    "id": "2",
+    "text": "Find pet",
+    "link": "/find-pet",
+    "private": true
+  },
+  {
+    "id": "3",
+    "text": "Our friends",
+    "link": "/our-friends",
+    "private": true
+  }
+]

@@ -1,8 +1,8 @@
+import { Route, Routes } from 'react-router';
 import Header from 'components/Header/Header';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
-import { Route, Routes } from 'react-router-dom';
 import UserPage from 'pages/UserPage/UserPage';
-
+import HomePage from 'pages/HomePage/HomePage';
 
 
 export default function SharedLayout() {
@@ -11,6 +11,7 @@ export default function SharedLayout() {
       <Header />
       <NoticesSearch/>
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/user" element={<UserPage />} />
       </Routes>
     </>

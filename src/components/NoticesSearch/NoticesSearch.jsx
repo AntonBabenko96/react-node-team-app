@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 // import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -59,3 +60,21 @@ export default function NoticesSearch() {
     </>
   );
 }
+
+import { ReactComponent as SearchIcon } from 'img/svg/search.svg';
+import { ReactComponent as CrossIcon } from 'img/svg/cross.svg';
+
+export default function NoticesSearch () {
+    return (
+        <form>
+            <input type="text" placeholder='Search'/>
+            <button>
+                <SearchIcon/>
+            </button>
+            <button type='button'>
+                <CrossIcon/>
+            </button>
+        </form>
+    )
+}
+
