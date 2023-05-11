@@ -3,6 +3,7 @@ import Header from 'components/Header/Header';
 import UserPage from 'pages/UserPage/UserPage';
 import HomePage from 'pages/HomePage/HomePage';
 
+
 export default function SharedLayout() {
   return (
     <>

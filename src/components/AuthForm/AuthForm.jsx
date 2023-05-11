@@ -9,8 +9,8 @@ import "./AuthForm.scss"
 
 export const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
-  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [currentPath] = useState(window.location.pathname);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const isRegisterPath = currentPath.endsWith('/register');
 
@@ -18,9 +18,9 @@ export const AuthForm = () => {
     setShowPassword(!showPassword);
   };
 
-  // const toggleConfirmPasswordVisibility = () => {
-  //   setShowConfirmPassword(!showConfirmPassword);
-  // };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -32,11 +32,11 @@ export const AuthForm = () => {
       // .required("Confirm Password is required"),
   });
 
-  const handleSubmit = async (values, { resetForm }) => {
+  const handleSubmit = async (values,  {resetForm} ) => {
     try {
       const response = await axios.post('/api/register', values); 
       console.log(response.data); 
-      resetForm();
+      resetForm ();
   //тут також має бути редіркет на модалку Congratulations
     } catch (error) {
       console.error(error);
@@ -93,12 +93,12 @@ export const AuthForm = () => {
               {showPassword ? (
                 <RemoveRedEyeIcon
                   className="icon"
-                  onClick={togglePasswordVisibility}
+                  onClick={toggleConfirmPasswordVisibility}
                 />
               ) : (
                 <VisibilityOffIcon
                   className="icon"
-                  onClick={togglePasswordVisibility}
+                  onClick={toggleConfirmPasswordVisibility}
                 />
               )}
             </div>
@@ -106,14 +106,14 @@ export const AuthForm = () => {
           </div>
           }
 
-          <button type="submit">{isRegisterPath ? 'Register' : 'Login'}</button>
+          <button type="submit" >{isRegisterPath ? 'Register' : 'Login'}</button>
         </Form>
       </Formik>
 
       {isRegisterPath ? (
-        <p>Already have an account? <a href="/login">Login</a></p>
+     <p>Already have an account? <a href="/login"> Login</a> </p> 
       ) : (
-        <p>Don't have an account? <a href="/register">Register</a></p>
+       <p>Don't have an account?  <a href="/register"> Register</a> </p>
       )}
     </div>
   );
