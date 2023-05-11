@@ -1,14 +1,12 @@
-import { BrowserRouter } from 'react-router-dom';
-// import { Provider } from 'react-redux';
-// import { PersistGate } from 'redux-persist/integration/react';
 import SharedLayout from './components/SharedLayout/SharedLayout';
-// import {AuthForm} from './/components/AuthForm/AuthForm'
+import { BrowserRouter } from 'react-router-dom';
 
 export const App = () => {
   return (
-    <BrowserRouter>
-      <SharedLayout />
-    </BrowserRouter>
+    <>
+      <BrowserRouter basename="/react-node-team-app">
+        <SharedLayout />
+      </BrowserRouter>
+    </>
   );
-
 };
