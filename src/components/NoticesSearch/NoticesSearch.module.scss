@@ -1,0 +1,44 @@
+@import '../../styles/styles.scss';
+
+.box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 24px;
+  margin-bottom: 20px;
+  width: 280px;
+  height: 44px;
+}
+
+.input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 24px;
+  border: none;
+  outline: none;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+
+  padding-top: 14px;
+  padding-bottom: 13px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  cursor: pointer;
+
+  background: white;
+  color:rgb(83, 83, 83);
+}
