@@ -6,6 +6,6 @@ import SharedLayout from './components/SharedLayout/SharedLayout';
 
 export const App = () => {
   return  <BrowserRouter>
-  <SharedLayout />
+  <SharedLayout  />
 </BrowserRouter>
 };
