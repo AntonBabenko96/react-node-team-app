@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import menuItems from './navMenuItems';
 import style from './Nav.module.scss';
 import { useState } from 'react';
+import AuthNav from '../../AuthNav/AuthNav';
 
 const Nav = () => {
   const [active, setActive] = useState(false);
@@ -16,6 +17,7 @@ const Nav = () => {
   return (
     <>
       <ul className={`${style.headerNav} ${active === true ? 'active' : ''}`}>
+        <AuthNav />
         {elements}
       </ul>
       <div className={style.burger} onClick={() => setActive(!active)}></div>

@@ -13,9 +13,9 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.headerInner}`}>
-        <button onClick={toggleModal}>MODAL</button>
+        {/* <button onClick={toggleModal}>MODAL</button> */}
         <Navigation />
-        <AuthNav />
+        {/* <AuthNav /> */}
         {showModal && (
           <Modal onClose={toggleModal}>
             <div className={styles.modal__wrapper}>
