@@ -3,13 +3,12 @@ import axios from 'axios';
 
 import Modal from '../Modal';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import './ModalApproveAction.scss'
+import './ModalApproveAction.scss';
 
-import "../ModalApproveAction/"
+import '../ModalApproveAction/';
 
-export const ModalApproveAction = (onClose, {name}) => {
+export const ModalApproveAction = (onClose, { name }) => {
   const [setShowModal] = useState(false);
-
 
   const closeModal = () => {
     setShowModal(false);
@@ -18,7 +17,7 @@ export const ModalApproveAction = (onClose, {name}) => {
   const handleDelete = async () => {
     try {
       const response = await axios.delete('/api/advertisement');
-      console.log(response.data); 
+      console.log(response.data);
 
       closeModal();
     } catch (error) {
@@ -30,10 +29,13 @@ export const ModalApproveAction = (onClose, {name}) => {
     <Modal onClose={onClose}>
       <h1>Delete advertisement?</h1>
       <p>
-        Are you sure you want to delete <strong>{name}</strong>? You can`t undo this action.
+        Are you sure you want to delete <strong>{name}</strong>? You can`t undo
+        this action.
       </p>
       <div>
-        <button onClick={closeModal} className={btn-close}>Cancel</button>
+        <button onClick={closeModal} className={btnClose}>
+          Cancel
+        </button>
         <button onClick={handleDelete}>
           Yes <DeleteForeverIcon />
         </button>
