@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import FirstStep from './FirstStep/FirstStep';
 import SecondStep from './SecondStep/SecondStep';
 import ThirdStep from './ThirdStep/ThirdStep';
+import styles from './AddPetPage.module.scss';
 
 const stateInitialValue = {
   petName: '',
@@ -39,6 +40,16 @@ export default function AddPetPage() {
     console.log(state);
   };
 
+  const stepStyle = position => {
+    if (currentStep === position) {
+      return styles.current;
+    }
+    if (currentStep > position) {
+      return styles.complete;
+    }
+    return styles.default;
+  };
+
   const steps = [
     <FirstStep
       data={notice}
@@ -62,5 +73,15 @@ export default function AddPetPage() {
     />,
   ];
 
-  return <div className="container">{steps[currentStep]}</div>;
+  return (
+    <div className="container">
+      <h2>Add pet</h2>
+      <div className={styles.stepWrapper}>
+        <p className={stepStyle(0)}>Choose option</p>
+        <p className={stepStyle(1)}>Personal details</p>
+        <p className={stepStyle(2)}>More info</p>
+      </div>
+      {steps[currentStep]}
+    </div>
+  );
 }

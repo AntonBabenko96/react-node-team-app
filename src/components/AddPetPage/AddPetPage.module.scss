@@ -1,0 +1,23 @@
+@import '/src/styles/styles.scss';
+
+.stepWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.current {
+  color: getColor(full-blue);
+}
+
+.complete {
+  color: getColor(full-green);
+}
+
+.default {
+  color: #888888;
+}
+
+.stepWrapper p {
+  @include main-font(500, 10px, 14px);
+  min-width: 80px;
+}
