@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/react-node-team-app/static/css/main.70675b0d.css",
-    "main.js": "/react-node-team-app/static/js/main.e44009fd.js",
+    "main.css": "/react-node-team-app/static/css/main.1eb0ab90.css",
+    "main.js": "/react-node-team-app/static/js/main.7d5eaca2.js",
     "static/media/picturesDesktop2.png": "/react-node-team-app/static/media/picturesDesktop2.18cfbc8e6f1506519929.png",
     "static/media/picturesTablet.png": "/react-node-team-app/static/media/picturesTablet.adcaaa3647d8ae5b6950.png",
     "static/media/picturesPhone.png": "/react-node-team-app/static/media/picturesPhone.e422b3be225d2906d0da.png",
@@ -16,11 +16,11 @@
     "static/media/trash.svg": "/react-node-team-app/static/media/trash.0609e9b2541cd8de8bb1f5949964c062.svg",
     "static/media/male.svg": "/react-node-team-app/static/media/male.122d11b557825917514b019b6fa82af8.svg",
     "static/media/clock.svg": "/react-node-team-app/static/media/clock.b7f751a5a36e50f9fd7a64d10703104b.svg",
-    "main.70675b0d.css.map": "/react-node-team-app/static/css/main.70675b0d.css.map",
-    "main.e44009fd.js.map": "/react-node-team-app/static/js/main.e44009fd.js.map"
+    "main.1eb0ab90.css.map": "/react-node-team-app/static/css/main.1eb0ab90.css.map",
+    "main.7d5eaca2.js.map": "/react-node-team-app/static/js/main.7d5eaca2.js.map"
   },
   "entrypoints": [
-    "static/css/main.70675b0d.css",
-    "static/js/main.e44009fd.js"
+    "static/css/main.1eb0ab90.css",
+    "static/js/main.7d5eaca2.js"
   ]
 }
