@@ -5,7 +5,7 @@ import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 export default function NoticesPage() {
   return (
     <section>
-      <div className='container'>
+      <div className="container">
         <h1>Find your favorite pet</h1>
         <NoticesSearch />
         <NoticesCategoriesNav />
