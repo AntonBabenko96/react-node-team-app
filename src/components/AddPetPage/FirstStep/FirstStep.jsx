@@ -1,6 +1,9 @@
 import React from 'react';
-import styles from './FirstStep.module.scss';
+import { Link } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
+import { ReactComponent as Arrow } from '../../../img/svg/arrow-left.svg';
+import { ReactComponent as Paw } from '../../../img/svg/pawprint.svg';
+import styles from './FirstStep.module.scss';
 
 function FirstStep({ onSubmit, next, data }) {
   const radioHandler = values => {
@@ -48,9 +51,16 @@ function FirstStep({ onSubmit, next, data }) {
           ></Field>
           <label htmlFor="choice4">in good hands</label>
         </div>
-        <button className={styles.next} type="submit">
-          Next
-        </button>
+        <div className={styles.controls}>
+          <button className={styles.next} type="submit">
+            Next
+            <Paw className={styles.icon}></Paw>
+          </button>
+          <Link className={styles.cancel} to="/">
+            <Arrow className={styles.arrow}></Arrow>
+            Cancel
+          </Link>
+        </div>
       </Form>
     </Formik>
   );

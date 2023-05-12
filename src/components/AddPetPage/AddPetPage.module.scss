@@ -1,23 +1,77 @@
 @import '/src/styles/styles.scss';
 
+.form {
+  border-radius: 40px;
+  //   border: 1px solid red;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  padding: 20px 8px 16px 8px;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+}
+
+.title {
+  @include main-font(500, 20px, 27px);
+  padding-left: 12px;
+  margin-bottom: 24px;
+}
 .stepWrapper {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 44px;
 }
 
-.current {
+.stepCurrent {
   color: getColor(full-blue);
+  position: relative;
 }
 
-.complete {
+.stepComplete {
   color: getColor(full-green);
+  position: relative;
 }
 
-.default {
+.stepDefault {
   color: #888888;
+  position: relative;
 }
 
+.border {
+  width: 100%;
+  position: absolute;
+  height: 8px;
+  border-radius: 8px;
+  left: 0;
+  bottom: -12px;
+}
+.borderCurrent {
+  @extend .border;
+  background-color: getColor(full-blue);
+}
+.borderComplete {
+  @extend .border;
+  background-color: getColor(full-green);
+}
+.borderDefault {
+  @extend .border;
+  background-color: getColor(light-blue);
+}
 .stepWrapper p {
   @include main-font(500, 10px, 14px);
   min-width: 80px;
+  position: relative;
 }
+
+// .stepWrapper p::after {
+//   content: '123';
+//   position: absolute;
+//   bottom: -10px;
+//   left: 0;
+//   display: block;
+//   width: 100%;
+//   height: 8px;
+//   color: inherit;
+//   background-color: inherit;
+//   border-radius: 8px;
+// }

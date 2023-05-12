@@ -17,26 +17,101 @@
   border: 2px solid getColor(full-blue);
   outline: none;
 }
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  @include main-font(500, 14px, 19px);
+}
+
+.input {
+  opacity: 0;
+  width: 0;
+}
+
+.input:focus ~ .upload {
+  outline: 2px solid red;
+}
+
+.upload {
+  background-color: getColor(light-blue);
+  width: 112px;
+  height: 112px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.comments {
+  resize: none;
+  width: 100%;
+  outline: none;
+  border-radius: 20px;
+  height: 92px;
+  padding: 8px 16px;
+}
+
+.comments:focus {
+  outline: 2px solid getColor(full-blue);
+}
+
+.controls {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 
 .next {
+  @include main-font(700, 16px, 22px);
+  color: getColor(full-white);
+  margin-left: 12px;
   width: 248px;
   height: 40px;
   background-color: getColor(full-blue);
   cursor: pointer;
   border-radius: 40px;
   border: none;
-}
-
-.prev {
-  width: 248px;
-  height: 40px;
-  background-color: getColor(full-white);
-  cursor: pointer;
-  border-radius: 40px;
-  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 .next:hover,
 .next:focus {
   background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+}
+
+.prev {
+  @include main-font(700, 16px, 22px);
+  height: 24px;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+  color: getColor(full-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  fill: #fef9f9;
+  height: 24px;
+  width: 24px;
+}
+
+.arrow {
+  stroke: getColor(full-blue);
+  height: 24px;
+  width: 24px;
+}
+
+.plus {
+  stroke: getColor(full-blue);
+  height: 30px;
+  width: 30px;
 }

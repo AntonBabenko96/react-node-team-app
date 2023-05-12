@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
+
 import FirstStep from './FirstStep/FirstStep';
 import SecondStep from './SecondStep/SecondStep';
 import ThirdStep from './ThirdStep/ThirdStep';
 import styles from './AddPetPage.module.scss';
+import axios from 'axios';
 
 const stateInitialValue = {
   petName: '',
   dateOfBirth: '',
   type: '',
   breed: '',
-  photo: '',
+  photo: null,
   comments: '',
+  imageURL: '',
 };
 export default function AddPetPage() {
   const [notice, setNotice] = useState('');
@@ -35,19 +38,39 @@ export default function AddPetPage() {
     setCurrentStep(prev => prev - 1);
   };
 
-  const handleFinish = values => {
-    setState(prev => ({ ...prev, ...values }));
+  const handleFinish = async values => {
+    const data = new FormData();
+    // console.log(values);
+    const { photo } = values;
+    data.append('file', photo);
+    data.append('upload_preset', 'zpexg61h');
+    const res = await axios.post(
+      'https://api.cloudinary.com/v1_1/dotlfyrhf/image/upload',
+      data
+    );
+    console.log(res.data.secure_url);
+    setState(prev => ({ ...prev, imageURL: res.data.secure_url }));
     console.log(state);
   };
 
   const stepStyle = position => {
     if (currentStep === position) {
-      return styles.current;
+      return styles.stepCurrent;
     }
     if (currentStep > position) {
-      return styles.complete;
+      return styles.stepComplete;
     }
-    return styles.default;
+    return styles.stepDefault;
+  };
+
+  const borderStyle = position => {
+    if (currentStep === position) {
+      return styles.borderCurrent;
+    }
+    if (currentStep > position) {
+      return styles.borderComplete;
+    }
+    return styles.borderDefault;
   };
 
   const steps = [
@@ -69,19 +92,28 @@ export default function AddPetPage() {
       name="secondStep"
       finish={handleFinish}
       prev={handlePrevStep}
-      onSubmit={handleFormSubmit}
+      //   onSubmit={handleFormSubmit}
     />,
   ];
 
   return (
     <div className="container">
-      <h2>Add pet</h2>
-      <div className={styles.stepWrapper}>
-        <p className={stepStyle(0)}>Choose option</p>
-        <p className={stepStyle(1)}>Personal details</p>
-        <p className={stepStyle(2)}>More info</p>
+      <div className={styles.form}>
+        <h2 className={styles.title}>Add pet</h2>
+        <div className={styles.stepWrapper}>
+          <p className={stepStyle(0)}>
+            Choose option <span className={borderStyle(0)}></span>
+          </p>
+
+          <p className={stepStyle(1)}>
+            Personal details<span className={borderStyle(1)}></span>
+          </p>
+          <p className={stepStyle(2)}>
+            More info<span className={borderStyle(2)}></span>
+          </p>
+        </div>
+        {steps[currentStep]}
       </div>
-      {steps[currentStep]}
     </div>
   );
 }

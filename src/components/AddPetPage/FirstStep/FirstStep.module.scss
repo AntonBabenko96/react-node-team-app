@@ -1,9 +1,11 @@
 @import '../../../styles/styles.scss';
 
 .div {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  @include main-font(500, 14px, 19px);
 }
 
 .div input[type='radio'] {
@@ -16,31 +18,63 @@
   display: flex;
   width: fit-content;
   background-color: getColor(light-blue);
-  padding: 10px 20px;
-  font-family: sans-serif, Arial;
-  font-size: 16px;
+  padding: 8px 16px;
   border-radius: 40px;
+  color: getColor(full-blue);
 }
 
 .div input[type='radio']:checked + label {
   background-color: getColor(full-blue);
+  color: getColor(full-white);
 }
 
 .div label:hover {
   cursor: pointer;
 }
 
+.icon {
+  fill: #fef9f9;
+  height: 24px;
+  width: 24px;
+}
+
+.arrow {
+  stroke: getColor(full-blue);
+  height: 24px;
+  width: 24px;
+}
+
+.controls {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 .next {
+  @include main-font(700, 16px, 22px);
+  color: getColor(full-white);
+  margin-left: 12px;
   width: 248px;
   height: 40px;
   background-color: getColor(full-blue);
   cursor: pointer;
   border-radius: 40px;
   border: none;
-  // transition: 250ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 .next:hover,
 .next:focus {
   background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+}
+
+.cancel {
+  @include main-font(700, 16px, 22px);
+  color: getColor(full-blue);
+  display: flex;
+  gap: 12px;
 }
