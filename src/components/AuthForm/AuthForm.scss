@@ -125,11 +125,12 @@
     border: transparent;
     border-radius: 40px;
     color: #ffffff;
-    font-family: 'Manrope', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
+    @include main-font(400, 16px, 22px, normal);
+    // font-family: 'Manrope', sans-serif;
+    // font-style: normal;
+    // font-weight: 400;
+    // font-size: 16px;
+    // line-height: 150%;
 
     margin-top: 40px;
     cursor: pointer;
