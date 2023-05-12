@@ -163,5 +163,23 @@
     color: #54adff;
     margin-left: 5px;
   }
+}
 
+h2 {
+  @include main-font(500, 16px, 22px, normal);
+  color:#111111;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+.btn-icon{
+fill:#ffffff;
+width: 24px;
+height: 24px;
+position: absolute;
+width: 24px;
+height: 20.97px;
+left: 5.56px;
+top: -2.59px;
 
+transform: rotate(25deg);
+}
