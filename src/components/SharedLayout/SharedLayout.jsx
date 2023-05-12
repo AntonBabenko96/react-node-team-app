@@ -1,8 +1,6 @@
 import { Route, Routes } from 'react-router';
 import Header from 'components/Header/Header';
-import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import UserPage from 'pages/UserPage/UserPage';
-
 import AddPetPage from 'pages/AddPetPage/AddPetPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import MainPage from 'pages/MainPage/MainPage';
@@ -16,7 +14,6 @@ export default function SharedLayout() {
   return (
     <>
       <Header />
-      <NoticesSearch />
       <Routes>
         <Route path="/user" element={<UserPage />} />
         <Route path="/add-pet" element={<AddPetPage />} />
