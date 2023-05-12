@@ -15,6 +15,10 @@
   @include media-min(tablet) {
     max-width: 336px;
   }
+
+  @include media-min(desktop) {
+    max-width: 288px;
+  }
 }
 
 .category {
@@ -59,6 +63,14 @@
 .img {
   width: 280px;
   height: 288px;
+
+  @include media-min(tablet) {
+    width: 336px;
+  }
+
+  @include media-min(desktop) {
+    width: 288px;
+  }
 }
 
 .wrapper {
@@ -67,6 +79,16 @@
   position: absolute;
   top: 248px;
   left: 8px;
+
+  @include media-min(tablet) {
+    gap: 24px;
+    left: 24px;
+  }
+
+  @include media-min(desktop) {
+    gap: 12px;
+    left: 12px;
+  }
 }
 
 .box {
@@ -103,10 +125,10 @@
   margin-right: auto;
   margin-bottom: 24px;
   width: 248px;
-  padding: 8px 28px;
+  padding: 7px 28px;
   border: 2px solid getColor('full-blue');
   border-radius: 40px;
   color: getColor('full-blue');
   background-color: inherit;
-  @include main-font(600, 16px, calc(21 / 16));
+  @include main-font(600, 16px, calc(22 / 16));
 }

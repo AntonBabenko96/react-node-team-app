@@ -10,12 +10,10 @@
     max-width: 573px;
     padding-left: 20px;
     padding-right: 20px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   @include media-min(tablet) {
-    width: 100%;
+    max-width: 768px;
     padding-left: 32px;
     padding-right: 32px;
   }
@@ -23,6 +21,6 @@
   @include media-min(desktop) {
     padding-left: 16px;
     padding-right: 16px;
-    width: 1280px;
+    max-width: 1280px;
   }
 }
