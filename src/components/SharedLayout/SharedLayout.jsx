@@ -17,6 +17,7 @@ export default function SharedLayout() {
     <>
       <Header />
       <NoticesSearch />
+      <NoticesPage />
       <Routes>
         <Route path="/user" element={<UserPage />} />
         <Route path="/add-pet" element={<AddPetPage />} />
