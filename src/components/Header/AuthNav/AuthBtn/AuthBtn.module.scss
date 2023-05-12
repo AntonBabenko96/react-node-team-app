@@ -25,7 +25,7 @@
   align-items: center;
   margin-bottom: 12px;
 
-  @include media-min('mobile-resp') {
+  @media (min-width: 768px) {
     margin-right: 20px;
     margin-bottom: 0;
   }
@@ -33,11 +33,16 @@
   &:focus {
     background-color: getColor('full-white');
     color: getColor('full-yellow');
+    svg {
+      transition: fill 0.3s linear;
+      fill: getColor('full-yellow');
+    }
   }
 }
 
 .register {
   width: 165px;
+  background-color: transparent;
 
   color: getColor('full-yellow');
   @include media-min('tablet') {
