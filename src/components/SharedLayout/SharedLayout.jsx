@@ -2,6 +2,8 @@ import { Route, Routes } from 'react-router';
 import Header from 'components/Header/Header';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import UserPage from 'pages/UserPage/UserPage';
+
+
 import AddPetPage from 'pages/AddPetPage/AddPetPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import MainPage from 'pages/MainPage/MainPage';
@@ -10,6 +12,7 @@ import NotFound from 'pages/NotFound/NotFound';
 import NoticesPage from 'pages/NoticesPage/NoticesPage';
 import OurFriendsPage from 'pages/OurFriendsPage/OurFriendsPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
+
 
 export default function SharedLayout() {
   return (
