@@ -9,13 +9,12 @@ export default function MainPage() {
         <div className="container">
           <h1 className={Style.Title}>Take good care of your small pets</h1>
           <picture>
-            <source media="(min-width: 1200px)" srcset={desktopImage} />
-            <source media="(min-width: 768px)" srcset={tabletImage} />
-            <img class="apartments__image" src={phoneImage} alt="" />
+            <source media="(min-width: 1200px)" srcSet={desktopImage} />
+            <source media="(min-width: 768px)" srcSet={tabletImage} />
+            <img className="apartments__image" src={phoneImage} alt="" />
           </picture>
         </div>
       </section>
-      
     </>
   );
 }
