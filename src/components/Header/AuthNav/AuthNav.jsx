@@ -26,7 +26,7 @@ const AuthNav = () => {
           </AuthBtn>
         </NavLink>
       </li>
-      <li>
+      <li className={styles.item}>
         <NavLink to="/login" className={styles.link}>
           <AuthBtn title="Registration"></AuthBtn>
         </NavLink>
