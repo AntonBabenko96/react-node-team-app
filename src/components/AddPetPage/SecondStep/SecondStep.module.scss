@@ -1,0 +1,41 @@
+@import '../../../styles/styles.scss';
+
+.div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.div input {
+  border-radius: 40px;
+  padding-left: 10px;
+  border: 1px solid getColor(full-blue);
+}
+
+.div input:focus {
+  border: 2px solid getColor(full-blue);
+  outline: none;
+}
+
+.next {
+  width: 248px;
+  height: 40px;
+  background-color: getColor(full-blue);
+  cursor: pointer;
+  border-radius: 40px;
+  border: none;
+}
+
+.prev {
+  width: 248px;
+  height: 40px;
+  background-color: getColor(full-white);
+  cursor: pointer;
+  border-radius: 40px;
+  border: none;
+}
+
+.next:hover,
+.next:focus {
+  background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+}

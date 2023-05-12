@@ -1,3 +1,10 @@
+import AddPetPage from 'pages/AddPetPage/AddPetPage';
+
 export default function HomePage() {
-  return <>HomePage</>;
+  return (
+    <>
+      HomePage
+      <AddPetPage />
+    </>
+  );
 }
