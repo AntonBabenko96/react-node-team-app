@@ -5,26 +5,36 @@
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 20px;
   width: 280px;
-  height: 441px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+
+
+  @include media-min(tablet){
+    width: 608px;
+  }
+
+ 
+
 
   h1 {
-    h1 {
-      font-family: 'Manrope', sans-serif;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 33px;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      color: #111111;
-      margin-bottom: 20px;
-    }
+    @include main-font(500, 24px, 33px, normal);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #111111;
+    margin-bottom: 40px;
+
+    margin-top: 60px;
+    @include media-min(tablet){
+        @include main-font(500, 36px, 33px, normal);
+      
+      }
+    
+
   }
 
   form {
@@ -35,9 +45,9 @@
       display: flex;
       flex-direction: column;
 
-      label {
-        margin-bottom: 5px;
-      }
+    //   label {
+    //     margin-bottom: 5px;
+    //   }
 
       .input-icon {
         position: relative;
@@ -51,29 +61,48 @@
           align-items: center;
           padding: 12px 16px;
           gap: 10px;
-          width: 100%;
+          width: 256px;
           height: 48px;
           border: 1px solid #54adff;
           border-radius: 40px;
-          font-family: 'Manrope', sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 150%;
+          @include main-font(400, 16px, 24px, normal);
+          //   line-height: 150%;
           display: flex;
           align-items: center;
           letter-spacing: 0.04em;
           color: #111111;
+          outline: transparent;
 
           &::placeholder {
             color: #888888;
           }
+
+          &:hover,
+          &:focus {
+            border: 1px solid orange;
+          }
+
+
+          @include media-min(tablet){
+            width: 458px; 
+            gap:42px;
+          }
+
         }
 
         .icon {
           position: absolute;
           right: 10px;
-          pointer-events: none;
+          color: #54adff;
+          top: 10px;
+          cursor: pointer;
+
+
+          @include media-min(tablet){
+            right: 75px;
+        
+          }
+
         }
       }
     }
@@ -85,25 +114,54 @@
     justify-content: center;
     align-items: center;
     padding: 10px 28px;
-    gap: 10px;
+    width: 256px;
+    height: 48px;
     position: absolute;
-    // left: 10%;
-    // right: 10%;
-    // top: 72.71%;
-    // bottom: 19.3%;
-    background: #54ADFF;
+    left: 4%;
+    top: 70%;
+    bottom: 19.3%;
+    background: #54adff;
     outline: none;
     border: transparent;
     border-radius: 40px;
-    color: #FFFFFF;
+    color: #ffffff;
     font-family: 'Manrope', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
+
+    margin-top: 40px;
+    cursor: pointer;
+
+    @include media-min(tablet){
+       width: 458px;
+       left:12%;
+       margin-top: 42px;
+    }
+
   }
 
   p {
-    margin-top: 20px;
+    @include main-font(400, 12px, 16px, normal);
+    margin-top: 90px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #888888;
+    // margin-bottom: 40px;
+
   }
-}
+
+ 
+
+  
+
+  a {
+    @include main-font(400, 12px, 16px, normal);
+    color: #54adff;
+    margin-left: 5px;
+  }
+
+

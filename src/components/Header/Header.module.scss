@@ -1,14 +1,24 @@
 @import '../../styles/styles.scss';
 
 .header {
-  color: getColor('full-red');
-  @include main-font(600, 36px, 1.2, 0.1em);
-  text-align: center;
+  position: relative;
+  padding-top: 20px;
+  @include main-font(500, 20px, 1.2, 0.1em);
+  .headerInner {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    @media (min-width: 1280px) {
+      justify-content: normal;
+    }
+  }
 }
 
 .text {
   color: getColor('full-green');
-  @include main-font(600, 36px, 1.2, 0.1em);
+  @include main-font(600, 36px, 1.35, 0.04em);
   text-align: center;
 }
 // @import '/src/shared/styles/variables';
