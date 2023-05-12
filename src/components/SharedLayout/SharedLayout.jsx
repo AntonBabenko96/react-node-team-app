@@ -14,7 +14,6 @@ export default function SharedLayout() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/user" element={<UserPage />} />
-        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </>
   );
