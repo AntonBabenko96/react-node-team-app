@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-node-team-app/static/css/main.d57e4f91.css",
-    "main.js": "/react-node-team-app/static/js/main.5e741ccd.js",
+    "main.js": "/react-node-team-app/static/js/main.0bebdaa6.js",
     "static/media/kitten.jpg": "/react-node-team-app/static/media/kitten.c90454e82313dc45f19f.jpg",
     "static/media/logo.svg": "/react-node-team-app/static/media/logo.6e2f51eeb062dc6472f5e4aa1de019f4.svg",
     "index.html": "/react-node-team-app/index.html",
@@ -10,10 +10,10 @@
     "static/media/male.svg": "/react-node-team-app/static/media/male.122d11b557825917514b019b6fa82af8.svg",
     "static/media/clock.svg": "/react-node-team-app/static/media/clock.b7f751a5a36e50f9fd7a64d10703104b.svg",
     "main.d57e4f91.css.map": "/react-node-team-app/static/css/main.d57e4f91.css.map",
-    "main.5e741ccd.js.map": "/react-node-team-app/static/js/main.5e741ccd.js.map"
+    "main.0bebdaa6.js.map": "/react-node-team-app/static/js/main.0bebdaa6.js.map"
   },
   "entrypoints": [
     "static/css/main.d57e4f91.css",
-    "static/js/main.5e741ccd.js"
+    "static/js/main.0bebdaa6.js"
   ]
 }
