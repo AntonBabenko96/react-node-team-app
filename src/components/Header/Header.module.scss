@@ -7,6 +7,7 @@
   .headerInner {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-top: 4px;
     padding-bottom: 4px;
 
@@ -14,10 +15,4 @@
       justify-content: normal;
     }
   }
-}
-
-.text {
-  color: getColor('full-green');
-  @include main-font(600, 36px, 1.35, 0.04em);
-  text-align: center;
 }
