@@ -25,11 +25,11 @@ export default function SharedLayout() {
         <Route path="/news" element={<NewsPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/notices/:categoryName" element={<NoticesPage />}>
-          {/* <Route path="/sell" />
-          <Route path="/lost-found" />
-          <Route path="/for-free" />
-          <Route path="/favotite" />
-          <Route path="/own" /> */}
+          {/* <Route path="sell" />
+          <Route path="lost-found" />
+          <Route path="for-free" />
+          <Route path="favotite" />
+          <Route path="own" /> */}
         </Route>
         <Route path="/friends" element={<OurFriendsPage />} />
         <Route path="/register" element={<RegisterPage />} />
