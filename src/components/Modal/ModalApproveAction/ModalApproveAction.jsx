@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import Modal from '../Modal';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import './ModalApproveAction.scss';
+import styles from './ModalApproveAction.scss';
 
 import '../ModalApproveAction/';
 
@@ -33,7 +33,7 @@ export const ModalApproveAction = (onClose, { name }) => {
         this action.
       </p>
       <div>
-        <button onClick={closeModal} className={btnClose}>
+        <button onClick={closeModal} className={styles.btn - сlose}>
           Cancel
         </button>
         <button onClick={handleDelete}>
