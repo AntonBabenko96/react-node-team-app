@@ -4,14 +4,18 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import PetsIcon from '@mui/icons-material/Pets';
+import Modal from '../Modal/Modal'
 
 import './AuthForm.scss';
 
-export const AuthForm = () => {
+export const AuthForm = ({ history }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [currentPath] = useState(window.location.pathname);
-  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
 
   const isRegisterPath = currentPath.endsWith('/register');
 
@@ -19,9 +23,9 @@ export const AuthForm = () => {
     setShowPassword(!showPassword);
   };
 
-  // const toggleConfirmPasswordVisibility = () => {
-  //   setShowConfirmPassword(!showConfirmPassword);
-  // };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
@@ -39,12 +43,18 @@ export const AuthForm = () => {
       const response = await axios.post('/api/register', values);
       console.log(response.data);
       resetForm();
-
-      //тут також має бути редіркет на модалку Congratulations
+      setShowModal(true);
+      history.push('/userPage');
     } catch (error) {
       console.error(error);
     }
   };
+  const handleClose = ({ target, currentTarget, code }) => {
+      if (target === currentTarget || code === 'Escape') {
+        setShowModal(false); 
+      }
+    };
+   
 
   return (
     <div className="registration-form">
@@ -93,12 +103,12 @@ export const AuthForm = () => {
                 {showPassword ? (
                   <RemoveRedEyeIcon
                     className="icon"
-                    onClick={togglePasswordVisibility}
+                    onClick={toggleConfirmPasswordVisibility}
                   />
                 ) : (
                   <VisibilityOffIcon
                     className="icon"
-                    onClick={togglePasswordVisibility}
+                    onClick={toggleConfirmPasswordVisibility}
                   />
                 )}
               </div>
@@ -118,6 +128,13 @@ export const AuthForm = () => {
         <p>
           Don't have an account? <a href="/register"> Register</a>{' '}
         </p>
+      )}
+      {showModal && (
+        <Modal onClose={handleClose}>
+        <h1>Congrats!</h1>
+        <h2>Your registration is successful</h2>
+        <button onClick={handleClose}>Go to profile <PetsIcon className="btn-icon" /></button>
+      </Modal>
       )}
     </div>
   );
