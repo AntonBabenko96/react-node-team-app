@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import {BsSearch} from "react-icons/bs"
-import {AiOutlineClose} from "react-icons/ai"
+import { BsSearch } from 'react-icons/bs';
+import { AiOutlineClose } from 'react-icons/ai';
 
 import style from './NoticesSearch.module.scss';
 
 export default function NoticesSearch() {
   const [hasClose, setHasClose] = useState(false);
   const [query, setQuery] = useState('');
-  const [_, SetSearchParams] = useSearchParams({});
+  // eslint-disable-next-line no-unused-vars
+  const [_unused, SetSearchParams] = useSearchParams({});
 
   useEffect(() => {
     if (!query) {
@@ -41,47 +42,49 @@ export default function NoticesSearch() {
   };
 
   return (
-  
-      <div className={style.box}>
-        <input
-          className={style.input}
-          name="findpets"
-          type="text"
-          value={query}
-          placeholder="Search"
-          onChange={handleInput}
-        />
-        {!hasClose ? (
-          <button className={style.btn} type="submit" onClick={onClickSearch}>
-            <BsSearch style={{
-                position: 'absolute',
-                top: 14,
-                right: 16,
-                border: "none",
-                outline: "none",
-                fill: "#54ADFF",
-                cursor: "pointer",
-                width: 17,
-                height: 17,
-              }}/>
-          </button>
-        ) : (
-          <button type="submit" onClick={onClick}>
-            <AiOutlineClose style={{
-                position: 'absolute',
-                top: 14,
-                right: 16,
-                border: "none",
-                outline: "none",
-                fill: "#54ADFF",
-                cursor: "pointer",
-                width: 17,
-                height: 17,
-              }}/>
-          </button>
-        )}
-      </div>
-    
+    <div className={style.box}>
+      <input
+        className={style.input}
+        name="findpets"
+        type="text"
+        value={query}
+        placeholder="Search"
+        onChange={handleInput}
+      />
+      {!hasClose ? (
+        <button className={style.btn} type="submit" onClick={onClickSearch}>
+          <BsSearch
+            style={{
+              position: 'absolute',
+              top: 14,
+              right: 16,
+              border: 'none',
+              outline: 'none',
+              fill: '#54ADFF',
+              cursor: 'pointer',
+              width: 17,
+              height: 17,
+            }}
+          />
+        </button>
+      ) : (
+        <button type="submit" onClick={onClick}>
+          <AiOutlineClose
+            style={{
+              position: 'absolute',
+              top: 14,
+              right: 16,
+              border: 'none',
+              outline: 'none',
+              fill: '#54ADFF',
+              cursor: 'pointer',
+              width: 17,
+              height: 17,
+            }}
+          />
+        </button>
+      )}
+    </div>
   );
 }
 
