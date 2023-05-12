@@ -33,7 +33,7 @@ export const ModalApproveAction = (onClose, { name }) => {
         this action.
       </p>
       <div>
-        <button onClick={closeModal} className={styles.btn - сlose}>
+        <button onClick={closeModal} className={styles.btnClose}>
           Cancel
         </button>
         <button onClick={handleDelete}>
