@@ -11,6 +11,7 @@ export default function Header() {
       <div className={`container ${styles.headerInner}`}>
         <Navigation />
         {isTablet && <AuthNav />}
+
       </div>
     </header>
   );

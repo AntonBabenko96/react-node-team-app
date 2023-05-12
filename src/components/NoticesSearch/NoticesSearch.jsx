@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
-// import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-// import {BsSearch} from "react-icons/bs"
+import { BsSearch } from 'react-icons/bs';
+import { AiOutlineClose } from 'react-icons/ai';
 
 import style from './NoticesSearch.module.scss';
 
 export default function NoticesSearch() {
   const [hasClose, setHasClose] = useState(false);
   const [query, setQuery] = useState('');
-  // const [searchParams ,SetSearchParams] = useSearchParams({});
+  // eslint-disable-next-line no-unused-vars
+  const [_unused, SetSearchParams] = useSearchParams({});
 
   useEffect(() => {
-    if (query === '') {
-      // SetSearchParams({});
+    if (!query) {
+      SetSearchParams({});
       setHasClose(false);
       return;
     }
 
-    // SetSearchParams({ search: query });
-  }, [query]);
+    SetSearchParams({ search: query });
+  }, [query, SetSearchParams]);
 
   const handleInput = event => {
     setHasClose(true);
@@ -29,34 +31,60 @@ export default function NoticesSearch() {
 
   const onClick = () => {
     setHasClose(false);
-    // SetSearchParams({});
+    SetSearchParams({});
     setQuery('');
   };
 
   const onClickSearch = () => {
-    if (query === '') {
+    if (!query) {
       Notify.warning('Please enter your search parameters');
     }
   };
 
   return (
-    <>
-      <div className={style.box}>
-        <input
-          className={style.input}
-          name="findpets"
-          type="text"
-          value={query}
-          placeholder="Search"
-          onChange={handleInput}
-        />
-        {!hasClose ? (
-          <button type="submit" onClick={onClickSearch}></button>
-        ) : (
-          <button type="submit" onClick={onClick}></button>
-        )}
-      </div>
-    </>
+    <div className={style.box}>
+      <input
+        className={style.input}
+        name="findpets"
+        type="text"
+        value={query}
+        placeholder="Search"
+        onChange={handleInput}
+      />
+      {!hasClose ? (
+        <button className={style.btn} type="submit" onClick={onClickSearch}>
+          <BsSearch
+            style={{
+              position: 'absolute',
+              top: 14,
+              right: 16,
+              border: 'none',
+              outline: 'none',
+              fill: '#54ADFF',
+              cursor: 'pointer',
+              width: 17,
+              height: 17,
+            }}
+          />
+        </button>
+      ) : (
+        <button type="submit" onClick={onClick}>
+          <AiOutlineClose
+            style={{
+              position: 'absolute',
+              top: 14,
+              right: 16,
+              border: 'none',
+              outline: 'none',
+              fill: '#54ADFF',
+              cursor: 'pointer',
+              width: 17,
+              height: 17,
+            }}
+          />
+        </button>
+      )}
+    </div>
   );
 }
 

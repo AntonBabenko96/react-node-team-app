@@ -125,11 +125,12 @@
     border: transparent;
     border-radius: 40px;
     color: #ffffff;
-    font-family: 'Manrope', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
+    @include main-font(400, 16px, 22px, normal);
+    // font-family: 'Manrope', sans-serif;
+    // font-style: normal;
+    // font-weight: 400;
+    // font-size: 16px;
+    // line-height: 150%;
 
     margin-top: 40px;
     cursor: pointer;
@@ -163,5 +164,23 @@
     color: #54adff;
     margin-left: 5px;
   }
+}
 
+h2 {
+  @include main-font(500, 16px, 22px, normal);
+  color:#111111;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+.btn-icon{
+fill:#ffffff;
+width: 24px;
+height: 24px;
+position: absolute;
+width: 24px;
+height: 20.97px;
+left: 5.56px;
+top: -2.59px;
 
+transform: rotate(25deg);
+}
