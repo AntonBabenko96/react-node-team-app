@@ -1,0 +1,46 @@
+@import '/src/styles/styles.scss';
+
+h1 {
+  @include main-font(700, 28px, 38px, bold);
+  text-align: center;
+  margin-bottom: 40px;
+  margin-top: 60px;
+}
+
+p {
+  @include main-font(700, 16px, 22px, normal);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+div {
+  display: flex;
+  flex-direction: row;
+  gap: 17px;
+  margin-bottom: 60px;
+}
+
+button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 129px;
+  height: 40px;
+  outline: none;
+  border: #54adff;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.btnClose {
+  background-color: white;
+}
+.btn-yes {
+  background-color: #54adff;
+}
+
+.icon {
+  fill: white;
+  margin-left: 8px;
+}

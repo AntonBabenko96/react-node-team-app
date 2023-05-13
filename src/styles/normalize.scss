@@ -1,4 +1,4 @@
-@import "./styles.scss";
+@import './styles.scss';
 
 /* Указываем box sizing */
 *,
@@ -77,8 +77,4 @@ input::-webkit-inner-spin-button {
   appearance: none;
   -webkit-appearance: none;
   margin: 0;
-}
-
-.active {
-  left: 0;
 }
