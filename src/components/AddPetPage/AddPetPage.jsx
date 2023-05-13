@@ -22,6 +22,7 @@ export default function AddPetPage() {
 
   const handleFormSubmit = values => {
     setState(prev => ({ ...prev, ...values }));
+    handleNextStep();
   };
 
   const handleNoticeType = data => {
@@ -39,19 +40,39 @@ export default function AddPetPage() {
   };
 
   const handleFinish = async values => {
+    console.log('VALUES', values);
     const data = new FormData();
     const { photo } = values;
-    data.append('file', photo);
-    data.append('upload_preset', 'zpexg61h');
-    const res = await axios.post(
-      'https://api.cloudinary.com/v1_1/dotlfyrhf/image/upload',
-      data
-    );
-    console.log(res.data.secure_url);
-    setState(prev => ({ ...prev, imageURL: res.data.secure_url }));
+    data.append('category', notice);
+    data.append('type', state.type);
+    data.append('name', state.petName);
+    data.append('breed', state.breed);
+    data.append('sex', `male`);
+    data.append('photoURL', photo);
+    // data.append('location', 'test');
+
+    // data.append('upload_preset', 'zpexg61h');
+    // const res = await axios.post(
+    //   'https://api.cloudinary.com/v1_1/dotlfyrhf/image/upload',
+    //   data
+    // );
+    // console.log(res.data.secure_url);
+    // setState(prev => ({ ...prev, ...values, imageURL: res.data.secure_url }));
     // alert(state.imageURL);
-    console.log(state);
-    setCurrentStep(0);
+
+    const instance = axios.create({
+      baseURL: 'https://your-pet-backend.onrender.com/',
+    });
+
+    instance.defaults.headers.common.authorization =
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZiZWVmMjUyNjQwMjIyMmZiY2U5NiIsImlhdCI6MTY4Mzk5ODQ3OSwiZXhwIjoxNjgzOTk5Njc5fQ.zq2n3GKTrcdmaF4BiwaDWIdzVXZBpdwOYf1SAb1dmGs';
+
+    const response = await instance.post('/pets', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    console.log(response);
+    // console.log(state);
+    // setCurrentStep(0);
     // setState(stateInitialValue);
   };
 

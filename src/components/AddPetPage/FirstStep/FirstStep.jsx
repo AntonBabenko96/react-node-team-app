@@ -1,6 +1,7 @@
 import React from 'react';
+import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { ReactComponent as Arrow } from '../../../img/svg/arrow-left.svg';
 import { ReactComponent as Paw } from '../../../img/svg/pawprint.svg';
 import styles from './FirstStep.module.scss';
@@ -11,8 +12,22 @@ function FirstStep({ onSubmit, next, data }) {
     next(values);
   };
 
+  const validationSchema = Yup.object({
+    noticeType: Yup.string().required('Choose category'),
+  });
+
+  const FormError = ({ name }) => {
+    return (
+      <ErrorMessage
+        name={name}
+        render={message => <p className={styles.error}>{message}</p>}
+      />
+    );
+  };
+
   return (
     <Formik
+      validationSchema={validationSchema}
       onSubmit={radioHandler}
       initialValues={{ noticeType: data }}
       className={styles.div}
@@ -23,7 +38,7 @@ function FirstStep({ onSubmit, next, data }) {
             type="radio"
             id="choice1"
             name="noticeType"
-            value="your pet"
+            value="my pet"
           ></Field>
           <label htmlFor="choice1">your pet</label>
 
@@ -51,6 +66,7 @@ function FirstStep({ onSubmit, next, data }) {
           ></Field>
           <label htmlFor="choice4">in good hands</label>
         </div>
+        <FormError name="noticeType" />
         <div className={styles.controls}>
           <button className={styles.next} type="submit">
             Next

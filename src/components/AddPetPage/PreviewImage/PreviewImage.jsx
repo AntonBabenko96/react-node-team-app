@@ -7,11 +7,18 @@ const PreviewImage = ({ file }) => {
   reader.readAsDataURL(file);
   reader.onload = () => {
     setPreview(reader.result);
+    // console.log(preview);
   };
 
   return (
     <div>
-      <img src={preview} alt="preview" width="150" height="150" />
+      <img
+        src={preview}
+        alt="preview"
+        width="112"
+        height="112"
+        style={{ borderRadius: '20px' }}
+      />
     </div>
   );
 };

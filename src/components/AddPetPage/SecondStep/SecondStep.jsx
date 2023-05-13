@@ -1,13 +1,35 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
 import styles from './SecondStep.module.scss';
 import { ReactComponent as Arrow } from '../../../img/svg/arrow-left.svg';
 import { ReactComponent as Paw } from '../../../img/svg/pawprint.svg';
 
 function SecondStep({ data, prev, next, onSubmit }) {
+  const validationSchema = Yup.object({
+    petName: Yup.string().required(`required field`),
+    dateOfBirth: Yup.string().required(`required field`),
+    type: Yup.string().required(`required field`),
+    breed: Yup.string().required(`required field`),
+  });
+
+  const FormError = ({ name }) => {
+    return (
+      <ErrorMessage
+        name={name}
+        render={message => <p className={styles.error}>{message}</p>}
+      />
+    );
+  };
+
   return (
     <>
-      <Formik onSubmit={onSubmit} initialValues={data}>
+      <Formik
+        onSubmit={onSubmit}
+        initialValues={data}
+        validationSchema={validationSchema}
+      >
         {({ values }) => (
           <Form>
             <div className={styles.div}>
@@ -20,6 +42,8 @@ function SecondStep({ data, prev, next, onSubmit }) {
                   placeholder="Enter pet name"
                 ></Field>
               </label>
+              <FormError name="petName" />
+
               <label className={styles.field}>
                 Date of birth
                 <Field
@@ -29,6 +53,8 @@ function SecondStep({ data, prev, next, onSubmit }) {
                   placeholder="Enter date of birth"
                 ></Field>
               </label>
+              <FormError name="dateOfBirth" />
+
               <label className={styles.field}>
                 Pet type
                 <Field
@@ -38,6 +64,8 @@ function SecondStep({ data, prev, next, onSubmit }) {
                   placeholder="Enter pet type"
                 ></Field>
               </label>
+              <FormError name="type" />
+
               <label className={styles.field}>
                 Breed
                 <Field
@@ -47,12 +75,13 @@ function SecondStep({ data, prev, next, onSubmit }) {
                   placeholder="Enter pet breed"
                 ></Field>
               </label>
+              <FormError name="breed" />
             </div>
             <div className={styles.controls}>
               <button
                 className={styles.next}
                 type="submit"
-                onClick={() => next(values)}
+                // onClick={() => next(values)}
               >
                 Next
                 <Paw className={styles.icon}></Paw>
