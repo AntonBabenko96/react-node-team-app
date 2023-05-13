@@ -38,7 +38,7 @@
   @include main-font(500, 14px, calc(19 / 14));
 }
 
-.favorite {
+.userBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,14 +46,22 @@
   height: 40px;
   border: 1px solid transparent;
   border-radius: 50%;
+  cursor: pointer;
   position: absolute;
-  top: 12px;
   right: 12px;
   color: getColor('full-blue');
   background-color: getColor('light-blue');
 }
 
-.favoriteIcon {
+.favorite {
+  top: 12px;
+}
+
+.delete {
+  top: 68px;
+}
+
+.icon {
   width: 24px;
   height: 24px;
   stroke: getColor('full-blue');
@@ -101,17 +109,29 @@
   padding: 2px 4px;
   border-radius: 16px;
   background-color: getColor('light-blue');
+
+  &:hover {
+    color:#ffffff;
+    background-color: getColor('full-blue');
+  }
 }
 
 .info {
+  pointer-events: none;
+  color: inherit;
   @include main-font(600, 12px, calc(16 / 12));
+
+  // &:hover {
+  //   color: #ffffff;
+  // }
 }
 
 .infoIcon {
-  width: 24px;
-  height: 24px;
-  stroke: getColor('full-blue');
-  fill: transparent;
+  pointer-events: none;
+  stroke: currentColor;
+  // &:hover {
+  //   stroke: #ffffff;
+  // }
 }
 
 .title {
@@ -128,7 +148,14 @@
   padding: 7px 28px;
   border: 2px solid getColor('full-blue');
   border-radius: 40px;
+  cursor: pointer;
+  position: relative;
   color: getColor('full-blue');
   background-color: inherit;
   @include main-font(600, 16px, calc(22 / 16));
+
+  &:hover {
+    color: #ffffff;
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+  }
 }
