@@ -9,15 +9,18 @@ import PetsIcon from '@mui/icons-material/Pets';
 import Modal from '../Modal/Modal';
 import { register, login } from '../../redux/auth/auth-operations';
 import { selectIsLogin, selectLoading } from '../../redux/auth/selectors';
+import { useNavigate } from 'react-router-dom';
 
 import './AuthForm.scss';
 
 export const AuthForm = ({ history }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const [currentPath] = useState(window.location.pathname);
   const [showModal, setShowModal] = useState(false);
+  console.log(showModal);
   // const [redirect, setRedirect] = useState(false);
 
   const dispatch = useDispatch();
@@ -44,12 +47,12 @@ export const AuthForm = ({ history }) => {
       .required('Confirm Password is required'),
   });
 
-  const handleClose = ({ target, currentTarget, code }) => {
-    if (target === currentTarget || code === 'Escape') {
-      setShowModal(false);
-      //  isLogin && setRedirect(true);
-    }
-  };
+  // const handleClose = ({ target, currentTarget, code }) => {
+  //   if (target === currentTarget || code === 'Escape') {
+  //     setShowModal(false);
+  //     //  isLogin && setRedirect(true);
+  //   }
+  // };
 
   const handleSubmit = (values, { resetForm }) => {
     isRegisterPath
@@ -57,7 +60,6 @@ export const AuthForm = ({ history }) => {
       : dispatch(login({ email: values.email, password: values.password }));
     resetForm();
     isRegisterPath && setShowModal(true);
-   
   };
 
   return (
@@ -71,12 +73,7 @@ export const AuthForm = ({ history }) => {
         <Form>
           <div>
             <div className="input-icon">
-              <Field
-                type="email"
-                name="email"
-                placeholder="Email"
-                
-              />
+              <Field type="email" name="email" placeholder="Email" />
             </div>
           </div>
 
@@ -138,16 +135,16 @@ export const AuthForm = ({ history }) => {
           Don't have an account? <Link to="/register"> Register</Link>{' '}
         </p>
       )}
-      {showModal && !isLoading  && isLogin &&(
-        <Modal  style={{ width: '608px' }}>
+      {showModal && !isLoading && isLogin && (
+        <Modal style={{ width: '608px' }}>
           <h1 className="modalH1">Congrats!</h1>
           <h2 className="modalP">Your registration is successful</h2>
-          <button className="modalBtn" onClick={handleClose}>
+          <button className="modalBtn" onClick={() => navigate('/user')}>
             Go to profile <PetsIcon className="modalIcon" />
           </button>
         </Modal>
       )}
-       {/* {isLogin && <Navigate to="/user" />} */}
+      {/* {isLogin && <Navigate to="/user" />} */}
     </div>
   );
 };
