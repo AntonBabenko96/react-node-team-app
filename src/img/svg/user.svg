@@ -2,5 +2,5 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
 <title>user</title>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.7143" stroke="#000" d="M25.143 27.429v-2.286c0-2.525-2.047-4.571-4.571-4.571h-9.143c-2.525 0-4.571 2.047-4.571 4.571v2.286M20.571 11.429c0 2.525-2.047 4.571-4.571 4.571s-4.571-2.047-4.571-4.571c0-2.525 2.047-4.571 4.571-4.571s4.571 2.047 4.571 4.571z"></path>
-<path fill="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.7143" stroke="#000" d="M16 0.857c8.363 0 15.143 6.78 15.143 15.143s-6.78 15.143-15.143 15.143c-8.363 0-15.143-6.78-15.143-15.143s6.78-15.143 15.143-15.143z"></path>
+<path  stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.7143"  d="M16 0.857c8.363 0 15.143 6.78 15.143 15.143s-6.78 15.143-15.143 15.143c-8.363 0-15.143-6.78-15.143-15.143s6.78-15.143 15.143-15.143z"></path>
 </svg>
