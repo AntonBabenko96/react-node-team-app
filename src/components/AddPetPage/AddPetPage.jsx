@@ -40,7 +40,6 @@ export default function AddPetPage() {
 
   const handleFinish = async values => {
     const data = new FormData();
-    // console.log(values);
     const { photo } = values;
     data.append('file', photo);
     data.append('upload_preset', 'zpexg61h');
@@ -50,7 +49,10 @@ export default function AddPetPage() {
     );
     console.log(res.data.secure_url);
     setState(prev => ({ ...prev, imageURL: res.data.secure_url }));
+    // alert(state.imageURL);
     console.log(state);
+    setCurrentStep(0);
+    // setState(stateInitialValue);
   };
 
   const stepStyle = position => {
@@ -92,7 +94,6 @@ export default function AddPetPage() {
       name="secondStep"
       finish={handleFinish}
       prev={handlePrevStep}
-      //   onSubmit={handleFormSubmit}
     />,
   ];
 
