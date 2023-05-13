@@ -84,7 +84,7 @@
 
 import { ReactComponent as UserIcon } from 'img/svg/user.svg';
 import { ReactComponent as CameraIcon } from 'img/svg/camera.svg';
-import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
+// import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
 import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
 
 import styles from './UserInfo.module.scss';
@@ -94,7 +94,7 @@ export default function UserInfo() {
       <div>
         <div className={styles.infobox}>
           <div className={styles.photo}>
-            <img></img>
+            {/* <img></img> */}
             <UserIcon className={styles.user__icon} />
           </div>
           <div className={styles.camera__title}>
