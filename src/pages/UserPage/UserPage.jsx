@@ -1,3 +1,8 @@
+import LogOutButton from "components/LogOutButton/LogOutButton";
+
 export default function UserPage() {
-  return <>User Page</>;
+  return (
+    <div style={{alignItems:"center"}}>
+    <LogOutButton/>
+    </div>)
 }
