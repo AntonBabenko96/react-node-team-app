@@ -1,0 +1,44 @@
+@import '/src/styles/styles.scss';
+.pets {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 280px;
+}
+
+.button {
+    outline: none;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+
+    width: 129px;
+    height: 40px;
+    // font-size: 76px;
+    // font-weight: 700;
+
+    @include main-font(700, 16px, 1.36);
+    background-color: getColor('full-blue');
+    color: #FEF9F9;
+}
+
+.plus {
+    padding-left: 14px;
+    font-weight: 400;
+    // color:red;
+    font-size: 25px;
+}
+.title {
+    @include main-font(500, 20px, 1.36);
+    margin-bottom: 18px;
+    margin-top: 40px;
+}
+.title__pets {
+    @include main-font(500, 20px, 1.36);
+
+}
