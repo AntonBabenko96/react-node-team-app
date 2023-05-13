@@ -1,0 +1,13 @@
+@import '/src/styles/styles.scss';
+// @import '../../img/mainPage/bg.png';
+
+.form {
+  margin-top: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include media-min(tablet){
+    margin-top: 80px;
+  }
+}
