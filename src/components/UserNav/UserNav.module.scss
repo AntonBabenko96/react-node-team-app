@@ -1,0 +1,21 @@
+@import '../../styles/styles.scss';
+.user {
+  display: block;
+  width: 28px;
+  height: 28px;
+  margin-right: 12px;
+  fill: getColor('full-white');
+}
+
+.userLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userName {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.04em;
+  color: getColor('full-yellow');
+}
