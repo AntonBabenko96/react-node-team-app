@@ -6,16 +6,28 @@
   gap: 20px;
 }
 
-.div input {
+.input {
   border-radius: 40px;
   padding-left: 10px;
   border: 1px solid getColor(full-blue);
 }
 
-.div input:focus {
+.errorField {
+  border-radius: 40px;
+  padding-left: 10px;
+  border: 1px solid getColor(full-red);
+}
+
+.errorField:focus {
+  outline: 1px solid getColor(full-red);
+}
+
+.input:focus {
   outline: 1px solid getColor(full-blue);
 }
+
 .field {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -34,6 +46,15 @@
   align-items: center;
   gap: 20px;
 }
+
+.error {
+  position: absolute;
+  color: getColor(full-red);
+  user-select: none;
+  bottom: -17px;
+  left: 0;
+}
+
 .next {
   @include main-font(700, 16px, 22px);
   color: getColor(full-white);

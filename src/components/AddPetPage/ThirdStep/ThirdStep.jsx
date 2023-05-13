@@ -9,6 +9,10 @@ import { ReactComponent as Plus } from '../../../img/svg/plus.svg';
 import PreviewImage from '../PreviewImage/PreviewImage';
 
 function ThirdStep({ data, prev, finish }) {
+  const showSex = data.category === 'my pet' ? false : true;
+  const location = data.category === 'my pet' ? false : true;
+  const price = data.category === 'sell' ? true : false;
+
   const validationSchema = Yup.object({
     photo: Yup.mixed()
       .required(`required field`)
@@ -24,7 +28,14 @@ function ThirdStep({ data, prev, finish }) {
           value &&
           ['image/png', 'image/jpeg', 'image/webp'].includes(value.type)
       ),
-    comments: Yup.string().required(`required field`),
+    comments: Yup.string(),
+    // sex: Yup.string().when(showSex, {
+    //   is: true,
+    //   then: Yup.string().required(),
+    // }),
+    sex: showSex ? Yup.string().required() : Yup.string(),
+    location: location ? Yup.string().required() : Yup.string(),
+    price: price ? Yup.string().required() : Yup.string(),
   });
 
   const FormError = ({ name }) => {
@@ -45,6 +56,27 @@ function ThirdStep({ data, prev, finish }) {
       >
         {formik => (
           <Form className={styles.div} encType="multipart/form-data">
+            {showSex && (
+              <div className={styles.sex}>
+                <Field
+                  type="radio"
+                  id="choice1"
+                  name="sex"
+                  value="male"
+                ></Field>
+                <label htmlFor="choice1">Male</label>
+
+                <Field
+                  type="radio"
+                  id="choice2"
+                  name="sex"
+                  value="female"
+                ></Field>
+                <label htmlFor="choice2">Female</label>
+                <FormError name="sex" />
+              </div>
+            )}
+
             <div className={styles.uploadwrapper}>
               <p className={styles.uploadlabel}>Add photo</p>
               {(formik.values.photo && (
@@ -76,6 +108,33 @@ function ThirdStep({ data, prev, finish }) {
               )}
             </div>
             <FormError name="photo" />
+
+            {location && (
+              <label className={styles.field}>
+                Location
+                <Field
+                  className={styles.input}
+                  type="text"
+                  name="location"
+                  placeholder="Enter location"
+                ></Field>
+                <FormError className={styles.error} name="location" />
+              </label>
+            )}
+
+            {price && (
+              <label className={styles.field}>
+                Price
+                <Field
+                  className={styles.input}
+                  type="text"
+                  name="price"
+                  placeholder="Enter price"
+                ></Field>
+                <FormError className={styles.error} name="price" />
+              </label>
+            )}
+
             <label className={styles.field}>
               Comments
               <Field

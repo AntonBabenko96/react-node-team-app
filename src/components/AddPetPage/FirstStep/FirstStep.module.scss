@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 10px;
   @include main-font(500, 14px, 19px);
+  position: relative;
 }
 
 .div input[type='radio'] {
@@ -32,6 +33,14 @@
   cursor: pointer;
 }
 
+.error {
+  position: absolute;
+  left: 0;
+  bottom: -35px;
+  color: getColor(full-red);
+  user-select: none;
+}
+
 .icon {
   fill: #fef9f9;
   height: 24px;
@@ -51,6 +60,7 @@
   align-items: center;
   gap: 20px;
 }
+
 .next {
   @include main-font(700, 16px, 22px);
   color: getColor(full-white);

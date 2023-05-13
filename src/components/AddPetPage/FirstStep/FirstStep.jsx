@@ -8,12 +8,12 @@ import styles from './FirstStep.module.scss';
 
 function FirstStep({ onSubmit, next, data }) {
   const radioHandler = values => {
-    onSubmit(values.noticeType);
+    onSubmit(values.category);
     next(values);
   };
 
   const validationSchema = Yup.object({
-    noticeType: Yup.string().required('Choose category'),
+    category: Yup.string().required('Choose category'),
   });
 
   const FormError = ({ name }) => {
@@ -29,7 +29,7 @@ function FirstStep({ onSubmit, next, data }) {
     <Formik
       validationSchema={validationSchema}
       onSubmit={radioHandler}
-      initialValues={{ noticeType: data }}
+      initialValues={{ category: data }}
       className={styles.div}
     >
       <Form>
@@ -37,36 +37,32 @@ function FirstStep({ onSubmit, next, data }) {
           <Field
             type="radio"
             id="choice1"
-            name="noticeType"
+            name="category"
             value="my pet"
           ></Field>
           <label htmlFor="choice1">your pet</label>
 
-          <Field
-            type="radio"
-            id="choice2"
-            name="noticeType"
-            value="sell"
-          ></Field>
+          <Field type="radio" id="choice2" name="category" value="sell"></Field>
           <label htmlFor="choice2">sell</label>
 
           <Field
             type="radio"
             id="choice3"
-            name="noticeType"
-            value="lost/found"
+            name="category"
+            value="lost-found"
           ></Field>
           <label htmlFor="choice3">lost/found</label>
 
           <Field
             type="radio"
             id="choice4"
-            name="noticeType"
-            value="in good hands"
+            name="category"
+            value="for-free"
           ></Field>
           <label htmlFor="choice4">in good hands</label>
+          <FormError className={styles.error} name="category" />
         </div>
-        <FormError name="noticeType" />
+
         <div className={styles.controls}>
           <button className={styles.next} type="submit">
             Next

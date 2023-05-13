@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import AddPetPageHeader from './AddPetPageHeader/AddPetPageHeader';
 import FirstStep from './FirstStep/FirstStep';
 import SecondStep from './SecondStep/SecondStep';
 import ThirdStep from './ThirdStep/ThirdStep';
@@ -7,6 +7,7 @@ import styles from './AddPetPage.module.scss';
 import axios from 'axios';
 
 const stateInitialValue = {
+  category: 'my pet',
   petName: '',
   dateOfBirth: '',
   type: '',
@@ -14,9 +15,12 @@ const stateInitialValue = {
   photo: null,
   comments: '',
   imageURL: '',
+  sex: '',
+  location: '',
+  price: '',
+  title: '',
 };
 export default function AddPetPage() {
-  const [notice, setNotice] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
   const [state, setState] = useState(stateInitialValue);
 
@@ -25,8 +29,8 @@ export default function AddPetPage() {
     handleNextStep();
   };
 
-  const handleNoticeType = data => {
-    setNotice(data);
+  const handleCategory = values => {
+    setState(prev => ({ ...prev, category: values }));
   };
 
   const handleNextStep = values => {
@@ -43,13 +47,14 @@ export default function AddPetPage() {
     console.log('VALUES', values);
     const data = new FormData();
     const { photo } = values;
-    data.append('category', notice);
+
+    data.append('category', state.category);
     data.append('type', state.type);
     data.append('name', state.petName);
     data.append('breed', state.breed);
-    data.append('sex', `male`);
+    data.append('sex', state.sex);
     data.append('photoURL', photo);
-    // data.append('location', 'test');
+    data.append('location', 'test');
 
     // data.append('upload_preset', 'zpexg61h');
     // const res = await axios.post(
@@ -65,7 +70,7 @@ export default function AddPetPage() {
     });
 
     instance.defaults.headers.common.authorization =
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZiZWVmMjUyNjQwMjIyMmZiY2U5NiIsImlhdCI6MTY4Mzk5ODQ3OSwiZXhwIjoxNjgzOTk5Njc5fQ.zq2n3GKTrcdmaF4BiwaDWIdzVXZBpdwOYf1SAb1dmGs';
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZiZWVmMjUyNjQwMjIyMmZiY2U5NiIsImlhdCI6MTY4NDAwMzE1NSwiZXhwIjoxNjg0MDA0MzU1fQ.toPuFbdg2Df7QicV4myLpTjjSN8xZ0oIORffuvituYk';
 
     const response = await instance.post('/pets', data, {
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -98,9 +103,9 @@ export default function AddPetPage() {
 
   const steps = [
     <FirstStep
-      data={notice}
+      data={state.category}
       name="firstStep"
-      onSubmit={handleNoticeType}
+      onSubmit={handleCategory}
       next={handleNextStep}
     />,
     <SecondStep
@@ -117,11 +122,25 @@ export default function AddPetPage() {
       prev={handlePrevStep}
     />,
   ];
-
+  const getTitle = () => {
+    if (state.category === 'sell') {
+      return 'Add pet for sale';
+    }
+    if (state.category === 'lost-found') {
+      return 'Add lost pet';
+    }
+    if (state.category === 'for-free') {
+      return 'Add pet for free';
+    }
+    return 'Add pet';
+  };
   return (
     <div className="container">
       <div className={styles.form}>
-        <h2 className={styles.title}>Add pet</h2>
+        {currentStep === 0 && <h2 className={styles.title}>Add pet</h2>}
+        {currentStep !== 0 && (
+          <AddPetPageHeader data={getTitle()}></AddPetPageHeader>
+        )}
         <div className={styles.stepWrapper}>
           <p className={stepStyle(0)}>
             Choose option <span className={borderStyle(0)}></span>
