@@ -9,14 +9,17 @@ import NoticesPage from 'pages/NoticesPage/NoticesPage';
 import OurFriendsPage from 'pages/OurFriendsPage/OurFriendsPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
+// import PrivateRoute from 'shared/privateRoute/privateRoute';
 
 export default function UserRoutes() {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<MainPage />} />
+        {/* <Route element={<PrivateRoute redirect="/login" />}> */}
         <Route path="user" element={<UserPage />} />
         <Route path="add-pet" element={<AddPetPage />} />
+        {/* </Route> */}
         <Route path="login" element={<LoginPage />} />
         <Route path="main" element={<MainPage />} />
         <Route path="news" element={<NewsPage />} />
