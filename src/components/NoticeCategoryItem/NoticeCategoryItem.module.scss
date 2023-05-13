@@ -120,18 +120,15 @@
   pointer-events: none;
   color: inherit;
   @include main-font(600, 12px, calc(16 / 12));
-
-  // &:hover {
-  //   color: #ffffff;
-  // }
 }
 
 .infoIcon {
   pointer-events: none;
-  stroke: currentColor;
-  // &:hover {
-  //   stroke: #ffffff;
-  // }
+  stroke: getColor('full-blue');
+}
+
+.box:hover > .infoIcon {
+  stroke:#ffffff;
 }
 
 .title {
