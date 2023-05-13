@@ -1,0 +1,14 @@
+@import '../../styles/styles.scss';
+
+.title {
+  margin-top: 40px;
+  margin-bottom: 24px;
+  @include main-font(700, 24px, calc(33 / 24));
+  text-align: center;
+
+  @include media-min(tablet) {
+    margin-top: 80px;
+    margin-bottom: 40px;
+    @include main-font(700, 48px, calc(33 / 24));
+  }
+}
