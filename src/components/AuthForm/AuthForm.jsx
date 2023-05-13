@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -18,7 +18,7 @@ export const AuthForm = ({ history }) => {
 
   const [currentPath] = useState(window.location.pathname);
   const [showModal, setShowModal] = useState(false);
-  const [redirect, setRedirect] = useState(false);
+  // const [redirect, setRedirect] = useState(false);
 
   const dispatch = useDispatch();
   const isLogin = useSelector(selectIsLogin);

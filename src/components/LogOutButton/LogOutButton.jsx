@@ -6,19 +6,6 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/auth/auth-operations';
 
 
-// export default function LogOutButton() {
-//     const handleLogoutClick = () => {
-//     //   тут функція яка виклика логаут
-//       };
-
-
-//       return (
-//         <button className={style.btn} onClick={handleLogoutClick}>
-//             <img className={style.icon} src={Icon} alt='logout logo'/>
-//             <p className={style.text}>Log out</p>
-//         </button>
-//       )
-// }
 export default function LogOutButton() {
   const dispatch = useDispatch();
 

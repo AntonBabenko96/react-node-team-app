@@ -1,24 +1,6 @@
 
-import LogOutButton from "components/LogOutButton/LogOutButton";
-
-export default function UserPage() {
-  return (
-    <div style={{alignItems:"center"}}>
-    <LogOutButton/>
-    </div>)
-
 
 import styles from './UserPage.module.scss';
-
-
-// name: string, // null if the user is newly registered
-//   birthday: number, // null
-//   phone: string, // null
-//   city: string, // null
-//   email: string,
-//   avatarURL: string
-// }
-
 import UserPetsList from 'components/UserPetsList/UserPetsList';
 import UserInfo from 'components/UserInfo/UserInfo';
 
