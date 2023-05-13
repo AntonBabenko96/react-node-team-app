@@ -1,4 +1,4 @@
-import LogOutButton from "components/LogOutButton/LogOutButton";
+import LogOutButton from "../../components/LogOutButton/LogOutButton";
 
 export default function UserPage() {
   return (
