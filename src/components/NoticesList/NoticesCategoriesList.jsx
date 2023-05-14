@@ -6,6 +6,7 @@ import NoticeCategoryItem from 'components/NoticeCategoryItem/NoticeCategoryItem
 
 import s from './NoticesCategoriesList.module.scss';
 import Modal from 'components/Modal/Modal';
+import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
 
 export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
@@ -52,7 +53,9 @@ export default function NoticesCategoriesList() {
   return (
     <>
       <ul className={s.list}>{elements}</ul>
-      {showModal && <Modal onClose={onModalClose}></Modal>}
+      {showModal && <Modal onClose={onModalClose}>
+        <NoticeModal />
+        </Modal>}
     </>
   );
 }
