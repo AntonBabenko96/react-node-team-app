@@ -4,7 +4,7 @@ import FirstStep from './FirstStep/FirstStep';
 import SecondStep from './SecondStep/SecondStep';
 import ThirdStep from './ThirdStep/ThirdStep';
 import styles from './AddPetPage.module.scss';
-import axios from 'axios';
+// import axios from 'axios';
 
 const stateInitialValue = {
   category: 'my pet',
@@ -56,26 +56,17 @@ export default function AddPetPage() {
     data.append('photoURL', photo);
     data.append('location', 'test');
 
-    // data.append('upload_preset', 'zpexg61h');
-    // const res = await axios.post(
-    //   'https://api.cloudinary.com/v1_1/dotlfyrhf/image/upload',
-    //   data
-    // );
-    // console.log(res.data.secure_url);
-    // setState(prev => ({ ...prev, ...values, imageURL: res.data.secure_url }));
-    // alert(state.imageURL);
+    // const instance = axios.create({
+    //   baseURL: 'https://your-pet-backend.onrender.com/',
+    // });
 
-    const instance = axios.create({
-      baseURL: 'https://your-pet-backend.onrender.com/',
-    });
+    // instance.defaults.headers.common.authorization =
+    //   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZiZWVmMjUyNjQwMjIyMmZiY2U5NiIsImlhdCI6MTY4NDAwMzE1NSwiZXhwIjoxNjg0MDA0MzU1fQ.toPuFbdg2Df7QicV4myLpTjjSN8xZ0oIORffuvituYk';
 
-    instance.defaults.headers.common.authorization =
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZiZWVmMjUyNjQwMjIyMmZiY2U5NiIsImlhdCI6MTY4NDAwMzE1NSwiZXhwIjoxNjg0MDA0MzU1fQ.toPuFbdg2Df7QicV4myLpTjjSN8xZ0oIORffuvituYk';
-
-    const response = await instance.post('/pets', data, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
-    console.log(response);
+    // const response = await instance.post('/pets', data, {
+    //   headers: { 'Content-Type': 'multipart/form-data' },
+    // });
+    // console.log(response);
     // console.log(state);
     // setCurrentStep(0);
     // setState(stateInitialValue);
