@@ -1,0 +1,240 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap");
+.active {
+  right: 0;
+}
+
+@media (max-width: 1279px) {
+  .burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 16px;
+    height: 10px;
+    transform: rotate(0) translate(0);
+    transition: ease-out 0.5s;
+    z-index: 111;
+    cursor: pointer;
+  }
+  .burger .burgerLines {
+    width: 100%;
+    height: 2.5px;
+    background-color: #ffc107;
+    transition: ease-out 0.5s;
+  }
+  .burger .burgerLines::before, .burger .burgerLines::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1.5px;
+    transition: ease-out 0.5s;
+    background-color: #ffc107;
+  }
+  .burger .burgerLines::before {
+    transform: translateY(-5px);
+  }
+  .burger .burgerLines::after {
+    transform: translateY(5px);
+  }
+}
+@media (min-width: 768px) {
+  .burger {
+    order: 1;
+  }
+}
+
+.burger.active .burgerLines {
+  transform: translateX(-50px);
+  background-color: transparent;
+}
+.burger.active .burgerLines::before {
+  transform: rotate(45deg) translate(35px, -35px);
+}
+.burger.active .burgerLines::after {
+  transform: rotate(-45deg) translate(35px, 35px);
+}
+
+.item {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 0px 0px 40px 40px;
+  background-color: #ffffff;
+  position: relative;
+}
+@media screen and (min-width: 768px) {
+  .item {
+    max-width: 336px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .item {
+    max-width: 288px;
+  }
+}
+
+.category {
+  width: 126px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border-radius: 0px 16px 16px 0px;
+  justify-content: center;
+  position: absolute;
+  top: 16px;
+  left: 0;
+  background-color: #cce4fb;
+}
+
+.categoryText {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.3571428571;
+  letter-spacing: 0.04em;
+  font-style: normal;
+  text-transform: none;
+}
+
+.userBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  color: #54adff;
+  background-color: #cce4fb;
+}
+
+.favorite {
+  top: 12px;
+}
+
+.delete {
+  top: 68px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  stroke: #54adff;
+  fill: transparent;
+}
+
+.img {
+  width: 280px;
+  height: 288px;
+}
+@media screen and (min-width: 768px) {
+  .img {
+    width: 336px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .img {
+    width: 288px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  gap: 12px;
+  position: absolute;
+  top: 248px;
+  left: 8px;
+}
+@media screen and (min-width: 768px) {
+  .wrapper {
+    gap: 24px;
+    left: 24px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    gap: 12px;
+    left: 12px;
+  }
+}
+
+.box {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 28px;
+  padding: 2px 4px;
+  border-radius: 16px;
+  background-color: #cce4fb;
+}
+.box:hover {
+  color: #ffffff;
+  background-color: #54adff;
+}
+
+.info {
+  pointer-events: none;
+  color: inherit;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.3333333333;
+  letter-spacing: 0.04em;
+  font-style: normal;
+  text-transform: none;
+}
+
+.infoIcon {
+  pointer-events: none;
+  stroke: #54adff;
+}
+
+.box:hover > .infoIcon {
+  stroke: #ffffff;
+}
+
+.title {
+  width: 231px;
+  margin-left: 20px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+  font-style: normal;
+  text-transform: none;
+}
+
+.btn {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 24px;
+  width: 248px;
+  padding: 7px 28px;
+  border: 2px solid #54adff;
+  border-radius: 40px;
+  cursor: pointer;
+  position: relative;
+  color: #54adff;
+  background-color: inherit;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+  font-style: normal;
+  text-transform: none;
+}
+.btn:hover {
+  color: #ffffff;
+  background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+}/*# sourceMappingURL=NoticeCategoryItem.module.css.map */

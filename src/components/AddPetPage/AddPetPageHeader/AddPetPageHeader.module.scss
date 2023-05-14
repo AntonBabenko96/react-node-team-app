@@ -1,0 +1,7 @@
+@import '../../../styles/styles.scss';
+
+.title {
+  @include main-font(500, 20px, 27px);
+  padding-left: 12px;
+  margin-bottom: 24px;
+}

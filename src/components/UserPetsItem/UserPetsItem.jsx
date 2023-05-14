@@ -1,7 +1,7 @@
 
 import { ReactComponent as TrashIcon } from 'img/svg/trash.svg';
 import styles from './UserPetsItem.module.scss';
-import notFoundImg from 'img/kitten.jpg';
+import notFoundImg from 'img/placeholder.png';
 
 export default function UserPetsItem({
   id,
