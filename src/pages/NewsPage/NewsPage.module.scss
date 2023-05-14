@@ -2,9 +2,17 @@
 
 .newsSection {
   padding-top: 40px;
+
+  @include media-min(tablet) {
+    padding-top: 80px;
+  }
 }
 .newsMainTitle {
   text-align: center;
+
+  @include media-min(tablet) {
+    @include main-font(700, 48px, calc(66 / 48));
+  }
 }
 
 .newsList {
@@ -14,6 +22,18 @@
 
   row-gap: 44px;
   column-gap: 32px;
+
+  padding-top: 24px;
+
+  @include media-min(tablet) {
+    padding-top: 20px;
+    row-gap: 46px;
+  }
+
+  @include media-min(desktop) {
+    padding-top: 42px;
+    column-gap: 31px;
+  }
 }
 
 .newsItem {
@@ -23,13 +43,22 @@
 
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 20px;
+
+  @include media-min(tablet) {
+    width: 336px;
+    height: 556px;
+  }
+
+  @include media-min(desktop) {
+    width: 395px;
+    height: 534px;
+  }
 }
 
 .newsItem::before {
   content: '';
   width: 100%;
   height: 8px;
-  background-color: #050046;
   position: absolute;
   top: -20px;
 
@@ -39,10 +68,14 @@
     getColor('gr-blue-end') 107.89%
   );
   border-radius: 40px;
+
+  @include media-min(tablet) {
+    top: -22px;
+  }
 }
 
 .newsImage {
-  width: 280px;
+  width: 100%;
   height: 252px;
 
   margin-bottom: 16px;
@@ -59,20 +92,26 @@
 
   height: 298px;
   padding: 0 12px;
+
+  @include media-min(tablet) {
+    height: 276px;
+  }
+
+  @include media-min(desktop) {
+    height: 254px;
+  }
 }
 
 .newsTitle {
   margin-bottom: 16px;
 
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 33px;
+  @include main-font(700, 24px, calc(33 / 24));
+
   letter-spacing: -0.01em;
 }
 
 .newsText {
-  font-size: 16px;
-  line-height: 1.37;
+  @include main-font(400, 16px, calc(22 / 16));
 }
 
 .dateLinkBox {

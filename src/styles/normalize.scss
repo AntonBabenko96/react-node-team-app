@@ -38,7 +38,7 @@ body {
   text-rendering: optimizeSpeed;
   // font-family: 'Manrope';
   @include main-font(400, 14px, 1.5);
-  background-color: rgba(244, 244, 244, 1);
+  background-color: #fef9f9;
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
