@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import PetsIcon from '@mui/icons-material/Pets';
+import CloseIcon from '@mui/icons-material/Close';
 import Modal from '../Modal/Modal';
 import validationSchema from 'helpers/validationSchema';
 
 import { register, login } from '../../redux/auth/auth-operations';
 import { selectIsLogin, selectLoading } from '../../redux/auth/selectors';
-
 
 import './AuthForm.scss';
 
@@ -19,16 +19,25 @@ export const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  // const [emailValue, setEmailValue] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
 
   const isLogin = useSelector(selectIsLogin);
   const isLoading = useSelector(selectLoading);
 
   const [currentPath] = useState(window.location.pathname);
   const isRegisterPath = currentPath.endsWith('/register');
+  const isLoginPath = currentPath.endsWith('/login');
+
+  // const handleEmailChange = event => {
+  //   setEmailValue(event.target.value);
+  // };
+
+  // const handleClearEmail = () => {
+  //   setEmailValue('');
+  // };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -38,15 +47,18 @@ export const AuthForm = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
- 
-
   const handleSubmit = (values, { resetForm }) => {
-    isRegisterPath
-      ? dispatch(register({ email: values.email, password: values.password }))
-      : dispatch(login({ email: values.email, password: values.password }));
+    if (isRegisterPath) {
+      dispatch(register({ email: values.email, password: values.password }));
+      isRegisterPath && setShowModal(true) &&  navigate('/user'); ;
+    }
+    if (isLoginPath) {
+      dispatch(login({ email: values.email, password: values.password }));
+      navigate('/user');
+    }
     resetForm();
-    isRegisterPath && setShowModal(true);
-    navigate('/user');
+  //   isRegisterPath && setShowModal(true) &&  navigate('/user'); ;
+  //   navigate('/user');
   };
 
   return (
@@ -60,7 +72,16 @@ export const AuthForm = () => {
         <Form>
           <div>
             <div className="input-icon">
-              <Field type="email" name="email" placeholder="Email" />
+              <Field
+                type="email"
+                name="email"
+                placeholder="Email"
+                // onChange={handleEmailChange}
+                // value={emailValue}
+              />
+              {/* {emailValue && (
+                <CloseIcon className="icon" onClick={handleClearEmail} />
+              )} */}
             </div>
           </div>
 
@@ -83,7 +104,11 @@ export const AuthForm = () => {
                 />
               )}
             </div>
-            <ErrorMessage name="password" component="div" />
+            <ErrorMessage
+              name="password"
+              component="div"
+              className="errorMessage"
+            />
           </div>
           {isRegisterPath && (
             <div>
@@ -105,7 +130,11 @@ export const AuthForm = () => {
                   />
                 )}
               </div>
-              <ErrorMessage name="confirmPassword" component="div" />
+              <ErrorMessage
+                name="confirmPassword"
+                component="div"
+                className="errorMessage"
+              />
             </div>
           )}
 
@@ -124,7 +153,7 @@ export const AuthForm = () => {
       )}
 
       {showModal && !isLoading && isLogin && (
-        <Modal style={{ width: '608px' }}>
+        <Modal onClose={() => setShowModal(false)} style={{ width: '608px' }}>
           <h1 className="modalH1">Congrats!</h1>
           <h2 className="modalP">Your registration is successful</h2>
           <button className="modalBtn" onClick={() => navigate('/user')}>
