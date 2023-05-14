@@ -18,17 +18,18 @@ const SponsorsList = ({ sponsors }) => {
     }) => (
       <li key={_id} className={styles.friends__item}>
         <Link
+          target="_blank"
           to={url}
           state={{ from: location }}
           className={styles.friends__link}
         >
           <p className={styles.friends__subtitle}>{title}</p>
         </Link>
-        <div>
+        <div className={styles.address__wrapper}>
           <img
             src={imageUrl}
             alt="Company`s logo"
-            className={styles.friends__img}
+            className={styles.friends__logo}
           ></img>
           <ul className={styles.address__list}>
             {/* <li className={styles.address__item}>
@@ -41,6 +42,7 @@ const SponsorsList = ({ sponsors }) => {
               <p className={styles.address__itemTitle}>Adress:</p>
               <a
                 href={addressUrl}
+                target="_blank"
                 rel="noopener noreferrer"
                 className={styles.address__itemLink}
               >
