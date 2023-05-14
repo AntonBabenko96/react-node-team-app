@@ -1,0 +1,102 @@
+@import '../../../styles/styles.scss';
+
+.div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input {
+  border-radius: 40px;
+  padding-left: 10px;
+  border: 1px solid getColor(full-blue);
+}
+
+.errorField {
+  border-radius: 40px;
+  padding-left: 10px;
+  border: 1px solid getColor(full-red);
+}
+
+.errorField:focus {
+  outline: 1px solid getColor(full-red);
+}
+
+.input:focus {
+  outline: 1px solid getColor(full-blue);
+}
+
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  @include main-font(500, 14px, 19px);
+}
+
+.input::placeholder {
+  @include main-font(400, 14px, 21px);
+  color: #888888;
+}
+
+.controls {
+  margin-top: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.error {
+  position: absolute;
+  color: getColor(full-red);
+  user-select: none;
+  bottom: -17px;
+  left: 0;
+}
+
+.next {
+  @include main-font(700, 16px, 22px);
+  color: getColor(full-white);
+  margin-left: 12px;
+  width: 248px;
+  height: 40px;
+  background-color: getColor(full-blue);
+  cursor: pointer;
+  border-radius: 40px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.next:hover,
+.next:focus {
+  background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+}
+
+.prev {
+  @include main-font(700, 16px, 22px);
+  height: 24px;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+  color: getColor(full-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  fill: #fef9f9;
+  height: 24px;
+  width: 24px;
+}
+
+.arrow {
+  stroke: getColor(full-blue);
+  height: 24px;
+  width: 24px;
+}
