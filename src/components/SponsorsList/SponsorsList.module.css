@@ -129,6 +129,9 @@
   font-size: 12px;
   line-height: 1.3333333333;
 }
+.address__itemLink:hover {
+  color: #54adff;
+}
 @media screen and (min-width: 768px) {
   .address__itemLink {
     font-weight: 400;
