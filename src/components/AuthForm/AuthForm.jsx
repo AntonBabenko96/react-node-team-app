@@ -1,32 +1,33 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import PetsIcon from '@mui/icons-material/Pets';
 import Modal from '../Modal/Modal';
+import validationSchema from 'helpers/validationSchema';
+
 import { register, login } from '../../redux/auth/auth-operations';
 import { selectIsLogin, selectLoading } from '../../redux/auth/selectors';
-import { useNavigate } from 'react-router-dom';
+
 
 import './AuthForm.scss';
 
-export const AuthForm = ({ history }) => {
+export const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate = useNavigate();
-
-  const [currentPath] = useState(window.location.pathname);
   const [showModal, setShowModal] = useState(false);
-  console.log(showModal);
-  // const [redirect, setRedirect] = useState(false);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+
   const isLogin = useSelector(selectIsLogin);
   const isLoading = useSelector(selectLoading);
 
+  const [currentPath] = useState(window.location.pathname);
   const isRegisterPath = currentPath.endsWith('/register');
 
   const togglePasswordVisibility = () => {
@@ -37,22 +38,7 @@ export const AuthForm = ({ history }) => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Email is required'),
-    password: Yup.string()
-      .min(6, 'Password must be at least 6 characters')
-      .required('Password is required'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required'),
-  });
-
-  // const handleClose = ({ target, currentTarget, code }) => {
-  //   if (target === currentTarget || code === 'Escape') {
-  //     setShowModal(false);
-  //     //  isLogin && setRedirect(true);
-  //   }
-  // };
+ 
 
   const handleSubmit = (values, { resetForm }) => {
     isRegisterPath
@@ -60,6 +46,7 @@ export const AuthForm = ({ history }) => {
       : dispatch(login({ email: values.email, password: values.password }));
     resetForm();
     isRegisterPath && setShowModal(true);
+    navigate('/user');
   };
 
   return (
@@ -135,6 +122,7 @@ export const AuthForm = ({ history }) => {
           Don't have an account? <Link to="/register"> Register</Link>{' '}
         </p>
       )}
+
       {showModal && !isLoading && isLogin && (
         <Modal style={{ width: '608px' }}>
           <h1 className="modalH1">Congrats!</h1>
@@ -144,7 +132,6 @@ export const AuthForm = ({ history }) => {
           </button>
         </Modal>
       )}
-      {/* {isLogin && <Navigate to="/user" />} */}
     </div>
   );
 };
