@@ -40,13 +40,11 @@ export const AuthForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     if (isRegisterPath) {
-      console.log(values.email);
       dispatch(register({ email: values.email, password: values.password }));
 
       isRegisterPath && setShowModal(true) && navigate('/user');
     }
     if (isLoginPath) {
-      console.log(values.email);
       dispatch(login({ email: values.email, password: values.password }));
       navigate('/user');
     }
