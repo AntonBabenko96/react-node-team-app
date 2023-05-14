@@ -3,12 +3,13 @@ import { ReactComponent as TrashIcon } from 'img/svg/trash.svg';
 import { ReactComponent as LocationIcon } from 'img/svg/location.svg';
 import { ReactComponent as ClockIcon } from 'img/svg/clock.svg';
 import { ReactComponent as MaleIcon } from 'img/svg/male.svg';
-import kitten from 'img/kitten.jpg';
+import placeholder from 'img/placeholder.png';
 
 import s from './NoticeCategoryItem.module.scss';
 
 export default function NoticeCategoryItem({
   category,
+  img,
   title,
   place,
   age,
@@ -16,6 +17,8 @@ export default function NoticeCategoryItem({
   kind,
   onBtnClick,
 }) {
+  const imgBeseURL = "https://your-pet-backend.onrender.com/";
+
   return (
     <li className={s.item}>
       <div className={s.category}>
@@ -27,7 +30,7 @@ export default function NoticeCategoryItem({
       <button className={`${s.userBtn} ${s.delete}`}>
         <TrashIcon className={s.icon} />
       </button>
-      <img className={s.img} src={kitten} alt="Pet" />
+      <img className={s.img} src={img ? `${imgBeseURL}${img}` : placeholder} alt="Pet" />
       <div className={s.wrapper}>
         <div className={s.box}>
           <LocationIcon className={`${s.icon} ${s.infoIcon}`} />
@@ -43,7 +46,7 @@ export default function NoticeCategoryItem({
         </div>
       </div>
       <h2 className={s.title}>
-        Сute {kind} looking for a home{title}
+        {title ? title : `Сute ${kind} looking for a home`}
       </h2>
       <button className={s.btn} type="button" onClick={onBtnClick}>
         Learn more
