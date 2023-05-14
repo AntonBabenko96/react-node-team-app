@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/react-node-team-app/static/css/main.010f94c4.css",
-    "main.js": "/react-node-team-app/static/js/main.825cb26c.js",
+    "main.css": "/react-node-team-app/static/css/main.489d0e1a.css",
+    "main.js": "/react-node-team-app/static/js/main.3cc2565a.js",
     "static/media/picturesDesktop2.png": "/react-node-team-app/static/media/picturesDesktop2.18cfbc8e6f1506519929.png",
     "static/media/picturesTablet.png": "/react-node-team-app/static/media/picturesTablet.adcaaa3647d8ae5b6950.png",
     "static/media/picturesPhone.png": "/react-node-team-app/static/media/picturesPhone.e422b3be225d2906d0da.png",
-    "static/media/kitten.jpg": "/react-node-team-app/static/media/kitten.c90454e82313dc45f19f.jpg",
     "static/media/logo.svg": "/react-node-team-app/static/media/logo.6e2f51eeb062dc6472f5e4aa1de019f4.svg",
     "static/media/bgDesktop.png": "/react-node-team-app/static/media/bgDesktop.8f2f03b4c02ba15f10da.png",
     "static/media/bgTablet.png": "/react-node-team-app/static/media/bgTablet.189af4fdd9116a8fd07d.png",
+    "static/media/placeholder.png": "/react-node-team-app/static/media/placeholder.f1de6a39e4b6d6891b5d.png",
     "static/media/pawprint.svg": "/react-node-team-app/static/media/pawprint.3a5b72efe736e581f5be8e4f8f607dca.svg",
     "index.html": "/react-node-team-app/index.html",
     "static/media/user.svg": "/react-node-team-app/static/media/user.f341eb398b1e6db361b079c9a163e5eb.svg",
@@ -18,12 +18,15 @@
     "static/media/trash.svg": "/react-node-team-app/static/media/trash.768a50fa28fec9d72fec88886179ba24.svg",
     "static/media/male.svg": "/react-node-team-app/static/media/male.122d11b557825917514b019b6fa82af8.svg",
     "static/media/clock.svg": "/react-node-team-app/static/media/clock.b7f751a5a36e50f9fd7a64d10703104b.svg",
+    "static/media/female.svg": "/react-node-team-app/static/media/female.044de226252d72d4893c8aab612e3129.svg",
     "static/media/logout.svg": "/react-node-team-app/static/media/logout.b9f86f69ec8cd58a59773551d548a6b5.svg",
-    "main.010f94c4.css.map": "/react-node-team-app/static/css/main.010f94c4.css.map",
-    "main.825cb26c.js.map": "/react-node-team-app/static/js/main.825cb26c.js.map"
+    "static/media/plus.svg": "/react-node-team-app/static/media/plus.b5e6410da4b4e6eccef3a4e839f4d4f7.svg",
+    "static/media/arrow-left.svg": "/react-node-team-app/static/media/arrow-left.28e54c68d22316b0adad105367f7e8e0.svg",
+    "main.489d0e1a.css.map": "/react-node-team-app/static/css/main.489d0e1a.css.map",
+    "main.3cc2565a.js.map": "/react-node-team-app/static/js/main.3cc2565a.js.map"
   },
   "entrypoints": [
-    "static/css/main.010f94c4.css",
-    "static/js/main.825cb26c.js"
+    "static/css/main.489d0e1a.css",
+    "static/js/main.3cc2565a.js"
   ]
 }
