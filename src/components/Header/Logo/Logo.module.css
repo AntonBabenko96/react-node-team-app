@@ -1,0 +1,18 @@
+.logo {
+  z-index: 111;
+}
+@media (max-width: 767px) {
+  .logo {
+    max-width: 116px;
+  }
+}
+@media (max-width: 1279px) {
+  .logo {
+    flex-basis: 100%;
+  }
+}
+@media (min-width: 1280px) {
+  .logo {
+    margin-right: 159px;
+  }
+}/*# sourceMappingURL=Logo.module.css.map */
