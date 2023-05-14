@@ -1,12 +1,15 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import PreviewImage from '../PreviewImage/PreviewImage';
+
 import styles from './ThirdStep.module.scss';
 import { ReactComponent as Arrow } from '../../../img/svg/arrow-left.svg';
 import { ReactComponent as Paw } from '../../../img/svg/pawprint.svg';
 import { ReactComponent as Plus } from '../../../img/svg/plus.svg';
-
-import PreviewImage from '../PreviewImage/PreviewImage';
+import { ReactComponent as Trash } from '../../../img/svg/trash.svg';
+import { ReactComponent as Male } from '../../../img/svg/male.svg';
+import { ReactComponent as Female } from '../../../img/svg/female.svg';
 
 function ThirdStep({ data, prev, finish }) {
   const showSex = data.category === 'my pet' ? false : true;
@@ -15,7 +18,8 @@ function ThirdStep({ data, prev, finish }) {
 
   const validationSchema = Yup.object({
     photo: Yup.mixed()
-      .required(`required field`)
+      .required()
+      .label(`Photo`)
       .test(
         'FILE_SIZE',
         'File is too large!',
@@ -33,9 +37,11 @@ function ThirdStep({ data, prev, finish }) {
     //   is: true,
     //   then: Yup.string().required(),
     // }),
-    sex: showSex ? Yup.string().required() : Yup.string(),
-    location: location ? Yup.string().required() : Yup.string(),
-    price: price ? Yup.string().required() : Yup.string(),
+    sex: showSex ? Yup.string().required('Sex is required') : Yup.string(),
+    location: location
+      ? Yup.string().required().label('Location')
+      : Yup.string(),
+    price: price ? Yup.string().required().label(`Price`) : Yup.string(),
   });
 
   const FormError = ({ name }) => {
@@ -60,20 +66,24 @@ function ThirdStep({ data, prev, finish }) {
               <div className={styles.sex}>
                 <Field
                   type="radio"
-                  id="choice1"
-                  name="sex"
-                  value="male"
-                ></Field>
-                <label htmlFor="choice1">Male</label>
-
-                <Field
-                  type="radio"
                   id="choice2"
                   name="sex"
                   value="female"
                 ></Field>
-                <label htmlFor="choice2">Female</label>
-                <FormError name="sex" />
+                <label htmlFor="choice2">
+                  <Female className={styles.female}></Female>Female
+                </label>
+                <Field
+                  type="radio"
+                  id="choice1"
+                  name="sex"
+                  value="male"
+                ></Field>
+                <label htmlFor="choice1">
+                  <Male className={styles.male}></Male>Male
+                </label>
+
+                <FormError className={styles.error} name="sex" />
               </div>
             )}
 
@@ -83,17 +93,18 @@ function ThirdStep({ data, prev, finish }) {
                 <>
                   <PreviewImage file={formik.values.photo} />
                   <button
+                    className={styles.trashBtn}
                     onClick={() => {
                       formik.setFieldValue(`photo`, null);
                     }}
                   >
-                    EDIT
+                    <Trash className={styles.trash}></Trash>
                   </button>
                 </>
               )) || (
                 <>
                   <input
-                    className={styles.input}
+                    className={styles.hidden}
                     type="file"
                     id="file"
                     name="photo"
@@ -106,8 +117,8 @@ function ThirdStep({ data, prev, finish }) {
                   </label>
                 </>
               )}
+              <FormError className={styles.error} name="photo" />
             </div>
-            <FormError name="photo" />
 
             {location && (
               <label className={styles.field}>
@@ -145,7 +156,7 @@ function ThirdStep({ data, prev, finish }) {
                 placeholder="Tell something about your pet"
               ></Field>
             </label>
-            <FormError name="comments" />
+            <FormError className={styles.error} name="comments" />
             {/* <label htmlFor="ll">
               <input type="file" id="ll" />
               upload

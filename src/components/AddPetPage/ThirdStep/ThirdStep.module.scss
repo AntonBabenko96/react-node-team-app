@@ -35,6 +35,7 @@
 
 .sex {
   display: flex;
+  position: relative;
 }
 
 input[type='radio'] {
@@ -44,28 +45,43 @@ input[type='radio'] {
 }
 
 .sex label {
+  @include main-font(400, 16px, 24px);
   display: flex;
   width: fit-content;
-  background-color: getColor(light-blue);
+  background-color: transparent;
   padding: 8px 16px;
   border-radius: 40px;
-  color: getColor(full-blue);
+  color: #888888;
 }
 
 input[type='radio']:checked + label {
-  background-color: getColor(full-blue);
-  color: getColor(full-white);
+  color: getColor(full-green);
 }
+
+// input[type='radio']:checked ~ input[type='radio'] + label {
+//   // background-color: getColor(full-white);
+//   color: (red);
+//   // filter: grayscale(1);
+// }
 
 label:hover {
   cursor: pointer;
 }
 
 .field {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 4px;
   @include main-font(500, 14px, 19px);
+}
+
+.error {
+  position: absolute;
+  color: getColor(full-red);
+  user-select: none;
+  bottom: -17px;
+  left: 0;
 }
 
 .uploadlabel {
@@ -73,7 +89,7 @@ label:hover {
   margin-right: 27px;
 }
 
-.input[type='file'] {
+.hidden {
   opacity: 0;
   width: 0;
 }
@@ -81,6 +97,7 @@ label:hover {
 .uploadwrapper {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .upload {
@@ -101,6 +118,7 @@ label:hover {
 }
 
 .comments {
+  position: relative;
   resize: none;
   width: 100%;
   outline: none;
@@ -165,6 +183,47 @@ label:hover {
   stroke: getColor(full-blue);
   height: 24px;
   width: 24px;
+}
+
+.male {
+  stroke: getColor(full-blue);
+  height: 24px;
+  width: 24px;
+  fill: none;
+}
+
+.female {
+  fill: none;
+  height: 24px;
+  width: 24px;
+  stroke: getColor(full-red);
+}
+
+.trashBtn {
+  background-color: transparent;
+  border-radius: 50%;
+  border: 1px solid getColor(full-blue);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 300ms;
+  margin-left: 7px;
+}
+
+.trashBtn:hover,
+.trashBtn:focus {
+  scale: 1.05;
+  outline: 1px solid getColor(full-blue);
+}
+
+.trash {
+  stroke: getColor(full-blue);
+  height: 24px;
+  width: 24px;
+  fill: none;
 }
 
 .plus {
