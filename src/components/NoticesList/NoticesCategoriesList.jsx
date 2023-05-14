@@ -33,6 +33,10 @@ export default function NoticesCategoriesList() {
 
   const elements = notices.map(
     ({ _id, category, photoURL, title, location, birth, sex, type }) => {
+      const yearOfBirth = birth && new Date(birth).getFullYear();
+      const difference = birth ? (new Date().getFullYear() - yearOfBirth) : "n/a"
+      const age = difference === 1 ? `${difference} year` : `${difference} years`
+
       return (
         <NoticeCategoryItem
           key={_id}
@@ -40,7 +44,7 @@ export default function NoticesCategoriesList() {
           img={photoURL}
           title={title}
           place={location}
-          age={birth}
+          age={age}
           sex={sex}
           kind={type}
           onBtnClick={handleLearnMoreBtnClick}
@@ -48,7 +52,6 @@ export default function NoticesCategoriesList() {
       );
     }
   );
-  console.log(notices)
 
   return (
     <>
