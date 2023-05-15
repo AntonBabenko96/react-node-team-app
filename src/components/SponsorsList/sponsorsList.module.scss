@@ -116,8 +116,31 @@
         gap: 12px;
     }
 
-    // &__list{
-    // }
+    &__itemBtn{
+        font-weight: 500;
+        font-size: 12px;
+        line-height: calc(16 / 12);
+        
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover {
+            color: #54adff;
+        }
+
+        @media screen and (min-width: 768px) {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: calc(19 / 14);
+        }
+
+        @media screen and (min-width: 1200px) {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: calc(22 / 16);
+        }
+    }
 
     &__item:not(:last-child){
         margin-bottom: 12px;
