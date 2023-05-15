@@ -19,7 +19,6 @@ export const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  // const [emailValue, setEmailValue] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,14 +29,6 @@ export const AuthForm = () => {
   const [currentPath] = useState(window.location.pathname);
   const isRegisterPath = currentPath.endsWith('/register');
   const isLoginPath = currentPath.endsWith('/login');
-
-  // const handleEmailChange = event => {
-  //   setEmailValue(event.target.value);
-  // };
-
-  // const handleClearEmail = () => {
-  //   setEmailValue('');
-  // };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -57,8 +48,7 @@ export const AuthForm = () => {
       navigate('/user');
     }
     resetForm();
-    //   isRegisterPath && setShowModal(true) &&  navigate('/user'); ;
-    //   navigate('/user');
+
   };
 
   return (
@@ -69,77 +59,103 @@ export const AuthForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <div>
-            <div className="input-icon">
-              <Field
-                type="email"
-                name="email"
-                placeholder="Email"
-                // onChange={handleEmailChange}
-                // value={emailValue}
-              />
-              {/* {emailValue && (
-                <CloseIcon className="icon" onClick={handleClearEmail} />
-              )} */}
-            </div>
-          </div>
+        {({ values, setValues }) => (
+          <Form>
+            <div>
+              <div className="input-icon">
+                <Field name="email">
+                  {({ field, form, meta }) => (
+                    <div>
+                      <input
+                        type="text"
+                        name="email"
+                        {...field}
+                        placeholder="Email"
+                        value={values.email}
+                        onChange={event => {
+                          form.setFieldValue('email', event.target.value);
+                        }}
+                      />
 
-          <div>
-            <div className="input-icon">
-              <Field
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                placeholder="Password"
-              />
-              {showPassword ? (
-                <RemoveRedEyeIcon
-                  className="icon"
-                  onClick={togglePasswordVisibility}
-                />
-              ) : (
-                <VisibilityOffIcon
-                  className="icon"
-                  onClick={togglePasswordVisibility}
-                />
-              )}
+                      {meta.touched && meta.error && (
+                        <ErrorMessage
+                          name="password"
+                          component="div"
+                          className="errorMessage"
+                        />
+                      )}
+                      {values.email && (
+                        <CloseIcon
+                          className="iconClose"
+                          onClick={() => {
+                            form.setFieldValue('email', '');
+                          }}
+                        />
+                      )}
+                    </div>
+                  )}
+                </Field>
+              </div>
             </div>
-            <ErrorMessage
-              name="password"
-              component="div"
-              className="errorMessage"
-            />
-          </div>
-          {isRegisterPath && (
+
             <div>
               <div className="input-icon">
                 <Field
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  name="confirmPassword"
-                  placeholder="Confirm password"
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Password"
                 />
-                {showConfirmPassword ? (
+                {showPassword ? (
                   <RemoveRedEyeIcon
                     className="icon"
-                    onClick={toggleConfirmPasswordVisibility}
+                    onClick={togglePasswordVisibility}
                   />
                 ) : (
                   <VisibilityOffIcon
                     className="icon"
-                    onClick={toggleConfirmPasswordVisibility}
+                    onClick={togglePasswordVisibility}
                   />
                 )}
               </div>
               <ErrorMessage
-                name="confirmPassword"
+                name="password"
                 component="div"
                 className="errorMessage"
               />
             </div>
-          )}
+            {isRegisterPath && (
+              <div>
+                <div className="input-icon">
+                  <Field
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                  />
+                  {showConfirmPassword ? (
+                    <RemoveRedEyeIcon
+                      className="icon"
+                      onClick={toggleConfirmPasswordVisibility}
+                    />
+                  ) : (
+                    <VisibilityOffIcon
+                      className="icon"
+                      onClick={toggleConfirmPasswordVisibility}
+                    />
+                  )}
+                </div>
+                <ErrorMessage
+                  name="confirmPassword"
+                  component="div"
+                  className="errorMessage"
+                />
+              </div>
+            )}
 
-          <button type="submit">{isRegisterPath ? 'Register' : 'Login'}</button>
-        </Form>
+            <button type="submit">
+              {isRegisterPath ? 'Register' : 'Login'}
+            </button>
+          </Form>
+        )}
       </Formik>
 
       {isRegisterPath ? (
@@ -154,8 +170,8 @@ export const AuthForm = () => {
 
       {showModal && !isLoading && isLogin && (
         <Modal onClose={() => setShowModal(false)} style={{ width: '608px' }}>
-          <h1 className="modalH1">Congrats!</h1>
-          <h2 className="modalP">Your registration is successful</h2>
+          <h2 className="modalH1">Congrats!</h2>
+          <p className="modalP">Your registration is successful</p>
           <button className="modalBtn" onClick={() => navigate('/user')}>
             Go to profile <PetsIcon className="modalIcon" />
           </button>
