@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const userPetsInstanse = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL
+  baseURL: 'https://your-pet-backend.onrender.com/',
 });
 
 export const getUserPets = async () => {

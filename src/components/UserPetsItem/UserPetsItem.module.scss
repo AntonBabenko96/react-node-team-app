@@ -39,11 +39,11 @@
 .text {
   @include main-font(400, 14px, 1.36);
   max-width: 240px;
-//   word-break: break-all;
-// word-wrap: break-word;
-    // -moz-hyphens: auto;
-    // -webkit-hyphens: auto;
-    // -ms-hyphens: auto;
+  //   word-break: break-all;
+  // word-wrap: break-word;
+  // -moz-hyphens: auto;
+  // -webkit-hyphens: auto;
+  // -ms-hyphens: auto;
   @media (min-width: 768px) {
     @include main-font(400, 14px, 1.28);
     max-width: 515px;
@@ -74,16 +74,58 @@ span {
   height: 24px;
   stroke: getColor('full-blue');
   fill: transparent;
+  cursor: pointer;
 }
 .trash__name {
   display: flex;
   justify-content: space-between;
   @media (min-width: 768px) {
     width: 515px;
-    justify-content:space-between;
+    justify-content: space-between;
   }
   @media (min-width: 1280px) {
     width: 580px;
-    justify-content:space-between;
+    justify-content: space-between;
   }
+}
+
+.modalContent {
+  height: 352px;
+}
+
+.modalTitle {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: calc(38 / 28);
+  letter-spacing: -0.01em;
+
+  margin: 60px 160px 40px;
+  text-align: center;
+
+  color: #000000;
+}
+
+.modalText {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: calc(22 / 16);
+  text-align: center;
+  letter-spacing: -0.01em;
+
+  margin: 0 110px 50px;
+}
+
+.buttonList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn {
+  display: block;
+  width: 130px;
+  height: 40px;
 }
