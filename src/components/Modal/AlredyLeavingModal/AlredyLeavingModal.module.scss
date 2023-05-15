@@ -1,5 +1,10 @@
 @import '/src/styles/styles.scss';
 
+div{
+    display: flex;
+    flex-direction: column; 
+}
+
 h1 {
     @include main-font(500, 24px, 33px, normal);
     text-align: center;
@@ -21,36 +26,38 @@ h1 {
     color:  getColor('full-black');
   }
   
-  .modalBtn {
+  .modalButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 17px;
+    margin-bottom: 60px;
+  }
+  
+  button {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 10px 28px;
-    width: 256px;
-    height: 48px;
-    background:  getColor('full-blue');
+    width: 129px;
+    height: 40px;
     outline: none;
-    border: transparent;
+    border:getColor('full-blue');
     border-radius: 40px;
-    color: getColor('full-white');
-    @include main-font(400, 16px, 22px, normal);
-    // margin-top: 40px;
-    margin-bottom: 60px;
     cursor: pointer;
   }
   
-  .modalIcon {
-    fill: getColor('full-white');
-    width: 24px;
-    height: 24px;
-    margin-left: 12px;
-    // position: absolute;
-    width: 24px;
-    height: 20.97px;
-    left: 5.56px;
-    top: -2.59px;
-  
-    transform: rotate(25deg);
+  .btnClose {
+    background-color:getColor('full-white');
   }
-
+  .btn-yes {
+    background-color:getColor('full-blue');
+  }
+  
+  .icon {
+    fill:getColor('full-white');
+    width:24px;
+    height:24px;
+    margin-left: 8px;
+    transform: rotate(180deg);
+  }
+  

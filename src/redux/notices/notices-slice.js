@@ -1,11 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import {
-  getNoticesByCategory,
-  getNoticeById,
-  getNoticesByTitle,
-  getNoticesByCategoryAndTitle,
-} from './notices-operations';
+import { getNotices, getNoticeById } from './notices-operations';
 
 const initialState = {
   items: [],
@@ -29,27 +24,17 @@ export const noticesSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(getNoticesByCategory.pending, handlePending)
-      .addCase(getNoticesByCategory.fulfilled, (state, { payload }) => {
+      .addCase(getNotices.pending, handlePending)
+      .addCase(getNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        state.error = null;
         state.items = payload;
       })
-      .addCase(getNoticesByCategory.rejected, handleRejected)
-      .addCase(getNoticesByTitle.pending, handlePending)
-      .addCase(getNoticesByTitle.fulfilled, (state, {payload}) => {
-        state.isLoading = false;
-        state.items = payload;
-      })
-      .addCase(getNoticesByTitle.rejected, handleRejected)
-      .addCase(getNoticesByCategoryAndTitle.pending, handlePending)
-      .addCase(getNoticesByCategoryAndTitle.fulfilled, (state, {payload}) => {
-        state.isLoading=false;
-        state.items = payload;
-      })
-      .addCase(getNoticesByCategoryAndTitle.rejected, handleRejected)
+      .addCase(getNotices.rejected, handleRejected)
       .addCase(getNoticeById.pending, handlePending)
       .addCase(getNoticeById.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        state.error = null;
         state.item = payload;
       })
       .addCase(getNoticeById.rejected, handleRejected);
