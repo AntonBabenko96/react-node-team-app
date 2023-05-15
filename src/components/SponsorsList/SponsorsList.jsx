@@ -51,12 +51,12 @@ const SponsorsList = ({ sponsors }) => {
             <li className={styles.address__item}>
               <p className={styles.address__itemTitle}>Time:</p>
               {Array.isArray(workDays) ? (
-                <a
-                  className={styles.address__itemLink}
+                <button
+                  className={styles.address__itemBtn}
                   onClick={() => handleToggleWorkHours(_id)}
                 >
                   {isWorkHoursOpen[_id] ? 'Hide Work Hours' : 'Show Work Hours'}
-                </a>
+                </button>
               ) : (
                 <span>{workDays}</span>
               )}
