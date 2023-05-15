@@ -35,7 +35,6 @@ const petsSlice = createSlice({
       .addCase(addNotice.fulfilled, (state, { payload }) => {
         state.loading = false;
         console.log(payload);
-        // state.items.push(payload.data);
       })
       .addCase(addNotice.rejected, (state, { payload }) => {
         state.loading = false;

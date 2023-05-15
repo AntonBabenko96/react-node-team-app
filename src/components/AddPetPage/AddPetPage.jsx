@@ -7,12 +7,11 @@ import styles from './AddPetPage.module.scss';
 import { useDispatch } from 'react-redux';
 import { addNotice, addPet } from 'redux/pets/pets-operations';
 import { createRequestData } from './CreateRequestData/CreateRequestData';
-// import axios from 'axios';
 
 const stateInitialValue = {
   category: '',
   petName: '',
-  dateOfBirth: 0,
+  dateOfBirth: '',
   type: '',
   breed: '',
   photo: null,
@@ -20,7 +19,7 @@ const stateInitialValue = {
   imageURL: '',
   sex: '',
   location: '',
-  price: 0,
+  price: '',
   title: '',
 };
 export default function AddPetPage() {
@@ -52,40 +51,10 @@ export default function AddPetPage() {
     setState(prev => ({ ...prev, ...values }));
     const data = new FormData();
     createRequestData(data, state, values);
-    // const { photo } = values;
-
-    // data.append('file', values.photo);
-    // data.append('type', state.type);
-    // data.append('name', state.petName);
-    // data.append('birth', state.dateOfBirth);
-    // data.append('breed', state.breed);
-    // data.append('comments', values.comments);
-
-    // data.append('sex', values.sex || `male`);
-    // data.append('title', state.title);
-    // data.append('location', values.location || 'test');
-    // data.append('category', state.category);
-    // data.append('price', values.price);
 
     state.category === 'my pet'
       ? dispatch(addPet(data))
       : dispatch(addNotice(data));
-
-    // dispatch(addPet(data));
-    // const instance = axios.create({
-    //   baseURL: 'https://your-pet-backend.onrender.com/',
-    // });
-
-    // instance.defaults.headers.common.authorization =
-    //   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZiZWVmMjUyNjQwMjIyMmZiY2U5NiIsImlhdCI6MTY4NDAwMzE1NSwiZXhwIjoxNjg0MDA0MzU1fQ.toPuFbdg2Df7QicV4myLpTjjSN8xZ0oIORffuvituYk';
-
-    // const response = await instance.post('/pets', data, {
-    //   headers: { 'Content-Type': 'multipart/form-data' },
-    // });
-    // console.log(response);
-    // console.log(state);
-    // setCurrentStep(0);
-    // setState(stateInitialValue);
   };
 
   const stepStyle = position => {
