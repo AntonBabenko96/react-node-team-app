@@ -7,11 +7,13 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 // import PetsIcon from '@mui/icons-material/Pets';
 import CloseIcon from '@mui/icons-material/Close';
+
 // import Modal from '../Modal/Modal';
 import {
   validationRegisterSchema,
   validationLoginSchema,
 } from 'helpers/validationSchema';
+
 
 import { register, login } from '../../redux/auth/auth-operations';
 // import { selectIsLogin, selectLoading } from '../../redux/auth/selectors';
@@ -52,7 +54,6 @@ export const AuthForm = () => {
       navigate('/user');
     }
     resetForm();
-
   };
 
   return (
