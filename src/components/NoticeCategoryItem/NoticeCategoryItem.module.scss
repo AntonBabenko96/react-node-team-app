@@ -109,11 +109,6 @@
   padding: 2px 4px;
   border-radius: 16px;
   background-color: getColor('light-blue');
-
-  &:hover {
-    color:#ffffff;
-    background-color: getColor('full-blue');
-  }
 }
 
 .info {
@@ -127,9 +122,6 @@
   stroke: getColor('full-blue');
 }
 
-.box:hover > .infoIcon {
-  stroke:#ffffff;
-}
 
 .title {
   width: 231px;

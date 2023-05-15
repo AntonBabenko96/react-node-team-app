@@ -52,6 +52,7 @@ export const AuthForm = () => {
       navigate('/user');
     }
     resetForm();
+
   };
 
   return (
