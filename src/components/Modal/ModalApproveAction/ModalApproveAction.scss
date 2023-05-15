@@ -13,7 +13,7 @@ p {
   margin-bottom: 20px;
 }
 
-div {
+.modalButtons {
   display: flex;
   flex-direction: row;
   gap: 17px;
@@ -42,5 +42,7 @@ button {
 
 .icon {
   fill:getColor('full-white');
+  width:24px;
+  height:24px;
   margin-left: 8px;
 }
