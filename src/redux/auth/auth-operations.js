@@ -36,3 +36,61 @@ export const logout = createAsyncThunk(
     }
   }
 );
+
+export const addToFavorites = createAsyncThunk(
+  'user/addToFavorites',
+  async(data, {rejectWithValue}) => {
+    try {
+      await api.addToFavorites(data);
+    } catch ({response}) {
+      return rejectWithValue(response.data.message);
+    }
+  }
+)
+
+export const removeFromFavorites = createAsyncThunk(
+  'user/removeFromFavorites',
+  async(data, {rejectWithValue}) => {
+    try {
+      await api.removeFromFavorites(data);
+    } catch ({response}) {
+      return rejectWithValue(response.data.message);
+    }
+  }
+)
+
+export const getFavoritesList = createAsyncThunk(
+  'user/getFavoritesList',
+  async(_, {rejectWithValue}) => {
+    try {
+      const {data: result} = await api.getFavoritesList();
+      return result;
+    } catch ({response}) {
+      return rejectWithValue(response.data.message);
+    }
+  }
+)
+
+export const getUserInfo = createAsyncThunk(
+  'user/getUserInfo',
+  async(_, {rejectWithValue}) => {
+    try {
+      const {data: result} = await api.getUserInfo();
+      return result;
+    } catch ({response}) {
+      return rejectWithValue(response.data.message);
+    }
+  }
+)
+
+export const updateUserInfo = createAsyncThunk(
+  'user/updateUserInfo',
+  async(data, {rejectWithValue}) => {
+    try {
+      const {data: result} = await api.updateUserInfo(data);
+      return result;
+    } catch ({response}) {
+      return rejectWithValue(response.data.message);
+    }
+  }
+)

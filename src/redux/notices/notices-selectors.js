@@ -1,2 +1,2 @@
-export const getNotices = ({notices}) => notices.items;
-export const getNotice = ({notices}) => notices.item;
+export const selectNotices = ({notices}) => notices.items;
+export const selectNotice = ({notices}) => notices.item;

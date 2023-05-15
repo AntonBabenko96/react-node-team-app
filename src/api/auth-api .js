@@ -50,4 +50,29 @@ export async function logout() {
   return data;
 }
 
+export async function addToFavorites(id) {
+  const data = await instance.post(`/users/favorites/${id}`)
+  return data;
+}
+
+export async function removeFromFavorites(id) {
+  const data = await instance.delete(`/users/favorites/${id}`)
+  return data;
+}
+
+export async function getFavoritesList() {
+  const data = await instance.delete(`/users/favorites`)
+  return data;
+}
+
+export async function getUserInfo() {
+  const data = await instance.get(`/users/me`)
+  return data;
+}
+
+export async function updateUserInfo(data) {
+  const {data: result} = await instance.patch(`/users/me`, data)
+  return result;
+}
+
 export default instance;
