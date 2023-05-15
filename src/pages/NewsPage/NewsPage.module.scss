@@ -126,3 +126,11 @@
 .newsLink {
   color: getColor('full-blue');
 }
+
+.noteFound {
+  text-align: center;
+}
+.noteFoundText {
+  margin-bottom: 80px;
+  @include main-font(700, 24px, calc(33 / 24));
+}

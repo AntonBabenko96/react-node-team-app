@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
-import NotFound from 'pages/NotFound/NotFound';
 import styles from './NewsPage.module.scss';
 import { getNews } from 'api/news';
+import notFoundImg from '../../img/notFound/notFound.png';
 
 export default function NewsPage() {
   const [news, setNews] = useState([]);
@@ -64,12 +64,21 @@ export default function NewsPage() {
     </>
   );
 
+  const notFoundMarkup = (
+    <div className={styles.noteFound}>
+      <p className={styles.noteFoundText}>
+        `Ooops! Nothing was found for your request :(`
+      </p>
+      <img className={styles.noteFoundImg} src={notFoundImg} alt="Not Found" />
+    </div>
+  );
+
   return (
     <section className={styles.newsSection}>
       <div className="container">
         <h1 className={styles.newsMainTitle}>News</h1>
         <NoticesSearch />
-        {!!news.length ? newsMarkup : <NotFound />}
+        {!!news.length ? newsMarkup : notFoundMarkup}
       </div>
     </section>
   );
