@@ -4,11 +4,21 @@ import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import styles from './NewsPage.module.scss';
 import { getNews } from 'api/news';
 import notFoundImg from '../../img/notFound/notFound.png';
+import Paginations from 'components/Pagination/Pagination';
 
 export default function NewsPage() {
   const [news, setNews] = useState([]);
+  const [count, setCount] = useState(1);
+
   const { search } = useLocation();
   let query = search.slice(8);
+
+  const [page, setPage] = useState(1);
+
+  const getPage = paginationPage => {
+    // Отримання даних з дочірнього компонента Pagination
+    setPage(paginationPage);
+  };
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -16,7 +26,9 @@ export default function NewsPage() {
       //1) першим параметром приймає номер сторінки
       //2) другим параметром кількість новин на сторінці
       //3) третій параметр - це пошуковий запит по заголовку новини
-      const result = await getNews(1, 6, query);
+      const result = await getNews(page, 6, query);
+      const total = Math.ceil(result.total / 6);
+      setCount(total);
       //У відповіді від бекенду повертається обєкт формату:
       // {
       //   total: 1151, <--- загальна кількість новин яка повернулась після пошуку
@@ -25,7 +37,7 @@ export default function NewsPage() {
       setNews([...result.data]);
     };
     fetchNews();
-  }, [query]);
+  }, [query, page]);
 
   const newsMarkup = (
     <>
@@ -88,6 +100,7 @@ export default function NewsPage() {
         <h1 className={styles.newsMainTitle}>News</h1>
         <NoticesSearch />
         {!!news.length ? newsMarkup : notFoundMarkup}
+        <Paginations getPage={getPage} count={count} />
       </div>
     </section>
   );
