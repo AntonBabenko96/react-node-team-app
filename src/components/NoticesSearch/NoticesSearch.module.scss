@@ -46,26 +46,21 @@
   cursor: pointer;
 
   background: white;
-  color:rgb(83, 83, 83);
-
-
+  color: rgb(83, 83, 83);
 
   @media screen and (min-width: 768px) {
     border-radius: 20px;
     width: 608px;
-     font-weight: 400;
+    font-weight: 400;
     font-size: 24px;
     line-height: 1.2;
-  .box:focus~.input {
-    font-size: 20px;
-  }
+    .box:focus ~ .input {
+      font-size: 20px;
+    }
   }
 }
-
 
 .btn {
   border: none;
   outline: none;
-
 }
-
