@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/react-node-team-app/static/css/main.9a9c2e0f.css",
-    "main.js": "/react-node-team-app/static/js/main.c3b843da.js",
+    "main.css": "/react-node-team-app/static/css/main.e254b477.css",
+    "main.js": "/react-node-team-app/static/js/main.4af774c8.js",
     "static/media/picturesDesktop2.png": "/react-node-team-app/static/media/picturesDesktop2.18cfbc8e6f1506519929.png",
     "static/media/picturesTablet.png": "/react-node-team-app/static/media/picturesTablet.adcaaa3647d8ae5b6950.png",
     "static/media/picturesPhone.png": "/react-node-team-app/static/media/picturesPhone.e422b3be225d2906d0da.png",
@@ -10,7 +10,9 @@
     "static/media/bgTablet.png": "/react-node-team-app/static/media/bgTablet.189af4fdd9116a8fd07d.png",
     "static/media/placeholder.png": "/react-node-team-app/static/media/placeholder.f1de6a39e4b6d6891b5d.png",
     "static/media/pawprint.svg": "/react-node-team-app/static/media/pawprint.3a5b72efe736e581f5be8e4f8f607dca.svg",
+    "static/media/photo-default.svg": "/react-node-team-app/static/media/photo-default.2c9afb5dfcbe695b9150f927616a01aa.svg",
     "index.html": "/react-node-team-app/index.html",
+    "static/media/edit.svg": "/react-node-team-app/static/media/edit.b66876a76809c374f29cb162c8103829.svg",
     "static/media/user.svg": "/react-node-team-app/static/media/user.f341eb398b1e6db361b079c9a163e5eb.svg",
     "static/media/camera.svg": "/react-node-team-app/static/media/camera.83a09746229414f9c1371f38927314bc.svg",
     "static/media/location.svg": "/react-node-team-app/static/media/location.258b621b15c5ce3ceed88fb027ca08a8.svg",
@@ -22,11 +24,11 @@
     "static/media/logout.svg": "/react-node-team-app/static/media/logout.b9f86f69ec8cd58a59773551d548a6b5.svg",
     "static/media/plus.svg": "/react-node-team-app/static/media/plus.b5e6410da4b4e6eccef3a4e839f4d4f7.svg",
     "static/media/arrow-left.svg": "/react-node-team-app/static/media/arrow-left.28e54c68d22316b0adad105367f7e8e0.svg",
-    "main.9a9c2e0f.css.map": "/react-node-team-app/static/css/main.9a9c2e0f.css.map",
-    "main.c3b843da.js.map": "/react-node-team-app/static/js/main.c3b843da.js.map"
+    "main.e254b477.css.map": "/react-node-team-app/static/css/main.e254b477.css.map",
+    "main.4af774c8.js.map": "/react-node-team-app/static/js/main.4af774c8.js.map"
   },
   "entrypoints": [
-    "static/css/main.9a9c2e0f.css",
-    "static/js/main.c3b843da.js"
+    "static/css/main.e254b477.css",
+    "static/js/main.4af774c8.js"
   ]
 }
