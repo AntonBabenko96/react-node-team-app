@@ -11,6 +11,7 @@ import {
   validationRegisterSchema,
   validationLoginSchema,
 } from 'helpers/validationSchema';
+
 import { register, login } from '../../redux/auth/auth-operations';
 
 import './AuthForm.scss';

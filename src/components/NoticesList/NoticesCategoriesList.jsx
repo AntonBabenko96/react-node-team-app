@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getNotices } from 'redux/notices/notices-selectors';
+import { selectNotices } from 'redux/notices/notices-selectors';
+import { selectIsLogin } from 'redux/auth/selectors';
 import { getNoticesByCategory } from 'redux/notices/notices-operations';
+import { addToFavorites } from 'redux/auth/auth-operations';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import NoticeCategoryItem from 'components/NoticeCategoryItem/NoticeCategoryItem';
 
 import s from './NoticesCategoriesList.module.scss';
@@ -10,7 +13,8 @@ import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
 
 export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
-  const notices = useSelector(getNotices);
+  const notices = useSelector(selectNotices);
+  const isLogin = useSelector(selectIsLogin);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,6 +35,14 @@ export default function NoticesCategoriesList() {
     setShowModal(false);
   };
 
+  const handleFavoriteBtnClick = (id) => {
+    if(!isLogin) {
+      Notify.info('The option "Add to favorite" is available only to registered users')
+    } else {
+      dispatch(addToFavorites(id));
+    }
+  }
+
   const elements = notices.map(
     ({ _id, category, photoURL, title, location, birth, sex, type }) => {
       const yearOfBirth = birth && new Date(birth).getFullYear();
@@ -40,6 +52,7 @@ export default function NoticesCategoriesList() {
       return (
         <NoticeCategoryItem
           key={_id}
+          id={_id}
           category={category}
           img={photoURL}
           title={title}
@@ -47,7 +60,8 @@ export default function NoticesCategoriesList() {
           age={age}
           sex={sex}
           kind={type}
-          onBtnClick={handleLearnMoreBtnClick}
+          onLearnMoreBtnClick={handleLearnMoreBtnClick}
+          onFavoriteBtnClick={handleFavoriteBtnClick}
         />
       );
     }
