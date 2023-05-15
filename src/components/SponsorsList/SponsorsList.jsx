@@ -2,11 +2,23 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './sponsorsList.module.scss';
+import img from '../../img/placeholder.png';
+
+const picture = img;
 
 const SponsorsList = ({ sponsors }) => {
   const [isWorkHoursOpen, setIsWorkHoursOpen] = useState(false);
 
   const location = useLocation();
+
+  const handleToggleWorkHours = sponsorId => {
+    setIsWorkHoursOpen(prevState => ({
+      ...prevState,
+      [sponsorId]: !prevState[sponsorId],
+    }));
+  };
+
+  const weekDays = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
 
   const elements = sponsors.map(
     ({
@@ -31,7 +43,7 @@ const SponsorsList = ({ sponsors }) => {
         </Link>
         <div className={styles.address__wrapper}>
           <img
-            src={imageUrl}
+            src={imageUrl || picture}
             alt="Company`s logo"
             className={styles.friends__logo}
           ></img>
@@ -42,23 +54,22 @@ const SponsorsList = ({ sponsors }) => {
                 <a
                   href="#"
                   className={styles.address__itemLink}
-                  onClick={() => setIsWorkHoursOpen(!isWorkHoursOpen)}
+                  onClick={() => handleToggleWorkHours(_id)}
                 >
-                  {isWorkHoursOpen ? 'Hide Work Hours' : 'Show Work Hours'}
+                  {isWorkHoursOpen[_id] ? 'Hide Work Hours' : 'Show Work Hours'}
                 </a>
               ) : (
                 <span>{workDays}</span>
               )}
-              {isWorkHoursOpen && Array.isArray(workDays) && (
+              {isWorkHoursOpen[_id] && Array.isArray(workDays) && (
                 <div className={styles.workHours__container}>
                   <ul>
-                    {Array.isArray(workDays) &&
-                      workDays.map((day, index) => (
-                        <li key={index}>
-                          <span>{day.day}: </span>
-                          {day.isOpen ? `${day.from} - ${day.to}` : 'Closed'}
-                        </li>
-                      ))}
+                    {workDays.map((day, index) => (
+                      <li key={index}>
+                        <span>{weekDays[index]}: </span>
+                        {day.isOpen ? `${day.from} - ${day.to}` : 'Closed'}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )}
