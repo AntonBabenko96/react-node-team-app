@@ -24,8 +24,10 @@
   column-gap: 32px;
 
   padding-top: 24px;
+  margin-bottom: 20px;
 
   @include media-min(tablet) {
+    margin-bottom: 60px;
     padding-top: 20px;
     row-gap: 46px;
   }
@@ -130,7 +132,12 @@
 .noteFound {
   text-align: center;
 }
+
 .noteFoundText {
   margin-bottom: 80px;
   @include main-font(700, 24px, calc(33 / 24));
+}
+
+.noteFoundImg {
+  margin: 0 auto;
 }
