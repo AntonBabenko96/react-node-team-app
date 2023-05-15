@@ -1,9 +1,25 @@
 // import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './sponsorsList.module.scss';
+import img from '../../img/placeholder.png';
+
+const picture = img;
 
 const SponsorsList = ({ sponsors }) => {
+  const [isWorkHoursOpen, setIsWorkHoursOpen] = useState(false);
+
   const location = useLocation();
+
+  const handleToggleWorkHours = sponsorId => {
+    setIsWorkHoursOpen(prevState => ({
+      ...prevState,
+      [sponsorId]: !prevState[sponsorId],
+    }));
+  };
+
+  const weekDays = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+
   const elements = sponsors.map(
     ({
       _id,
@@ -27,17 +43,38 @@ const SponsorsList = ({ sponsors }) => {
         </Link>
         <div className={styles.address__wrapper}>
           <img
-            src={imageUrl}
+            src={imageUrl || picture}
             alt="Company`s logo"
             className={styles.friends__logo}
           ></img>
           <ul className={styles.address__list}>
-            {/* <li className={styles.address__item}>
+            <li className={styles.address__item}>
               <p className={styles.address__itemTitle}>Time:</p>
-              <a href={workDays} className={styles.address__itemLink}>
-                {workDays}
-              </a>
-            </li> */}
+              {Array.isArray(workDays) ? (
+                <a
+                  className={styles.address__itemLink}
+                  onClick={() => handleToggleWorkHours(_id)}
+                >
+                  {isWorkHoursOpen[_id] ? 'Hide Work Hours' : 'Show Work Hours'}
+                </a>
+              ) : (
+                <span>{workDays}</span>
+              )}
+              {isWorkHoursOpen[_id] && Array.isArray(workDays) && (
+                <div className={styles.workHours__container}>
+                  <ul className={styles.workHours__list}>
+                    {workDays.map((day, index) => (
+                      <li key={index} className={styles.workHours__item}>
+                        <span className={styles.workHours__day}>
+                          {weekDays[index]}:{' '}
+                        </span>
+                        {day.isOpen ? `${day.from} - ${day.to}` : 'Closed'}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </li>
             <li className={styles.address__item}>
               <p className={styles.address__itemTitle}>Adress:</p>
               <a
