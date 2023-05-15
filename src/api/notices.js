@@ -1,7 +1,9 @@
-import instance from './auth-api ';
+import instance from './auth-api';
 
-export async function getNoticesByCategory({category, page, limit}) {
-  const {data} = await instance.get(`/notices/find/byCategory?category=${category}&page=${page}&limit=${limit}`);
+export async function getNoticesByCategory({ category, page, limit }) {
+  const { data } = await instance.get(
+    `/notices/find/byCategory?category=${category}&page=${page}&limit=${limit}`
+  );
   return data;
 }
 
