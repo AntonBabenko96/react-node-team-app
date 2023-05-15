@@ -4,12 +4,15 @@ import FirstStep from './FirstStep/FirstStep';
 import SecondStep from './SecondStep/SecondStep';
 import ThirdStep from './ThirdStep/ThirdStep';
 import styles from './AddPetPage.module.scss';
+import { useDispatch } from 'react-redux';
+import { addNotice, addPet } from 'redux/pets/pets-operations';
+import { createRequestData } from './CreateRequestData/CreateRequestData';
 // import axios from 'axios';
 
 const stateInitialValue = {
-  category: 'my pet',
+  category: '',
   petName: '',
-  dateOfBirth: '',
+  dateOfBirth: 0,
   type: '',
   breed: '',
   photo: null,
@@ -17,12 +20,14 @@ const stateInitialValue = {
   imageURL: '',
   sex: '',
   location: '',
-  price: '',
+  price: 0,
   title: '',
 };
 export default function AddPetPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [state, setState] = useState(stateInitialValue);
+
+  const dispatch = useDispatch();
 
   const handleFormSubmit = values => {
     setState(prev => ({ ...prev, ...values }));
@@ -44,18 +49,29 @@ export default function AddPetPage() {
   };
 
   const handleFinish = async values => {
-    console.log('VALUES', values);
+    setState(prev => ({ ...prev, ...values }));
     const data = new FormData();
-    const { photo } = values;
+    createRequestData(data, state, values);
+    // const { photo } = values;
 
-    data.append('category', state.category);
-    data.append('type', state.type);
-    data.append('name', state.petName);
-    data.append('breed', state.breed);
-    data.append('sex', state.sex);
-    data.append('photoURL', photo);
-    data.append('location', 'test');
+    // data.append('file', values.photo);
+    // data.append('type', state.type);
+    // data.append('name', state.petName);
+    // data.append('birth', state.dateOfBirth);
+    // data.append('breed', state.breed);
+    // data.append('comments', values.comments);
 
+    // data.append('sex', values.sex || `male`);
+    // data.append('title', state.title);
+    // data.append('location', values.location || 'test');
+    // data.append('category', state.category);
+    // data.append('price', values.price);
+
+    state.category === 'my pet'
+      ? dispatch(addPet(data))
+      : dispatch(addNotice(data));
+
+    // dispatch(addPet(data));
     // const instance = axios.create({
     //   baseURL: 'https://your-pet-backend.onrender.com/',
     // });

@@ -2,6 +2,8 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import PreviewImage from '../PreviewImage/PreviewImage';
+import { addPetLoading } from 'redux/pets/pets-selectors';
+import { useSelector } from 'react-redux';
 
 import styles from './ThirdStep.module.scss';
 import { ReactComponent as Arrow } from '../../../img/svg/arrow-left.svg';
@@ -15,6 +17,8 @@ function ThirdStep({ data, prev, finish }) {
   const showSex = data.category === 'my pet' ? false : true;
   const location = data.category === 'my pet' ? false : true;
   const price = data.category === 'sell' ? true : false;
+
+  const isLoading = useSelector(addPetLoading);
 
   const validationSchema = Yup.object({
     photo: Yup.mixed()
@@ -157,15 +161,20 @@ function ThirdStep({ data, prev, finish }) {
               ></Field>
             </label>
             <FormError className={styles.error} name="comments" />
-            {/* <label htmlFor="ll">
-              <input type="file" id="ll" />
-              upload
-            </label> */}
             <div className={styles.controls}>
-              <button type="submit" className={styles.next}>
-                Done
-                <Paw className={styles.icon}></Paw>
-              </button>
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className={styles.next}
+                >
+                  Done
+                  <Paw className={styles.icon}></Paw>
+                </button>
+              )}
+
               <button
                 type="submit"
                 className={styles.prev}
