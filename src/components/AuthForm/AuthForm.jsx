@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
@@ -13,7 +13,6 @@ import {
   validationRegisterSchema,
   validationLoginSchema,
 } from 'helpers/validationSchema';
-
 
 import { register, login } from '../../redux/auth/auth-operations';
 // import { selectIsLogin, selectLoading } from '../../redux/auth/selectors';
@@ -202,8 +201,6 @@ export const AuthForm = () => {
           </Form>
         )}
       </Formik>
-
-     
 
       {isRegisterPath ? (
         <p>
