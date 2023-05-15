@@ -5,7 +5,7 @@ import notFoundImg from 'img/kitten.jpg';
 
 export default function UserPetsItem({
   id,
-  imageURL,
+  photoURL,
   name,
   date,
   breed,
@@ -13,15 +13,15 @@ export default function UserPetsItem({
 }) {
   return (
     <li className={styles.pets__card} key={id}>
-      {imageURL && (
+      {photoURL && (
         <img
           className={styles.pets__image}
-          src={`https://image.tmdb.org/t/p/original${imageURL}`}
+          src={`https://image.tmdb.org/t/p/original${photoURL}`}
           alt={name}
           width="240"
         />
       )}
-      {!imageURL && (
+      {!photoURL && (
         <img
           className={styles.pets__image}
           src={notFoundImg}

@@ -82,10 +82,10 @@
 // }
 // export default UserInfo
 
-import { ReactComponent as UserIcon } from 'img/svg/user.svg';
 import { ReactComponent as CameraIcon } from 'img/svg/camera.svg';
-// import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
+import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
 import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
+import { ReactComponent as DefaultIcon} from 'img/svg/photo-default.svg';
 
 import styles from './UserInfo.module.scss';
 export default function UserInfo() {
@@ -93,39 +93,42 @@ export default function UserInfo() {
     <>
       <div>
         <div className={styles.infobox}>
-          <div className={styles.photo}>
-            {/* <img></img> */}
-            <UserIcon className={styles.user__icon} />
+          <div className={styles.decktop}>
+            <div className={styles.photo}>
+              {/* <img></img> */}
+              <DefaultIcon className={styles.user__icon} />
+            </div>
+            <div className={styles.camera__title}>
+              <CameraIcon className={styles.user__camera} />
+              <p className={styles.edit}>Edit photo</p>
+            </div>
           </div>
-          <div className={styles.camera__title}>
-            <CameraIcon className={styles.user__camera} />
-            <p className={styles.edit}>Edit photo</p>
-          </div>
+          <div className={styles.decktop}>
+            <div className={styles.information}>
+              < p className={styles.text}>
+                Name: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
+              </p>
 
-          <div className={styles.information}>
-            <p className={styles.text}>
-              Name: <input className={styles.input}></input>
-            </p>
+              <p className={styles.text}>
+                Email: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
+              </p> 
 
-            <p className={styles.text}>
-              Email: <input className={styles.input}></input>
-            </p>
+              <p className={styles.text}>
+                Birthday: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
+              </p> 
 
-            <p className={styles.text}>
-              Birthday: <input className={styles.input}></input>
-            </p>
+              <p className={styles.text}>
+                Phone:<input className={styles.input}></input><EditIcon className={styles.edit__icon} />
+              </p> 
 
-            <p className={styles.text}>
-              Phone:<input className={styles.input}></input>
-            </p>
-
-            <p className={styles.text}>
-              City:<input className={styles.input}></input>
-            </p>
-          </div>
-          <div className={styles.logout}>
-            <LogoutIcon className={styles.logout__icon} />
-            <p className={styles.logout__text}>Log Out</p>
+              <p className={styles.text}>
+                City:<input className={styles.input}></input><EditIcon className={styles.edit__icon} />
+              </p> 
+            </div>
+            <div className={styles.logout}>
+              <LogoutIcon className={styles.logout__icon} />
+              <p className={styles.logout__text}>Log Out</p>
+            </div>
           </div>
         </div>
       </div>
