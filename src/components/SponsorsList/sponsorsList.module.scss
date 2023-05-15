@@ -146,6 +146,8 @@
         font-size: 12px;
         line-height: calc(16 / 12);
 
+        cursor: pointer;
+
         &:hover {
             color: #54adff;
         }
@@ -163,4 +165,23 @@
         }
     }
 
+}
+
+.workHours {
+    &__container{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    &__list{
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    &__item{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    // &__day{}
 }

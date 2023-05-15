@@ -52,7 +52,6 @@ const SponsorsList = ({ sponsors }) => {
               <p className={styles.address__itemTitle}>Time:</p>
               {Array.isArray(workDays) ? (
                 <a
-                  href="#"
                   className={styles.address__itemLink}
                   onClick={() => handleToggleWorkHours(_id)}
                 >
@@ -63,10 +62,12 @@ const SponsorsList = ({ sponsors }) => {
               )}
               {isWorkHoursOpen[_id] && Array.isArray(workDays) && (
                 <div className={styles.workHours__container}>
-                  <ul>
+                  <ul className={styles.workHours__list}>
                     {workDays.map((day, index) => (
-                      <li key={index}>
-                        <span>{weekDays[index]}: </span>
+                      <li key={index} className={styles.workHours__item}>
+                        <span className={styles.workHours__day}>
+                          {weekDays[index]}:{' '}
+                        </span>
                         {day.isOpen ? `${day.from} - ${day.to}` : 'Closed'}
                       </li>
                     ))}
