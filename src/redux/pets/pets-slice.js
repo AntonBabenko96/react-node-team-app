@@ -16,17 +16,17 @@ const petsSlice = createSlice({
       .addCase(addPet.pending, state => {
         state.loading = true;
         state.error = null;
-        console.log(`LOADING`);
+        // console.log(`LOADING`);
       })
       .addCase(addPet.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.items.push(payload.data);
-        console.log(`SUCCESS`, payload);
+        console.log('RESPONSE:', payload.data);
       })
       .addCase(addPet.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
-        console.log(`ERROR`, payload);
+        // console.log(`ERROR`, payload);
       })
       .addCase(addNotice.pending, state => {
         state.loading = true;
@@ -34,7 +34,7 @@ const petsSlice = createSlice({
       })
       .addCase(addNotice.fulfilled, (state, { payload }) => {
         state.loading = false;
-        console.log(payload);
+        console.log('RESPONSE:', payload.data);
       })
       .addCase(addNotice.rejected, (state, { payload }) => {
         state.loading = false;
