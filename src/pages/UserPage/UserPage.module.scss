@@ -1,44 +1,81 @@
 @import '/src/styles/styles.scss';
+
+@media screen and (min-width: 1280px) {
+  .content {
+    display: flex;
+  }
+}
 .pets {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 280px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 280px;
+  @media (min-width: 1280px) {
+    width: 821px;
+    min-height: 212px;
+  }
 }
-
 .button {
-    outline: none;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-items: center;
-    justify-content: center;
-    align-items: center;
-    border-radius: 40px;
-
-    width: 129px;
-    height: 40px;
-    // font-size: 76px;
-    // font-weight: 700;
-
-    @include main-font(700, 16px, 1.36);
-    background-color: getColor('full-blue');
-    color: #FEF9F9;
+  outline: none;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  margin-right: 0;
+  width: 129px;
+  height: 40px;
+  @include main-font(700, 16px, 1.36);
+  background-color: getColor('full-blue');
+  color: #fef9f9;
 }
-
 .plus {
-    padding-left: 14px;
-    font-weight: 400;
-    // color:red;
-    font-size: 25px;
+  padding-left: 14px;
+  font-weight: 400;
+  font-size: 25px;
 }
 .title {
-    @include main-font(500, 20px, 1.36);
-    margin-bottom: 18px;
-    margin-top: 40px;
+  @include main-font(500, 20px, 1.36);
+  margin-bottom: 18px;
+  margin-top: 40px;
+  @media (min-width: 768px) {
+    margin-bottom: 24px;
+    margin-top: 60px;
+  }
 }
 .title__pets {
-    @include main-font(500, 20px, 1.36);
-
+  @include main-font(500, 20px, 1.36);
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 32px;
+  margin-top: 46px;
+  @media (min-width: 768px) {
+    margin-bottom: 24px;
+    margin-top: 62px;
+  }
+  @media (min-width: 1280px) {
+    max-width: 571px;
+  }
+}
+.descktop__user {
+  @media (min-width: 1280px) {
+    display: flex;
+    flex-direction: column;
+    margin-right: 32px;
+  }
+}
+.descktop__pets {
+  @media (min-width: 1280px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.title__button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
 }

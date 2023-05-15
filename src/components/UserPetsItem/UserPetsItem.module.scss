@@ -1,60 +1,89 @@
 @import '/src/styles/styles.scss';
 
 .pets__card {
-    display: flex;
-    flex-direction: column;
-    width: 280px;
-    padding: 16px 20px;
-    // margin: 0 auto;
-    box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
-    border-radius: 20px;
-    background: #FFFFFF;
-    // margin-bottom: 137px;
-
-    // min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  padding: 16px 20px;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 20px;
+  background: #ffffff;
+  @media (min-width: 768px) {
+    padding: 20px 20px;
+    width: 703px;
+    flex-direction: row;
+    border-radius: 40px;
+    min-height: 256px;
+  }
+  @media (min-width: 1280px) {
+    padding: 20px 20px;
+    width: 821px;
+    min-height: 212px;
+  }
 }
-img{
-    margin: 0;
-}
-.pets__image{
-
-    margin-bottom: 20px;
-    border-radius: 20px;
+.pets__image {
+  margin-bottom: 20px;
+  border-radius: 20px;
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: 20px;
+    width: 128px;
+    height: 128px;
+  }
+  @media (min-width: 1280px) {
+    margin-right: 32px;
+    width: 161px;
+    height: 161px;
+  }
 }
 .text {
-    @include main-font(400, 14px, 1.36);
-    max-width: 320px;
-    word-break: break-all;
-    
-}
-.text:not(:last-child){
-    margin-bottom: 12px;
-}
-span{
-    @include main-font(700, 14px, 1, 36);
-}
-.list {
-    margin-top: 24px;
-    margin-bottom: 40px;
-    padding: 0;
-    list-style: none;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-.trash__icon{
-        width: 24px;
-            height: 24px;
-            stroke: getColor('full-blue');
-            fill: transparent;
+  @include main-font(400, 14px, 1.36);
+  max-width: 240px;
+//   word-break: break-all;
+// word-wrap: break-word;
+    // -moz-hyphens: auto;
+    // -webkit-hyphens: auto;
+    // -ms-hyphens: auto;
+  @media (min-width: 768px) {
+    @include main-font(400, 14px, 1.28);
+    max-width: 515px;
+  }
+  @media (min-width: 1280px) {
+    @include main-font(400, 16px, 1.36);
+    max-width: 580px;
+  }
 }
 
-.trash__name{
-        display: flex;
-            justify-content: space-between;
+.text:not(:last-child) {
+  margin-bottom: 12px;
+  @media (min-width: 768px) {
+    margin-bottom: 16px;
+  }
 }
-span{
-    font-size: 700;
+span {
+  @include main-font(700, 14px, 1.36);
+  @media (min-width: 768px) {
+    @include main-font(600, 14px, 1.28);
+  }
+  @media (min-width: 1280px) {
+    @include main-font(600, 16px, 1.36);
+  }
+}
+.trash__icon {
+  width: 24px;
+  height: 24px;
+  stroke: getColor('full-blue');
+  fill: transparent;
+}
+.trash__name {
+  display: flex;
+  justify-content: space-between;
+  @media (min-width: 768px) {
+    width: 515px;
+    justify-content:space-between;
+  }
+  @media (min-width: 1280px) {
+    width: 580px;
+    justify-content:space-between;
+  }
 }

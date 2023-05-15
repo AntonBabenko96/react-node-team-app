@@ -37,6 +37,7 @@
       margin-bottom: 15px;
       display: flex;
       flex-direction: column;
+      text-align: center;
 
       //   label {
       //     margin-bottom: 5px;
@@ -91,15 +92,21 @@
           @include media-min(tablet) {
             right: 75px;
           }
-
-          .iconClose {
-            color: red;
-          }
         }
       }
     }
   }
+  .iconClose {
+    position: absolute;
+    right: 10px;
+    color: red;
+    top: 10px;
+    cursor: pointer;
 
+    @include media-min(tablet) {
+      right: 75px;
+    }
+  }
   button {
     display: flex;
     flex-direction: row;
