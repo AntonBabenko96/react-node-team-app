@@ -65,4 +65,14 @@ export async function getFavoritesList() {
   return data;
 }
 
+export async function getUserInfo() {
+  const data = await instance.get(`/users/me`)
+  return data;
+}
+
+export async function updateUserInfo(data) {
+  const {data: result} = await instance.patch(`/users/me`, data)
+  return result;
+}
+
 export default instance;

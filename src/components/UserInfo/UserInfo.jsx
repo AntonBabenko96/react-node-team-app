@@ -111,19 +111,19 @@ export default function UserInfo() {
 
               <p className={styles.text}>
                 Email: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
-              </p> 
+              </p>
 
               <p className={styles.text}>
                 Birthday: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
-              </p> 
+              </p>
 
               <p className={styles.text}>
                 Phone:<input className={styles.input}></input><EditIcon className={styles.edit__icon} />
-              </p> 
+              </p>
 
               <p className={styles.text}>
                 City:<input className={styles.input}></input><EditIcon className={styles.edit__icon} />
-              </p> 
+              </p>
             </div>
             <div className={styles.logout}>
               <LogoutIcon className={styles.logout__icon} />
