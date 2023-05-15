@@ -1,94 +1,153 @@
 @import '/src/styles/styles.scss';
 
 .infobox {
-    border: 1px solid red;
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 20px;
+  background: #ffffff;
+  @media (min-width: 768px) {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 20px 20px ;
+    width: 703px;
+    height: 268px;
+  }
+  @media (min-width: 1280px) {
+    justify-content:flex-start;
     flex-direction: column;
-    width: 280px;
-    box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
-    border-radius: 20px;
-    background: #FFFFFF;
-    margin-bottom: 40px;
-
+    width: 395px;
+    height: 520px;
+  }
 }
-
 .photo {
-    margin: 20px 49px 14px 49px;
-    width: 182px;
-    height: 182px;
-    border-radius: 40px;
-    border: 1px solid black;
-}
+  margin: 20px 49px 14px 49px;
+  width: 182px;
+  height: 182px;
+  border-radius: 40px;
+  border: 1px solid black;
+  @media (min-width: 768px) {
+    margin: 0  46px 14px 71px;
+  }
+  @media (min-width: 1280px) {
+    margin: 0  107px 0 107px;
 
+  }
+}
 .input {
-    outline: none;
-    border: none;
-    min-width: 190px;
-    height: 28px;
-    border-radius: 20px;
-    border: 1px solid getColor('full-blue');
+
+  outline: none;
+  border: none;
+  min-width: 190px;
+  height: 28px;
+  border-radius: 20px;
+  border: 1px solid getColor('full-blue');
+  padding-left: 12px;
+  padding-right: 12px;
+  @media (min-width: 768px) {
+    min-width: 255px;
+    height: 32px;
+  }
+ 
 
 }
 
 .information {
+  padding-left: 8px;
+  padding-right: 8px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 12px;
+  @media (min-width: 768px) {
+    padding:0;
+    gap: 8px;
+  }
 
-    padding-left: 8px;
-    padding-right: 8px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    gap: 12px;
 }
 .text {
-    color: getColor('full-black');
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
+  @include main-font(600, 14px, 1.35);
+  color: getColor('full-black');
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media (min-width: 768px) {
+    @include main-font(600, 18px, 1.33);
+  }
 }
 
 .edit {
-    @include main-font(400, 12px, 1.83);
-    margin-bottom: 21px;
-    text-align: center;
-    margin-left: 8px;
+  @include main-font(400, 12px, 1.83);
+  margin-bottom: 21px;
+  text-align: center;
+  margin-left: 8px;
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+  }
+  @media (min-width: 1280px) {
+    margin-bottom: 26px;
+    margin-top: 14px;
+  }
 }
-
+.edit__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(500%, -50%);
+  width: 20px;
+  height: 20px;
+  stroke: getColor('full-blue');
+  fill: getColor('full-blue');
+  @media (min-width: 768px) {
+    width: 24px;
+    height: 24px;
+    transform: translate(570%, -50%);
+  }
+}
 .user__icon {
-    width: 182px;
-    height: 182px;
-    // stroke: getColor('full-blue');
-    fill: transparent;
+  width: 182px;
+  height: 182px;
+//   stroke: getColor('full-blue');
+//   fill: transparent;
 }
 
 .user__camera {
-    width: 24px;
-    height: 24px;
-    stroke: getColor('full-blue');
-    fill: transparent;
-    
+  width: 24px;
+  height: 24px;
+  stroke: getColor('full-blue');
+  fill: transparent;
+  @media (min-width: 1280px) {
+   margin-top: 14px;
+  
+  }
 }
-.camera__title{
-    display: flex;
-    justify-content: center;
+.camera__title {
+  display: flex;
+  justify-content: center;
 }
 
 .logout {
-    margin-top: 21px;
-    margin-bottom: 25px;
-    display: flex;
-    margin-left: 10px;
+  margin-top: 21px;
+  margin-bottom: 25px;
+  display: flex;
+  margin-left: 10px;
+  @media (min-width: 768px) {
+    margin-top: 13px;
+    margin-bottom: 0;
+  }
 }
 
 .logout__text {
-    @include main-font(500, 16px, 1.36);
-    color: #888888;
-    margin-left: 12px;
-    ;
+  @include main-font(500, 16px, 1.36);
+  color: #888888;
+  margin-left: 12px;
 }
 
 .logout__icon {
-    width: 24px;
-    height: 24px;
-    stroke: getColor('full-blue');
-    fill: transparent;
+  width: 24px;
+  height: 24px;
+  stroke: getColor('full-blue');
+  fill: transparent;
 }
