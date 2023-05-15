@@ -32,12 +32,12 @@ const SponsorsList = ({ sponsors }) => {
             className={styles.friends__logo}
           ></img>
           <ul className={styles.address__list}>
-            {/* <li className={styles.address__item}>
+            <li className={styles.address__item}>
               <p className={styles.address__itemTitle}>Time:</p>
-              <a href={workDays} className={styles.address__itemLink}>
+              {/* <a href={workDays} className={styles.address__itemLink}>
                 {workDays}
-              </a>
-            </li> */}
+              </a> */}
+            </li>
             <li className={styles.address__item}>
               <p className={styles.address__itemTitle}>Adress:</p>
               <a
