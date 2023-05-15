@@ -13,7 +13,7 @@ const BASE_URL = 'http://hn.algolia.com/api/v1/search?';
 
 export default function Paginations() {
   const [posts, setPosts] = useState([]);
-  const [query, setQuery] = useState('');
+  const [query] = useState(''); //setQuery
   const [page, setPage] = useState(1);
   const [pageQty, setPageQty] = useState(0);
 
