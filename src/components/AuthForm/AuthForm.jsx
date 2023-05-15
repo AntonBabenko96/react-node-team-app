@@ -6,7 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import PetsIcon from '@mui/icons-material/Pets';
-// import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from '@mui/icons-material/Close';
 import Modal from '../Modal/Modal';
 import validationSchema from 'helpers/validationSchema';
 
@@ -48,7 +48,6 @@ export const AuthForm = () => {
       navigate('/user');
     }
     resetForm();
-
   };
 
   return (
