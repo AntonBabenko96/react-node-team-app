@@ -39,16 +39,12 @@
       flex-direction: column;
       text-align: center;
 
-      //   label {
-      //     margin-bottom: 5px;
-      //   }
-
       .input-icon {
         position: relative;
         display: flex;
         align-items: center;
 
-        input {
+        .input {
           box-sizing: border-box;
           display: flex;
           flex-direction: row;
@@ -107,6 +103,24 @@
       right: 75px;
     }
   }
+
+
+.emptyInput ~ .errorMessage {
+  display: none;
+}
+
+.errorBorder{
+  border: 1px solid red !important;
+}
+
+.emptyInput:focus {
+  border: 1px solid orange !important;
+}
+
+.emptyInput {
+  border: 1px solid  #54adff !important;
+}
+
   button {
     display: flex;
     flex-direction: row;
@@ -177,7 +191,7 @@
 
 // }
 
-.modalH1 {
+.modalH {
   @include main-font(500, 24px, 33px, normal);
   text-align: center;
   color: #111111;
@@ -237,4 +251,5 @@
 
 .errorMessage {
   color: red;
+  margin-bottom: 0;
 }
