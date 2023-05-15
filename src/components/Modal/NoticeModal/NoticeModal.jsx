@@ -1,10 +1,24 @@
 import Style from './NoticeModal.module.scss';
 import { BsHeart } from 'react-icons/bs';
 
+import placeholder from 'img/placeholder.png';
 
-
-export default function NoticeModal() {
-
+export default function NoticeModal({
+  name,
+  title,
+  breed,
+  photoURL,
+  category,
+  type,
+  location,
+  sex,
+  comment,
+  birth
+}) {
+  const imgBeseURL = 'https://your-pet-backend.onrender.com/';
+  const yearOfBirth = birth && new Date(birth).getFullYear();
+  const difference = birth ? new Date().getFullYear() - yearOfBirth : 'n/a';
+  const age = difference === 1 ? `${difference} year` : `${difference} years`;
 
   return (
     <>
@@ -13,38 +27,37 @@ export default function NoticeModal() {
           <div className={Style.NoticePhotoWrapper}>
             <img
               className={Style.NoticePhoto}
-              src="https://petsi.net/images/dogbreed/big/angliyskiy-fokskhaund.jpg"
-              alt=""
+              src={photoURL ? `${imgBeseURL}${photoURL}` : placeholder}
+              alt="Pet"
             />
-            <p className={Style.StickyValue}>In good hands</p>
+            <p className={Style.StickyValue}>{category}</p>
           </div>
           <div className={Style.WrapperText}>
-    
-            <h3 className={Style.NoticeTitle}>Cute Dog Looking for a home</h3>
+            <h3 className={Style.NoticeTitle}>{title}</h3>
             <ul className={Style.NoticeList}>
               <li>
                 <h4>Name:</h4>
-                <p>Rich</p>
+                <p>{name}</p>
               </li>
               <li>
                 <h4>Type:</h4>
-                <p>Dog</p>
+                <p>{type}</p>
               </li>
               <li>
                 <h4>Birthday:</h4>
-                <p>21.09.2020</p>
+                <p>{age}</p>
               </li>
               <li>
                 <h4>Breed:</h4>
-                <p>Pomeranian</p>
+                <p>{breed}</p>
               </li>
               <li>
                 <h4>Place:</h4>
-                <p>Lviv</p>
+                <p>{location}</p>
               </li>
               <li>
                 <h4>The sex:</h4>
-                <p>male</p>
+                <p>{sex}</p>
               </li>
               <li>
                 <h4>Email:</h4>
@@ -58,7 +71,7 @@ export default function NoticeModal() {
           </div>
         </div>
         <p className={Style.NoticeComent}>
-          <strong>Comments:</strong> .....
+          <strong>Comments:</strong> {comment}
         </p>
         <div className={Style.ButtonWrapper}>
           <button className={Style.ButtonContact}>Contact</button>

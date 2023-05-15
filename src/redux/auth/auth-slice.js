@@ -6,6 +6,8 @@ import {
   addToFavorites,
   removeFromFavorites,
   getFavoritesList,
+  getUserInfo,
+  updateUserInfo,
 } from './auth-operations';
 
 const initialState = {
@@ -57,23 +59,37 @@ const authSlice = createSlice({
       .addCase(logout.rejected, handleRejected)
       .addCase(addToFavorites.pending, handlePending)
       .addCase(addToFavorites.fulfilled, state => {
-        state.loading = true;
+        state.loading = false;
         state.error = null;
       })
       .addCase(addToFavorites.rejected, handleRejected)
       .addCase(removeFromFavorites.pending, handlePending)
       .addCase(removeFromFavorites.fulfilled, state => {
-        state.loading = true;
+        state.loading = false;
         state.error = null;
       })
       .addCase(removeFromFavorites.rejected, handleRejected)
       .addCase(getFavoritesList.pending, handlePending)
       .addCase(getFavoritesList.fulfilled, (state, {payload}) => {
-        state.loading = true;
+        state.loading = false;
         state.error = null;
         state.favorites = payload;
       })
-      .addCase(getFavoritesList.rejected, handleRejected);
+      .addCase(getFavoritesList.rejected, handleRejected)
+      .addCase(getUserInfo.pending, handlePending)
+      .addCase(getUserInfo.fulfilled, (state, {payload}) => {
+        state.loading = false;
+        state.error = null;
+        state.user = payload;
+      })
+      .addCase(getUserInfo.rejected, handleRejected)
+      .addCase(updateUserInfo.pending, handlePending)
+      .addCase(updateUserInfo.fulfilled, (state, {payload}) => {
+        state.loading = false;
+        state.error = null;
+        state.user = payload;
+      })
+      .addCase(updateUserInfo.rejected, handleRejected);
   },
 });
 

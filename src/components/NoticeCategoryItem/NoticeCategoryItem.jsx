@@ -16,21 +16,22 @@ export default function NoticeCategoryItem({
   age,
   sex,
   kind,
+  favorite,
   onLearnMoreBtnClick,
   onFavoriteBtnClick,
 }) {
   const imgBeseURL = "https://your-pet-backend.onrender.com/";
 
   return (
-    <li className={s.item} id={id}>
+    <li className={s.item}>
       <div className={s.category}>
         <p className={s.categoryText}>{category}</p>
       </div>
-      <button className={`${s.userBtn} ${s.favorite}`} onClick={onFavoriteBtnClick(id)}>
+      <button className={`${s.userBtn} ${s.favorite}`} onClick={() => onFavoriteBtnClick(id)}>
         <FavoriteIcon className={s.icon} />
       </button>
       <button className={`${s.userBtn} ${s.delete}`}>
-        <TrashIcon className={s.icon} />
+        <TrashIcon className={favorite ? s.favoriteIcon : s.icon} />
       </button>
       <img className={s.img} src={img ? `${imgBeseURL}${img}` : placeholder} alt="Pet" />
       <div className={s.wrapper}>
@@ -50,7 +51,7 @@ export default function NoticeCategoryItem({
       <h2 className={s.title}>
         {title ? title : `Сute ${kind} looking for a home`}
       </h2>
-      <button className={s.btn} type="button" onClick={onLearnMoreBtnClick}>
+      <button className={s.btn} type="button" onClick={() => onLearnMoreBtnClick(id)}>
         Learn more
       </button>
     </li>
