@@ -1,7 +1,7 @@
 @import '/src/styles/styles.scss';
 
 .registration-form {
-  background: #ffffff;
+  background: getColor('full-white');
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 20px;
   width: 280px;
@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    color: #111111;
+    color: getColor('full-black');
     margin-bottom: 40px;
 
     margin-top: 60px;
@@ -53,14 +53,14 @@
           gap: 10px;
           width: 256px;
           height: 48px;
-          border: 1px solid #54adff;
+          border: 1px solid getColor('full-blue');
           border-radius: 40px;
           @include main-font(400, 16px, 24px, normal);
           //   line-height: 150%;
           display: flex;
           align-items: center;
           letter-spacing: 0.04em;
-          color: #111111;
+          color: getColor('full-black');
           outline: transparent;
 
           &::placeholder {
@@ -69,7 +69,7 @@
 
           &:hover,
           &:focus {
-            border: 1px solid orange;
+            border: 1px solid getColor('full-yellow');
           }
 
           @include media-min(tablet) {
@@ -81,7 +81,7 @@
         .icon {
           position: absolute;
           right: 10px;
-          color: #54adff;
+          color:getColor('full-blue');
           top: 10px;
           cursor: pointer;
 
@@ -95,7 +95,7 @@
   .iconClose {
     position: absolute;
     right: 10px;
-    color: red;
+    color: getColor('full-red');
     top: 10px;
     cursor: pointer;
 
@@ -110,15 +110,15 @@
 }
 
 .errorBorder{
-  border: 1px solid red !important;
+  border: 1px solid getColor('full-red') !important;
 }
 
 .emptyInput:focus {
-  border: 1px solid orange !important;
+  border: 1px solid getColor('full-yellow') !important;
 }
 
 .emptyInput {
-  border: 1px solid  #54adff !important;
+  border: 1px solid getColor('full-blue') !important;
 }
 
   button {
@@ -133,11 +133,11 @@
     left: 4%;
     top: 70%;
     bottom: 19.3%;
-    background: #54adff;
+    background: getColor('full-blue');
     outline: none;
     border: transparent;
     border-radius: 40px;
-    color: #ffffff;
+    color: getColor('full-white');
     @include main-font(400, 16px, 22px, normal);
     margin-top: 40px;
     cursor: pointer;
@@ -162,94 +162,15 @@
 
   a {
     @include main-font(400, 12px, 16px, normal);
-    color: #54adff;
+    color:getColor('full-blue');
     margin-left: 5px;
   }
 }
 
-// h2 {
-//   @include main-font(500, 16px, 22px, normal);
-//   color:#111111;
-//   margin-top: 30px;
-//   margin-bottom: 40px;
-// }
-// .btn-icon{
-// fill:#ffffff;
-// width: 24px;
-// height: 24px;
-// position: absolute;
-// width: 24px;
-// height: 20.97px;
-// left: 5.56px;
-// top: -2.59px;
 
-// transform: rotate(25deg);
-// }
-
-// .modalDiv{
-//   width:608px;
-
-// }
-
-.modalH {
-  @include main-font(500, 24px, 33px, normal);
-  text-align: center;
-  color: #111111;
-  margin-top: 60px;
-  @include media-min(tablet) {
-    @include main-font(500, 36px, 33px, normal);
-  }
-}
-
-.modalP {
-  @include main-font(500, 24px, 33px, normal);
-  margin-top: 60px;
-  margin-bottom: 60px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  letter-spacing: 0.04em;
-  color: black;
-}
-
-.modalBtn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 28px;
-  width: 256px;
-  height: 48px;
-  // position: absolute;
-  // left: 4%;
-  // top: 70%;
-  // bottom: 19.3%;
-  background: #54adff;
-  outline: none;
-  border: transparent;
-  border-radius: 40px;
-  color: #ffffff;
-  @include main-font(400, 16px, 22px, normal);
-  // margin-top: 40px;
-  margin-bottom: 60px;
-  cursor: pointer;
-}
-
-.modalIcon {
-  fill: #ffffff;
-  width: 24px;
-  height: 24px;
-  margin-left: 12px;
-  // position: absolute;
-  width: 24px;
-  height: 20.97px;
-  left: 5.56px;
-  top: -2.59px;
-
-  transform: rotate(25deg);
-}
 
 .errorMessage {
-  color: red;
+  color: getColor('full-red');
   margin-bottom: 0;
 }
+

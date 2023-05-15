@@ -28,19 +28,19 @@ button {
   width: 129px;
   height: 40px;
   outline: none;
-  border: #54adff;
+  border:getColor('full-blue');
   border-radius: 40px;
   cursor: pointer;
 }
 
 .btnClose {
-  background-color: white;
+  background-color:getColor('full-white');
 }
 .btn-yes {
-  background-color: #54adff;
+  background-color:getColor('full-blue');
 }
 
 .icon {
-  fill: white;
+  fill:getColor('full-white');
   margin-left: 8px;
 }

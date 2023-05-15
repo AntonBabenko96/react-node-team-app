@@ -1,0 +1,32 @@
+@import '/src/styles/styles.scss';
+.button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    // padding: 8px 20px;
+    gap: 8px;
+    background-color: getColor('full-blue');
+    outline:transparent;
+    border-radius: 40px;
+    color: getColor('full-white');
+    width:129px;
+    
+}
+.icon{
+fill: getColor('full-white');
+width: 24px;
+height: 24px;
+}
+.notification{
+    @include main-font(500, 24px, 33px, normal);
+    text-align: center;
+    padding:20px 40px;
+    color:  getColor('full-black');
+}
+.link{
+    @include main-font(500, 24px, 33px, normal);
+    color:getColor('full-blue');
+    text-decoration: none;
+}
+
