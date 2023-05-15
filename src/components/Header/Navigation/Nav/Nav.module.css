@@ -1,0 +1,62 @@
+.headerNav {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .headerNav {
+    padding-top: 82px;
+  }
+}
+@media (max-width: 1279px) {
+  .headerNav {
+    flex-direction: column;
+    position: fixed;
+    right: -100%;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    transition: right 1s;
+    background-color: #fef9f9;
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  .headerNav {
+    padding-top: 160px;
+  }
+}
+@media (min-width: 1280px) {
+  .headerNav {
+    margin-right: auto;
+    gap: 40px;
+  }
+}
+.headerNav .link {
+  transition: color 0.2s linear;
+}
+.headerNav .link:global(.active) {
+  color: #ffc107;
+  font-weight: 700;
+}
+.headerNav .link:hover, .headerNav .link:focus {
+  color: #ffc107;
+}
+@media (max-width: 767px) {
+  .headerNav .headerNavItem {
+    font-size: 32px;
+    line-height: 1.3659375;
+  }
+  .headerNav .headerNavItem:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  .headerNav .headerNavItem {
+    font-size: 48px;
+    line-height: 1.3660416667;
+  }
+  .headerNav .headerNavItem:not(:last-child) {
+    margin-bottom: 60px;
+  }
+}/*# sourceMappingURL=Nav.module.css.map */

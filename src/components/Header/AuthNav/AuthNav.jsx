@@ -7,14 +7,14 @@ const AuthNav = () => {
   return (
     <ul className={styles.navList}>
       <li className={styles.item}>
-        <NavLink to="/register" className={styles.link}>
+        <NavLink to="/login" className={styles.link}>
           <AuthBtn title="Log IN">
             <SvgImage className={styles.paw} />
           </AuthBtn>
         </NavLink>
       </li>
       <li className={styles.item}>
-        <NavLink to="/login" className={styles.link}>
+        <NavLink to="/register" className={styles.link}>
           <AuthBtn title="Registration"></AuthBtn>
         </NavLink>
       </li>

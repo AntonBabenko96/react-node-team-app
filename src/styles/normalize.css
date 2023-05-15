@@ -1,0 +1,141 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap");
+.active {
+  right: 0;
+}
+
+@media (max-width: 1279px) {
+  .burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 16px;
+    height: 10px;
+    transform: rotate(0) translate(0);
+    transition: ease-out 0.5s;
+    z-index: 111;
+    cursor: pointer;
+  }
+  .burger .burgerLines {
+    width: 100%;
+    height: 2.5px;
+    background-color: #ffc107;
+    transition: ease-out 0.5s;
+  }
+  .burger .burgerLines::before, .burger .burgerLines::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1.5px;
+    transition: ease-out 0.5s;
+    background-color: #ffc107;
+  }
+  .burger .burgerLines::before {
+    transform: translateY(-5px);
+  }
+  .burger .burgerLines::after {
+    transform: translateY(5px);
+  }
+}
+@media (min-width: 768px) {
+  .burger {
+    order: 1;
+  }
+}
+
+.burger.active .burgerLines {
+  transform: translateX(-50px);
+  background-color: transparent;
+}
+.burger.active .burgerLines::before {
+  transform: rotate(45deg) translate(35px, -35px);
+}
+.burger.active .burgerLines::after {
+  transform: rotate(-45deg) translate(35px, 35px);
+}
+
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Убираем внутренние отступы */
+ul,
+ol {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  font-style: normal;
+  text-transform: none;
+  background-color: #FEF9F9;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul,
+ol {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a {
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+  text-decoration: none;
+  color: currentColor;
+}
+
+button {
+  padding: 0px;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}/*# sourceMappingURL=normalize.css.map */

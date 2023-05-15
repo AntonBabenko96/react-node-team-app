@@ -1,23 +1,34 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import PetsIcon from '@mui/icons-material/Pets';
-import Modal from '../Modal/Modal'
+import CloseIcon from '@mui/icons-material/Close';
+import Modal from '../Modal/Modal';
+import validationSchema from 'helpers/validationSchema';
+
+import { register, login } from '../../redux/auth/auth-operations';
+import { selectIsLogin, selectLoading } from '../../redux/auth/selectors';
 
 import './AuthForm.scss';
 
-export const AuthForm = ({ history }) => {
+export const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const [currentPath] = useState(window.location.pathname);
   const [showModal, setShowModal] = useState(false);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const isLogin = useSelector(selectIsLogin);
+  const isLoading = useSelector(selectLoading);
+
+  const [currentPath] = useState(window.location.pathname);
   const isRegisterPath = currentPath.endsWith('/register');
+  const isLoginPath = currentPath.endsWith('/login');
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -27,34 +38,17 @@ export const AuthForm = ({ history }) => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Email is required'),
-    password: Yup.string().min(6, 'Password must be at least 6 characters'),
-    // .required("Password is required"),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref('password'), null],
-      'Passwords must match'
-    ),
-    // .required("Confirm Password is required"),
-  });
-
-  const handleSubmit = async (values, { resetForm }) => {
-    try {
-      const response = await axios.post('/api/register', values);
-      console.log(response.data);
-      resetForm();
-      setShowModal(true);
-      history.push('/userPage');
-    } catch (error) {
-      console.error(error);
+  const handleSubmit = (values, { resetForm }) => {
+    if (isRegisterPath) {
+      dispatch(register({ email: values.email, password: values.password }));
+      isRegisterPath && setShowModal(true) && navigate('/user');
     }
+    if (isLoginPath) {
+      dispatch(login({ email: values.email, password: values.password }));
+      navigate('/user');
+    }
+    resetForm();
   };
-  const handleClose = ({ target, currentTarget, code }) => {
-      if (target === currentTarget || code === 'Escape') {
-        setShowModal(false); 
-      }
-    };
-   
 
   return (
     <div className="registration-form">
@@ -64,77 +58,123 @@ export const AuthForm = ({ history }) => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <div>
-            <div className="input-icon">
-              <Field type="email" name="email" placeholder="Email" />
-            </div>
-          </div>
+        {({ values, setValues }) => (
+          <Form>
+            <div>
+              <div className="input-icon">
+                <Field name="email">
+                  {({ field, form, meta }) => (
+                    <div>
+                      <input
+                        type="text"
+                        name="email"
+                        {...field}
+                        placeholder="Email"
+                        value={values.email}
+                        onChange={event => {
+                          form.setFieldValue('email', event.target.value);
+                        }}
+                      />
 
-          <div>
-            <div className="input-icon">
-              <Field
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                placeholder="Password"
-              />
-              {showPassword ? (
-                <RemoveRedEyeIcon
-                  className="icon"
-                  onClick={togglePasswordVisibility}
-                />
-              ) : (
-                <VisibilityOffIcon
-                  className="icon"
-                  onClick={togglePasswordVisibility}
-                />
-              )}
+                      {meta.touched && meta.error && (
+                        <ErrorMessage
+                          name="password"
+                          component="div"
+                          className="errorMessage"
+                        />
+                      )}
+                      {values.email && (
+                        <CloseIcon
+                          className="iconClose"
+                          onClick={() => {
+                            form.setFieldValue('email', '');
+                          }}
+                        />
+                      )}
+                    </div>
+                  )}
+                </Field>
+              </div>
             </div>
-            <ErrorMessage name="password" component="div" />
-          </div>
-          {isRegisterPath && (
+
             <div>
               <div className="input-icon">
                 <Field
                   type={showPassword ? 'text' : 'password'}
-                  name="confirmPassword"
-                  placeholder="Confirm password"
+                  name="password"
+                  placeholder="Password"
                 />
                 {showPassword ? (
                   <RemoveRedEyeIcon
                     className="icon"
-                    onClick={toggleConfirmPasswordVisibility}
+                    onClick={togglePasswordVisibility}
                   />
                 ) : (
                   <VisibilityOffIcon
                     className="icon"
-                    onClick={toggleConfirmPasswordVisibility}
+                    onClick={togglePasswordVisibility}
                   />
                 )}
               </div>
-              <ErrorMessage name="confirmPassword" component="div" />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="errorMessage"
+              />
             </div>
-          )}
+            {isRegisterPath && (
+              <div>
+                <div className="input-icon">
+                  <Field
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                  />
+                  {showConfirmPassword ? (
+                    <RemoveRedEyeIcon
+                      className="icon"
+                      onClick={toggleConfirmPasswordVisibility}
+                    />
+                  ) : (
+                    <VisibilityOffIcon
+                      className="icon"
+                      onClick={toggleConfirmPasswordVisibility}
+                    />
+                  )}
+                </div>
+                <ErrorMessage
+                  name="confirmPassword"
+                  component="div"
+                  className="errorMessage"
+                />
+              </div>
+            )}
 
-          <button type="submit">{isRegisterPath ? 'Register' : 'Login'}</button>
-        </Form>
+            <button type="submit">
+              {isRegisterPath ? 'Register' : 'Login'}
+            </button>
+          </Form>
+        )}
       </Formik>
 
       {isRegisterPath ? (
         <p>
-          Already have an account? <a href="/login"> Login</a>{' '}
+          Already have an account? <Link to="/login"> Login</Link>{' '}
         </p>
       ) : (
         <p>
-          Don't have an account? <a href="/register"> Register</a>{' '}
+          Don't have an account? <Link to="/register"> Register</Link>{' '}
         </p>
       )}
-      {showModal && (
-        <Modal onClose={handleClose}>
-        <h1>Congrats!</h1>
-        <h2>Your registration is successful</h2>
-        <button onClick={handleClose}>Go to profile <PetsIcon className="btn-icon" /></button>
-      </Modal>
+
+      {showModal && !isLoading && isLogin && (
+        <Modal onClose={() => setShowModal(false)} style={{ width: '608px' }}>
+          <h2 className="modalH1">Congrats!</h2>
+          <p className="modalP">Your registration is successful</p>
+          <button className="modalBtn" onClick={() => navigate('/user')}>
+            Go to profile <PetsIcon className="modalIcon" />
+          </button>
+        </Modal>
       )}
     </div>
   );

@@ -1,12 +1,13 @@
 @import '/src/styles/styles.scss';
 .list {
-    margin-top: 24px;
     margin-bottom: 40px;
     padding: 0;
     list-style: none;
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 20px;
+
 }

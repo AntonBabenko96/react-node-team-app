@@ -5,6 +5,7 @@ import * as api from '../../api/auth-api ';
 export const register = createAsyncThunk(
   'user/register',
   async (data, { rejectWithValue }) => {
+    console.log(data)
     try {
       const result = await api.register(data);
       return result;

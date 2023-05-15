@@ -12,13 +12,9 @@
   align-items: center;
   position: relative;
 
-
-  @include media-min(tablet){
+  @include media-min(tablet) {
     width: 608px;
   }
-
- 
-
 
   h1 {
     @include main-font(500, 24px, 33px, normal);
@@ -29,12 +25,9 @@
     margin-bottom: 40px;
 
     margin-top: 60px;
-    @include media-min(tablet){
-        @include main-font(500, 36px, 33px, normal);
-      
-      }
-    
-
+    @include media-min(tablet) {
+      @include main-font(500, 36px, 33px, normal);
+    }
   }
 
   form {
@@ -44,10 +37,11 @@
       margin-bottom: 15px;
       display: flex;
       flex-direction: column;
+      text-align: center;
 
-    //   label {
-    //     margin-bottom: 5px;
-    //   }
+      //   label {
+      //     margin-bottom: 5px;
+      //   }
 
       .input-icon {
         position: relative;
@@ -82,12 +76,10 @@
             border: 1px solid orange;
           }
 
-
-          @include media-min(tablet){
-            width: 458px; 
-            gap:42px;
+          @include media-min(tablet) {
+            width: 458px;
+            gap: 42px;
           }
-
         }
 
         .icon {
@@ -97,18 +89,25 @@
           top: 10px;
           cursor: pointer;
 
-
-          @include media-min(tablet){
+          @include media-min(tablet) {
             right: 75px;
-        
           }
-
         }
       }
     }
   }
+  .iconClose {
+    position: absolute;
+    right: 10px;
+    color: red;
+    top: 10px;
+    cursor: pointer;
 
-  button[type='submit'] {
+    @include media-min(tablet) {
+      right: 75px;
+    }
+  }
+  button {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -126,21 +125,14 @@
     border-radius: 40px;
     color: #ffffff;
     @include main-font(400, 16px, 22px, normal);
-    // font-family: 'Manrope', sans-serif;
-    // font-style: normal;
-    // font-weight: 400;
-    // font-size: 16px;
-    // line-height: 150%;
-
     margin-top: 40px;
     cursor: pointer;
 
-    @include media-min(tablet){
-       width: 458px;
-       left:12%;
-       margin-top: 42px;
+    @include media-min(tablet) {
+      width: 458px;
+      left: 12%;
+      margin-top: 42px;
     }
-
   }
 
   p {
@@ -152,12 +144,7 @@
     letter-spacing: 0.04em;
     color: #888888;
     // margin-bottom: 40px;
-
   }
-
- 
-
-  
 
   a {
     @include main-font(400, 12px, 16px, normal);
@@ -166,21 +153,88 @@
   }
 }
 
-h2 {
-  @include main-font(500, 16px, 22px, normal);
-  color:#111111;
-  margin-top: 30px;
-  margin-bottom: 40px;
-}
-.btn-icon{
-fill:#ffffff;
-width: 24px;
-height: 24px;
-position: absolute;
-width: 24px;
-height: 20.97px;
-left: 5.56px;
-top: -2.59px;
+// h2 {
+//   @include main-font(500, 16px, 22px, normal);
+//   color:#111111;
+//   margin-top: 30px;
+//   margin-bottom: 40px;
+// }
+// .btn-icon{
+// fill:#ffffff;
+// width: 24px;
+// height: 24px;
+// position: absolute;
+// width: 24px;
+// height: 20.97px;
+// left: 5.56px;
+// top: -2.59px;
 
-transform: rotate(25deg);
+// transform: rotate(25deg);
+// }
+
+// .modalDiv{
+//   width:608px;
+
+// }
+
+.modalH1 {
+  @include main-font(500, 24px, 33px, normal);
+  text-align: center;
+  color: #111111;
+  margin-top: 60px;
+  @include media-min(tablet) {
+    @include main-font(500, 36px, 33px, normal);
+  }
+}
+
+.modalP {
+  @include main-font(500, 24px, 33px, normal);
+  margin-top: 60px;
+  margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.04em;
+  color: black;
+}
+
+.modalBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 28px;
+  width: 256px;
+  height: 48px;
+  // position: absolute;
+  // left: 4%;
+  // top: 70%;
+  // bottom: 19.3%;
+  background: #54adff;
+  outline: none;
+  border: transparent;
+  border-radius: 40px;
+  color: #ffffff;
+  @include main-font(400, 16px, 22px, normal);
+  // margin-top: 40px;
+  margin-bottom: 60px;
+  cursor: pointer;
+}
+
+.modalIcon {
+  fill: #ffffff;
+  width: 24px;
+  height: 24px;
+  margin-left: 12px;
+  // position: absolute;
+  width: 24px;
+  height: 20.97px;
+  left: 5.56px;
+  top: -2.59px;
+
+  transform: rotate(25deg);
+}
+
+.errorMessage {
+  color: red;
 }
