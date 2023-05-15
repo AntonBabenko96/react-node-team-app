@@ -1,0 +1,63 @@
+@import '/src/styles/styles.scss';
+
+div{
+    display: flex;
+    flex-direction: column; 
+}
+
+h1 {
+    @include main-font(500, 24px, 33px, normal);
+    text-align: center;
+   color:  getColor('full-black');
+    margin-top: 60px;
+    @include media-min(tablet) {
+      @include main-font(500, 36px, 33px, normal);
+    }
+  }
+  
+ p{
+    @include main-font(500, 24px, 33px, normal);
+    margin-top: 60px;
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color:  getColor('full-black');
+  }
+  
+  .modalButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 17px;
+    margin-bottom: 60px;
+  }
+  
+  button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 129px;
+    height: 40px;
+    outline: none;
+    border:getColor('full-blue');
+    border-radius: 40px;
+    cursor: pointer;
+  }
+  
+  .btnClose {
+    background-color:getColor('full-white');
+  }
+  .btn-yes {
+    background-color:getColor('full-blue');
+  }
+  
+  .icon {
+    fill:getColor('full-white');
+    width:24px;
+    height:24px;
+    margin-left: 8px;
+    transform: rotate(180deg);
+  }
+  
