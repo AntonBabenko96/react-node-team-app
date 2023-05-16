@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage, getIn } from 'formik';
 import * as Yup from 'yup';
+import { Calendar } from '../Calendar/Calendar';
 
 import styles from './SecondStep.module.scss';
 import { ReactComponent as Arrow } from '../../../img/svg/arrow-left.svg';
@@ -49,7 +50,7 @@ function SecondStep({ data, prev, onSubmit }) {
         initialValues={data}
         validationSchema={validationSchema}
       >
-        {({ values, errors }) => (
+        {({ values, errors, setFieldValue }) => (
           <Form>
             <div className={styles.div}>
               {title && (
@@ -75,6 +76,16 @@ function SecondStep({ data, prev, onSubmit }) {
                 ></Field>
                 <FormError className={styles.error} name="petName" />
               </label>
+
+              {/* <Field
+                component={Calendar}
+                selected={values.dateOfBirth}
+                name="dateOfBirth"
+                value={values.date}
+                onChange={val => setFieldValue('dateOfBirth', val)}
+              ></Field> */}
+
+              <Calendar name="dateOfBirth" values={values} />
 
               <label className={styles.field}>
                 Date of birth

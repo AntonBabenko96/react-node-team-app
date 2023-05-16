@@ -110,6 +110,7 @@ export default function AddPetPage() {
     }
     return 'Add pet';
   };
+
   return (
     <div className="container">
       <div className={styles.form}>
