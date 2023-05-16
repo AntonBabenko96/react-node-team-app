@@ -5,6 +5,9 @@ import Modal from 'components/Modal/Modal';
 import React, { useState } from 'react';
 import { ReactComponent as SvgImage } from '../../img/svg/trash.svg';
 import ModalButtons from './ModalButtons/ModalButtons';
+import { useDispatch } from 'react-redux';
+
+import { removePets } from 'redux/pets/pets-operations';
 
 export default function UserPetsItem({
   id,
@@ -13,15 +16,13 @@ export default function UserPetsItem({
   date,
   breed,
   comments,
-  handleDeleteItem,
 }) {
   const [showModal, setShowModal] = useState(false);
-  console.log('🆑  showModal:', showModal);
+  const dispatch = useDispatch();
 
   const handleRemoveItem = (e, id) => {
+    dispatch(removePets(id));
     setShowModal(false);
-    handleDeleteItem(id);
-    console.log('e -->', e);
   };
 
   return (
@@ -30,7 +31,7 @@ export default function UserPetsItem({
         {photoURL && (
           <img
             className={styles.pets__image}
-            src={`https://image.tmdb.org/t/p/original${photoURL}`}
+            src={`https://your-pet-backend.onrender.com/${photoURL}`}
             alt={name}
             width="240"
           />
@@ -73,19 +74,22 @@ export default function UserPetsItem({
               You can`t undo this action.
             </p>
             <ul className={styles.buttonList}>
-              <li key="cancel" className={styles.item}>
+              <li
+                key="cancel"
+                className={styles.item}
+                onClick={() => setShowModal(false)}
+              >
                 <ModalButtons
-                  onClick={() => setShowModal(false)}
                   title="Cancel"
                   className={`${styles.btn} cancel`}
-                ></ModalButtons>
+                />
               </li>
-              <li key="aprove" className={styles.item}>
-                <ModalButtons
-                  title="Yes"
-                  className={`${styles.btn} aprove`}
-                  onClick={e => handleRemoveItem(e, id)}
-                >
+              <li
+                key="aprove"
+                className={styles.item}
+                onClick={e => handleRemoveItem(e, id)}
+              >
+                <ModalButtons title="Yes" className={`${styles.btn} aprove`}>
                   <SvgImage className={styles.trash} />
                 </ModalButtons>
               </li>

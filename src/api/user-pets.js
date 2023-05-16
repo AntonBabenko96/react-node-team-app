@@ -1,12 +1,17 @@
-import axios from 'axios';
-
-const userPetsInstanse = axios.create({
-  baseURL: 'https://your-pet-backend.onrender.com/',
-});
+import instance from './auth-api';
 
 export const getUserPets = async () => {
   try {
-    const { data } = await userPetsInstanse.get('/pets');
+    const { data } = await instance.get('pets');
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteUserPets = async id => {
+  try {
+    const { data } = await instance.delete(`pets/${id}`);
     return data;
   } catch (error) {
     throw error;
