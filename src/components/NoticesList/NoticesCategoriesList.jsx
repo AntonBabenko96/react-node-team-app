@@ -14,6 +14,7 @@ import NoticeCategoryItem from 'components/NoticeCategoryItem/NoticeCategoryItem
 import s from './NoticesCategoriesList.module.scss';
 import Modal from 'components/Modal/Modal';
 import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
+import { getDifference } from 'shared/utils/getDateFormat';
 
 const data = {
   category: 'sell',
@@ -76,11 +77,7 @@ export default function NoticesCategoriesList() {
       favorite,
       own,
     }) => {
-      const yearOfBirth = birth && new Date(birth).getFullYear();
-      const difference = birth ? new Date().getFullYear() - yearOfBirth : 'n/a';
-      const age =
-        difference === 1 ? `${difference} year` : `${difference} years`;
-
+        const age = birth ? getDifference(birth) : "no data";
       return (
         <NoticeCategoryItem
           key={_id}
@@ -105,8 +102,8 @@ export default function NoticesCategoriesList() {
     <>
       <ul className={s.list}>{elements}</ul>
       {showModal && (
-        <Modal onClose={onModalClose}>
-          <NoticeModal {...notice} />
+        <Modal className="css.noticeModal" onClose={onModalClose}>
+          <NoticeModal {...notice} onFavoriteBtnClick={handleFavoriteBtnClick} />
         </Modal>
       )}
     </>

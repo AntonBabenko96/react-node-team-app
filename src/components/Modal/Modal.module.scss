@@ -1,3 +1,5 @@
+@import "../../styles/styles.scss";
+
 .overlay {
   // @media screen and (min-width: 320px) and (max-width: 767.9px) {
 
@@ -29,7 +31,7 @@
     border-radius: 20px;
   }
 
-  width: 540px;
+  // width: 540px;
   // min-height: 508px;
   // padding: 40px 73px;
   display: flex;
@@ -60,5 +62,20 @@
   &:hover,
   &:focus {
     background-color: #ececec;
+  }
+}
+
+.noticeModal {
+  padding-top: 44px;
+  padding-right: 12px;
+  padding-bottom: 16px;
+  padding-left: 12px;
+
+  @include media-min(tablet) {
+    min-width: 681px;
+    padding-top: 32px;
+    padding-right: 32px;
+    padding-bottom: 24px;
+    padding-left: 32px;
   }
 }
