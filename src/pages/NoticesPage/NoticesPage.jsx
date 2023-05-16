@@ -1,14 +1,19 @@
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
 import NoticesCategoriesList from 'components/NoticesList/NoticesCategoriesList';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
+
 import Paginations from 'components/Pagination/Pagination';
 import { useState, useEffect } from 'react';
+
+
+// import Paginations from 'components/Pagination/Pagination';
 
 // import { useState } from 'react';
 
 import s from './NoticesPage.module.scss';
 
 export default function NoticesPage() {
+
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(1);
 
@@ -16,6 +21,7 @@ export default function NoticesPage() {
     // Отримання даних з дочірнього компонента Pagination
     setPage(paginationPage);
   };
+
   // const [query, setQuery] = useState('');
 
   // const handleSearch = (query) => {
