@@ -52,9 +52,10 @@ export default function AddPetPage() {
     const data = new FormData();
     createRequestData(data, state, values);
 
-    state.category === 'my pet'
-      ? dispatch(addPet(data))
-      : dispatch(addNotice(data));
+    console.log(data);
+    // state.category === 'my pet'
+    //   ? dispatch(addPet(data))
+    //   : dispatch(addNotice(data));
   };
 
   const stepStyle = position => {

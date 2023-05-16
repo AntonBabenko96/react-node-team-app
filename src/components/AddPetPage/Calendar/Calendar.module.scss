@@ -1,0 +1,18 @@
+@import '../../../styles/styles.scss';
+
+.calendar {
+  border-radius: 40px;
+  //   padding-left: 10px;
+  border: 1px solid getColor(full-blue);
+  width: 100%;
+}
+
+.calendar:focus {
+  outline: 1px solid getColor(full-blue);
+}
+
+// .input {
+//   border-radius: 40px;
+//   padding-left: 10px;
+//   //   border: 1px solid getColor(full-blue);
+// }

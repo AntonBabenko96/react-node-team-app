@@ -50,7 +50,7 @@ function SecondStep({ data, prev, onSubmit }) {
         initialValues={data}
         validationSchema={validationSchema}
       >
-        {({ values, errors, setFieldValue }) => (
+        {({ values, errors }) => (
           <Form>
             <div className={styles.div}>
               {title && (
@@ -77,26 +77,11 @@ function SecondStep({ data, prev, onSubmit }) {
                 <FormError className={styles.error} name="petName" />
               </label>
 
-              {/* <Field
-                component={Calendar}
-                selected={values.dateOfBirth}
-                name="dateOfBirth"
-                value={values.date}
-                onChange={val => setFieldValue('dateOfBirth', val)}
-              ></Field> */}
-
-              <Calendar name="dateOfBirth" values={values} />
-
-              <label className={styles.field}>
+              <p className={styles.field}>
                 Date of birth
-                <Field
-                  className={styles.input}
-                  type="text"
-                  name="dateOfBirth"
-                  placeholder="Enter date of birth"
-                ></Field>
+                <Calendar name="dateOfBirth" values={values} />
                 <FormError className={styles.error} name="dateOfBirth" />
-              </label>
+              </p>
 
               <label className={styles.field}>
                 Pet type
