@@ -20,6 +20,7 @@ export default function NoticesPage() {
   // const [query, setQuery] = useState('');
   useEffect(() => {
     console.log('page -->', page, count);
+    setCount(1);
   }, [page, count]);
   // const handleSearch = (query) => {
   //   setQuery(query);
