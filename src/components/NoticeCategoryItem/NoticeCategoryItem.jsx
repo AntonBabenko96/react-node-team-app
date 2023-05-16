@@ -17,6 +17,7 @@ export default function NoticeCategoryItem({
   sex,
   kind,
   favorite,
+  own,
   onLearnMoreBtnClick,
   onFavoriteBtnClick,
 }) {
@@ -27,12 +28,12 @@ export default function NoticeCategoryItem({
       <div className={s.category}>
         <p className={s.categoryText}>{category}</p>
       </div>
-      <button className={`${s.userBtn} ${s.favorite}`} onClick={() => onFavoriteBtnClick(id)}>
-        <FavoriteIcon className={s.icon} />
+      <button className={`${s.userBtn} ${s.favorite}`} onClick={() => onFavoriteBtnClick(id, favorite)}>
+        <FavoriteIcon className={favorite ? s.favoriteIcon : s.icon} />
       </button>
-      <button className={`${s.userBtn} ${s.delete}`}>
-        <TrashIcon className={favorite ? s.favoriteIcon : s.icon} />
-      </button>
+      {own && <button className={`${s.userBtn} ${s.delete}`}>
+        <TrashIcon className={s.icon} />
+      </button>}
       <img className={s.img} src={img ? `${imgBeseURL}${img}` : placeholder} alt="Pet" />
       <div className={s.wrapper}>
         <div className={s.box}>
