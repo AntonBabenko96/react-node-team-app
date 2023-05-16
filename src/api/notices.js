@@ -4,7 +4,7 @@ import instance from './auth-api';
 export async function getNotices({
   sex = '',
   age = '',
-  category = '',
+  category = 'sell',
   title = '',
   page = '',
   limit = '',

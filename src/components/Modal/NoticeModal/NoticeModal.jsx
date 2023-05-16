@@ -2,8 +2,13 @@ import Style from './NoticeModal.module.scss';
 import { BsHeart } from 'react-icons/bs';
 
 import placeholder from 'img/placeholder.png';
+import { getDateFormat } from 'shared/utils/getDateFormat';
+
+let email = '';
+let phone = '';
 
 export default function NoticeModal({
+  _id,
   name,
   title,
   breed,
@@ -12,13 +17,19 @@ export default function NoticeModal({
   type,
   location,
   sex,
-  comment,
-  birth
+  comments,
+  birth,
+  owner,
+  favorite,
+  onFavoriteBtnClick,
 }) {
   const imgBeseURL = 'https://your-pet-backend.onrender.com/';
-  const yearOfBirth = birth && new Date(birth).getFullYear();
-  const difference = birth ? new Date().getFullYear() - yearOfBirth : 'n/a';
-  const age = difference === 1 ? `${difference} year` : `${difference} years`;
+  const date = getDateFormat(birth);
+  if (owner) {
+    email = owner.email ? owner.email : 'no data';
+    phone = owner.phone ? owner.phone : 'no data';
+  }
+  const isFromModal = true;
 
   return (
     <>
@@ -45,7 +56,7 @@ export default function NoticeModal({
               </li>
               <li>
                 <h4>Birthday:</h4>
-                <p>{age}</p>
+                <p>{date}</p>
               </li>
               <li>
                 <h4>Breed:</h4>
@@ -61,21 +72,26 @@ export default function NoticeModal({
               </li>
               <li>
                 <h4>Email:</h4>
-                <a href="mailto: user@gmail.com">user@gmail.com</a>
+                <a href={`mailto: ${email}`}>{email}</a>
               </li>
               <li>
                 <h4>Phone:</h4>
-                <a href="tel: +380981234567">+380981234567</a>
+                <a href={`tel: ${phone}`}>{phone}</a>
               </li>
             </ul>
           </div>
         </div>
         <p className={Style.NoticeComent}>
-          <strong>Comments:</strong> {comment}
+          <strong>Comments:</strong> {comments}
         </p>
         <div className={Style.ButtonWrapper}>
-          <button className={Style.ButtonContact}>Contact</button>
-          <button className={Style.ButtonFavorite}>
+          <button className={Style.ButtonContact}>
+            <a href={`tel: ${phone}`}>Contact</a>
+          </button>
+          <button
+            className={Style.ButtonFavorite}
+            onClick={() => onFavoriteBtnClick(_id, favorite, isFromModal)}
+          >
             Add to <BsHeart className={Style.icon} />
           </button>
         </div>
