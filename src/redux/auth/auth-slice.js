@@ -3,6 +3,7 @@ import {
   register,
   login,
   logout,
+  refresh,
   addToFavorites,
   removeFromFavorites,
   getFavoritesList,
@@ -57,6 +58,21 @@ const authSlice = createSlice({
         state.isLogin = false;
       })
       .addCase(logout.rejected, handleRejected)
+      .addCase(refresh.pending, state => {
+        state.loading = true;
+        state.error = null;
+        state.isLogin = false;
+      })
+      .addCase(refresh.fulfilled, state => {
+        state.loading = false;
+        state.error = null;
+        state.isLogin = true;
+      })
+      .addCase(refresh.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+        state.isLogin = false;
+      })
       .addCase(addToFavorites.pending, handlePending)
       .addCase(addToFavorites.fulfilled, state => {
         state.loading = false;
@@ -70,21 +86,21 @@ const authSlice = createSlice({
       })
       .addCase(removeFromFavorites.rejected, handleRejected)
       .addCase(getFavoritesList.pending, handlePending)
-      .addCase(getFavoritesList.fulfilled, (state, {payload}) => {
+      .addCase(getFavoritesList.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.error = null;
         state.favorites = payload;
       })
       .addCase(getFavoritesList.rejected, handleRejected)
       .addCase(getUserInfo.pending, handlePending)
-      .addCase(getUserInfo.fulfilled, (state, {payload}) => {
+      .addCase(getUserInfo.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.error = null;
         state.user = payload;
       })
       .addCase(getUserInfo.rejected, handleRejected)
       .addCase(updateUserInfo.pending, handlePending)
-      .addCase(updateUserInfo.fulfilled, (state, {payload}) => {
+      .addCase(updateUserInfo.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.error = null;
         state.user = payload;
