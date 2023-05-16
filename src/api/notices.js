@@ -20,3 +20,9 @@ export async function getNoticeById(id) {
   const { data } = await instance.get(`/notices/${id}`);
   return data;
 }
+
+// для отримання оголошень авторизованого кристувача створених цим же користувачем
+export async function getMyNotices() {
+  const { data } = await instance.get('notices/my');
+  return data;
+}
