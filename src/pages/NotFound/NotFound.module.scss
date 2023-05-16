@@ -1,0 +1,91 @@
+@import '/src/styles/styles.scss';
+
+.bgnotfound {
+  position: relative;
+  background-image: url('../../img/mainPage/bg.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  padding-bottom: 100px;
+
+  @media screen and (min-width: 768px) {
+    background-image: url('../../img/mainPage/bgTablet.png');
+    background-position: top left;
+    padding-bottom: 200px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    background-image: url('../../img/mainPage/bgDesktop.png');
+    background-position: center;
+    padding-bottom: 100px;
+  }
+}
+
+.text {
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  @include main-font(700, 24px, 33px);
+  text-align: center;
+  color: #000000;
+
+  @media screen and (min-width: 768px) {
+    br {
+      display: none;
+    }
+    padding-top: 60px;
+
+    @include main-font(600, 32px, 130%);
+    text-align: center;
+    color: #000000;
+  }
+}
+
+.wrapper {
+  width: 280px;
+  height: 123px;
+  margin-bottom: 60px;
+  margin-left: auto;
+  margin-right: auto;
+
+  background-image: url('../../img/notFound/notfound-img.png');
+
+  @media screen and (min-width: 768px) {
+    background-image: url('../../img/notFound/notfound-img-tablet.png');
+    width: 704px;
+    height: 308px;
+    margin-bottom: 70px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    background-image: url('../../img/notFound/notfound-img-tablet.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    width: 822px;
+    height: 360px;
+    margin-bottom: 18px;
+  }
+}
+
+.link {
+  display: block;
+  width: 248px;
+  height: 40px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  margin-left: auto;
+  margin-right: auto;
+
+  border-radius: 40px;
+  background-color: getColor('full-blue');
+  color: #fef9f9;
+  @include main-font(700, 16px, 22px);
+  letter-spacing: 0.04em;
+  text-align: center;
+
+  background-image: url(../../img/svg/pawprint-white.svg);
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: 190px 8px;
+}
