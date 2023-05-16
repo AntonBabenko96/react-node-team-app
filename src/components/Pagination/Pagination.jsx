@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Container, Pagination, Stack } from '@mui/material';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import {
+  Container,
+  Pagination,
+  Stack,
+  createTheme,
+  ThemeProvider,
+} from '@mui/material';
 
 const theme = createTheme({
   breakpoints: {
