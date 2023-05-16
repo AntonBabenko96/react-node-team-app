@@ -5,7 +5,6 @@ import { selectIsLogin } from 'redux/auth/selectors';
 import { getNoticeById, getNotices } from 'redux/notices/notices-operations';
 import {
   addToFavorites,
-  getUserInfo,
   removeFromFavorites,
 } from 'redux/auth/auth-operations';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -17,7 +16,6 @@ import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
 import { getDifference } from 'shared/utils/getDateFormat';
 
 const data = {
-  category: 'sell',
   page: 1,
   limit: 10,
 };
@@ -49,17 +47,28 @@ export default function NoticesCategoriesList() {
     setShowModal(false);
   };
 
-  const handleFavoriteBtnClick = (id, favorite) => {
+  const handleFavoriteBtnClick = (id, favorite, isFromModal = false) => {
     if (!isLogin) {
       Notify.info(
         'The option "Add to favorite" is available only to registered users'
       );
+    }
+    //  else if(isFromModal && favorite) {
+    //   Notify.info(
+    //     'This notice already in favorite'
+    //   );
+    // }
+    else if(isFromModal && favorite) {
+      dispatch(addToFavorites(id));
+      setTimeout(() => {
+        dispatch(getNotices(data));
+      }, 500);
     } else {
       favorite
         ? dispatch(removeFromFavorites(id))
         : dispatch(addToFavorites(id));
       setTimeout(() => {
-        dispatch(getUserInfo());
+        dispatch(getNotices(data));
       }, 500);
     }
   };
@@ -77,7 +86,7 @@ export default function NoticesCategoriesList() {
       favorite,
       own,
     }) => {
-        const age = birth ? getDifference(birth) : "no data";
+      const age = birth ? getDifference(birth) : 'no data';
       return (
         <NoticeCategoryItem
           key={_id}
@@ -103,7 +112,10 @@ export default function NoticesCategoriesList() {
       <ul className={s.list}>{elements}</ul>
       {showModal && (
         <Modal className="css.noticeModal" onClose={onModalClose}>
-          <NoticeModal {...notice} onFavoriteBtnClick={handleFavoriteBtnClick} />
+          <NoticeModal
+            {...notice}
+            onFavoriteBtnClick={handleFavoriteBtnClick}
+          />
         </Modal>
       )}
     </>

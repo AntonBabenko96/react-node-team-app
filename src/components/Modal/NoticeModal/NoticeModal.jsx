@@ -2,12 +2,13 @@ import Style from './NoticeModal.module.scss';
 import { BsHeart } from 'react-icons/bs';
 
 import placeholder from 'img/placeholder.png';
-import {getDateFormat} from 'shared/utils/getDateFormat';
+import { getDateFormat } from 'shared/utils/getDateFormat';
 
-let email = "";
-let phone = "";
+let email = '';
+let phone = '';
 
 export default function NoticeModal({
+  _id,
   name,
   title,
   breed,
@@ -24,10 +25,11 @@ export default function NoticeModal({
 }) {
   const imgBeseURL = 'https://your-pet-backend.onrender.com/';
   const date = getDateFormat(birth);
-  if(owner) {
-    email = owner.email ? owner.email : "no data";
-    phone = owner.phone ? owner.phone : "no data";
+  if (owner) {
+    email = owner.email ? owner.email : 'no data';
+    phone = owner.phone ? owner.phone : 'no data';
   }
+  const isFromModal = true;
 
   return (
     <>
@@ -83,8 +85,13 @@ export default function NoticeModal({
           <strong>Comments:</strong> {comments}
         </p>
         <div className={Style.ButtonWrapper}>
-          <button className={Style.ButtonContact}>Contact</button>
-          <button className={Style.ButtonFavorite} onClick={onFavoriteBtnClick}>
+          <button className={Style.ButtonContact}>
+            <a href={`tel: ${phone}`}>Contact</a>
+          </button>
+          <button
+            className={Style.ButtonFavorite}
+            onClick={() => onFavoriteBtnClick(_id, favorite, isFromModal)}
+          >
             Add to <BsHeart className={Style.icon} />
           </button>
         </div>

@@ -1,4 +1,4 @@
-@import "../../styles/styles.scss";
+@import '../../styles/styles.scss';
 
 .overlay {
   position: fixed;
@@ -51,20 +51,5 @@
   &:hover,
   &:focus {
     background-color: #ececec;
-  }
-}
-
-.noticeModal {
-  padding-top: 44px;
-  padding-right: 12px;
-  padding-bottom: 16px;
-  padding-left: 12px;
-
-  @include media-min(tablet) {
-    min-width: 681px;
-    padding-top: 32px;
-    padding-right: 32px;
-    padding-bottom: 24px;
-    padding-left: 32px;
   }
 }

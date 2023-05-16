@@ -95,12 +95,12 @@
     color: getColor('full-yellow');
     text-decoration: underline;
     font-size: 12px;
-      transition: color 250ms ease;
+    transition: color 250ms ease;
     @media screen and (min-width: 768px) {
       font-size: 16px;
     }
     &:hover {
-    color: getColor('gr-blue-start');
+      color: getColor('gr-blue-start');
     }
   }
 }
@@ -135,17 +135,21 @@
   cursor: pointer;
   width: 256px;
   height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid getColor('full-blue');
   margin-bottom: 8px;
   border-radius: 40px;
   background-color: white;
   color: getColor('full-blue');
   transition: background-color 250ms ease;
+  @include main-font(700, 16px, calc(22 / 16));
   @media screen and (min-width: 768px) {
     width: 129px;
   }
   &:hover {
-  background-color: rgba(248, 248, 248, 0.808);
+    background-color: rgba(248, 248, 248, 0.808);
   }
 }
 .ButtonFavorite {
@@ -159,10 +163,11 @@
   background-color: getColor('full-blue');
   border: none;
   color: white;
-    transition: background-color 250ms ease;
+  @include main-font(700, 16px, calc(22 / 16));
+  transition: background-color 250ms ease;
   &:hover {
     background-color: #79bcfc;
-  &:hover .icon {
+    &:hover .icon {
       scale: 1.15;
     }
   }
