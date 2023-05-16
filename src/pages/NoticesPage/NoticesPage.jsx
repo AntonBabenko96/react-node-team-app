@@ -7,6 +7,7 @@ import { useState } from 'react';
 // import { useState } from 'react';
 
 import s from './NoticesPage.module.scss';
+import { useEffect } from 'react';
 
 export default function NoticesPage() {
   const [page, setPage] = useState(1);
@@ -17,7 +18,9 @@ export default function NoticesPage() {
     setPage(paginationPage);
   };
   // const [query, setQuery] = useState('');
-
+  useEffect(() => {
+    console.log('page -->', page, count);
+  }, [page, count]);
   // const handleSearch = (query) => {
   //   setQuery(query);
 
