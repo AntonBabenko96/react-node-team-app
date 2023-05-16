@@ -135,3 +135,17 @@ span {
   align-items: center;
   justify-content: center;
 }
+
+.trash {
+  width: 24px;
+  height: 24px;
+  stroke: getColor('full-white');
+  fill: getColor('full-blue');
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    stroke: getColor('full-blue');
+    fill: getColor('full-white');
+  }
+}

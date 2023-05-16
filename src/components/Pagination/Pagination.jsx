@@ -39,7 +39,7 @@ export default function Paginations({ getPage, count }) {
               '@media (max-width: 767px)': {
                 marginBottom: '50px',
                 '& .MuiPagination-ul': {
-                  '& > *:not(:first-child):not(:last-child)': {
+                  '& > *:not(:first-of-type):not(:last-child)': {
                     display: 'none',
                   },
                 },

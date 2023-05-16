@@ -38,7 +38,7 @@ export default function UserPetsList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPets());
+    setTimeout(() => dispatch(getPets()), 2000);
   }, [dispatch]);
 
   const elements = pets.map(

@@ -25,7 +25,7 @@ export const addNotice = createAsyncThunk(
     //     console.log(value);
     // }
     try {
-      const result = await api.addPetNotice(data);
+      const { data: result } = await api.addPetNotice(data);
       return result;
     } catch ({ response }) {
       return rejectWithValue(response.data.message);
