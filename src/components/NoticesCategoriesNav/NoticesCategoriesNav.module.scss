@@ -1,0 +1,27 @@
+@import '../../styles/styles.scss';
+.filterCategiries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 210px;
+  margin-bottom: 50px;
+  @media screen and (min-width: 340px) {
+    width: 300px;
+  }
+  @media screen and (min-width: 1200px) {
+    width: auto;
+  }
+}
+.categoriesbtn {
+  cursor: pointer;
+  background-color: getColor('light-blue');
+  border: none;
+  border-radius: 40px;
+  color: getColor('full-blue');
+  padding: 8px 16px;
+  font-size: 14px;
+transition: background-color 250ms ease;
+  &:hover {
+background-color: #daeaf8;
+}
+}
