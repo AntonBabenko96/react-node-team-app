@@ -3,7 +3,7 @@ import NoticesCategoriesList from 'components/NoticesList/NoticesCategoriesList'
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 
 import Paginations from 'components/Pagination/Pagination';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 // import Paginations from 'components/Pagination/Pagination';
@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 // import { useState } from 'react';
 
 import s from './NoticesPage.module.scss';
+import { useEffect } from 'react';
 
 export default function NoticesPage() {
 
@@ -23,7 +24,9 @@ export default function NoticesPage() {
   };
 
   // const [query, setQuery] = useState('');
-
+  useEffect(() => {
+    console.log('page -->', page, count);
+  }, [page, count]);
   // const handleSearch = (query) => {
   //   setQuery(query);
 
