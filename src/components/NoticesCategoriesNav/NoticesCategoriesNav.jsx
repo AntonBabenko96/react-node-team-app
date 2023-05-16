@@ -1,5 +1,5 @@
 import Style from "./NoticesCategoriesNav.module.scss"
-import {getNotices,getMyNotices} from "../../redux/notices/notices-operations"
+import {getNotices} from "../../redux/notices/notices-operations"
 import { useDispatch,useSelector } from 'react-redux';
 import { selectIsLogin} from "../../redux/auth/selectors";
 const mainCategoriesList = [{ id: 1, value: "sell", name: "sell" }, { id: 2,value: "lost-found", name: "lost/found" }, { id: 3,value: "for-free", name: "in good hands" }];
@@ -19,7 +19,7 @@ export default function NoticesCategoriesNav(value) {
         dispatch(getNotices(fetch)); 
     }
     const filterСhangeUser = (e) => {
-        let value = e.target.name;
+        // let value = e.target.name;
         // const fetch = {
         //     category: value,
         //     page: 1,
