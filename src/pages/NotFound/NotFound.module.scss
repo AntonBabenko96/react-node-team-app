@@ -1,0 +1,88 @@
+@import '../../../src/styles/styles.scss';
+
+.NotFoundSection {
+  height: 90vh;
+  background-image: url('../../img/mainPage/bg.png');
+  background-repeat: repeat;
+  //   background-size: cover;
+
+  @media screen and (min-width: 768px) {
+    background-position: bottom;
+    background-image: url('../../img/mainPage/bgTablet.png');
+  }
+  @media screen and (min-width: 1200px) {
+    background-position: right top;
+    background-image: url('../../img/mainPage/bgDesktop.png');
+  }
+}
+
+.Title {
+  margin: 0 auto;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 68px;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 60px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 500px;
+  }
+}
+.FirstLine,
+.SecondLine {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.375;
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+}
+.mainBtn {
+  display: flex;
+  justify-content: space-between;
+  width: 248px;
+  height: 40px;
+  border-radius: 40px;
+  color: getColor('full-white');
+  background-color: #54adff;
+  @include main-font(700, 16px, 22px, normal);
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 60px;
+  @media screen and (min-width: 768px) {
+    margin-top: 70px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-top: 18px;
+  }
+  margin-left: auto;
+  margin-right: auto;
+  padding: 8px 54px;
+}
+
+.modalIcon {
+  fill: getColor('full-white');
+  width: 24px;
+  height: 24px;
+  margin-left: 12px;
+  // position: absolute;
+  width: 24px;
+  height: 20.97px;
+  left: 5.56px;
+  top: -2.59px;
+
+  transform: rotate(25deg);
+}
+.image {
+  margin: 0 auto;
+}
