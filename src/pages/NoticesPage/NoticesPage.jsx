@@ -2,7 +2,7 @@ import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategor
 import NoticesCategoriesList from 'components/NoticesList/NoticesCategoriesList';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import Paginations from 'components/Pagination/Pagination';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // import { useState } from 'react';
 
