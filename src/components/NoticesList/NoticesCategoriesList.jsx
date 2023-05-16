@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectNotice, selectNotices } from 'redux/notices/notices-selectors';
 import { selectIsLogin } from 'redux/auth/selectors';
 import { getNoticeById, getNotices } from 'redux/notices/notices-operations';
-import { addToFavorites } from 'redux/auth/auth-operations';
+import {
+  addToFavorites,
+  getUserInfo,
+  removeFromFavorites,
+} from 'redux/auth/auth-operations';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import NoticeCategoryItem from 'components/NoticeCategoryItem/NoticeCategoryItem';
 
@@ -11,34 +15,32 @@ import s from './NoticesCategoriesList.module.scss';
 import Modal from 'components/Modal/Modal';
 import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
 
+const data = {
+  category: 'sell',
+  page: 1,
+  limit: 10,
+};
+
 export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
-  // const [notice, setNotice] = useState('');
 
   const notices = useSelector(selectNotices);
-  const notice = useSelector(selectNotice)
+  const notice = useSelector(selectNotice);
   const isLogin = useSelector(selectIsLogin);
-  // const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const data = {
-      category: 'sell',
-      page: 1,
-      limit: 10,
-    };
     dispatch(getNotices(data));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (isLogin) {
+  useEffect(() => {
+    if (isLogin) {
+      dispatch(getNotices(data));
+    }
+  }, [dispatch, isLogin]);
 
-  //     dispatch(getNotices());
-  //   }
-  // }, [dispatch, isLogin]);
-
-  const handleLearnMoreBtnClick = (id) => {
-    dispatch(getNoticeById(id))
+  const handleLearnMoreBtnClick = id => {
+    dispatch(getNoticeById(id));
     setShowModal(true);
   };
 
@@ -46,13 +48,18 @@ export default function NoticesCategoriesList() {
     setShowModal(false);
   };
 
-  const handleFavoriteBtnClick = id => {
+  const handleFavoriteBtnClick = (id, favorite) => {
     if (!isLogin) {
       Notify.info(
         'The option "Add to favorite" is available only to registered users'
       );
     } else {
-      dispatch(addToFavorites(id));
+      favorite
+        ? dispatch(removeFromFavorites(id))
+        : dispatch(addToFavorites(id));
+      setTimeout(() => {
+        dispatch(getUserInfo());
+      }, 500);
     }
   };
 
@@ -67,13 +74,13 @@ export default function NoticesCategoriesList() {
       sex,
       type,
       favorite,
+      own,
     }) => {
       const yearOfBirth = birth && new Date(birth).getFullYear();
       const difference = birth ? new Date().getFullYear() - yearOfBirth : 'n/a';
       const age =
         difference === 1 ? `${difference} year` : `${difference} years`;
-      // console.log("id", _id)
-      // console.log("favorite", favorite)
+
       return (
         <NoticeCategoryItem
           key={_id}
@@ -86,6 +93,7 @@ export default function NoticesCategoriesList() {
           sex={sex}
           kind={type}
           favorite={favorite}
+          own={own}
           onLearnMoreBtnClick={handleLearnMoreBtnClick}
           onFavoriteBtnClick={handleFavoriteBtnClick}
         />
@@ -98,7 +106,7 @@ export default function NoticesCategoriesList() {
       <ul className={s.list}>{elements}</ul>
       {showModal && (
         <Modal onClose={onModalClose}>
-          <NoticeModal {...notice}/>
+          <NoticeModal {...notice} />
         </Modal>
       )}
     </>
