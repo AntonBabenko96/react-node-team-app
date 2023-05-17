@@ -14,14 +14,16 @@ import s from './NoticesCategoriesList.module.scss';
 import Modal from 'components/Modal/Modal';
 import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
 import { getDifference } from 'shared/utils/getDateFormat';
+import { ModalApproveAction } from 'components/Modal/ModalApproveAction/ModalApproveAction';
 
 const data = {
   page: 1,
-  limit: 10,
+  limit: 16,
 };
 
 export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
 
   const notices = useSelector(selectNotices);
   const notice = useSelector(selectNotice);
@@ -43,6 +45,12 @@ export default function NoticesCategoriesList() {
     setShowModal(true);
   };
 
+  const handleDeleteBtnClick = id => {
+    setIsDelete(true);
+    dispatch(getNoticeById(id));
+    setShowModal(true);
+  };
+
   const onModalClose = () => {
     setShowModal(false);
   };
@@ -58,7 +66,7 @@ export default function NoticesCategoriesList() {
     //     'This notice already in favorite'
     //   );
     // }
-    else if(isFromModal && favorite) {
+    else if (isFromModal && favorite) {
       dispatch(addToFavorites(id));
       setTimeout(() => {
         dispatch(getNotices(data));
@@ -102,20 +110,27 @@ export default function NoticesCategoriesList() {
           own={own}
           onLearnMoreBtnClick={handleLearnMoreBtnClick}
           onFavoriteBtnClick={handleFavoriteBtnClick}
+          onDeleteBtnClick={handleDeleteBtnClick}
         />
       );
     }
   );
+
+  // console.log("notices in list", notices)
 
   return (
     <>
       <ul className={s.list}>{elements}</ul>
       {showModal && (
         <Modal className="css.noticeModal" onClose={onModalClose}>
-          <NoticeModal
-            {...notice}
-            onFavoriteBtnClick={handleFavoriteBtnClick}
-          />
+          {isDelete ? (
+            <ModalApproveAction onClose={onModalClose} {...notice}/>
+          ) : (
+            <NoticeModal
+              {...notice}
+              onFavoriteBtnClick={handleFavoriteBtnClick}
+            />
+          )}
         </Modal>
       )}
     </>
