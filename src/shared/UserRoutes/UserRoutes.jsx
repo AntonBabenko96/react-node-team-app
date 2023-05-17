@@ -23,7 +23,7 @@ const NoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
 const OurFriendsPage = lazy(() =>
   import('pages/OurFriendsPage/OurFriendsPage')
 );
-const RegisterPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const SharedLayout = lazy(() => import('components/SharedLayout/SharedLayout'));
 
 export default function UserRoutes() {
