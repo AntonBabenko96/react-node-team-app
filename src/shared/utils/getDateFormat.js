@@ -19,7 +19,7 @@ export function getDifference(date) {
         const months = Math.floor(diffInDays / 30.5);
         age = months > 1 ? `${months} months` : `${months} month`;
     }
-    if(inYears > 1 || inYears < -1) {
+    if(inYears >= 1 || inYears <= -1 || inYears === 0) {
         age = inYears > 1 ? `${inYears} years` : `${inYears} year`;
 
     }

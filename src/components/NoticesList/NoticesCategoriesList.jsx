@@ -21,6 +21,12 @@ const data = {
   limit: 16,
 };
 
+const categoryItems = [
+  {name: "sell", value: "sell"},
+  {name: "lost-found", value: "lost/found"},
+  {name: "for-free", value: "in good hands"},
+]
+
 export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -95,6 +101,11 @@ export default function NoticesCategoriesList() {
       own,
     }) => {
       const age = birth ? getDifference(birth) : 'no data';
+      if(location.length > 6) {
+        location = location.slice(0, 4) + '...';
+      }
+      const categoryItem = categoryItems.find(item => item.name === category)
+      category = categoryItem.value;
       return (
         <NoticeCategoryItem
           key={_id}

@@ -59,18 +59,6 @@ export const removeFromFavorites = createAsyncThunk(
   }
 );
 
-export const getFavoritesList = createAsyncThunk(
-  'user/getFavoritesList',
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data: result } = await api.getFavoritesList();
-      return result;
-    } catch ({ response }) {
-      return rejectWithValue(response.data.message);
-    }
-  }
-);
-
 export const getUserInfo = createAsyncThunk(
   'user/getUserInfo',
   async (_, { rejectWithValue }) => {
