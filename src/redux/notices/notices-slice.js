@@ -1,16 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import {
-  getNotices,
-  getNoticeById,
-  getMyNotices,
-  deleteMyNotice,
-  getFavoritesList,
-} from './notices-operations';
+import { getNotices, getNoticeById, getMyNotices, deleteMyNotice } from './notices-operations';
 
 const initialState = {
   items: [],
   item: {},
+  myItems: [],
   isLoading: false,
   error: null,
 };
@@ -48,23 +43,16 @@ export const noticesSlice = createSlice({
       .addCase(getMyNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.items = payload;
+        state.myItems = payload;
       })
       .addCase(getMyNotices.rejected, handleRejected)
       .addCase(deleteMyNotice.pending, handlePending)
-      .addCase(deleteMyNotice.fulfilled, (state, { payload }) => {
+      .addCase(deleteMyNotice.fulfilled, (state, {payload}) => {
         state.isLoading = false;
         state.error = null;
         state.items = state.items.filter(({ _id }) => _id !== payload);
       })
-      .addCase(deleteMyNotice.rejected, handleRejected)
-      .addCase(getFavoritesList.pending, handlePending)
-      .addCase(getFavoritesList.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.error = null;
-        state.items = payload;
-      })
-      .addCase(getFavoritesList.rejected, handleRejected);
+      .addCase(deleteMyNotice.rejected, handleRejected);
   },
 });
 
