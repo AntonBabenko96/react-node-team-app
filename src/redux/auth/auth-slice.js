@@ -6,14 +6,12 @@ import {
   refresh,
   addToFavorites,
   removeFromFavorites,
-  getFavoritesList,
   getUserInfo,
   updateUserInfo,
 } from './auth-operations';
 
 const initialState = {
   user: {},
-  favorites: [],
   isLogin: false,
   loading: false,
   error: null,
@@ -85,13 +83,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(removeFromFavorites.rejected, handleRejected)
-      .addCase(getFavoritesList.pending, handlePending)
-      .addCase(getFavoritesList.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.error = null;
-        state.favorites = payload;
-      })
-      .addCase(getFavoritesList.rejected, handleRejected)
+
       .addCase(getUserInfo.pending, handlePending)
       .addCase(getUserInfo.fulfilled, (state, { payload }) => {
         state.loading = false;
