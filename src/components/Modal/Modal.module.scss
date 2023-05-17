@@ -1,10 +1,6 @@
+@import '../../styles/styles.scss';
+
 .overlay {
-  // @media screen and (min-width: 320px) and (max-width: 767.9px) {
-
-  //   height: 100vh;
-  //   background-color: rgba(43, 43, 43, 0.6);
-  // }
-
   position: fixed;
   top: 0;
   left: 0;
@@ -30,11 +26,8 @@
   }
 
   width: 540px;
-  // min-height: 508px;
-  // padding: 40px 73px;
   display: flex;
   flex-direction: column;
-  // gap: 20px;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
@@ -49,8 +42,6 @@
   justify-content: center;
   top: 11px;
   right: 11px;
-  // width: 34px;
-  // height: 34px;
   border: 1px solid transparent;
   border-radius: 50%;
   background-color: transparent;

@@ -69,6 +69,8 @@
 }
 
 .favoriteIcon {
+  width: 24px;
+  height: 24px;
   fill: getColor('full-blue');
 }
 
@@ -129,6 +131,7 @@
 
 .title {
   width: 231px;
+  min-height: 66px;
   margin-left: 20px;
   @include main-font(700, 24px, calc(33 / 24));
 }

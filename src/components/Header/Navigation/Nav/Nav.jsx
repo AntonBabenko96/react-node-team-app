@@ -1,16 +1,18 @@
 import { NavLink } from 'react-router-dom';
 import menuItems from './navMenuItems';
 import style from './Nav.module.scss';
-import { useState } from 'react';
 import AuthNav from '../../AuthNav/AuthNav';
 import useMediaQuery from 'shared/hooks/useMediaQuery';
 
-const Nav = () => {
-  const [active, setActive] = useState(false);
+const Nav = ({ onShowMenu, active, setActive }) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
 
   const elements = menuItems.map(({ id, link, text }) => (
-    <li key={id} className={style.headerNavItem}>
+    <li
+      key={id}
+      className={style.headerNavItem}
+      onClick={() => setActive(false)}
+    >
       <NavLink to={link} className={`${style.link}`}>
         {text}
       </NavLink>
@@ -19,12 +21,12 @@ const Nav = () => {
   return (
     <>
       <ul className={`${style.headerNav} ${active === true ? 'active' : ''}`}>
-        {isMobile && <AuthNav />}
+        {isMobile && <AuthNav setActive={setActive} />}
         {elements}
       </ul>
       <div
         className={`${style.burger} burger ${active === true ? 'active' : ''}`}
-        onClick={() => setActive(!active)}
+        onClick={onShowMenu}
       >
         <div className="burgerLines"></div>
       </div>

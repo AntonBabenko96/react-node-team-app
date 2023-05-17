@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import * as api from '../../api/auth-api ';
+import * as api from '../../api/auth-api';
 
 export const register = createAsyncThunk(
   'user/register',
   async (data, { rejectWithValue }) => {
-    console.log(data)
+    console.log(data);
     try {
       const result = await api.register(data);
       return result;
@@ -39,58 +39,69 @@ export const logout = createAsyncThunk(
 
 export const addToFavorites = createAsyncThunk(
   'user/addToFavorites',
-  async(data, {rejectWithValue}) => {
+  async (data, { rejectWithValue }) => {
     try {
       await api.addToFavorites(data);
-    } catch ({response}) {
+    } catch ({ response }) {
       return rejectWithValue(response.data.message);
     }
   }
-)
+);
 
 export const removeFromFavorites = createAsyncThunk(
   'user/removeFromFavorites',
-  async(data, {rejectWithValue}) => {
+  async (data, { rejectWithValue }) => {
     try {
       await api.removeFromFavorites(data);
-    } catch ({response}) {
+    } catch ({ response }) {
       return rejectWithValue(response.data.message);
     }
   }
-)
+);
 
 export const getFavoritesList = createAsyncThunk(
   'user/getFavoritesList',
-  async(_, {rejectWithValue}) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const {data: result} = await api.getFavoritesList();
+      const { data: result } = await api.getFavoritesList();
       return result;
-    } catch ({response}) {
+    } catch ({ response }) {
       return rejectWithValue(response.data.message);
     }
   }
-)
+);
 
 export const getUserInfo = createAsyncThunk(
   'user/getUserInfo',
-  async(_, {rejectWithValue}) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const {data: result} = await api.getUserInfo();
+      const { data: result } = await api.getUserInfo();
       return result;
-    } catch ({response}) {
+    } catch ({ response }) {
       return rejectWithValue(response.data.message);
     }
   }
-)
+);
 
 export const updateUserInfo = createAsyncThunk(
   'user/updateUserInfo',
-  async(data, {rejectWithValue}) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const {data: result} = await api.updateUserInfo(data);
+      const { data: result } = await api.updateUserInfo(data);
       return result;
-    } catch ({response}) {
+    } catch ({ response }) {
       return rejectWithValue(response.data.message);
     }
   }
-)
+);
+
+export const refresh = createAsyncThunk(
+  'user/refresh',
+  async (_, { rejectWithValue }) => {
+    try {
+      return await api.getCurrent();
+    } catch ({ response }) {
+      return rejectWithValue(response.data.message);
+    }
+  }
+);

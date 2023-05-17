@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getNotices, getNoticeById } from './notices-operations';
+import { getNotices, getNoticeById, getMyNotices, deleteMyNotice } from './notices-operations';
 
 const initialState = {
   items: [],
   item: {},
+  myItems: [],
   isLoading: false,
   error: null,
 };
@@ -37,7 +38,21 @@ export const noticesSlice = createSlice({
         state.error = null;
         state.item = payload;
       })
-      .addCase(getNoticeById.rejected, handleRejected);
+      .addCase(getNoticeById.rejected, handleRejected)
+      .addCase(getMyNotices.pending, handlePending)
+      .addCase(getMyNotices.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        state.myItems = payload;
+      })
+      .addCase(getMyNotices.rejected, handleRejected)
+      .addCase(deleteMyNotice.pending, handlePending)
+      .addCase(deleteMyNotice.fulfilled, (state, {payload}) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = state.items.filter(({ _id }) => _id !== payload);
+      })
+      .addCase(deleteMyNotice.rejected, handleRejected);
   },
 });
 

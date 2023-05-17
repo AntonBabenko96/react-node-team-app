@@ -3,42 +3,51 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectNotice, selectNotices } from 'redux/notices/notices-selectors';
 import { selectIsLogin } from 'redux/auth/selectors';
 import { getNoticeById, getNotices } from 'redux/notices/notices-operations';
-import { addToFavorites } from 'redux/auth/auth-operations';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from 'redux/auth/auth-operations';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import NoticeCategoryItem from 'components/NoticeCategoryItem/NoticeCategoryItem';
 
 import s from './NoticesCategoriesList.module.scss';
 import Modal from 'components/Modal/Modal';
 import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
+import { getDifference } from 'shared/utils/getDateFormat';
+import { ModalApproveAction } from 'components/Modal/ModalApproveAction/ModalApproveAction';
+
+const data = {
+  page: 1,
+  limit: 16,
+};
 
 export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
-  // const [notice, setNotice] = useState('');
+  const [isDelete, setIsDelete] = useState(false);
 
   const notices = useSelector(selectNotices);
-  const notice = useSelector(selectNotice)
+  const notice = useSelector(selectNotice);
   const isLogin = useSelector(selectIsLogin);
-  // const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const data = {
-      category: 'sell',
-      page: 1,
-      limit: 10,
-    };
     dispatch(getNotices(data));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (isLogin) {
+  useEffect(() => {
+    if (isLogin) {
+      dispatch(getNotices(data));
+    }
+  }, [dispatch, isLogin]);
 
-  //     dispatch(getNotices());
-  //   }
-  // }, [dispatch, isLogin]);
+  const handleLearnMoreBtnClick = id => {
+    dispatch(getNoticeById(id));
+    setShowModal(true);
+  };
 
-  const handleLearnMoreBtnClick = (id) => {
-    dispatch(getNoticeById(id))
+  const handleDeleteBtnClick = id => {
+    setIsDelete(true);
+    dispatch(getNoticeById(id));
     setShowModal(true);
   };
 
@@ -46,13 +55,29 @@ export default function NoticesCategoriesList() {
     setShowModal(false);
   };
 
-  const handleFavoriteBtnClick = id => {
+  const handleFavoriteBtnClick = (id, favorite, isFromModal = false) => {
     if (!isLogin) {
       Notify.info(
         'The option "Add to favorite" is available only to registered users'
       );
-    } else {
+    }
+    //  else if(isFromModal && favorite) {
+    //   Notify.info(
+    //     'This notice already in favorite'
+    //   );
+    // }
+    else if (isFromModal && favorite) {
       dispatch(addToFavorites(id));
+      setTimeout(() => {
+        dispatch(getNotices(data));
+      }, 500);
+    } else {
+      favorite
+        ? dispatch(removeFromFavorites(id))
+        : dispatch(addToFavorites(id));
+      setTimeout(() => {
+        dispatch(getNotices(data));
+      }, 500);
     }
   };
 
@@ -67,13 +92,9 @@ export default function NoticesCategoriesList() {
       sex,
       type,
       favorite,
+      own,
     }) => {
-      const yearOfBirth = birth && new Date(birth).getFullYear();
-      const difference = birth ? new Date().getFullYear() - yearOfBirth : 'n/a';
-      const age =
-        difference === 1 ? `${difference} year` : `${difference} years`;
-      // console.log("id", _id)
-      // console.log("favorite", favorite)
+      const age = birth ? getDifference(birth) : 'no data';
       return (
         <NoticeCategoryItem
           key={_id}
@@ -86,19 +107,30 @@ export default function NoticesCategoriesList() {
           sex={sex}
           kind={type}
           favorite={favorite}
+          own={own}
           onLearnMoreBtnClick={handleLearnMoreBtnClick}
           onFavoriteBtnClick={handleFavoriteBtnClick}
+          onDeleteBtnClick={handleDeleteBtnClick}
         />
       );
     }
   );
 
+  // console.log("notices in list", notices)
+
   return (
     <>
       <ul className={s.list}>{elements}</ul>
       {showModal && (
-        <Modal onClose={onModalClose}>
-          <NoticeModal {...notice}/>
+        <Modal className="css.noticeModal" onClose={onModalClose}>
+          {isDelete ? (
+            <ModalApproveAction onClose={onModalClose} {...notice}/>
+          ) : (
+            <NoticeModal
+              {...notice}
+              onFavoriteBtnClick={handleFavoriteBtnClick}
+            />
+          )}
         </Modal>
       )}
     </>

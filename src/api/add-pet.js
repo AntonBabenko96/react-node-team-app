@@ -1,4 +1,4 @@
-import instance from './auth-api ';
+import instance from './auth-api';
 
 export async function addMyNewPet(data) {
   const response = await instance.post('/pets', data, {
