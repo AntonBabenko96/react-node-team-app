@@ -70,11 +70,6 @@ export async function removeFromFavorites(id) {
   return data;
 }
 
-export async function getFavoritesList() {
-  const data = await instance.delete(`/users/favorites`);
-  return data;
-}
-
 export async function getUserInfo() {
   const data = await instance.get(`/users/me`);
   return data;

@@ -56,3 +56,16 @@ export const deleteMyNotice = createAsyncThunk(
     }
   }
 )
+
+// для отримання улюблених оголошень авторизованого кристувача
+export const getFavoritesList = createAsyncThunk(
+  'user/getFavoritesList',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data: result } = await api.getFavoritesList();
+      return result;
+    } catch ({ response }) {
+      return rejectWithValue(response.data.message);
+    }
+  }
+);
