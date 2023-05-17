@@ -20,6 +20,7 @@ export default function NoticeCategoryItem({
   own,
   onLearnMoreBtnClick,
   onFavoriteBtnClick,
+  onDeleteBtnClick,
 }) {
   const imgBeseURL = 'https://your-pet-backend.onrender.com/';
 
@@ -35,7 +36,10 @@ export default function NoticeCategoryItem({
         <FavoriteIcon className={favorite ? s.favoriteIcon : s.icon} />
       </button>
       {own && (
-        <button className={`${s.userBtn} ${s.delete}`}>
+        <button
+          className={`${s.userBtn} ${s.delete}`}
+          onClick={() => onDeleteBtnClick(id)}
+        >
           <TrashIcon className={s.icon} />
         </button>
       )}
