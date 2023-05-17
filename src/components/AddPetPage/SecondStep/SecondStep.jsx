@@ -1,7 +1,7 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage, getIn } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { Calendar } from '../Calendar/Calendar';
+import InputMask from 'react-input-mask';
 
 import styles from './SecondStep.module.scss';
 import { ReactComponent as Arrow } from '../../../img/svg/arrow-left.svg';
@@ -12,25 +12,35 @@ function SecondStep({ data, prev, onSubmit }) {
   const validationSchema = Yup.object({
     petName: Yup.string()
       .min(2, '2 characters minimum')
-      .max(16, '16 characters maximum')
+      .max(32, '32 characters maximum')
       .required()
       .label(`Pet name`),
-    dateOfBirth: Yup.string().required().label('Date of birth'),
-    type: Yup.string().required().label('Type'),
+    dateOfBirth: Yup.string()
+      .required()
+      .label('Date of birth')
+      .matches(
+        /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
+        'Invalid date'
+      )
+      .typeError(`Invalid date`),
+
+    type: Yup.string()
+      .required()
+      .max(32, '32 characters maximum')
+      .label('Type'),
     breed: Yup.string()
       .min(2, '2 characters minimum')
-      .max(16, '16 characters maximum')
+      .max(32, '32 characters maximum')
       .required()
       .label('Breed'),
-    title: title ? Yup.string().required() : Yup.string(),
+    title: title
+      ? Yup.string()
+          .required()
+          .min(2, '2 characters minimum')
+          .max(120, '120 characters maximum')
+          .label(`Title`)
+      : Yup.string().label(`Title`),
   });
-
-  function getStyles(errors, fieldName) {
-    if (getIn(errors, fieldName)) {
-      return styles.errorField;
-    }
-    return styles.input;
-  }
 
   const FormError = ({ name }) => {
     return (
@@ -44,20 +54,23 @@ function SecondStep({ data, prev, onSubmit }) {
   return (
     <>
       <Formik
-        validateOnChange={false}
         validateOnBlur={false}
         onSubmit={onSubmit}
         initialValues={data}
         validationSchema={validationSchema}
       >
-        {({ values, errors }) => (
+        {({ values, errors, touched }) => (
           <Form>
             <div className={styles.div}>
               {title && (
                 <label className={styles.field}>
                   Title of ad
                   <Field
-                    className={getStyles(errors, 'title')}
+                    className={
+                      errors.title && touched.title
+                        ? styles.errorField
+                        : styles.input
+                    }
                     type="text"
                     name="title"
                     placeholder="Enter pet name"
@@ -69,7 +82,11 @@ function SecondStep({ data, prev, onSubmit }) {
               <label className={styles.field}>
                 Pet name
                 <Field
-                  className={getStyles(errors, 'petName')}
+                  className={
+                    errors.petName && touched.petName
+                      ? styles.errorField
+                      : styles.input
+                  }
                   type="text"
                   name="petName"
                   placeholder="Enter pet name"
@@ -77,16 +94,47 @@ function SecondStep({ data, prev, onSubmit }) {
                 <FormError className={styles.error} name="petName" />
               </label>
 
-              <p className={styles.field}>
+              <label htmlFor="" className={styles.field}>
                 Date of birth
-                <Calendar name="dateOfBirth" values={values} />
+                <Field
+                  name="dateOfBirth"
+                  className={
+                    errors.title && touched.title
+                      ? styles.errorField
+                      : styles.input
+                  }
+                >
+                  {({ form }) => {
+                    const { setFieldValue } = form;
+                    return (
+                      <InputMask
+                        value={values.dateOfBirth}
+                        name="dateOfBirth"
+                        mask="99-99-9999"
+                        onChange={event => {
+                          setFieldValue('dateOfBirth', event.target.value);
+                        }}
+                        className={
+                          errors.dateOfBirth && touched.dateOfBirth
+                            ? styles.errorField
+                            : styles.input
+                        }
+                        placeholder="DD-MM-YYYY"
+                      />
+                    );
+                  }}
+                </Field>
                 <FormError className={styles.error} name="dateOfBirth" />
-              </p>
+              </label>
 
               <label className={styles.field}>
                 Pet type
                 <Field
-                  className={styles.input}
+                  className={
+                    errors.type && touched.type
+                      ? styles.errorField
+                      : styles.input
+                  }
                   type="text"
                   name="type"
                   placeholder="Enter pet type"
@@ -97,7 +145,11 @@ function SecondStep({ data, prev, onSubmit }) {
               <label className={styles.field}>
                 Breed
                 <Field
-                  className={styles.input}
+                  className={
+                    errors.breed && touched.breed
+                      ? styles.errorField
+                      : styles.input
+                  }
                   type="text"
                   name="breed"
                   placeholder="Enter pet breed"

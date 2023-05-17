@@ -6,12 +6,9 @@ import * as userPets from 'api/user-pets';
 export const addPet = createAsyncThunk(
   'pet/add',
   async (data, { rejectWithValue }) => {
-    // for (const value of data.values()) {
-    //     console.log(value);
-    // }
     try {
       const result = await api.addMyNewPet(data);
-      return result;
+      return result.data;
     } catch ({ response }) {
       return rejectWithValue(response.data.message);
     }
@@ -21,9 +18,6 @@ export const addPet = createAsyncThunk(
 export const addNotice = createAsyncThunk(
   'notice/add',
   async (data, { rejectWithValue }) => {
-    // for (const value of data.values()) {
-    //     console.log(value);
-    // }
     try {
       const { data: result } = await api.addPetNotice(data);
       return result;

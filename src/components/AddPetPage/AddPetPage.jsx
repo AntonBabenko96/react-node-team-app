@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import AddPetPageHeader from './AddPetPageHeader/AddPetPageHeader';
+import { useNavigate, useLocation } from 'react-router-dom';
 import FirstStep from './FirstStep/FirstStep';
 import SecondStep from './SecondStep/SecondStep';
 import ThirdStep from './ThirdStep/ThirdStep';
@@ -7,6 +8,8 @@ import styles from './AddPetPage.module.scss';
 import { useDispatch } from 'react-redux';
 import { addNotice, addPet } from 'redux/pets/pets-operations';
 import { createRequestData } from './CreateRequestData/CreateRequestData';
+import { addPetLoading } from 'redux/pets/pets-selectors';
+import { useSelector } from 'react-redux';
 
 const stateInitialValue = {
   category: '',
@@ -16,7 +19,6 @@ const stateInitialValue = {
   breed: '',
   photo: null,
   comments: '',
-  imageURL: '',
   sex: '',
   location: '',
   price: '',
@@ -26,12 +28,16 @@ export default function AddPetPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [state, setState] = useState(stateInitialValue);
 
-  const dispatch = useDispatch();
+  const location = useLocation();
+  console.log(location.state.pathname);
+  const refLocation = useRef(location);
+  console.log(refLocation);
+  const from = `${refLocation.current.state.pathname}` || `/`;
+  console.log(from);
 
-  const handleFormSubmit = values => {
-    setState(prev => ({ ...prev, ...values }));
-    handleNextStep();
-  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoading = useSelector(addPetLoading);
 
   const handleCategory = values => {
     setState(prev => ({ ...prev, category: values }));
@@ -47,15 +53,23 @@ export default function AddPetPage() {
     setCurrentStep(prev => prev - 1);
   };
 
+  const handleFormSubmit = values => {
+    setState(prev => ({ ...prev, ...values }));
+    handleNextStep();
+  };
+
   const handleFinish = async values => {
     setState(prev => ({ ...prev, ...values }));
-    const data = new FormData();
-    createRequestData(data, state, values);
 
-    console.log(data);
-    // state.category === 'my pet'
-    //   ? dispatch(addPet(data))
-    //   : dispatch(addNotice(data));
+    const data = createRequestData(state, values);
+
+    // for (const pair of data.entries()) {
+    //   console.log(`${pair[0]}, ${pair[1]}`);
+    // }
+
+    state.category === 'my pet'
+      ? dispatch(addPet(data)).then(!isLoading && navigate(from))
+      : dispatch(addNotice(data)).then(!isLoading && navigate(from));
   };
 
   const stepStyle = position => {
@@ -84,6 +98,7 @@ export default function AddPetPage() {
       name="firstStep"
       onSubmit={handleCategory}
       next={handleNextStep}
+      from={from}
     />,
     <SecondStep
       data={state}
@@ -99,6 +114,7 @@ export default function AddPetPage() {
       prev={handlePrevStep}
     />,
   ];
+
   const getTitle = () => {
     if (state.category === 'sell') {
       return 'Add pet for sale';

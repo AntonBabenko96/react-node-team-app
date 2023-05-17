@@ -6,7 +6,7 @@ import { ReactComponent as Arrow } from '../../../img/svg/arrow-left.svg';
 import { ReactComponent as Paw } from '../../../img/svg/pawprint.svg';
 import styles from './FirstStep.module.scss';
 
-function FirstStep({ onSubmit, next, data }) {
+function FirstStep({ onSubmit, next, data, from }) {
   const radioHandler = values => {
     onSubmit(values.category);
     next(values);
@@ -68,7 +68,7 @@ function FirstStep({ onSubmit, next, data }) {
             Next
             <Paw className={styles.icon}></Paw>
           </button>
-          <Link className={styles.cancel} to="/">
+          <Link className={styles.cancel} to={from}>
             <Arrow className={styles.arrow}></Arrow>
             Cancel
           </Link>

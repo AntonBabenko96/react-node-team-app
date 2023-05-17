@@ -32,20 +32,19 @@ function ThirdStep({ data, prev, finish }) {
       .test(
         'FILE_TYPE',
         'Unsupported file format!',
-        value =>
-          value &&
-          ['image/png', 'image/jpeg', 'image/webp'].includes(value.type)
+        value => value && ['image/png', 'image/jpeg'].includes(value.type)
       ),
-    comments: Yup.string(),
-    // sex: Yup.string().when(showSex, {
-    //   is: true,
-    //   then: Yup.string().required(),
-    // }),
-    sex: showSex ? Yup.string().required('Sex is required') : Yup.string(),
+    comments: Yup.string()
+      .min(8, '8 characters minimum')
+      .max(160, '160 characters maximum')
+      .required('Leave a comment'),
+    sex: showSex ? Yup.string().required('Choose gender') : Yup.string(),
     location: location
       ? Yup.string().required().label('Location')
       : Yup.string(),
-    price: price ? Yup.string().required().label(`Price`) : Yup.string(),
+    price: price
+      ? Yup.number().required().label(`Price`).typeError(`Must be a number`)
+      : Yup.string(),
   });
 
   const FormError = ({ name }) => {
@@ -61,10 +60,11 @@ function ThirdStep({ data, prev, finish }) {
     <div>
       <Formik
         onSubmit={finish}
+        validateOnBlur={false}
         initialValues={data}
         validationSchema={validationSchema}
       >
-        {formik => (
+        {({ values, errors, touched, setFieldValue }) => (
           <Form className={styles.div} encType="multipart/form-data">
             {showSex && (
               <div className={styles.sex}>
@@ -93,13 +93,13 @@ function ThirdStep({ data, prev, finish }) {
 
             <div className={styles.uploadwrapper}>
               <p className={styles.uploadlabel}>Add photo</p>
-              {(formik.values.photo && (
+              {(values.photo && (
                 <>
-                  <PreviewImage file={formik.values.photo} />
+                  <PreviewImage file={values.photo} />
                   <button
                     className={styles.trashBtn}
                     onClick={() => {
-                      formik.setFieldValue(`photo`, null);
+                      setFieldValue(`photo`, null);
                     }}
                   >
                     <Trash className={styles.trash}></Trash>
@@ -113,7 +113,7 @@ function ThirdStep({ data, prev, finish }) {
                     id="file"
                     name="photo"
                     onChange={event => {
-                      formik.setFieldValue(`photo`, event.target.files[0]);
+                      setFieldValue(`photo`, event.target.files[0]);
                     }}
                   ></input>
                   <label htmlFor="file" className={styles.upload}>
@@ -128,7 +128,11 @@ function ThirdStep({ data, prev, finish }) {
               <label className={styles.field}>
                 Location
                 <Field
-                  className={styles.input}
+                  className={
+                    errors.location && touched.location
+                      ? styles.errorField
+                      : styles.input
+                  }
                   type="text"
                   name="location"
                   placeholder="Enter location"
@@ -141,7 +145,11 @@ function ThirdStep({ data, prev, finish }) {
               <label className={styles.field}>
                 Price
                 <Field
-                  className={styles.input}
+                  className={
+                    errors.price && touched.price
+                      ? styles.errorField
+                      : styles.input
+                  }
                   type="text"
                   name="price"
                   placeholder="Enter price"
@@ -153,14 +161,19 @@ function ThirdStep({ data, prev, finish }) {
             <label className={styles.field}>
               Comments
               <Field
-                className={styles.comments}
+                className={
+                  errors.comments && touched.comments
+                    ? styles.commentsError
+                    : styles.comments
+                }
                 as="textarea"
                 type="text"
                 name="comments"
                 placeholder="Tell something about your pet"
               ></Field>
+              <FormError className={styles.error} name="comments" />
             </label>
-            <FormError className={styles.error} name="comments" />
+
             <div className={styles.controls}>
               {isLoading ? (
                 <p>Loading...</p>
@@ -178,7 +191,7 @@ function ThirdStep({ data, prev, finish }) {
               <button
                 type="submit"
                 className={styles.prev}
-                onClick={() => prev(formik.values)}
+                onClick={() => prev(values)}
               >
                 <Arrow className={styles.arrow}></Arrow>
                 Back
