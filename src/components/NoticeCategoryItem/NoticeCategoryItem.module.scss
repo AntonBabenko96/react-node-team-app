@@ -131,6 +131,7 @@
 
 .title {
   width: 231px;
+  min-height: 66px;
   margin-left: 20px;
   @include main-font(700, 24px, calc(33 / 24));
 }

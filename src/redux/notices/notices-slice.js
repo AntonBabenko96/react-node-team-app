@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getNotices, getNoticeById, getMyNotices } from './notices-operations';
+import { getNotices, getNoticeById, getMyNotices, deleteMyNotice } from './notices-operations';
 
 const initialState = {
   items: [],
@@ -45,7 +45,14 @@ export const noticesSlice = createSlice({
         state.error = null;
         state.myItems = payload;
       })
-      .addCase(getMyNotices.rejected, handleRejected);
+      .addCase(getMyNotices.rejected, handleRejected)
+      .addCase(deleteMyNotice.pending, handlePending)
+      .addCase(deleteMyNotice.fulfilled, (state, {payload}) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = state.items.filter(({ _id }) => _id !== payload);
+      })
+      .addCase(deleteMyNotice.rejected, handleRejected);
   },
 });
 
