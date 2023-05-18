@@ -18,7 +18,7 @@ import { ModalApproveAction } from 'components/Modal/ModalApproveAction/ModalApp
 
 const data = {
   page: 1,
-  limit: 16,
+  limit: 12,
 };
 
 const categoryItems = [
@@ -26,7 +26,6 @@ const categoryItems = [
   {name: "lost-found", value: "lost/found"},
   {name: "for-free", value: "in good hands"},
 ]
-
 export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -61,23 +60,19 @@ export default function NoticesCategoriesList() {
     setShowModal(false);
   };
 
-  const handleFavoriteBtnClick = (id, favorite, isFromModal = false) => {
+  const handleFavoriteBtnClick = (id, favorite = false) => {
+    console.log(favorite)
     if (!isLogin) {
       Notify.info(
-        'The option "Add to favorite" is available only to registered users'
-      );
+        'The option "Add to favorite" is available only to registered users');
     }
-    //  else if(isFromModal && favorite) {
-    //   Notify.info(
-    //     'This notice already in favorite'
-    //   );
+    // else if (isFromModal) {
+    //   dispatch(addToFavorites(id));
+    //   setTimeout(() => {
+    //     dispatch(getNotices(data));
+    //   }, 500);
     // }
-    else if (isFromModal && favorite) {
-      dispatch(addToFavorites(id));
-      setTimeout(() => {
-        dispatch(getNotices(data));
-      }, 500);
-    } else {
+    else {
       favorite
         ? dispatch(removeFromFavorites(id))
         : dispatch(addToFavorites(id));
@@ -127,8 +122,6 @@ export default function NoticesCategoriesList() {
     }
   );
 
-  // console.log("notices in list", notices)
-
   return (
     <>
       <ul className={s.list}>{elements}</ul>
@@ -139,6 +132,7 @@ export default function NoticesCategoriesList() {
           ) : (
             <NoticeModal
               {...notice}
+              notices={{...notices}}
               onFavoriteBtnClick={handleFavoriteBtnClick}
             />
           )}
