@@ -20,7 +20,7 @@ export default function NoticeModal({
   comments,
   birth,
   owner,
-  favorite,
+  notices,
   onFavoriteBtnClick,
 }) {
   const imgBeseURL = 'https://your-pet-backend.onrender.com/';
@@ -29,7 +29,11 @@ export default function NoticeModal({
     email = owner.email ? owner.email : 'no data';
     phone = owner.phone ? owner.phone : 'no data';
   }
-  const isFromModal = true;
+  // const isFromModal = true;
+  // console.log(notices)
+  // const notice = notices.findIndex(item => item._id === _id);
+  // const favorite = notice.favorite;
+  // console.log("favorite in modal", favorite)
 
   return (
     <>
@@ -90,7 +94,7 @@ export default function NoticeModal({
           </button>
           <button
             className={Style.ButtonFavorite}
-            onClick={() => onFavoriteBtnClick(_id, favorite, isFromModal)}
+            onClick={() => onFavoriteBtnClick(_id)}
           >
             Add to <BsHeart className={Style.icon} />
           </button>
