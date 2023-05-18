@@ -3,6 +3,7 @@
 }
 
 .burger {
+  order: 1;
   @media (max-width: 1279px) {
     display: flex;
     align-items: center;
@@ -10,7 +11,7 @@
     flex-shrink: 0;
     width: 16px;
     height: 10px;
-    transform: rotate(0) translate(0);
+  transform: rotate(0) translate(0);
     transition: ease-out 0.5s;
     z-index: 111;
     cursor: pointer;
@@ -35,9 +36,6 @@
         transform: translateY(5px);
       }
     }
-  }
-  @media (min-width: 768px) {
-    order: 1;
   }
 }
 
