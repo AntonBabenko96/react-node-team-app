@@ -144,6 +144,7 @@
 .camera__title {
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .logout {
@@ -151,6 +152,7 @@
   margin-bottom: 25px;
   display: flex;
   margin-left: 10px;
+  cursor: pointer;
   @media (min-width: 768px) {
     margin-top: 13px;
     margin-bottom: 0;
