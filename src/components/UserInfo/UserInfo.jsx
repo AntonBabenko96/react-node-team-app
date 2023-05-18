@@ -362,32 +362,6 @@ export default function UserInfo() {
               {/* <LogoutIcon className={styles.logout__icon} />
               <p className={styles.logout__text}>Log Out</p> */}
             </div>
-
-//           <div className={styles.decktop}>
-//             <div className={styles.information}>
-//               < p className={styles.text}>
-//                 Name: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
-//               </p>
-
-//               <p className={styles.text}>
-//                 Email: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
-//               </p>
-
-//               <p className={styles.text}>
-//                 Birthday: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
-//               </p>
-
-//               <p className={styles.text}>
-//                 Phone:<input className={styles.input}></input><EditIcon className={styles.edit__icon} />
-//               </p>
-
-//               <p className={styles.text}>
-//                 City:<input className={styles.input}></input><EditIcon className={styles.edit__icon} />
-//               </p>
-//             </div>
-           
-
-//           </div>
         </div>
       </div>
     </div>
