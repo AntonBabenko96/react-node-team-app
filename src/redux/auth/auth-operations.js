@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import * as api from '../../api/auth-api';
 
@@ -10,6 +11,7 @@ export const register = createAsyncThunk(
       const result = await api.register(data);
       return result;
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }
@@ -21,6 +23,7 @@ export const login = createAsyncThunk(
       const result = await api.login(data);
       return result;
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }
@@ -32,6 +35,7 @@ export const logout = createAsyncThunk(
       const result = await api.logout();
       return result;
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }
@@ -43,6 +47,7 @@ export const addToFavorites = createAsyncThunk(
     try {
       await api.addToFavorites(data);
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }
@@ -54,6 +59,7 @@ export const removeFromFavorites = createAsyncThunk(
     try {
       await api.removeFromFavorites(data);
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }
@@ -66,6 +72,7 @@ export const getUserInfo = createAsyncThunk(
       const data = await api.getUserInfo();
       return data;
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }
@@ -78,6 +85,7 @@ export const updateUserInfo = createAsyncThunk(
       const res = await api.updateUserInfo(data);
       return res;
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }
@@ -89,6 +97,7 @@ export const refresh = createAsyncThunk(
     try {
       return await api.getCurrent();
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }
