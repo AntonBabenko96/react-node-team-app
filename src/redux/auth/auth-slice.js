@@ -101,6 +101,8 @@ const authSlice = createSlice({
       .addCase(getUserInfo.rejected, handleRejected)
       .addCase(updateUserInfo.pending, handlePending)
       .addCase(updateUserInfo.fulfilled, (state, { payload }) => {
+        console.log('🆑  payload:', payload);
+
         state.loading = false;
         state.error = null;
         state.user = payload;

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPets } from 'redux/pets/pets-operations';
 import { userPetsList } from 'redux/pets/pets-selectors';
+import { selectIsLogin } from 'redux/auth/selectors';
 import styles from 'components/UserPetsList/UserPetsList.module.scss';
 
 // const pets = [
@@ -34,12 +35,14 @@ import styles from 'components/UserPetsList/UserPetsList.module.scss';
 // ];
 export default function UserPetsList() {
   const pets = useSelector(userPetsList);
-
+  const isLogin = useSelector(selectIsLogin);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setTimeout(() => dispatch(getPets()), 2000);
-  }, [dispatch]);
+    if (isLogin) {
+      dispatch(getPets());
+    }
+  }, [dispatch, isLogin]);
 
   const elements = pets.map(
     ({ _id, photoURL, name, date, breed, comments }) => {

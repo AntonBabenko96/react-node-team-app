@@ -1,6 +1,7 @@
-import styles from './UserPage.module.scss';
 import UserPetsList from 'components/UserPetsList/UserPetsList';
 import UserInfo from 'components/UserInfo/UserInfo';
+
+import styles from './UserPage.module.scss';
 
 export default function UserPage() {
   return (
@@ -14,10 +15,10 @@ export default function UserPage() {
           <div className={styles.pets}>
             <div className={styles.descktop__pets}>
               <div className={styles.title__button}>
-              <h3 className={styles.title__pets}>My pets:</h3>
-              <button className={styles.button}>
-                Add Pet <span className={styles.plus}>+</span>
-              </button>
+                <h3 className={styles.title__pets}>My pets:</h3>
+                <button className={styles.button}>
+                  Add Pet <span className={styles.plus}>+</span>
+                </button>
               </div>
               <UserPetsList />
             </div>
@@ -27,7 +28,6 @@ export default function UserPage() {
     </section>
   );
 }
-
 
 // import styles from './UserPage.module.scss';
 // import UserPetsList from 'components/UserPetsList/UserPetsList';
