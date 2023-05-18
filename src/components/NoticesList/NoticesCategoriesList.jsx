@@ -22,10 +22,10 @@ const data = {
 };
 
 const categoryItems = [
-  {name: "sell", value: "sell"},
-  {name: "lost-found", value: "lost/found"},
-  {name: "for-free", value: "in good hands"},
-]
+  { name: 'sell', value: 'sell' },
+  { name: 'lost-found', value: 'lost/found' },
+  { name: 'for-free', value: 'in good hands' },
+];
 export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -61,10 +61,11 @@ export default function NoticesCategoriesList() {
   };
 
   const handleFavoriteBtnClick = (id, favorite = false) => {
-    console.log(favorite)
+    console.log(favorite);
     if (!isLogin) {
       Notify.info(
-        'The option "Add to favorite" is available only to registered users');
+        'The option "Add to favorite" is available only to registered users'
+      );
     }
     // else if (isFromModal) {
     //   dispatch(addToFavorites(id));
@@ -96,10 +97,10 @@ export default function NoticesCategoriesList() {
       own,
     }) => {
       const age = birth ? getDifference(birth) : 'no data';
-      if(location.length > 6) {
+      if (location.length > 6) {
         location = location.slice(0, 4) + '...';
       }
-      const categoryItem = categoryItems.find(item => item.name === category)
+      const categoryItem = categoryItems.find(item => item.name === category);
       category = categoryItem.value;
       return (
         <NoticeCategoryItem
@@ -128,11 +129,11 @@ export default function NoticesCategoriesList() {
       {showModal && (
         <Modal className="css.noticeModal" onClose={onModalClose}>
           {isDelete ? (
-            <ModalApproveAction onClose={onModalClose} {...notice}/>
+            <ModalApproveAction onClose={onModalClose} {...notice} />
           ) : (
             <NoticeModal
               {...notice}
-              notices={{...notices}}
+              notices={{ ...notices }}
               onFavoriteBtnClick={handleFavoriteBtnClick}
             />
           )}

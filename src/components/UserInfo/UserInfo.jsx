@@ -1,46 +1,64 @@
 import { ReactComponent as CameraIcon } from 'img/svg/camera.svg';
 import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
-
-
-// import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
+import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
 import { ReactComponent as DefaultIcon } from 'img/svg/photo-default.svg';
 import { ReactComponent as CheckIcon } from 'img/svg/check.svg';
 import { useState, useEffect, useRef } from 'react';
 import { selectUser, selectIsLogin } from 'redux/auth/selectors';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserInfo, updateUserInfo } from 'redux/auth/auth-operations';
-
-
-import LogOutButton from 'components/LogOutButton/LogOutButton';
-
+import {
+  getUserInfo,
+  updateUserInfo,
+  logout,
+} from 'redux/auth/auth-operations';
+import { updateUserAvatar } from 'api/auth-api';
 import styles from './UserInfo.module.scss';
 
 export default function UserInfo() {
   const userInfo = useSelector(selectUser);
-
   const isLogin = useSelector(selectIsLogin);
-
-  const [nameValue, setNameValue] = useState('');
-  const [emailValue, setEmailValue] = useState('');
-  const [birthdayValue, setBirthdayValue] = useState('');
-  const [phoneValue, setPhoneValue] = useState('');
-  const [cityValue, setCityValue] = useState('');
-
-  const [isNameEdit, setIsNameEdit] = useState(false);
-  const [isEmailEdit, setIsEmailEdit] = useState(false);
-  const [isBirthdayEdit, setIsBirthdayEdit] = useState(false);
-  const [isPhoneEdit, setIsPhoneEdit] = useState(false);
-  const [isCityEdit, setIsCityEdit] = useState(false);
-
   const dispatch = useDispatch();
+
+  const [fields, setFields] = useState({
+    name: '',
+    email: '',
+    birthday: '',
+    phone: '',
+    city: '',
+  });
+
+  const [editField, setEditField] = useState('');
+
+  const inputRefs = {
+    name: useRef(null),
+    email: useRef(null),
+    birthday: useRef(null),
+    phone: useRef(null),
+    city: useRef(null),
+  };
+
+  const fileInputRef = useRef(null);
+
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = async event => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('avatar', file);
+    await updateUserAvatar(formData);
+  };
 
   useEffect(() => {
     if (userInfo) {
-      setNameValue(userInfo.name || '');
-      setEmailValue(userInfo.email || '');
-      setBirthdayValue(formatBirthday(userInfo.birthday) || '');
-      setPhoneValue(userInfo.phone || '');
-      setCityValue(userInfo.city || '');
+      setFields({
+        name: userInfo.name || '',
+        email: userInfo.email || '',
+        birthday: formatBirthday(userInfo.birthday) || '',
+        phone: userInfo.phone || '',
+        city: userInfo.city || '',
+      });
     }
   }, [userInfo]);
 
@@ -50,114 +68,19 @@ export default function UserInfo() {
     }
   }, [dispatch, isLogin]);
 
-  const handleNameEditClick = () => {
-    setIsNameEdit(true);
-    setIsEmailEdit(false);
-    setIsBirthdayEdit(false);
-    setIsPhoneEdit(false);
-    setIsCityEdit(false);
+  const handleEditClick = field => {
+    setEditField(field);
   };
 
-  const handleEmailEditClick = () => {
-    setIsEmailEdit(true);
-    setIsNameEdit(false);
-    setIsBirthdayEdit(false);
-    setIsPhoneEdit(false);
-    setIsCityEdit(false);
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setFields(prevFields => ({ ...prevFields, [name]: value }));
   };
 
-  const handleBirthdayEditClick = () => {
-    setIsBirthdayEdit(true);
-    setIsNameEdit(false);
-    setIsEmailEdit(false);
-    setIsPhoneEdit(false);
-    setIsCityEdit(false);
+  const handleInputBlur = () => {
+    dispatch(updateUserInfo({ [editField]: fields[editField] }));
+    setEditField('');
   };
-
-  const handlePhoneEditClick = () => {
-    setIsPhoneEdit(true);
-    setIsNameEdit(false);
-    setIsEmailEdit(false);
-    setIsBirthdayEdit(false);
-    setIsCityEdit(false);
-  };
-
-  const handleCityEditClick = () => {
-    setIsCityEdit(true);
-    setIsNameEdit(false);
-    setIsEmailEdit(false);
-    setIsBirthdayEdit(false);
-    setIsPhoneEdit(false);
-  };
-
-  const handleNameInputChange = e => {
-    setNameValue(e.target.value);
-  };
-
-  const handleEmailInputChange = e => {
-    setEmailValue(e.target.value);
-  };
-
-  const handleBirthdayInputChange = e => {
-    setBirthdayValue(e.target.value);
-  };
-
-  const handlePhoneInputChange = e => {
-    setPhoneValue(e.target.value);
-  };
-
-  const handleCityInputChange = e => {
-    setCityValue(e.target.value);
-  };
-
-  const handleNameInputBlur = () => {
-    setIsNameEdit(false);
-    dispatch(updateUserInfo({ name: nameValue }));
-  };
-
-  const handleEmailInputBlur = () => {
-    setIsEmailEdit(false);
-    dispatch(updateUserInfo({ email: emailValue }));
-  };
-
-  const handleBirthdayInputBlur = () => {
-    setIsBirthdayEdit(false);
-    dispatch(updateUserInfo({ birthday: birthdayValue }));
-  };
-
-  const handlePhoneInputBlur = () => {
-    setIsPhoneEdit(false);
-    dispatch(updateUserInfo({ phone: phoneValue }));
-  };
-
-  const handleCityInputBlur = () => {
-    setIsCityEdit(false);
-    dispatch(updateUserInfo({ city: cityValue }));
-  };
-
-  const nameInputRef = useRef(null);
-  const emailInputRef = useRef(null);
-  const birthdayInputRef = useRef(null);
-  const phoneInputRef = useRef(null);
-  const cityInputRef = useRef(null);
-
-  useEffect(() => {
-    if (isNameEdit) {
-      nameInputRef.current.focus();
-    }
-    if (isEmailEdit) {
-      emailInputRef.current.focus();
-    }
-    if (isBirthdayEdit) {
-      birthdayInputRef.current.focus();
-    }
-    if (isPhoneEdit) {
-      phoneInputRef.current.focus();
-    }
-    if (isCityEdit) {
-      cityInputRef.current.focus();
-    }
-  }, [isNameEdit, isEmailEdit, isBirthdayEdit, isPhoneEdit, isCityEdit]);
 
   const formatBirthday = birthday => {
     const date = new Date(birthday);
@@ -168,6 +91,10 @@ export default function UserInfo() {
     return `${day}.${month}.${year}`;
   };
 
+  const handleLogoutClick = () => {
+    dispatch(logout());
+  };
+
   return (
     <div>
       <div className={styles.infobox}>
@@ -176,7 +103,7 @@ export default function UserInfo() {
             {userInfo && userInfo.avatarURL && userInfo.avatarURL !== '' ? (
               <img
                 className={styles.userAvatar}
-                src={userInfo.avatarURL}
+                src={`https://your-pet-backend.onrender.com/${userInfo.avatarURL}`}
                 alt="userAvatar"
                 width="182px"
                 height="182px"
@@ -185,28 +112,37 @@ export default function UserInfo() {
               <DefaultIcon className={styles.user__icon} />
             )}
           </div>
-          <div className={styles.camera__title}>
-            <CameraIcon className={styles.user__camera} />
-            <p className={styles.edit}>Edit photo</p>
+          <div>
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />
+            <div className={styles.camera__title} onClick={handleUploadClick}>
+              <CameraIcon className={styles.user__camera} />
+              <p className={styles.edit}>Edit photo</p>
+            </div>
           </div>
         </div>
         <div className={styles.decktop}>
           <div className={styles.information}>
             <label className={styles.text}>
               Name:
-              {isNameEdit ? (
+              {editField === 'name' ? (
                 <>
                   <input
-                    ref={nameInputRef}
-                    onChange={handleNameInputChange}
-                    onBlur={handleNameInputBlur}
+                    ref={inputRefs.name}
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur}
                     name="name"
                     className={styles.input}
-                    value={nameValue}
+                    value={fields.name}
                   />
                   <CheckIcon
                     className={styles.check__icon}
-                    onClick={handleNameInputBlur}
+                    onClick={handleInputBlur}
                   />
                 </>
               ) : (
@@ -214,12 +150,12 @@ export default function UserInfo() {
                   <input
                     name="name"
                     className={styles.input}
-                    value={nameValue}
+                    value={fields.name}
                     readOnly
                   />
                   <EditIcon
                     className={styles.edit__icon}
-                    onClick={handleNameEditClick}
+                    onClick={() => handleEditClick('name')}
                   />
                 </>
               )}
@@ -227,19 +163,19 @@ export default function UserInfo() {
 
             <label className={styles.text}>
               Email:
-              {isEmailEdit ? (
+              {editField === 'email' ? (
                 <>
                   <input
-                    ref={emailInputRef}
-                    onChange={handleEmailInputChange}
-                    onBlur={handleEmailInputBlur}
+                    ref={inputRefs.email}
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur}
                     name="email"
                     className={styles.input}
-                    value={emailValue}
+                    value={fields.email}
                   />
                   <CheckIcon
                     className={styles.check__icon}
-                    onClick={handleEmailInputBlur}
+                    onClick={handleInputBlur}
                   />
                 </>
               ) : (
@@ -247,12 +183,12 @@ export default function UserInfo() {
                   <input
                     name="email"
                     className={styles.input}
-                    value={emailValue}
+                    value={fields.email}
                     readOnly
                   />
                   <EditIcon
                     className={styles.edit__icon}
-                    onClick={handleEmailEditClick}
+                    onClick={() => handleEditClick('email')}
                   />
                 </>
               )}
@@ -260,19 +196,19 @@ export default function UserInfo() {
 
             <label className={styles.text}>
               Birthday:
-              {isBirthdayEdit ? (
+              {editField === 'birthday' ? (
                 <>
                   <input
-                    ref={birthdayInputRef}
-                    onChange={handleBirthdayInputChange}
-                    onBlur={handleBirthdayInputBlur}
+                    ref={inputRefs.birthday}
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur}
                     name="birthday"
                     className={styles.input}
-                    value={birthdayValue}
+                    value={fields.birthday}
                   />
                   <CheckIcon
                     className={styles.check__icon}
-                    onClick={handleBirthdayInputBlur}
+                    onClick={handleInputBlur}
                   />
                 </>
               ) : (
@@ -280,12 +216,12 @@ export default function UserInfo() {
                   <input
                     name="birthday"
                     className={styles.input}
-                    value={birthdayValue}
+                    value={fields.birthday}
                     readOnly
                   />
                   <EditIcon
                     className={styles.edit__icon}
-                    onClick={handleBirthdayEditClick}
+                    onClick={() => handleEditClick('birthday')}
                   />
                 </>
               )}
@@ -293,19 +229,19 @@ export default function UserInfo() {
 
             <label className={styles.text}>
               Phone:
-              {isPhoneEdit ? (
+              {editField === 'phone' ? (
                 <>
                   <input
-                    ref={phoneInputRef}
-                    onChange={handlePhoneInputChange}
-                    onBlur={handlePhoneInputBlur}
+                    ref={inputRefs.phone}
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur}
                     name="phone"
                     className={styles.input}
-                    value={phoneValue}
+                    value={fields.phone}
                   />
                   <CheckIcon
                     className={styles.check__icon}
-                    onClick={handlePhoneInputBlur}
+                    onClick={handleInputBlur}
                   />
                 </>
               ) : (
@@ -313,12 +249,12 @@ export default function UserInfo() {
                   <input
                     name="phone"
                     className={styles.input}
-                    value={phoneValue}
+                    value={fields.phone}
                     readOnly
                   />
                   <EditIcon
                     className={styles.edit__icon}
-                    onClick={handlePhoneEditClick}
+                    onClick={() => handleEditClick('phone')}
                   />
                 </>
               )}
@@ -326,19 +262,19 @@ export default function UserInfo() {
 
             <label className={styles.text}>
               City:
-              {isCityEdit ? (
+              {editField === 'city' ? (
                 <>
                   <input
-                    ref={cityInputRef}
-                    onChange={handleCityInputChange}
-                    onBlur={handleCityInputBlur}
+                    ref={inputRefs.city}
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur}
                     name="city"
                     className={styles.input}
-                    value={cityValue}
+                    value={fields.city}
                   />
                   <CheckIcon
                     className={styles.check__icon}
-                    onClick={handleCityInputBlur}
+                    onClick={handleInputBlur}
                   />
                 </>
               ) : (
@@ -346,22 +282,21 @@ export default function UserInfo() {
                   <input
                     name="city"
                     className={styles.input}
-                    value={cityValue}
+                    value={fields.city}
                     readOnly
                   />
                   <EditIcon
                     className={styles.edit__icon}
-                    onClick={handleCityEditClick}
+                    onClick={() => handleEditClick('city')}
                   />
                 </>
               )}
             </label>
           </div>
- <div className={styles.logout}>
-              <LogOutButton/>
-              {/* <LogoutIcon className={styles.logout__icon} />
-              <p className={styles.logout__text}>Log Out</p> */}
-            </div>
+          <div className={styles.logout} onClick={handleLogoutClick}>
+            <LogoutIcon className={styles.logout__icon} />
+            <p className={styles.logout__text}>Log Out</p>
+          </div>
         </div>
       </div>
     </div>
