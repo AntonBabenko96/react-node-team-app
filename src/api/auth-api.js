@@ -34,6 +34,8 @@ export async function register(data) {
 
 export async function login(data) {
   const { data: result } = await instance.post('/users/login', data);
+  console.log('🆑  result:', result);
+
   setToken(result.accessToken);
   localStorage.setItem('refreshToken', result.refreshToken);
   return result;
@@ -71,7 +73,7 @@ export async function removeFromFavorites(id) {
 }
 
 export async function getUserInfo() {
-  const data = await instance.get(`/users/me`);
+  const { data } = await instance.get(`/users/me`);
   return data;
 }
 
