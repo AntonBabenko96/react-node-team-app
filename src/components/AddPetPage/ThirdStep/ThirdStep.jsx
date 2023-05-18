@@ -66,113 +66,115 @@ function ThirdStep({ data, prev, finish }) {
       >
         {({ values, errors, touched, setFieldValue }) => (
           <Form className={styles.div} encType="multipart/form-data">
-            {showSex && (
-              <div className={styles.sex}>
-                <Field
-                  type="radio"
-                  id="choice2"
-                  name="sex"
-                  value="female"
-                ></Field>
-                <label htmlFor="choice2">
-                  <Female className={styles.female}></Female>Female
-                </label>
-                <Field
-                  type="radio"
-                  id="choice1"
-                  name="sex"
-                  value="male"
-                ></Field>
-                <label htmlFor="choice1">
-                  <Male className={styles.male}></Male>Male
-                </label>
-
-                <FormError className={styles.error} name="sex" />
-              </div>
-            )}
-
-            <div className={styles.uploadwrapper}>
-              <p className={styles.uploadlabel}>Add photo</p>
-              {(values.photo && (
-                <>
-                  <PreviewImage file={values.photo} />
-                  <button
-                    className={styles.trashBtn}
-                    onClick={() => {
-                      setFieldValue(`photo`, null);
-                    }}
-                  >
-                    <Trash className={styles.trash}></Trash>
-                  </button>
-                </>
-              )) || (
-                <>
-                  <input
-                    className={styles.hidden}
-                    type="file"
-                    id="file"
-                    name="photo"
-                    onChange={event => {
-                      setFieldValue(`photo`, event.target.files[0]);
-                    }}
-                  ></input>
-                  <label htmlFor="file" className={styles.upload}>
-                    <Plus className={styles.plus}></Plus>
+            <div className={styles.position}>
+              {showSex && (
+                <div className={styles.sex}>
+                  <Field
+                    type="radio"
+                    id="choice2"
+                    name="sex"
+                    value="female"
+                  ></Field>
+                  <label htmlFor="choice2">
+                    <Female className={styles.female}></Female>Female
                   </label>
-                </>
+                  <Field
+                    type="radio"
+                    id="choice1"
+                    name="sex"
+                    value="male"
+                  ></Field>
+                  <label htmlFor="choice1">
+                    <Male className={styles.male}></Male>Male
+                  </label>
+
+                  <FormError className={styles.error} name="sex" />
+                </div>
               )}
-              <FormError className={styles.error} name="photo" />
+
+              <div className={styles.uploadwrapper}>
+                <p className={styles.uploadlabel}>Add photo</p>
+                {(values.photo && (
+                  <>
+                    <PreviewImage file={values.photo} />
+                    <button
+                      className={styles.trashBtn}
+                      onClick={() => {
+                        setFieldValue(`photo`, null);
+                      }}
+                    >
+                      <Trash className={styles.trash}></Trash>
+                    </button>
+                  </>
+                )) || (
+                  <>
+                    <input
+                      className={styles.hidden}
+                      type="file"
+                      id="file"
+                      name="photo"
+                      onChange={event => {
+                        setFieldValue(`photo`, event.target.files[0]);
+                      }}
+                    ></input>
+                    <label htmlFor="file" className={styles.upload}>
+                      <Plus className={styles.plus}></Plus>
+                    </label>
+                  </>
+                )}
+                <FormError className={styles.error} name="photo" />
+              </div>
+
+              {location && (
+                <label className={styles.field}>
+                  Location
+                  <Field
+                    className={
+                      errors.location && touched.location
+                        ? styles.errorField
+                        : styles.input
+                    }
+                    type="text"
+                    name="location"
+                    placeholder="Enter location"
+                  ></Field>
+                  <FormError className={styles.error} name="location" />
+                </label>
+              )}
+
+              {price && (
+                <label className={styles.field}>
+                  Price
+                  <Field
+                    className={
+                      errors.price && touched.price
+                        ? styles.errorField
+                        : styles.input
+                    }
+                    type="text"
+                    name="price"
+                    placeholder="Enter price"
+                  ></Field>
+                  <FormError className={styles.error} name="price" />
+                </label>
+              )}
+
+              <label className={styles.field}>
+                Comments
+                <Field
+                  className={
+                    errors.comments && touched.comments
+                      ? styles.commentsError
+                      : styles.comments
+                  }
+                  as="textarea"
+                  type="text"
+                  name="comments"
+                  placeholder="Tell something about your pet"
+                ></Field>
+                <FormError className={styles.error} name="comments" />
+              </label>
             </div>
-
-            {location && (
-              <label className={styles.field}>
-                Location
-                <Field
-                  className={
-                    errors.location && touched.location
-                      ? styles.errorField
-                      : styles.input
-                  }
-                  type="text"
-                  name="location"
-                  placeholder="Enter location"
-                ></Field>
-                <FormError className={styles.error} name="location" />
-              </label>
-            )}
-
-            {price && (
-              <label className={styles.field}>
-                Price
-                <Field
-                  className={
-                    errors.price && touched.price
-                      ? styles.errorField
-                      : styles.input
-                  }
-                  type="text"
-                  name="price"
-                  placeholder="Enter price"
-                ></Field>
-                <FormError className={styles.error} name="price" />
-              </label>
-            )}
-
-            <label className={styles.field}>
-              Comments
-              <Field
-                className={
-                  errors.comments && touched.comments
-                    ? styles.commentsError
-                    : styles.comments
-                }
-                as="textarea"
-                type="text"
-                name="comments"
-                placeholder="Tell something about your pet"
-              ></Field>
-              <FormError className={styles.error} name="comments" />
-            </label>
 
             <div className={styles.controls}>
               {isLoading ? (

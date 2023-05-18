@@ -59,6 +59,9 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  @include media-min(tablet) {
+    flex-direction: row-reverse;
+  }
 }
 
 .next {

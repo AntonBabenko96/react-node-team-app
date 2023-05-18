@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import AddPetPageHeader from './AddPetPageHeader/AddPetPageHeader';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import FirstStep from './FirstStep/FirstStep';
 import SecondStep from './SecondStep/SecondStep';
 import ThirdStep from './ThirdStep/ThirdStep';
@@ -8,8 +8,8 @@ import styles from './AddPetPage.module.scss';
 import { useDispatch } from 'react-redux';
 import { addNotice, addPet } from 'redux/pets/pets-operations';
 import { createRequestData } from './CreateRequestData/CreateRequestData';
-import { addPetLoading } from 'redux/pets/pets-selectors';
-import { useSelector } from 'react-redux';
+// import { addPetLoading } from 'redux/pets/pets-selectors';
+// import { useSelector } from 'react-redux';
 
 const stateInitialValue = {
   category: '',
@@ -29,15 +29,10 @@ export default function AddPetPage() {
   const [state, setState] = useState(stateInitialValue);
 
   const location = useLocation();
-  console.log(location.state.pathname);
-  const refLocation = useRef(location);
-  console.log(refLocation);
-  const from = `${refLocation.current.state.pathname}` || `/`;
-  console.log(from);
+  console.log(location);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isLoading = useSelector(addPetLoading);
 
   const handleCategory = values => {
     setState(prev => ({ ...prev, category: values }));
@@ -68,8 +63,10 @@ export default function AddPetPage() {
     // }
 
     state.category === 'my pet'
-      ? dispatch(addPet(data)).then(!isLoading && navigate(from))
-      : dispatch(addNotice(data)).then(!isLoading && navigate(from));
+      ? dispatch(addPet(data))
+      : dispatch(addNotice(data));
+
+    navigate('/');
   };
 
   const stepStyle = position => {
@@ -98,7 +95,6 @@ export default function AddPetPage() {
       name="firstStep"
       onSubmit={handleCategory}
       next={handleNextStep}
-      from={from}
     />,
     <SecondStep
       data={state}
@@ -136,16 +132,16 @@ export default function AddPetPage() {
           <AddPetPageHeader data={getTitle()}></AddPetPageHeader>
         )}
         <div className={styles.stepWrapper}>
-          <p className={stepStyle(0)}>
+          <h3 className={stepStyle(0)}>
             Choose option <span className={borderStyle(0)}></span>
-          </p>
+          </h3>
 
-          <p className={stepStyle(1)}>
+          <h3 className={stepStyle(1)}>
             Personal details<span className={borderStyle(1)}></span>
-          </p>
-          <p className={stepStyle(2)}>
+          </h3>
+          <h3 className={stepStyle(2)}>
             More info<span className={borderStyle(2)}></span>
-          </p>
+          </h3>
         </div>
         {steps[currentStep]}
       </div>

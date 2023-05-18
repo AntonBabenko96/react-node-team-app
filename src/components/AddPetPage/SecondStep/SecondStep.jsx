@@ -119,7 +119,7 @@ function SecondStep({ data, prev, onSubmit }) {
                             ? styles.errorField
                             : styles.input
                         }
-                        placeholder="DD-MM-YYYY"
+                        placeholder="Datebirth format DD-MM-YYYY"
                       />
                     );
                   }}

@@ -3,6 +3,7 @@ import phoneImage from '../../img/mainPage/picturesPhone.png';
 import tabletImage from '../../img/mainPage/picturesTablet.png';
 import desktopImage from '../../img/mainPage/picturesDesktop2.png';
 import { Link, useLocation } from 'react-router-dom';
+
 export default function MainPage() {
   const location = useLocation();
   return (

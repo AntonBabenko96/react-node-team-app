@@ -6,6 +6,13 @@
   gap: 10px;
 }
 
+.position {
+  display: flex;
+  flex-direction: column;
+  @include media-min(tablet) {
+  }
+}
+
 .input {
   border-radius: 40px;
   padding-left: 10px;
@@ -27,7 +34,8 @@
   outline: 1px solid getColor(full-red);
 }
 
-.input::placeholder {
+.input::placeholder,
+.errorField::placeholder {
   @include main-font(400, 14px, 21px);
   color: #888888;
 }
@@ -56,12 +64,6 @@ input[type='radio'] {
 input[type='radio']:checked + label {
   color: getColor(full-green);
 }
-
-// input[type='radio']:checked ~ input[type='radio'] + label {
-//   // background-color: getColor(full-white);
-//   color: (red);
-//   // filter: grayscale(1);
-// }
 
 label:hover {
   cursor: pointer;
@@ -110,6 +112,10 @@ label:hover {
   cursor: pointer;
   box-sizing: border-box;
   outline: none;
+  @include media-min(tablet) {
+    width: 182px;
+    height: 182px;
+  }
 }
 .upload:focus > .plus,
 .upload:hover > .plus {
@@ -152,6 +158,9 @@ label:hover {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  @include media-min(tablet) {
+    flex-direction: row-reverse;
+  }
 }
 
 .next {
@@ -246,4 +255,8 @@ label:hover {
   height: 30px;
   width: 30px;
   transition: 250ms;
+  @include media-min(tablet) {
+    height: 48px;
+    width: 48px;
+  }
 }
