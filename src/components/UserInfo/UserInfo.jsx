@@ -356,13 +356,13 @@ export default function UserInfo() {
                 </>
               )}
             </label>
+          </div>
  <div className={styles.logout}>
               <LogOutButton/>
               {/* <LogoutIcon className={styles.logout__icon} />
               <p className={styles.logout__text}>Log Out</p> */}
             </div>
-          </div>
-<
+
 //           <div className={styles.decktop}>
 //             <div className={styles.information}>
 //               < p className={styles.text}>
