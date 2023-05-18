@@ -1,5 +1,14 @@
 @import '../../styles/styles.scss';
-.filterCategiries {
+.categoryBtns{
+  display: flex;
+  justify-content: space-between
+  // gap:92px;
+  // @include media-min(desktop) {
+  //   gap: 403px;
+  // }
+}
+
+.filterCategories {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -12,6 +21,12 @@
     width: auto;
   }
 }
+
+.filterBtnCategories{
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+}
 .categoriesbtn {
   cursor: pointer;
   background-color: getColor('light-blue');
@@ -19,7 +34,10 @@
   border-radius: 40px;
   color: getColor('full-blue');
   padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
   font-size: 14px;
+  height: 35px;
 transition: background-color 250ms ease;
   &:hover {
 background-color: #daeaf8;

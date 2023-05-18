@@ -26,3 +26,15 @@ export async function getMyNotices() {
   const { data } = await instance.get('notices/my');
   return data;
 }
+
+// для видалення оголошення авторизованого кристувача створеного цим же користувачем
+export async function deleteMyNotice(id) {
+  const { data } = await instance.delete(`notices/${id}`);
+  return data;
+}
+
+// для отримання улюблених оголошень авторизованого кристувача
+export async function getFavoritesList() {
+  const data = await instance.delete(`/users/favorites`);
+  return data;
+}

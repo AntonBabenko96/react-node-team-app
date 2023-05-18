@@ -1,0 +1,239 @@
+@import '/src/styles/styles.scss';
+// .button {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 8px;
+//   background-color: getColor('full-white');
+//   outline: transparent;
+//   border: 2px solid getColor('full-blue');
+//   border-radius: 40px;
+//   color: getColor('full-blue');
+//   width: 152px;
+//   height: 40px;
+//   margin-bottom: 10px;
+//   cursor: pointer;
+//   @include main-font(700, 16px, 22px, normal);
+//   &:hover {
+//     background-color: getColor('full-blue');
+//     border: 2px solid getColor('full-blue');
+//     color: getColor('full-white');
+//   }
+
+//   .icon {
+//     fill: getColor('full-blue');
+//     width: 24px;
+//     height: 24px;
+//   }
+//   .icon:hover,
+//   .icon.active {
+//     fill:getColor('full-white');
+//   }
+// }
+
+// .button {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-items: center;
+//     gap: 8px;
+//     background-color: getColor('full-white');
+//     outline: transparent;
+//     border: 2px solid getColor('full-blue');
+//     border-radius: 40px;
+//     color: getColor('full-blue');
+//     width: 152px;
+//     height: 40px;
+//     margin-bottom: 10px;
+//     cursor: pointer;
+//     @include main-font(700, 16px, 22px, normal);
+  
+//     &:hover {
+//       background-color: getColor('full-blue');
+//       border: 2px solid getColor('full-blue');
+//       color: getColor('full-white');
+  
+//       .icon {
+//         fill: getColor('full-white');
+//       }
+      
+//     }
+  
+//     &.active {
+//       background-color: getColor('full-blue');
+//       border: 2px solid getColor('full-blue');
+//       color: getColor('full-white');
+  
+//       .icon {
+//         fill: getColor('full-white');
+//       }
+//     }
+  
+//     .icon {
+//       fill: getColor('full-blue');
+//       width: 24px;
+//       height: 24px;
+//     }
+
+//    }
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background-color: getColor('full-white');
+  outline: transparent;
+  border: 2px solid getColor('full-blue');
+  border-radius: 40px;
+  color: getColor('full-blue');
+  width: 152px;
+  height: 40px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  @include main-font(700, 16px, 22px, normal);
+}
+
+.button .icon {
+  fill: getColor('full-blue');
+  width: 24px;
+  height: 24px;
+}
+
+@media (hover: hover) {
+  .button:hover {
+    background-color: getColor('full-blue');
+    border: 2px solid getColor('full-blue');
+    color: getColor('full-white');
+  }
+
+  .button:hover .icon {
+    fill: getColor('full-white');
+  }
+}
+
+@media (max-width: 767px) {
+  .button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    background-color: #C5DFF6;
+  }
+
+  .button .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .button span {
+    display: none;
+  }
+}
+
+.filterButtons {
+  position: relative;
+  display: inline-block;
+}
+
+.filtersTitle {
+  color: getColor('full-blue');
+  @include main-font(700, 16px, 22px, normal);
+}
+
+.filterDropdownBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #cce4fb;
+  outline: transparent;
+  border: 2px solid #cce4fb;
+  border-radius: 40px;
+  color: getColor('full-blue');
+  width: 136px;
+  height: 40px;
+  @include main-font(400, 14px, 18.2px, normal);
+  cursor: pointer;
+}
+
+.arrowIcon {
+  fill: getColor('full-blue');
+  width: 24px;
+  height: 24px;
+}
+.dropdownContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: absolute;
+  background-color: white;
+  border-radius: 20px;
+  min-width: 152px;
+  padding: 8px;
+  align-items: center;
+  z-index: 1;
+}
+
+.ageDropdown,
+.genderDropdown {
+  display: flex;
+  flex-direction: column;
+  @include main-font(400, 12px, 16px, normal);
+  color: getColor('full-blue');
+  background-color: #cce4fb;
+  border-radius: 20px;
+  width: 136px;
+  padding: 8px;
+}
+.inputCheck {
+  width: 24px;
+  height: 24px;
+  background-color: #cce4fb;
+  outline: none;
+  border: 1px solid getColor('full-blue');
+  border-radius: 20px;
+}
+
+.filterOption {
+  display: flex;
+  gap: 12px;
+  margin-left: 30px;
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
+}
+
+
+.customCheckbox {
+  position: relative;
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+  gap: 12px;
+}
+
+.customCheckbox input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+}
+
+.customCheckbox .checkmark {
+  position: relative;
+  display: flex;
+  width: 16px;
+  height: 16px;
+  border: 2px solid getColor('full-blue');
+  border-radius: 4px;
+  transition: border-color 0.3s;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkIcon {
+  width: 16px;
+  height: 16px;
+}
