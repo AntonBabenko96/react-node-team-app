@@ -67,8 +67,6 @@ export default function NoticesCategoriesNav() {
     </NavLink>
   ));
 
-
-  
   return (
     <div className={Style.filterCategiries}>
       {mainCategories}
