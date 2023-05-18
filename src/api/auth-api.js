@@ -34,15 +34,13 @@ export async function register(data) {
 
 export async function login(data) {
   const { data: result } = await instance.post('/users/login', data);
-  console.log('🆑  result:', result);
-
   setToken(result.accessToken);
   localStorage.setItem('refreshToken', result.refreshToken);
   return result;
 }
 
 export async function logout() {
-  const data = await instance.post('/users/logout');
+  const { data } = await instance.post('/users/logout');
   setToken();
   return data;
 }
@@ -79,6 +77,17 @@ export async function getUserInfo() {
 
 export async function updateUserInfo(data) {
   const { data: result } = await instance.patch(`/users/me`, data);
+  return result;
+}
+
+export async function updateUserAvatar(file) {
+  const response = await instance.patch('/users/avatars', file, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  const result = response.data;
   return result;
 }
 

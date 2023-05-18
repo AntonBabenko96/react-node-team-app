@@ -45,17 +45,17 @@ export const getMyNotices = createAsyncThunk(
 // для видалення оголошення авторизованого кристувача створеного цим же користувачем
 export const deleteMyNotice = createAsyncThunk(
   'notices/deleteMyNotice',
-  async(data, {rejectWithValue}) => {
+  async (data, { rejectWithValue }) => {
     try {
       await api.deleteMyNotice(data);
-      Notify.success('The notice has been successfully removed')
+      Notify.success('The notice has been successfully removed');
       return data;
-    } catch ({response}) {
-      Notify.error('Something went wrong, please try again')
+    } catch ({ response }) {
+      Notify.error('Something went wrong, please try again');
       return rejectWithValue(response);
     }
   }
-)
+);
 
 // для отримання улюблених оголошень авторизованого кристувача
 export const getFavoritesList = createAsyncThunk(
