@@ -1,5 +1,5 @@
-.active {
-  right: 0;
+.headerNavActive {
+  right: 0 !important;
 }
 
 .burger {
@@ -41,7 +41,7 @@
   }
 }
 
-.burger.active .burgerLines {
+.burger.headerNavActive .burgerLines {
   transform: translateX(-50px);
   background-color: transparent;
   &::before {

@@ -20,12 +20,12 @@ const Nav = ({ onShowMenu, active, setActive }) => {
   ));
   return (
     <>
-      <ul className={`${style.headerNav} ${active === true ? 'active' : ''}`}>
+      <ul className={`${style.headerNav} ${active === true ? 'headerNavActive' : ''}`}>
         {isMobile && <AuthNav setActive={setActive} />}
         {elements}
       </ul>
       <div
-        className={`${style.burger} burger ${active === true ? 'active' : ''}`}
+        className={`${style.burger} burger ${active === true ? 'headerNavActive' : ''}`}
         onClick={onShowMenu}
       >
         <div className="burgerLines"></div>

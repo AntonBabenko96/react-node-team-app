@@ -11,7 +11,8 @@ export const getNotices = createAsyncThunk(
       const result = await api.getNotices(data);
       return result;
     } catch ({ response }) {
-      return rejectWithValue(response);
+      Notify.failure(response.data.message);
+      return rejectWithValue(response.data.message);
     }
   }
 );
@@ -24,7 +25,8 @@ export const getNoticeById = createAsyncThunk(
       const result = await api.getNoticeById(data);
       return result;
     } catch ({ response }) {
-      return rejectWithValue(response);
+      Notify.failure(response.data.message);
+      return rejectWithValue(response.data.message);
     }
   }
 );
@@ -37,7 +39,8 @@ export const getMyNotices = createAsyncThunk(
       const data = await api.getMyNotices();
       return data;
     } catch ({ response }) {
-      return rejectWithValue(response);
+      Notify.failure(response.data.message);
+      return rejectWithValue(response.data.message);
     }
   }
 );
@@ -65,6 +68,7 @@ export const getFavoritesList = createAsyncThunk(
       const { data: result } = await api.getFavoritesList();
       return result;
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }
