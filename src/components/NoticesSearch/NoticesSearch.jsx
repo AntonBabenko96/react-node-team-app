@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { BsSearch } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -8,41 +8,43 @@ import { AiOutlineClose } from 'react-icons/ai';
 import style from './NoticesSearch.module.scss';
 
 export default function NoticesSearch() {
-  const [hasClose, setHasClose] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [_, setHasClose] = useState(false);
   const [query, setQuery] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [_unused, SetSearchParams] = useSearchParams({});
 
-  useEffect(() => {
+
+  const handleInput = event => {
+    setQuery(event.target.value.toLowerCase().trim());
+  };
+
+  const clearQuery = () => {
+    setQuery('');
+    setHasClose(false);
+  };
+
+  const onSubmit = event => {
+    event.preventDefault();
+
     if (!query) {
-      SetSearchParams({});
-      setHasClose(false);
+      Notify.warning('Please enter your search parameters');
       return;
     }
 
     SetSearchParams({ search: query });
-  }, [query, SetSearchParams]);
-
-  const handleInput = event => {
-    setHasClose(true);
-    const newQuery = event.target.value.toLowerCase().trim();
-    setQuery(newQuery);
   };
 
-  const onClick = () => {
-    setHasClose(false);
-    SetSearchParams({});
-    setQuery('');
-  };
-
-  const onClickSearch = () => {
+  const onClickSearch = (event) => {
     if (!query) {
       Notify.warning('Please enter your search parameters');
+    } else {
+      onSubmit(event);
     }
   };
 
   return (
-    <div className={style.box}>
+    <form className={style.box} onSubmit={onSubmit}>
       <input
         className={style.input}
         name="findpets"
@@ -51,56 +53,37 @@ export default function NoticesSearch() {
         placeholder="Search"
         onChange={handleInput}
       />
-      {!hasClose ? (
-        <button className={style.btn} type="submit" onClick={onClickSearch}>
-          <BsSearch
-            style={{
-              position: 'absolute',
-              top: 14,
-              right: 16,
-              border: 'none',
-              outline: 'none',
-              fill: '#54ADFF',
-              cursor: 'pointer',
-              width: 17,
-              height: 17,
-            }}
-          />
-        </button>
-      ) : (
-        <button type="submit" onClick={onClick}>
+      <button className={style.btn} type="submit" onClick={onClickSearch}>
+        {query && (
           <AiOutlineClose
             style={{
               position: 'absolute',
-              top: 14,
+              top: 12,
               right: 16,
               border: 'none',
               outline: 'none',
-              fill: '#54ADFF',
+              fill: '#FFC107',
               cursor: 'pointer',
-              width: 17,
-              height: 17,
+              width: 19,
+              height: 19,
             }}
+            onClick={clearQuery}
           />
-        </button>
-      )}
-    </div>
+        )}
+        <BsSearch
+          style={{
+            position: 'absolute',
+            top: 14,
+            right: query ? 45 : 16,
+            border: 'none',
+            outline: 'none',
+            fill: '#54ADFF',
+            cursor: 'pointer',
+            width: 17,
+            height: 17,
+          }}
+        />
+      </button>
+    </form>
   );
 }
-
-// import { ReactComponent as SearchIcon } from 'img/svg/search.svg';
-// import { ReactComponent as CrossIcon } from 'img/svg/cross.svg';
-
-// export default function NoticesSearch () {
-//     return (
-//         <form>
-//             <input type="text" placeholder='Search'/>
-//             <button>
-//                 <SearchIcon/>
-//             </button>
-//             <button type='button'>
-//                 <CrossIcon/>
-//             </button>
-//         </form>
-//     )
-// }

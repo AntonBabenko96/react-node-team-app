@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
@@ -13,6 +13,8 @@ import {
 } from 'helpers/validationSchema';
 
 import { register, login } from '../../redux/auth/auth-operations';
+import {selectLoading} from '../../redux/auth/selectors'
+import Loader from 'shared/Loder/Loader';
 
 import './AuthForm.scss';
 
@@ -28,6 +30,8 @@ export const AuthForm = () => {
   const [currentPath] = useState(window.location.pathname);
   const isRegisterPath = currentPath.endsWith('/register');
   const isLoginPath = currentPath.endsWith('/login');
+  const isLoading = useSelector(selectLoading);
+ 
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -39,9 +43,12 @@ export const AuthForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     if (isRegisterPath) {
-      dispatch(register({ email: values.email, password: values.password }));
-
-      isRegisterPath && navigate('/user');
+      dispatch(register({ email: values.email, password: values.password }))
+     
+        .then(() => {
+          dispatch(login({ email: values.email, password: values.password }));
+          navigate('/user');
+        });
     }
     if (isLoginPath) {
       dispatch(login({ email: values.email, password: values.password }));
@@ -51,8 +58,10 @@ export const AuthForm = () => {
   };
 
   return (
+    <>  {isLoading && <Loader />}
     <div className="registration-form">
       <h1>{isRegisterPath ? 'Registration' : 'Login'}</h1>
+     
       <Formik
         initialValues={{ email: '', password: '', confirmPassword: '' }}
         validationSchema={
@@ -196,7 +205,7 @@ export const AuthForm = () => {
           </Form>
         )}
       </Formik>
-
+     
       {isRegisterPath ? (
         <p>
           Already have an account? <Link to="/login"> Login</Link>{' '}
@@ -207,5 +216,6 @@ export const AuthForm = () => {
         </p>
       )}
     </div>
+    </>
   );
 };

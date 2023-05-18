@@ -5,7 +5,6 @@ import { selectIsLogin } from 'redux/auth/selectors';
 import { getNoticeById, getNotices } from 'redux/notices/notices-operations';
 import {
   addToFavorites,
-  getUserInfo,
   removeFromFavorites,
 } from 'redux/auth/auth-operations';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -14,15 +13,22 @@ import NoticeCategoryItem from 'components/NoticeCategoryItem/NoticeCategoryItem
 import s from './NoticesCategoriesList.module.scss';
 import Modal from 'components/Modal/Modal';
 import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
+import { getDifference } from 'shared/utils/getDateFormat';
+import { ModalApproveAction } from 'components/Modal/ModalApproveAction/ModalApproveAction';
 
 const data = {
-  category: 'sell',
   page: 1,
-  limit: 10,
+  limit: 12,
 };
 
+const categoryItems = [
+  {name: "sell", value: "sell"},
+  {name: "lost-found", value: "lost/found"},
+  {name: "for-free", value: "in good hands"},
+]
 export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
 
   const notices = useSelector(selectNotices);
   const notice = useSelector(selectNotice);
@@ -44,21 +50,34 @@ export default function NoticesCategoriesList() {
     setShowModal(true);
   };
 
+  const handleDeleteBtnClick = id => {
+    setIsDelete(true);
+    dispatch(getNoticeById(id));
+    setShowModal(true);
+  };
+
   const onModalClose = () => {
     setShowModal(false);
   };
 
-  const handleFavoriteBtnClick = (id, favorite) => {
+  const handleFavoriteBtnClick = (id, favorite = false) => {
+    console.log(favorite)
     if (!isLogin) {
       Notify.info(
-        'The option "Add to favorite" is available only to registered users'
-      );
-    } else {
+        'The option "Add to favorite" is available only to registered users');
+    }
+    // else if (isFromModal) {
+    //   dispatch(addToFavorites(id));
+    //   setTimeout(() => {
+    //     dispatch(getNotices(data));
+    //   }, 500);
+    // }
+    else {
       favorite
         ? dispatch(removeFromFavorites(id))
         : dispatch(addToFavorites(id));
       setTimeout(() => {
-        dispatch(getUserInfo());
+        dispatch(getNotices(data));
       }, 500);
     }
   };
@@ -76,11 +95,12 @@ export default function NoticesCategoriesList() {
       favorite,
       own,
     }) => {
-      const yearOfBirth = birth && new Date(birth).getFullYear();
-      const difference = birth ? new Date().getFullYear() - yearOfBirth : 'n/a';
-      const age =
-        difference === 1 ? `${difference} year` : `${difference} years`;
-
+      const age = birth ? getDifference(birth) : 'no data';
+      if(location.length > 6) {
+        location = location.slice(0, 4) + '...';
+      }
+      const categoryItem = categoryItems.find(item => item.name === category)
+      category = categoryItem.value;
       return (
         <NoticeCategoryItem
           key={_id}
@@ -96,6 +116,7 @@ export default function NoticesCategoriesList() {
           own={own}
           onLearnMoreBtnClick={handleLearnMoreBtnClick}
           onFavoriteBtnClick={handleFavoriteBtnClick}
+          onDeleteBtnClick={handleDeleteBtnClick}
         />
       );
     }
@@ -105,8 +126,16 @@ export default function NoticesCategoriesList() {
     <>
       <ul className={s.list}>{elements}</ul>
       {showModal && (
-        <Modal onClose={onModalClose}>
-          <NoticeModal {...notice} />
+        <Modal className="css.noticeModal" onClose={onModalClose}>
+          {isDelete ? (
+            <ModalApproveAction onClose={onModalClose} {...notice}/>
+          ) : (
+            <NoticeModal
+              {...notice}
+              notices={{...notices}}
+              onFavoriteBtnClick={handleFavoriteBtnClick}
+            />
+          )}
         </Modal>
       )}
     </>

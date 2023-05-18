@@ -4,7 +4,7 @@ import instance from './auth-api';
 export async function getNotices({
   sex = '',
   age = '',
-  category = '',
+  category = 'sell',
   title = '',
   page = '',
   limit = '',
@@ -17,12 +17,28 @@ export async function getNotices({
 
 // для отримання одного оголошення по id
 export async function getNoticeById(id) {
-  const { data } = await instance.get(`/notices/${id}`);
-  return data;
+  try {
+    const { data } = await instance.get(`/notices/${id}`);
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 // для отримання оголошень авторизованого кристувача створених цим же користувачем
 export async function getMyNotices() {
   const { data } = await instance.get('notices/my');
+  return data;
+}
+
+// для видалення оголошення авторизованого кристувача створеного цим же користувачем
+export async function deleteMyNotice(id) {
+  const { data } = await instance.delete(`notices/${id}`);
+  return data;
+}
+
+// для отримання улюблених оголошень авторизованого кристувача
+export async function getFavoritesList() {
+  const { data } = await instance.delete(`/users/favorites`);
   return data;
 }

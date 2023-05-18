@@ -9,6 +9,8 @@ import Paginations from 'components/Pagination/Pagination';
 export default function NewsPage() {
   const [news, setNews] = useState([]);
   const [count, setCount] = useState(1);
+  const [notFound, setNotFound] = useState(false);
+  const [showPagination, setShowPagination] = useState(false);
 
   const { search } = useLocation();
   let query = search.slice(8);
@@ -22,19 +24,28 @@ export default function NewsPage() {
 
   useEffect(() => {
     const fetchNews = async () => {
-      //Функція getNews(page, limit, search_query) -
-      //1) першим параметром приймає номер сторінки
-      //2) другим параметром кількість новин на сторінці
-      //3) третій параметр - це пошуковий запит по заголовку новини
-      const result = await getNews(page, 6, query);
-      const total = Math.ceil(result.total / 6);
-      setCount(total);
-      //У відповіді від бекенду повертається обєкт формату:
-      // {
-      //   total: 1151, <--- загальна кількість новин яка повернулась після пошуку
-      //   data: [{},{},{}], <--- масив обєктів з ноаинами які відповідають пошуковому запиту
-      // }
-      setNews([...result.data]);
+      try {
+        //Функція getNews(page, limit, search_query) -
+        //1) першим параметром приймає номер сторінки
+        //2) другим параметром кількість новин на сторінці
+        //3) третій параметр - це пошуковий запит по заголовку новини
+        const result = await getNews(page, 6, query);
+        //У відповіді від бекенду повертається обєкт формату:
+        // {
+        //   total: 1151, <--- загальна кількість новин яка повернулась після пошуку
+        //   data: [{},{},{}], <--- масив обєктів з ноаинами які відповідають пошуковому запиту
+        // }
+        setShowPagination(true);
+        setNotFound(false);
+        const total = Math.ceil(result.total / 6);
+        setCount(total);
+        setNews([...result.data]);
+      } catch ({ response }) {
+        if (response.status === 404) {
+          setShowPagination(false);
+          setNotFound(true);
+        }
+      }
     };
     fetchNews();
   }, [query, page]);
@@ -99,8 +110,8 @@ export default function NewsPage() {
       <div className="container">
         <h1 className={styles.newsMainTitle}>News</h1>
         <NoticesSearch />
-        {!!news.length ? newsMarkup : notFoundMarkup}
-        <Paginations getPage={getPage} count={count} />
+        {!notFound ? newsMarkup : notFoundMarkup}
+        {showPagination && <Paginations getPage={getPage} count={count} />}
       </div>
     </section>
   );
