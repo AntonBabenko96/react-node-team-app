@@ -59,8 +59,6 @@ export default function NoticesCategoriesNav(value) {
     </button>
   ));
 
-
-  
   return (
     <div className={Style.categoryBtns}>
       <div className={Style.filterCategories}>
