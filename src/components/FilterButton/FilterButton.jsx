@@ -91,7 +91,8 @@ export default function FilterButton({ onFilter }) {
         className={`${styles.button} ${isDropdownVisible ? styles.active : ''}`}
         onClick={toggleDropdown}
       >
-        Filters
+        <span>Filters</span>
+        
         <FilterAltOutlinedIcon className={styles.icon} />
       </div>
       {isDropdownVisible && (

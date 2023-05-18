@@ -32,49 +32,107 @@
 //   }
 // }
 
+// .button {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-items: center;
+//     gap: 8px;
+//     background-color: getColor('full-white');
+//     outline: transparent;
+//     border: 2px solid getColor('full-blue');
+//     border-radius: 40px;
+//     color: getColor('full-blue');
+//     width: 152px;
+//     height: 40px;
+//     margin-bottom: 10px;
+//     cursor: pointer;
+//     @include main-font(700, 16px, 22px, normal);
+  
+//     &:hover {
+//       background-color: getColor('full-blue');
+//       border: 2px solid getColor('full-blue');
+//       color: getColor('full-white');
+  
+//       .icon {
+//         fill: getColor('full-white');
+//       }
+      
+//     }
+  
+//     &.active {
+//       background-color: getColor('full-blue');
+//       border: 2px solid getColor('full-blue');
+//       color: getColor('full-white');
+  
+//       .icon {
+//         fill: getColor('full-white');
+//       }
+//     }
+  
+//     .icon {
+//       fill: getColor('full-blue');
+//       width: 24px;
+//       height: 24px;
+//     }
+
+//    }
+
 .button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    background-color: getColor('full-white');
-    outline: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background-color: getColor('full-white');
+  outline: transparent;
+  border: 2px solid getColor('full-blue');
+  border-radius: 40px;
+  color: getColor('full-blue');
+  width: 152px;
+  height: 40px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  @include main-font(700, 16px, 22px, normal);
+}
+
+.button .icon {
+  fill: getColor('full-blue');
+  width: 24px;
+  height: 24px;
+}
+
+@media (hover: hover) {
+  .button:hover {
+    background-color: getColor('full-blue');
     border: 2px solid getColor('full-blue');
-    border-radius: 40px;
-    color: getColor('full-blue');
-    width: 152px;
-    height: 40px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    @include main-font(700, 16px, 22px, normal);
-  
-    &:hover {
-      background-color: getColor('full-blue');
-      border: 2px solid getColor('full-blue');
-      color: getColor('full-white');
-  
-      .icon {
-        fill: getColor('full-white');
-      }
-    }
-  
-    &.active {
-      background-color: getColor('full-blue');
-      border: 2px solid getColor('full-blue');
-      color: getColor('full-white');
-  
-      .icon {
-        fill: getColor('full-white');
-      }
-    }
-  
-    .icon {
-      fill: getColor('full-blue');
-      width: 24px;
-      height: 24px;
-    }
+    color: getColor('full-white');
   }
+
+  .button:hover .icon {
+    fill: getColor('full-white');
+  }
+}
+
+@media (max-width: 767px) {
+  .button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    background-color: #C5DFF6;
+  }
+
+  .button .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .button span {
+    display: none;
+  }
+}
+
 .filterButtons {
   position: relative;
   display: inline-block;
