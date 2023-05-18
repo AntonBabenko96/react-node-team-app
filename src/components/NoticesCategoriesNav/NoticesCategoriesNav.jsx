@@ -67,10 +67,16 @@ export default function NoticesCategoriesNav() {
     </NavLink>
   ));
 
-  return (
-    <div className={Style.filterCategiries}>
-      {mainCategories}
-      {isLogin && userCategories}
+return (
+    <div className={Style.categoryBtns}>
+      <div className={Style.filterCategories}>
+        {mainCategories}
+        {isLogin && userCategories}
+      </div>
+      <div className={Style.filterBtnCategories}>
+        <FilterButton />
+        <AddPetButton />
+      </div>
     </div>
   );
 }
