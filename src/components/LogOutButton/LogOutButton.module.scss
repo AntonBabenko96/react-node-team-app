@@ -20,7 +20,8 @@ align-items: center;
 }
 
 .icon {
-    width: 24px;
-    height: 24px;
-    color: #54ADFF
+  width: 24px;
+  height: 24px;
+  stroke: getColor('full-blue');
+  fill: transparent;
 }

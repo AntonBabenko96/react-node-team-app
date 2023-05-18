@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import CheckIcon from '@mui/icons-material/Check';
 
-import { getNotices } from '../../api/notices';
+// import { getNotices } from '../../api/notices';
 import styles from './FilterButton.module.scss';
 
 export default function FilterButton({ onFilter }) {
@@ -46,22 +46,26 @@ export default function FilterButton({ onFilter }) {
       }
     }
   };
+  // const handleFilter = (result) => {
+  //   console.log(result);
+  // };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await getNotices({
-          sex: selectedGenderOptions.join(','),
-          age: selectedAgeOptions.join(','),
-        });
-        onFilter(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
 
-    fetchData();
-  }, [selectedAgeOptions, selectedGenderOptions, onFilter]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const result = await getNotices({
+  //         sex: selectedGenderOptions.join(','),
+  //         age: selectedAgeOptions.join(','),
+  //       });
+  //       onFilter(result);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [selectedAgeOptions, selectedGenderOptions, onFilter]);
 
   const renderCheckbox = (option, optionType) => {
     const isChecked =
@@ -86,7 +90,7 @@ export default function FilterButton({ onFilter }) {
   };
 
   return (
-    <div className={styles.filterButton}>
+    <div className={styles.filterButton} >
       <div
         className={`${styles.button} ${isDropdownVisible ? styles.active : ''}`}
         onClick={toggleDropdown}

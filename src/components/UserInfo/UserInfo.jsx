@@ -84,8 +84,10 @@
 
 import { ReactComponent as CameraIcon } from 'img/svg/camera.svg';
 import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
-import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
+// import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
 import { ReactComponent as DefaultIcon} from 'img/svg/photo-default.svg';
+
+import LogOutButton from 'components/LogOutButton/LogOutButton';
 
 import styles from './UserInfo.module.scss';
 export default function UserInfo() {
@@ -126,8 +128,9 @@ export default function UserInfo() {
               </p>
             </div>
             <div className={styles.logout}>
-              <LogoutIcon className={styles.logout__icon} />
-              <p className={styles.logout__text}>Log Out</p>
+              <LogOutButton/>
+              {/* <LogoutIcon className={styles.logout__icon} />
+              <p className={styles.logout__text}>Log Out</p> */}
             </div>
           </div>
         </div>
