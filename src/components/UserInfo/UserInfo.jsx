@@ -1,5 +1,7 @@
 import { ReactComponent as CameraIcon } from 'img/svg/camera.svg';
 import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
+
+
 import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
 import { ReactComponent as DefaultIcon } from 'img/svg/photo-default.svg';
 import { ReactComponent as CheckIcon } from 'img/svg/check.svg';
@@ -7,6 +9,9 @@ import { useState, useEffect, useRef } from 'react';
 import { selectUser, selectIsLogin } from 'redux/auth/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserInfo, updateUserInfo } from 'redux/auth/auth-operations';
+
+
+import LogOutButton from 'components/LogOutButton/LogOutButton';
 
 import styles from './UserInfo.module.scss';
 
@@ -351,11 +356,38 @@ export default function UserInfo() {
                 </>
               )}
             </label>
+ <div className={styles.logout}>
+              <LogOutButton/>
+              {/* <LogoutIcon className={styles.logout__icon} />
+              <p className={styles.logout__text}>Log Out</p> */}
+            </div>
           </div>
-          <div className={styles.logout}>
-            <LogoutIcon className={styles.logout__icon} />
-            <p className={styles.logout__text}>Log Out</p>
-          </div>
+<
+//           <div className={styles.decktop}>
+//             <div className={styles.information}>
+//               < p className={styles.text}>
+//                 Name: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
+//               </p>
+
+//               <p className={styles.text}>
+//                 Email: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
+//               </p>
+
+//               <p className={styles.text}>
+//                 Birthday: <input className={styles.input}></input><EditIcon className={styles.edit__icon} />
+//               </p>
+
+//               <p className={styles.text}>
+//                 Phone:<input className={styles.input}></input><EditIcon className={styles.edit__icon} />
+//               </p>
+
+//               <p className={styles.text}>
+//                 City:<input className={styles.input}></input><EditIcon className={styles.edit__icon} />
+//               </p>
+//             </div>
+           
+
+//           </div>
         </div>
       </div>
     </div>
