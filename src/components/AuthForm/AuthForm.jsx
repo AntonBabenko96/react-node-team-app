@@ -13,7 +13,10 @@ import {
 } from 'helpers/validationSchema';
 
 import { register, login } from '../../redux/auth/auth-operations';
-import {selectLoading} from '../../redux/auth/selectors'
+import {
+  selectLoading,
+  selectIsLogin,
+} from '../../redux/auth/selectors';
 import Loader from 'shared/Loder/Loader';
 
 import './AuthForm.scss';
@@ -22,15 +25,14 @@ export const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
 
   const [currentPath] = useState(window.location.pathname);
   const isRegisterPath = currentPath.endsWith('/register');
   const isLoginPath = currentPath.endsWith('/login');
   const isLoading = useSelector(selectLoading);
+  const isLogin = useSelector(selectIsLogin);
  
 
   const togglePasswordVisibility = () => {
@@ -43,151 +45,109 @@ export const AuthForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     if (isRegisterPath) {
-      dispatch(register({ email: values.email, password: values.password }))
-     
-        .then(() => {
-          dispatch(login({ email: values.email, password: values.password }));
-          navigate('/user');
-        });
+      dispatch(register({ email: values.email, password: values.password }));
+
+      if (isLoginPath) {
+        dispatch(login({ email: values.email, password: values.password }));
+        navigate('/user');
+      }
+      resetForm();
     }
-    if (isLoginPath) {
-      dispatch(login({ email: values.email, password: values.password }));
-      navigate('/user');
-    }
-    resetForm();
   };
 
+  if (isLogin) {
+    navigate('/user');
+  }
+
   return (
-    <>  {isLoading && <Loader />}
-    <div className="registration-form">
-      <h1>{isRegisterPath ? 'Registration' : 'Login'}</h1>
-     
-      <Formik
-        initialValues={{ email: '', password: '', confirmPassword: '' }}
-        validationSchema={
-          isRegisterPath ? validationRegisterSchema : validationLoginSchema
-        }
-        onSubmit={handleSubmit}
-      >
-        {({ values }) => (
-          <Form>
-            {/* Email Field */}
-            <div>
-              <div className="input-icon">
-                <Field name="email">
-                  {({ field, form, meta }) => (
-                    <>
-                      <input
-                        type="text"
-                        name="email"
-                        {...field}
-                        placeholder="Email"
-                        value={values.email}
-                        onChange={event => {
-                          form.setFieldValue('email', event.target.value);
-                        }}
-                        className={`input ${
-                          meta.touched && meta.error ? 'errorBorder' : ''
-                        } ${values.email === '' ? 'emptyInput' : ''}`}
-                      />
+    <>
+      {' '}
+      {isLoading && <Loader />}
+      <div className="registration-form">
+        <h1>{isRegisterPath ? 'Registration' : 'Login'}</h1>
 
-                      {meta.touched && meta.error && (
-                        <ErrorMessage
-                          name="email"
-                          component="div"
-                          className="errorMessage"
-                        />
-                      )}
-
-                      {values.email && (
-                        <CloseIcon
-                          className="iconClose"
-                          onClick={() => {
-                            form.setFieldValue('email', '');
-                          }}
-                        />
-                      )}
-                    </>
-                  )}
-                </Field>
-              </div>
-            </div>
-
-            {/* Password Field */}
-            <div>
-              <div className="input-icon">
-                <Field name="password">
-                  {({ field, form, meta }) => (
-                    <>
-                      <input
-                        type={showPassword ? 'text' : 'password'}
-                        name="password"
-                        {...field}
-                        placeholder="Password"
-                        className={`input ${
-                          meta.touched && meta.error ? 'errorBorder' : ''
-                        } ${values.password === '' ? 'emptyInput' : ''}`}
-                      />
-
-                      {showPassword ? (
-                        <RemoveRedEyeIcon
-                          className="icon"
-                          onClick={togglePasswordVisibility}
-                        />
-                      ) : (
-                        <VisibilityOffIcon
-                          className="icon"
-                          onClick={togglePasswordVisibility}
-                        />
-                      )}
-
-                      {meta.touched && meta.error && (
-                        <ErrorMessage
-                          name="password"
-                          component="div"
-                          className="errorMessage"
-                        />
-                      )}
-                    </>
-                  )}
-                </Field>
-              </div>
-            </div>
-
-            {/* Confirm Password Field */}
-            {isRegisterPath && (
+        <Formik
+          initialValues={{ email: '', password: '', confirmPassword: '' }}
+          validationSchema={
+            isRegisterPath ? validationRegisterSchema : validationLoginSchema
+          }
+          onSubmit={handleSubmit}
+        >
+          {({ values }) => (
+            <Form>
+              {/* Email Field */}
               <div>
                 <div className="input-icon">
-                  <Field name="confirmPassword">
+                  <Field name="email">
                     {({ field, form, meta }) => (
                       <>
                         <input
-                          type={showConfirmPassword ? 'text' : 'password'}
-                          name="confirmPassword"
+                          type="text"
+                          name="email"
                           {...field}
-                          placeholder="Confirm password"
+                          placeholder="Email"
+                          value={values.email}
+                          onChange={event => {
+                            form.setFieldValue('email', event.target.value);
+                          }}
                           className={`input ${
                             meta.touched && meta.error ? 'errorBorder' : ''
-                          } ${
-                            values.confirmPassword === '' ? 'emptyInput' : ''
-                          }`}
+                          } ${values.email === '' ? 'emptyInput' : ''}`}
                         />
 
-                        {showConfirmPassword ? (
+                        {meta.touched && meta.error && (
+                          <ErrorMessage
+                            name="email"
+                            component="div"
+                            className="errorMessage"
+                          />
+                        )}
+
+                        {values.email && (
+                          <CloseIcon
+                            className="iconClose"
+                            onClick={() => {
+                              form.setFieldValue('email', '');
+                            }}
+                          />
+                        )}
+                      </>
+                    )}
+                  </Field>
+                </div>
+              </div>
+
+              {/* Password Field */}
+              <div>
+                <div className="input-icon">
+                  <Field name="password">
+                    {({ field, form, meta }) => (
+                      <>
+                        <input
+                          type={showPassword ? 'text' : 'password'}
+                          name="password"
+                          {...field}
+                          placeholder="Password"
+                          className={`input ${
+                            meta.touched && meta.error ? 'errorBorder' : ''
+                          } ${values.password === '' ? 'emptyInput' : ''}`}
+                        />
+
+                        {showPassword ? (
                           <RemoveRedEyeIcon
                             className="icon"
-                            onClick={toggleConfirmPasswordVisibility}
+                            onClick={togglePasswordVisibility}
                           />
                         ) : (
                           <VisibilityOffIcon
                             className="icon"
-                            onClick={toggleConfirmPasswordVisibility}
+                            onClick={togglePasswordVisibility}
                           />
                         )}
 
                         {meta.touched && meta.error && (
                           <ErrorMessage
-                            name="confirmPassword"
+                            name="password"
                             component="div"
                             className="errorMessage"
                           />
@@ -197,25 +157,69 @@ export const AuthForm = () => {
                   </Field>
                 </div>
               </div>
-            )}
 
-            <button type="submit">
-              {isRegisterPath ? 'Register' : 'Login'}
-            </button>
-          </Form>
+              {/* Confirm Password Field */}
+              {isRegisterPath && (
+                <div>
+                  <div className="input-icon">
+                    <Field name="confirmPassword">
+                      {({ field, form, meta }) => (
+                        <>
+                          <input
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            name="confirmPassword"
+                            {...field}
+                            placeholder="Confirm password"
+                            className={`input ${
+                              meta.touched && meta.error ? 'errorBorder' : ''
+                            } ${
+                              values.confirmPassword === '' ? 'emptyInput' : ''
+                            }`}
+                          />
+
+                          {showConfirmPassword ? (
+                            <RemoveRedEyeIcon
+                              className="icon"
+                              onClick={toggleConfirmPasswordVisibility}
+                            />
+                          ) : (
+                            <VisibilityOffIcon
+                              className="icon"
+                              onClick={toggleConfirmPasswordVisibility}
+                            />
+                          )}
+
+                          {meta.touched && meta.error && (
+                            <ErrorMessage
+                              name="confirmPassword"
+                              component="div"
+                              className="errorMessage"
+                            />
+                          )}
+                        </>
+                      )}
+                    </Field>
+                  </div>
+                </div>
+              )}
+
+              <button type="submit">
+                {isRegisterPath ? 'Register' : 'Login'}
+              </button>
+            </Form>
+          )}
+        </Formik>
+
+        {isRegisterPath ? (
+          <p>
+            Already have an account? <Link to="/login"> Login</Link>{' '}
+          </p>
+        ) : (
+          <p>
+            Don't have an account? <Link to="/register"> Register</Link>{' '}
+          </p>
         )}
-      </Formik>
-     
-      {isRegisterPath ? (
-        <p>
-          Already have an account? <Link to="/login"> Login</Link>{' '}
-        </p>
-      ) : (
-        <p>
-          Don't have an account? <Link to="/register"> Register</Link>{' '}
-        </p>
-      )}
-    </div>
+      </div>
     </>
   );
 };
