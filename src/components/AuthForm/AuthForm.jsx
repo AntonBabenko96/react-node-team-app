@@ -13,10 +13,7 @@ import {
 } from 'helpers/validationSchema';
 
 import { register, login } from '../../redux/auth/auth-operations';
-import {
-  selectLoading,
-  selectIsLogin,
-} from '../../redux/auth/selectors';
+import { selectLoading, selectIsLogin } from '../../redux/auth/selectors';
 import Loader from 'shared/Loder/Loader';
 
 import './AuthForm.scss';
@@ -33,7 +30,6 @@ export const AuthForm = () => {
   const isLoginPath = currentPath.endsWith('/login');
   const isLoading = useSelector(selectLoading);
   const isLogin = useSelector(selectIsLogin);
- 
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -46,13 +42,13 @@ export const AuthForm = () => {
   const handleSubmit = (values, { resetForm }) => {
     if (isRegisterPath) {
       dispatch(register({ email: values.email, password: values.password }));
-
-      if (isLoginPath) {
-        dispatch(login({ email: values.email, password: values.password }));
-        navigate('/user');
-      }
-      resetForm();
     }
+
+    if (isLoginPath) {
+      dispatch(login({ email: values.email, password: values.password }));
+     
+    }
+    resetForm();
   };
 
   if (isLogin) {
