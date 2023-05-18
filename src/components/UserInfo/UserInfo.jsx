@@ -2,7 +2,7 @@ import { ReactComponent as CameraIcon } from 'img/svg/camera.svg';
 import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
 
 
-import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
+// import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
 import { ReactComponent as DefaultIcon } from 'img/svg/photo-default.svg';
 import { ReactComponent as CheckIcon } from 'img/svg/check.svg';
 import { useState, useEffect, useRef } from 'react';
