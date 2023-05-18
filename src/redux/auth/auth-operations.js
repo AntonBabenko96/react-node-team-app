@@ -63,8 +63,8 @@ export const getUserInfo = createAsyncThunk(
   'user/getUserInfo',
   async (_, { rejectWithValue }) => {
     try {
-      const { data: result } = await api.getUserInfo();
-      return result;
+      const data = await api.getUserInfo();
+      return data;
     } catch ({ response }) {
       return rejectWithValue(response.data.message);
     }
@@ -75,8 +75,8 @@ export const updateUserInfo = createAsyncThunk(
   'user/updateUserInfo',
   async (data, { rejectWithValue }) => {
     try {
-      const { data: result } = await api.updateUserInfo(data);
-      return result;
+      const res = await api.updateUserInfo(data);
+      return res;
     } catch ({ response }) {
       return rejectWithValue(response.data.message);
     }
