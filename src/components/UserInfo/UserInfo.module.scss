@@ -3,54 +3,56 @@
 .infobox {
   display: flex;
   flex-direction: column;
-  width: 280px;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 20px;
   background: #ffffff;
   @media (min-width: 768px) {
     flex-direction: row-reverse;
     justify-content: space-between;
-    padding: 20px 20px ;
+    padding: 20px 20px;
     width: 703px;
     height: 268px;
   }
   @media (min-width: 1280px) {
-    justify-content:flex-start;
+    justify-content: flex-start;
     flex-direction: column;
     width: 395px;
     height: 520px;
   }
 }
+
 .photo {
-  margin: 20px 49px 14px 49px;
+  margin: 20px auto 15px;
   width: 182px;
   height: 182px;
   border-radius: 40px;
   border: 1px solid black;
-  @media (min-width: 768px) {
-    margin: 0  46px 14px 71px;
-  }
-  @media (min-width: 1280px) {
-    margin: 0  107px 0 107px;
 
+  @media (min-width: 768px) {
+    margin: 0 auto 15px;
   }
+  // @media (min-width: 1280px) {
+  //   margin: 0 107px 0 107px;
+  // }
 }
 .input {
-
   outline: none;
-  border: none;
   min-width: 190px;
   height: 28px;
   border-radius: 20px;
   border: 1px solid getColor('full-blue');
   padding-left: 12px;
   padding-right: 12px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.04em;
+  color: getColor('full-black');
+
   @media (min-width: 768px) {
     min-width: 255px;
     height: 32px;
   }
- 
-
 }
 
 .information {
@@ -61,13 +63,12 @@
   flex-direction: column;
   gap: 12px;
   @media (min-width: 768px) {
-    padding:0;
+    padding: 0;
     gap: 8px;
   }
-
 }
 .text {
-    position: relative;
+  position: relative;
   @include main-font(600, 14px, 1.35);
   color: getColor('full-black');
   display: flex;
@@ -100,17 +101,35 @@
   height: 20px;
   stroke: getColor('full-blue');
   fill: getColor('full-blue');
+  cursor: pointer;
   @media (min-width: 768px) {
     width: 24px;
     height: 24px;
     transform: translate(570%, -50%);
   }
 }
+
+.check__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(500%, -50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+
+  @media (min-width: 768px) {
+    width: 24px;
+    height: 24px;
+    transform: translate(570%, -50%);
+  }
+}
+
 .user__icon {
   width: 182px;
   height: 182px;
-//   stroke: getColor('full-blue');
-//   fill: transparent;
+  //   stroke: getColor('full-blue');
+  //   fill: transparent;
 }
 
 .user__camera {
@@ -119,8 +138,7 @@
   stroke: getColor('full-blue');
   fill: transparent;
   @media (min-width: 1280px) {
-   margin-top: 14px;
-  
+    margin-top: 14px;
   }
 }
 .camera__title {
@@ -150,4 +168,11 @@
   height: 24px;
   stroke: getColor('full-blue');
   fill: transparent;
+}
+
+.userAvatar {
+  display: block;
+  width: 182px;
+  height: 182px;
+  border-radius: 40px;
 }
