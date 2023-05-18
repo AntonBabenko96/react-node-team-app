@@ -1,44 +1,38 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
+import Notiflix from 'notiflix';
 
 import { selectIsLogin } from 'redux/auth/selectors';
-import Modal from 'components/Modal/Modal';
 
-import styles from './AddPetButton.module.scss'
-
+import styles from './AddPetButton.module.scss';
 
 const AddPetButton = () => {
-  const isLogin = useSelector(selectIsLogin );
 
-  const renderButton = () => {
-    if (isLogin ) {
-      return (
-        <button className={styles.button}>
-        <Link to="/add-pet" >
-          Add Pet
-          <AddIcon className={styles.icon} />
-        </Link>
-        </button>
-      );
+  const isLogin = useSelector(selectIsLogin);
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    if (isLogin) {
+       navigate('/add-pet');
     } else {
-      return (
-        <Modal>
-        <div className={styles.notification}>
-          Please 
-          <Link to="/login" className={styles.link}>login</Link> or 
-          <Link to="/register" className={styles.link}>register</Link> to add a pet.
-        </div>
-        </Modal>
+      Notiflix.Notify.failure(
+        'Please login or register to add a pet.', 
+        {
+          timeout: 5000,
+        }
       );
     }
   };
 
   return (
-    <div>
-      {renderButton()}
-    </div>
+    <button className={styles.button} onClick={handleButtonClick}>
+  
+        Add Pet
+        <AddIcon className={styles.icon} />
+     
+    </button>
   );
 };
 

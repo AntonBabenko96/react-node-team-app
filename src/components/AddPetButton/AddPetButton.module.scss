@@ -1,5 +1,7 @@
 @import '/src/styles/styles.scss';
-.button{
+.button {
+  display: none;
+  @include media-min(tablet) {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -7,26 +9,16 @@
     // padding: 8px 20px;
     gap: 8px;
     background-color: getColor('full-blue');
-    outline:transparent;
+    outline: transparent;
     border-radius: 40px;
     color: getColor('full-white');
-    width:129px;
-    
+    width: 129px;
+    height: 40px;
+    border: 2px solid getColor('full-blue');
+  }
 }
-.icon{
-fill: getColor('full-white');
-width: 24px;
-height: 24px;
+.icon {
+  fill: getColor('full-white');
+  width: 24px;
+  height: 24px;
 }
-.notification{
-    @include main-font(500, 24px, 33px, normal);
-    text-align: center;
-    padding:20px 40px;
-    color:  getColor('full-black');
-}
-.link{
-    @include main-font(500, 24px, 33px, normal);
-    color:getColor('full-blue');
-    text-decoration: none;
-}
-
