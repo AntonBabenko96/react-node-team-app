@@ -1,12 +1,17 @@
 import { ReactComponent as CameraIcon } from 'img/svg/camera.svg';
 import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
-import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
+
+
+// import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
 import { ReactComponent as DefaultIcon } from 'img/svg/photo-default.svg';
 import { ReactComponent as CheckIcon } from 'img/svg/check.svg';
 import { useState, useEffect, useRef } from 'react';
 import { selectUser, selectIsLogin } from 'redux/auth/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserInfo, updateUserInfo } from 'redux/auth/auth-operations';
+
+
+import LogOutButton from 'components/LogOutButton/LogOutButton';
 
 import styles from './UserInfo.module.scss';
 
@@ -352,10 +357,11 @@ export default function UserInfo() {
               )}
             </label>
           </div>
-          <div className={styles.logout}>
-            <LogoutIcon className={styles.logout__icon} />
-            <p className={styles.logout__text}>Log Out</p>
-          </div>
+ <div className={styles.logout}>
+              <LogOutButton/>
+              {/* <LogoutIcon className={styles.logout__icon} />
+              <p className={styles.logout__text}>Log Out</p> */}
+            </div>
         </div>
       </div>
     </div>

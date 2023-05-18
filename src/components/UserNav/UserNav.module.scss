@@ -4,7 +4,6 @@
   width: 28px;
   height: 28px;
   margin-right: 12px;
-  fill: getColor('full-white');
   stroke: getColor('full-yellow');
 }
 
@@ -12,6 +11,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: 768px) and (max-width: 1279px) {
+    margin-right: 38px;
+  }
 }
 
 .userName {
