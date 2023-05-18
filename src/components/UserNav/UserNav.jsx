@@ -1,4 +1,4 @@
-import { ReactComponent as SvgImage } from '../../img/svg/user.svg';
+import { ReactComponent as UserSvg } from '../../img/svg/user-1.svg';
 import { NavLink } from 'react-router-dom';
 import useMediaQuery from 'shared/hooks/useMediaQuery';
 import { useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ const UserNav = () => {
 
   return (
     <NavLink to="/user" className={styles.userLink}>
-      <SvgImage className={styles.user} />
+      <UserSvg className={styles.user} />
       {!user.name && <p className={styles.userName}>User</p>}
       {isTablet && <p className={styles.userName}>{user.name}</p>}
     </NavLink>
