@@ -10,7 +10,7 @@ h1 {
     }
   }
   
- p{
+ .text{
     @include main-font(500, 24px, 33px, normal);
     margin-top: 60px;
     margin-bottom: 60px;
