@@ -2,7 +2,7 @@ import styles from './UserPage.module.scss';
 import UserPetsList from 'components/UserPetsList/UserPetsList';
 import UserInfo from 'components/UserInfo/UserInfo';
 import AddPetButton from 'components/AddPetButton/AddPetButton';
-import styles from './UserPage.module.scss';
+
 
 
 export default function UserPage() {
