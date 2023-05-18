@@ -17,8 +17,12 @@ export async function getNotices({
 
 // для отримання одного оголошення по id
 export async function getNoticeById(id) {
-  const { data } = await instance.get(`/notices/${id}`);
-  return data;
+  try {
+    const { data } = await instance.get(`/notices/${id}`);
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 // для отримання оголошень авторизованого кристувача створених цим же користувачем
@@ -35,6 +39,6 @@ export async function deleteMyNotice(id) {
 
 // для отримання улюблених оголошень авторизованого кристувача
 export async function getFavoritesList() {
-  const data = await instance.delete(`/users/favorites`);
+  const { data } = await instance.delete(`/users/favorites`);
   return data;
 }
