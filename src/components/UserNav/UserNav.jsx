@@ -9,13 +9,21 @@ import { selectUser } from 'redux/auth/selectors';
 const UserNav = () => {
   const isTablet = useMediaQuery('(min-width: 768px)');
   const user = useSelector(selectUser);
-  console.log(user);
 
   return (
     <NavLink to="/user" className={styles.userLink}>
-      <UserSvg className={styles.user} />
-      {!user.name && <p className={styles.userName}>User</p>}
-      {isTablet && <p className={styles.userName}>{user.name}</p>}
+      {user.avatarURL ? (
+        <img
+          src={user.avatarURL}
+          alt="imgUser"
+          className={styles.avtarUser}
+        ></img>
+      ) : (
+        <UserSvg className={styles.user} />
+      )}
+
+      {isTablet && <p className={styles.userName}>{user?.name}</p>}
+      {!user?.name && <p className={styles.userName}>User</p>}
     </NavLink>
   );
 };
