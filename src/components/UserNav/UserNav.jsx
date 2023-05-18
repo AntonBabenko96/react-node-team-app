@@ -12,9 +12,9 @@ const UserNav = () => {
 
   return (
     <NavLink to="/user" className={styles.userLink}>
-      {user.avatarURL ? (
+      {user?.avatarURL ? (
         <img
-          src={user.avatarURL}
+          src={user?.avatarURL}
           alt="imgUser"
           className={styles.avtarUser}
         ></img>
