@@ -1,9 +1,13 @@
 import Style from './NoticesCategoriesNav.module.scss';
-import { getNotices } from '../../redux/notices/notices-operations';
+import {
+  getNotices,
+  getFavoritesList,
+  getMyNotices,
+} from '../../redux/notices/notices-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLogin } from '../../redux/auth/selectors';
-import AddPetButton from 'components/AddPetButton/AddPetButton';
-import FilterButton from 'components/FilterButton/FilterButton';
+import { NavLink } from 'react-router-dom';
+
 const mainCategoriesList = [
   { id: 1, value: 'sell', name: 'sell' },
   { id: 2, value: 'lost-found', name: 'lost/found' },
@@ -14,7 +18,7 @@ const userCategoriesList = [
   { id: 5, value: 'my-adss', name: 'my adss' },
 ];
 
-export default function NoticesCategoriesNav(value) {
+export default function NoticesCategoriesNav() {
   const dispatch = useDispatch();
   const isLogin = useSelector(selectIsLogin);
   const filterСhange = e => {
@@ -27,28 +31,31 @@ export default function NoticesCategoriesNav(value) {
     dispatch(getNotices(fetch));
   };
   const filterСhangeUser = e => {
-    // let value = e.target.name;
-    // const fetch = {
-    //     category: value,
-    //     page: 1,
-    //     limit: 20,
-    // }
-    // dispatch(getMyNotices(fetch));
+    switch (e.target.name) {
+      case 'favorite-ads':
+        dispatch(getFavoritesList());
+        break;
+      default:
+        dispatch(getMyNotices());
+        break;
+    }
   };
 
   const mainCategories = mainCategoriesList.map(({ id, value, name }) => (
-    <button
-      key={id}
-      name={value}
-      type="button"
-      className={Style.categoriesbtn}
-      onClick={filterСhange}
-    >
-      {name}
-    </button>
+    <NavLink to={`/notices/${value}`} key={id}>
+      <button
+        name={value}
+        type="button"
+        className={Style.categoriesbtn}
+        onClick={filterСhange}
+      >
+        {name}
+      </button>
+    </NavLink>
   ));
   const userCategories = userCategoriesList.map(({ id, value, name }) => (
-    <button
+    <NavLink to={`/notices/${value}`} key={id}>
+      <button
       key={id}
       name={value}
       type="button"
@@ -57,18 +64,13 @@ export default function NoticesCategoriesNav(value) {
     >
       {name}
     </button>
+    </NavLink>
   ));
 
   return (
-    <div className={Style.categoryBtns}>
-      <div className={Style.filterCategories}>
-        {mainCategories}
-        {isLogin && userCategories}
-      </div>
-      <div className={Style.filterBtnCategories}>
-        <FilterButton />
-        <AddPetButton />
-      </div>
+    <div className={Style.filterCategiries}>
+      {mainCategories}
+      {isLogin && userCategories}
     </div>
   );
 }
