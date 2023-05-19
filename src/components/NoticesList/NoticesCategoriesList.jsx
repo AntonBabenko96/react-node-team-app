@@ -45,10 +45,14 @@ export default function NoticesCategoriesList() {
     setPage(paginationPage);
   };
 
-  const notices = useSelector(selectNotices);
+  const result = useSelector(selectNotices);
+  const notices = Object.keys(result).length === 0 ? [] : result.notices;
+  const count = result.total ?? '';
+
   const notice = useSelector(selectNotice);
   const isLogin = useSelector(selectIsLogin);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     dispatch(getNotices({ ...data, page }));
@@ -134,7 +138,7 @@ export default function NoticesCategoriesList() {
     <>
       <ul className={s.list}>{elements}</ul>
       {notices.length > 0 && (
-        <Paginations getPage={getPage} count={Math.ceil(notices.length / data.limit)} />
+        <Paginations getPage={getPage} count={Math.ceil(count / data.limit)} />
       )}
       {showModal && (
         <Modal className="css.noticeModal" onClose={onModalClose}>
