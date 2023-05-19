@@ -16,6 +16,7 @@ const initialState = {
   isLogin: false,
   loading: false,
   error: null,
+  newUser: false,
 };
 
 const handlePending = state => {
@@ -38,6 +39,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = payload.user;
         state.error = null;
+        state.newUser = true;
       })
       .addCase(register.rejected, handleRejected)
       .addCase(login.pending, handlePending)
@@ -106,6 +108,13 @@ const authSlice = createSlice({
       })
       .addCase(updateAvatar.rejected, handleRejected);
   },
+  reducers: {
+    setNewUser(state, { payload }) {
+      state.newUser = payload;
+    },
+  },
 });
+
+export const { setNewUser } = authSlice.actions;
 
 export default authSlice.reducer;
