@@ -22,7 +22,6 @@ export default function NoticeCategoryItem({
   onFavoriteBtnClick,
   onDeleteBtnClick,
 }) {
-  const imgBeseURL = 'https://your-pet-backend.onrender.com/';
 
   return (
     <li className={s.item}>
@@ -45,7 +44,7 @@ export default function NoticeCategoryItem({
       )}
       <img
         className={s.img}
-        src={img ? `${imgBeseURL}${img}` : placeholder}
+        src={img ? `${img}` : placeholder}
         alt="Pet"
       />
       <div className={s.wrapper}>

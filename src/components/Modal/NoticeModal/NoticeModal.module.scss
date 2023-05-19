@@ -1,41 +1,52 @@
 @import '../../../styles/styles.scss';
 
+.wrapper {
+  @include media-max(tablet) {
+    width: 280px;
+    padding-top: 24px;
+    padding-right: 12px;
+    padding-bottom: 16px;
+    padding-left: 12px;
+  }
+
+  @include media-min(tablet) {
+    width: 681px;
+    padding-top: 12px;
+    padding-right: 32px;
+    padding-bottom: 24px;
+    padding-left: 32px;
+  }
+}
+
 .Notice {
   position: relative;
   font-family: Manrope;
-  @media screen and (min-width: 768px) {
+  @include media-min(tablet) {
     display: flex;
   }
 }
-.WrapperText {
-  width: 240px;
-  margin-left: auto;
-  margin-right: auto;
-  @media screen and (min-width: 768px) {
-    width: auto;
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
+
 .NoticePhotoWrapper {
   position: relative;
   width: 240px;
   margin-left: auto;
   margin-right: auto;
-  @media screen and (min-width: 768px) {
+  margin-bottom: 12px;
+
+  @include media-min(tablet) {
+    width: 262px;
     margin-left: 0;
-    margin-right: 0;
-    margin-right: 25px;
+    margin-right: 24px;
   }
 }
 .NoticePhoto {
-  background-color: rgb(230, 230, 230);
   width: 240px;
   height: 240px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
   object-fit: cover;
-  @media screen and (min-width: 768px) {
+
+  @include media-min(tablet) {
     display: flex;
     width: 262px;
     height: 298px;
@@ -46,137 +57,156 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 1.3;
-  margin-bottom: 10px;
-  margin-top: 12px;
-  @media screen and (min-width: 768px) {
-    font-size: 28px;
-    width: 280px;
-    margin-top: 0;
+  margin-bottom: 20px;
+
+  @include media-min(tablet) {
+    @include main-font(700, 28px, calc(38 / 28));
+    width: 315px;
   }
 }
 
 .StickyValue {
+  min-width: 126px;
   position: absolute;
-  top: 14px;
+  top: 16px;
   left: 0;
   background-color: getColor('light-blue');
-
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 19px;
-  padding: 5px 22px 5px 11px;
-
+  padding: 6px 22px 6px 11px;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  @include main-font(500, 14px, calc(19 / 14));
+  text-align: center;
 }
+
+.NoticeList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+
+  @include media-min(tablet) {
+    margin-bottom: 28px;
+  }
+}
+
 .NoticeList li {
   display: flex;
-  margin: 8px;
+  align-items: center;
+  justify-content: start;
+  gap: 20px;
+
+  @include media-min(tablet) {
+    gap: 51px;
+  }
 
   & h4 {
-    width: 70px;
-    font-size: 14px;
+    width: 62px;
+    @include main-font(600, 14px, calc(19 / 14));
 
-    @media screen and (min-width: 768px) {
-      font-size: 16px;
+    @include media-min(tablet) {
+      width: 70px;
+      @include main-font(600, 16px, calc(22 / 16));
     }
   }
+
   & p {
-    margin-left: 50px;
-    font-size: 12px;
-    font-weight: 500;
+    @include main-font(500, 12px, calc(16 / 12));
 
-    @media screen and (min-width: 768px) {
-      font-size: 16px;
+    @include media-min(tablet) {
+      @include main-font(500, 16px, calc(22 / 16));
     }
   }
+
   & a {
-    margin-left: 50px;
     color: getColor('full-yellow');
     text-decoration: underline;
-    font-size: 12px;
+    @include main-font(500, 12px, calc(16 / 12));
     transition: color 250ms ease;
-    @media screen and (min-width: 768px) {
-      font-size: 16px;
+
+    @include media-min(tablet) {
+      @include main-font(500, 16px, calc(22 / 16));
     }
+
     &:hover {
       color: getColor('gr-blue-start');
     }
   }
 }
+
 .NoticeComent {
   width: 256px;
-  margin-top: 12px;
   margin-bottom: 12px;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: Manrope;
-  @media screen and (min-width: 768px) {
-    margin-left: 0;
-    margin-right: 0;
+  @include main-font(500, 14px, calc(19 / 14));
+
+  @include media-min(tablet) {
+    max-width: 618px;
+    margin-bottom: 70px;
   }
 }
+
 .ButtonWrapper {
-  font-family: Manrope;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   width: 256px;
   margin-left: auto;
   margin-right: auto;
-  @media screen and (min-width: 768px) {
-    margin-left: 0;
-    margin-right: 0;
+  @include main-font(700, 16px, calc(22 / 16));
+
+  @include media-min(tablet) {
     width: 100%;
-    display: flex;
     flex-direction: row-reverse;
     gap: 17px;
-    margin-top: 70px;
   }
 }
-.ButtonContact {
-  cursor: pointer;
+
+.button {
   width: 256px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid getColor('full-blue');
-  margin-bottom: 8px;
   border-radius: 40px;
-  background-color: white;
-  color: getColor('full-blue');
-  transition: background-color 250ms ease;
-  @include main-font(700, 16px, calc(22 / 16));
-  @media screen and (min-width: 768px) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid getColor('full-blue');
+  border-radius: 40px;
+  cursor: pointer;
+
+  @include media-min(tablet) {
     width: 129px;
   }
+}
+
+.ButtonContact {
+  color: getColor('full-blue');
+  background-color: getColor('full-white');
+  scale: 1;
+  transition: scale 250ms ease;
+  @include main-font(700, 16px, calc(22 / 16));
+
   &:hover {
-    background-color: rgba(248, 248, 248, 0.808);
+    scale: 1.1;
   }
 }
+
 .ButtonFavorite {
   cursor: pointer;
-  width: 256px;
-  height: 40px;
-  border-radius: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: getColor('full-white');
   background-color: getColor('full-blue');
-  border: none;
-  color: white;
-  @include main-font(700, 16px, calc(22 / 16));
-  transition: background-color 250ms ease;
+  scale: 1;
+  transition: scale 250ms ease;
   &:hover {
-    background-color: #79bcfc;
+    scale: 1.1;
     &:hover .icon {
       scale: 1.15;
     }
   }
-  @media screen and (min-width: 768px) {
-    width: 129px;
-  }
 }
+
 .icon {
+  width: 24px;
+  height: 24px;
   margin-left: 7px;
-  fill: white;
+  stroke: getColor('full-white');
+  fill: transparent;
   transition: scale 250ms ease;
 }
