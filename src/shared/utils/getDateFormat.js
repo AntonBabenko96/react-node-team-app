@@ -14,13 +14,13 @@ export function getDifference(date) {
     const birthDate = new Date(date).getTime()
     const diffInTime = dateNow - birthDate;
     const diffInDays = diffInTime / msInOneDay;
-    const inYears = Math.floor(diffInDays / 365);
+    const inYears = diffInDays / 365;
     if(inYears < 1 || inYears > -1) {
         const months = Math.floor(diffInDays / 30.5);
         age = months > 1 ? `${months} months` : `${months} month`;
     }
     if(inYears >= 1 || inYears <= -1 || inYears === 0) {
-        age = inYears > 1 ? `${inYears} years` : `${inYears} year`;
+        age = inYears > 1 ? `${Math.floor(inYears)} years` : `${Math.floor(inYears)} year`;
 
     }
         return age;
