@@ -98,7 +98,6 @@ export const refresh = createAsyncThunk(
     try {
       return await api.getCurrent();
     } catch ({ response }) {
-      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }
