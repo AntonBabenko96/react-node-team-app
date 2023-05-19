@@ -8,6 +8,8 @@ import css from './Modal.module.scss';
 const modalRootEl = document.getElementById('modal-root');
 
 const Modal = ({ className = '', children, onClose }) => {
+
+  
   useEffect(() => {
     document.body.addEventListener('keydown', handleClose);
     return () => document.body.removeEventListener('keydown', handleClose);

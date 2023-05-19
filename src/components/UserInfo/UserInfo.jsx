@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as CameraIcon } from 'img/svg/camera.svg';
 import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
 import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
@@ -13,11 +14,21 @@ import {
 } from 'redux/auth/auth-operations';
 import { updateUserAvatar } from 'api/auth-api';
 import styles from './UserInfo.module.scss';
+import React from 'react';
+import Modal from 'components/Modal/Modal';
+
 
 export default function UserInfo() {
+ const navigate = useNavigate();
   const userInfo = useSelector(selectUser);
   const isLogin = useSelector(selectIsLogin);
   const dispatch = useDispatch();
+
+  const [showModal, setShowModal] = useState(false);
+
+   const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const [fields, setFields] = useState({
     name: '',
@@ -93,6 +104,7 @@ export default function UserInfo() {
 
   const handleLogoutClick = () => {
     dispatch(logout());
+  navigate('/notices/sell');
   };
 
   return (
@@ -293,9 +305,24 @@ export default function UserInfo() {
               )}
             </label>
           </div>
-          <div className={styles.logout} onClick={handleLogoutClick}>
+          <div className={styles.logout} onClick={toggleModal}>
             <LogoutIcon className={styles.logout__icon} />
             <p className={styles.logout__text}>Log Out</p>
+            {showModal && (
+              <Modal onClose={toggleModal}>
+                <div className={styles.modal__wrapper}>
+                  <p className={styles.question}> Already leaving ?</p>
+                  <div className={styles.button__wrapper}>
+                     <button className={styles.button__question_cancel} onClick={toggleModal}>
+                      Cancel
+                    </button>
+                    <button className={styles.button__question_yes} onClick={handleLogoutClick} >
+                      Yes
+                      <LogoutIcon className={styles.logout__icon_yes} />
+                    </button>
+                  </div>
+                </div>
+              </Modal>)}
           </div>
         </div>
       </div>
