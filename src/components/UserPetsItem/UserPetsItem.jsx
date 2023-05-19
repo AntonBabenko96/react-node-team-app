@@ -31,7 +31,7 @@ export default function UserPetsItem({
         {photoURL && (
           <img
             className={styles.pets__image}
-            src={`https://your-pet-backend.onrender.com/${photoURL}`}
+            src={photoURL}
             alt={name}
             width="240"
           />

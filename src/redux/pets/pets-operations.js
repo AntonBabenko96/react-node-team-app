@@ -44,8 +44,8 @@ export const removePets = createAsyncThunk(
   'pet/delete',
   async (id, { rejectWithValue }) => {
     try {
-      const result = await userPets.deleteUserPets(id);
-      return result;
+      await userPets.deleteUserPets(id);
+      return id;
     } catch ({ response }) {
       return rejectWithValue(response.data.message);
     }
