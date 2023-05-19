@@ -4,4 +4,8 @@
   @include main-font(500, 20px, 27px);
   padding-left: 12px;
   margin-bottom: 24px;
+  @include media-min(tablet) {
+    @include main-font(500, 28px, 38px);
+    padding-left: 0;
+  }
 }

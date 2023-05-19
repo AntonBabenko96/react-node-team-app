@@ -6,6 +6,7 @@ const initialState = {
   items: [],
   loading: false,
   error: null,
+  result: '',
 };
 
 const petsSlice = createSlice({
@@ -16,29 +17,31 @@ const petsSlice = createSlice({
       .addCase(addPet.pending, state => {
         state.loading = true;
         state.error = null;
-        // console.log(`LOADING`);
+        state.result = `pending`;
       })
       .addCase(addPet.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.items.push(payload);
-        // console.log('RESPONSE:', payload);
+        state.result = `fulfilled`;
       })
       .addCase(addPet.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
-        // console.log(`ERROR`, payload);
+        state.result = `rejected`;
       })
       .addCase(addNotice.pending, state => {
         state.loading = true;
         state.error = null;
+        state.result = `pending`;
       })
       .addCase(addNotice.fulfilled, (state, { payload }) => {
         state.loading = false;
-        // console.log('RESPONSE:', payload);
+        state.result = `fulfilled`;
       })
       .addCase(addNotice.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
+        state.result = `rejected`;
       })
       .addCase(getPets.pending, state => {
         state.loading = true;

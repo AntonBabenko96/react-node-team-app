@@ -10,12 +10,22 @@
   border-radius: 40px;
   padding-left: 10px;
   border: 1px solid getColor(full-blue);
+  height: 40px;
+  width: 100%;
+  @include media-min(tablet) {
+    padding-left: 16px;
+  }
 }
 
 .errorField {
   border-radius: 40px;
   padding-left: 10px;
   border: 1px solid getColor(full-red);
+  width: 100%;
+  height: 40px;
+  @include media-min(tablet) {
+    padding-left: 16px;
+  }
 }
 
 .errorField:focus {
@@ -32,11 +42,19 @@
   flex-direction: column;
   gap: 4px;
   @include main-font(500, 14px, 19px);
+  @include media-min(tablet) {
+    @include main-font(500, 20px, 27px);
+    padding-left: 0;
+  }
 }
 
-.input::placeholder {
+.input::placeholder,
+.errorField::placeholder {
   @include main-font(400, 14px, 21px);
   color: #888888;
+  @include media-min(tablet) {
+    @include main-font(400, 16px, 24px);
+  }
 }
 
 .controls {
@@ -45,6 +63,11 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  @include media-min(tablet) {
+    flex-direction: row-reverse;
+    gap: 32px;
+    margin-top: 40px;
+  }
 }
 
 .error {
@@ -53,6 +76,9 @@
   user-select: none;
   bottom: -17px;
   left: 0;
+  @include media-min(tablet) {
+    @include main-font(500, 14px, 20px);
+  }
 }
 
 .next {

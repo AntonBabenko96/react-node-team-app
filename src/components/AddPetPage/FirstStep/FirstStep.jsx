@@ -6,12 +6,11 @@ import { ReactComponent as Arrow } from '../../../img/svg/arrow-left.svg';
 import { ReactComponent as Paw } from '../../../img/svg/pawprint.svg';
 import styles from './FirstStep.module.scss';
 
-function FirstStep({ onSubmit, next, data }) {
+function FirstStep({ onSubmit, next, data, path }) {
   const radioHandler = values => {
     onSubmit(values.category);
     next(values);
   };
-
   const validationSchema = Yup.object({
     category: Yup.string().required('Choose category'),
   });
@@ -68,7 +67,7 @@ function FirstStep({ onSubmit, next, data }) {
             Next
             <Paw className={styles.icon}></Paw>
           </button>
-          <Link className={styles.cancel} to="/">
+          <Link className={styles.cancel} to={path}>
             <Arrow className={styles.arrow}></Arrow>
             Cancel
           </Link>
