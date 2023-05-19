@@ -39,6 +39,6 @@ export async function deleteMyNotice(id) {
 
 // для отримання улюблених оголошень авторизованого кристувача
 export async function getFavoritesList() {
-  const { data } = await instance.delete(`/users/favorites`);
+  const { data } = await instance.get(`/users/favorites`);
   return data;
 }
