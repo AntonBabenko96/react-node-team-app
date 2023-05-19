@@ -8,6 +8,7 @@ import {
   removeFromFavorites,
   getUserInfo,
   updateUserInfo,
+  updateAvatar,
 } from './auth-operations';
 
 const initialState = {
@@ -21,7 +22,6 @@ const handlePending = state => {
   state.loading = true;
   state.error = null;
 };
-
 
 const handleRejected = (state, { payload }) => {
   state.loading = false;
@@ -38,7 +38,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = payload.user;
         state.error = null;
-       
       })
       .addCase(register.rejected, handleRejected)
       .addCase(login.pending, handlePending)
@@ -98,7 +97,14 @@ const authSlice = createSlice({
         state.error = null;
         state.user = payload;
       })
-      .addCase(updateUserInfo.rejected, handleRejected);
+      .addCase(updateUserInfo.rejected, handleRejected)
+      .addCase(updateAvatar.pending, handlePending)
+      .addCase(updateAvatar.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.error = null;
+        state.user.avatarURL = payload.avatarURL;
+      })
+      .addCase(updateAvatar.rejected, handleRejected);
   },
 });
 
