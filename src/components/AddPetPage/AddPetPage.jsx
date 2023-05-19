@@ -29,7 +29,7 @@ export default function AddPetPage() {
   const [state, setState] = useState(stateInitialValue);
 
   const location = useLocation();
-  console.log(location);
+  // console.log(`target`, location);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -66,7 +66,7 @@ export default function AddPetPage() {
       ? dispatch(addPet(data))
       : dispatch(addNotice(data));
 
-    navigate('/');
+    navigate(location.state?.pathname || `/`);
   };
 
   const stepStyle = position => {
@@ -95,6 +95,7 @@ export default function AddPetPage() {
       name="firstStep"
       onSubmit={handleCategory}
       next={handleNextStep}
+      path={location.state?.pathname || `/`}
     />,
     <SecondStep
       data={state}
@@ -125,7 +126,7 @@ export default function AddPetPage() {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ marginTop: `40px` }}>
       <div className={styles.form}>
         {currentStep === 0 && <h2 className={styles.title}>Add pet</h2>}
         {currentStep !== 0 && (

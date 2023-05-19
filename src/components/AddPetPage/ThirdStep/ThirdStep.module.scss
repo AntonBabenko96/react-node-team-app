@@ -9,7 +9,13 @@
 .position {
   display: flex;
   flex-direction: column;
+  gap: 16px;
   @include media-min(tablet) {
+    flex-direction: row;
+    gap: 63px;
+  }
+  @include media-min(desktop) {
+    gap: 97px;
   }
 }
 
@@ -17,6 +23,10 @@
   border-radius: 40px;
   padding-left: 10px;
   border: 1px solid getColor(full-blue);
+  height: 40px;
+  @include media-min(tablet) {
+    width: 395px;
+  }
 }
 
 .input:focus {
@@ -27,22 +37,31 @@
   border-radius: 40px;
   padding-left: 10px;
   border: 1px solid getColor(full-red);
-  width: 100%;
+  height: 40px;
+
+  @include media-min(tablet) {
+    width: 395px;
+  }
 }
 
 .errorField:focus {
   outline: 1px solid getColor(full-red);
 }
-
+.commentsError::placeholder,
+.comments::placeholder,
 .input::placeholder,
 .errorField::placeholder {
   @include main-font(400, 14px, 21px);
   color: #888888;
+  @include media-min(tablet) {
+    @include main-font(400, 16px, 24px);
+  }
 }
 
 .sex {
   display: flex;
   position: relative;
+  gap: 16px;
 }
 
 input[type='radio'] {
@@ -51,12 +70,26 @@ input[type='radio'] {
   width: 0;
 }
 
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  @include media-min(tablet) {
+    gap: 16px;
+  }
+}
 .sex label {
   @include main-font(400, 16px, 24px);
   display: flex;
   width: fit-content;
   background-color: transparent;
-  padding: 8px 16px;
+  // padding: 8px 16px;
   border-radius: 40px;
   color: #888888;
 }
@@ -75,6 +108,10 @@ label:hover {
   flex-direction: column;
   gap: 4px;
   @include main-font(500, 14px, 19px);
+  @include media-min(tablet) {
+    gap: 8px;
+    @include main-font(500, 20px, 27px);
+  }
 }
 
 .error {
@@ -83,22 +120,32 @@ label:hover {
   user-select: none;
   bottom: -17px;
   left: 0;
+  @include main-font(500, 14px, 19px);
 }
 
 .uploadlabel {
   @include main-font(500, 14px, 19px);
   margin-right: 27px;
+  @include media-min(tablet) {
+    @include main-font(500, 20px, 27px);
+  }
 }
 
 .hidden {
   opacity: 0;
   width: 0;
+  height: 0;
 }
 
 .uploadwrapper {
   display: flex;
   align-items: center;
   position: relative;
+  @include media-min(tablet) {
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+  }
 }
 
 .upload {
@@ -125,12 +172,14 @@ label:hover {
 .comments {
   position: relative;
   resize: none;
-  width: 100%;
   outline: none;
   border-radius: 20px;
   height: 92px;
   padding: 8px 16px;
   border: 1px solid getColor(full-blue);
+  @include media-min(tablet) {
+    width: 395px;
+  }
 }
 
 .comments:focus {
@@ -146,6 +195,9 @@ label:hover {
   height: 92px;
   padding: 8px 16px;
   border: 1px solid getColor(full-red);
+  @include media-min(tablet) {
+    width: 395px;
+  }
 }
 
 .commentsError:focus {
@@ -160,6 +212,7 @@ label:hover {
   gap: 20px;
   @include media-min(tablet) {
     flex-direction: row-reverse;
+    gap: 32px;
   }
 }
 
@@ -177,6 +230,9 @@ label:hover {
   align-items: center;
   justify-content: center;
   gap: 12px;
+  @include media-min(tablet) {
+    margin-left: 0px;
+  }
 }
 
 .next:hover,
@@ -234,7 +290,7 @@ label:hover {
   justify-content: center;
   cursor: pointer;
   transition: 300ms;
-  margin-left: 7px;
+  margin: auto;
 }
 
 .trashBtn:hover,

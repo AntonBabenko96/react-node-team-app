@@ -4,7 +4,6 @@ import tabletImage from '../../img/mainPage/picturesTablet.png';
 import desktopImage from '../../img/mainPage/picturesDesktop2.png';
 
 export default function MainPage() {
-  const location = useLocation();
   return (
     <>
       <section className={Style.MainSection}>

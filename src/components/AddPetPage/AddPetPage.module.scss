@@ -4,12 +4,13 @@
   border-radius: 40px;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   padding: 20px 8px 16px 8px;
-  width: 280px;
+  // width: 280px;
+  width: fit-content;
   margin-left: auto;
   margin-right: auto;
   background-color: white;
   @include media-min(tablet) {
-    width: 458px;
+    // width: 458px;
     padding: 20px 32px 20px 32px;
   }
   @include media-min(desktop) {
@@ -22,7 +23,6 @@
   margin-bottom: 24px;
   @include media-min(tablet) {
     @include main-font(500, 28px, 38px);
-    padding-left: 0;
   }
 }
 
@@ -31,7 +31,7 @@
   min-width: 80px;
   position: relative;
   @include media-min(tablet) {
-    @include main-font(400, 15px, 26px);
+    @include main-font(500, 16px, 26px);
   }
 }
 .stepWrapper {
@@ -41,6 +41,10 @@
   margin-bottom: 44px;
   user-select: none;
   @include media-min(tablet) {
+    margin-left: auto;
+    margin-right: auto;
+    gap: 16px;
+    max-width: 425px;
   }
 }
 

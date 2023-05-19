@@ -1,7 +1,7 @@
 @import '../../../styles/styles.scss';
 
 .div {
-  width: 100%;
+  width: 280px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -61,6 +61,7 @@
   gap: 20px;
   @include media-min(tablet) {
     flex-direction: row-reverse;
+    gap: 32px;
   }
 }
 
