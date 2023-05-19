@@ -128,9 +128,12 @@ export default function NoticesCategoriesList() {
       favorite,
       own,
     }) => {
-      const age = birth ? getDifference(birth) : 'no data';
-      if (location.length > 6) {
+      let age = birth ? getDifference(birth) : 'no data';
+      if (location.length > 5) {
         location = location.slice(0, 4) + '...';
+      }
+      if (age.length > 5) {
+        age = age.slice(0, 4) + '...';
       }
       const categoryItem = categoryItems.find(item => item.name === category);
       category = categoryItem.value;

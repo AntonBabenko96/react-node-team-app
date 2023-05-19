@@ -3,9 +3,6 @@ import phoneImage from '../../img/mainPage/picturesPhone.png';
 import tabletImage from '../../img/mainPage/picturesTablet.png';
 import desktopImage from '../../img/mainPage/picturesDesktop2.png';
 
-
-
-
 export default function MainPage() {
   return (
     <>
@@ -18,7 +15,6 @@ export default function MainPage() {
             <img className="apartments__image" src={phoneImage} alt="" />
           </picture>
         </div>
-        
       </section>
     </>
   );
