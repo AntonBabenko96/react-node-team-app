@@ -1,8 +1,10 @@
-import Style from './NoticeModal.module.scss';
-import { BsHeart } from 'react-icons/bs';
-
-import placeholder from 'img/placeholder.png';
 import { getDateFormat } from 'shared/utils/getDateFormat';
+import {ReactComponent as Heart} from "img/svg/heart.svg";
+import placeholder from 'img/placeholder.png';
+
+import Style from './NoticeModal.module.scss';
+// import { BsHeart } from 'react-icons/bs';
+
 
 let email = '';
 let phone = '';
@@ -30,8 +32,7 @@ export default function NoticeModal({
   }
 
   return (
-    <>
-      <div>
+      <div className={Style.wrapper}>
         <div className={Style.Notice}>
           <div className={Style.NoticePhotoWrapper}>
             <img
@@ -83,17 +84,16 @@ export default function NoticeModal({
           <strong>Comments:</strong> {comments}
         </p>
         <div className={Style.ButtonWrapper}>
-          <button className={Style.ButtonContact}>
+          <button className={`${Style.ButtonContact} ${Style.button}`}>
             <a href={`tel: ${phone}`}>Contact</a>
           </button>
           <button
-            className={Style.ButtonFavorite}
+            className={`${Style.ButtonFavorite} ${Style.button}`}
             onClick={() => onFavoriteBtnClick(_id)}
           >
-            Add to <BsHeart className={Style.icon} />
+            Add to <Heart className={Style.icon} />
           </button>
         </div>
       </div>
-    </>
   );
 }
