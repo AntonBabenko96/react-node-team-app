@@ -4,27 +4,47 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 40px;
+  margin-right: 16px;
+  margin-bottom: 60px;
+  margin-left: 16px;
+
+  @include media-min(tablet) {
+    margin-right: 105px;
+    margin-left: 110px;
+  }
 }
 
 .title {
-  @include main-font(700, 28px, 38px, bold);
+  @include main-font(500, 24px, calc(33 / 24));
   text-align: center;
   margin-bottom: 40px;
-  margin-top: 60px;
+
+  @include media-min(tablet) {
+    @include main-font(700, 28px, calc(38 / 28));
+  }
 }
 
 .text {
-  max-width: 393px;
-  @include main-font(700, 16px, 22px, normal);
+  max-width: 248px;
+  @include main-font(500, 16px, calc(22 / 16));
   text-align: center;
   margin-bottom: 48px;
+
+  @include media-min(tablet) {
+    max-width: 393px;
+  }
 }
 
 .modalButtons {
   display: flex;
-  flex-direction: row;
-  gap: 17px;
-  margin-bottom: 60px;
+  flex-direction: column;
+  gap: 8px;
+
+  @include media-min(tablet) {
+    flex-direction: row;
+    gap: 17px;
+  }
 }
 
 .button {
@@ -32,7 +52,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 129px;
+  width: 248px;
   height: 40px;
   outline: none;
   border: 2px solid getColor('full-blue');
@@ -40,10 +60,15 @@
   cursor: pointer;
   @include main-font(700, 16px, calc(22 / 16));
   scale: 1;
-  transition: scale 300ms linear;
+  transition: scale 300ms easy;
 
-  &:hover, :focus{
+  &:hover,
+  :focus {
     scale: 1.1;
+  }
+
+  @include media-min(tablet) {
+    width: 129px;
   }
 }
 
@@ -51,6 +76,7 @@
   color: getColor('full-blue');
   background-color: getColor('full-white');
 }
+
 .btnYes {
   color: getColor('full-white');
   background-color: getColor('full-blue');

@@ -7,9 +7,8 @@ import css from './Modal.module.scss';
 
 const modalRootEl = document.getElementById('modal-root');
 
-const Modal = ({ className = '', children, onClose }) => {
 
-  
+const Modal = ({ className = '', children, onClose }) => {
   useEffect(() => {
     document.body.addEventListener('keydown', handleClose);
     return () => document.body.removeEventListener('keydown', handleClose);
@@ -24,9 +23,9 @@ const Modal = ({ className = '', children, onClose }) => {
 
   return createPortal(
     <div onClick={handleClose} className={css.overlay}>
-      <div className={`${css.modal} ${className}`}>
+      <div className={css.modal}>
         <button className={css.button} type="button" onClick={onClose}>
-          <CloseIcon color="primary" />
+          <CloseIcon className={css.icon}/>
         </button>
         {children}
       </div>
