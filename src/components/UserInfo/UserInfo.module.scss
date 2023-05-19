@@ -221,3 +221,59 @@ input[type='date'] {
     margin-right: 28px;
   }
 }
+
+.button__wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.question {
+  @include main-font(500, 24px, 33px);
+  text-align: center;
+  margin-bottom: 30px;
+  @media (min-width: 1280px) {
+    @include main-font(500, 36px, 49px);
+    padding-top: 108px;
+    margin-bottom: 48px;
+  }
+}
+.button__question_cancel {
+  @include main-font(700, 16px, 22px);
+  border: 2px solid #54adff;
+  border-radius: 40px;
+  width: 100px;
+  height: 40px;
+  @media (min-width: 1280px) {
+    width: 129px;
+    height: 40px;
+  }
+  color: #54adff;
+  background-color: #ffffff;
+}
+.button__question_yes {
+  @include main-font(700, 16px, 22px);
+  background: #54adff;
+  border-radius: 40px;
+  color: #fff;
+  width: 100px;
+  height: 40px;
+  border: none;
+  @media (min-width: 1280px) {
+    width: 129px;
+    height: 40px;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logout__icon_yes {
+  margin-left: 5px;
+  width: 24px;
+  height: 24px;
+  stroke: getColor('full-white');
+  fill: transparent;
+}
+.modal__wrapper {
+  @media (min-width: 1280px) {
+    height: 354px;
+  }
+}
