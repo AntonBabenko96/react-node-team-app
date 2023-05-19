@@ -17,7 +17,7 @@ export default function UserPage() {
             <div className={styles.descktop__pets}>
               <div className={styles.title__button}>
                 <h3 className={styles.title__pets}>My pets:</h3>
-                <AddPetButton />
+                <AddPetButton styles={''} />
               </div>
               <UserPetsList />
             </div>

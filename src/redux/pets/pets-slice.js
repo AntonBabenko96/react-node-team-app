@@ -64,8 +64,7 @@ const petsSlice = createSlice({
       })
       .addCase(removePets.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.items = state.items.filter(({ id }) => id !== payload.id);
-        console.log('RESPONSE:', payload);
+        state.items = state.items.filter(({ _id }) => _id !== payload);
       })
       .addCase(removePets.rejected, (state, { payload }) => {
         state.loading = false;
