@@ -16,23 +16,24 @@ export default function NoticesSearch() {
 
 
   const handleInput = event => {
-    setQuery(event.target.value.toLowerCase().trim());
+    const inputValue = event.target.value;
+    setQuery(inputValue.toLowerCase());
   };
 
   const clearQuery = () => {
     setQuery('');
     setHasClose(false);
   };
-
   const onSubmit = event => {
     event.preventDefault();
-
-    if (!query) {
+  
+    const trimmedQuery = query.trim();
+    if (!trimmedQuery) {
       Notify.warning('Please enter your search parameters');
       return;
     }
-
-    SetSearchParams({ search: query });
+  
+    SetSearchParams({ search: trimmedQuery });
   };
 
   const onClickSearch = (event) => {
