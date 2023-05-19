@@ -1,8 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectNotice, selectNotices } from 'redux/notices/notices-selectors';
-import { selectIsLogin } from 'redux/auth/selectors';
-import { getNoticeById, getNotices } from 'redux/notices/notices-operations';
+import {
+  selectNotice,
+  selectNotices,
+} from 'redux/notices/notices-selectors';
+import {
+  selectIsLogin,
+} from 'redux/auth/selectors';
+import {
+  getNoticeById,
+  getNotices,
+} from 'redux/notices/notices-operations';
 import {
   addToFavorites,
   removeFromFavorites,
@@ -15,9 +23,9 @@ import Modal from 'components/Modal/Modal';
 import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
 import { getDifference } from 'shared/utils/getDateFormat';
 import { ModalApproveAction } from 'components/Modal/ModalApproveAction/ModalApproveAction';
+import Paginations from 'components/Pagination/Pagination';
 
 const data = {
-  page: 1,
   limit: 12,
 };
 
@@ -26,9 +34,16 @@ const categoryItems = [
   { name: 'lost-found', value: 'lost/found' },
   { name: 'for-free', value: 'in good hands' },
 ];
+
 export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
+
+  const [page, setPage] = useState(1);
+
+  const getPage = (paginationPage) => {
+    setPage(paginationPage);
+  };
 
   const notices = useSelector(selectNotices);
   const notice = useSelector(selectNotice);
@@ -36,21 +51,21 @@ export default function NoticesCategoriesList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getNotices(data));
-  }, [dispatch]);
+    dispatch(getNotices({ ...data, page }));
+  }, [dispatch, page]);
 
   useEffect(() => {
     if (isLogin) {
-      dispatch(getNotices(data));
+      dispatch(getNotices({ ...data, page }));
     }
-  }, [dispatch, isLogin]);
+  }, [dispatch, isLogin, page]);
 
-  const handleLearnMoreBtnClick = id => {
+  const handleLearnMoreBtnClick = (id) => {
     dispatch(getNoticeById(id));
     setShowModal(true);
   };
 
-  const handleDeleteBtnClick = id => {
+  const handleDeleteBtnClick = (id) => {
     setIsDelete(true);
     dispatch(getNoticeById(id));
     setShowModal(true);
@@ -61,24 +76,16 @@ export default function NoticesCategoriesList() {
   };
 
   const handleFavoriteBtnClick = (id, favorite = false) => {
-    console.log(favorite);
     if (!isLogin) {
       Notify.info(
         'The option "Add to favorite" is available only to registered users'
       );
-    }
-    // else if (isFromModal) {
-    //   dispatch(addToFavorites(id));
-    //   setTimeout(() => {
-    //     dispatch(getNotices(data));
-    //   }, 500);
-    // }
-    else {
+    } else {
       favorite
         ? dispatch(removeFromFavorites(id))
         : dispatch(addToFavorites(id));
       setTimeout(() => {
-        dispatch(getNotices(data));
+        dispatch(getNotices({ ...data, page }));
       }, 500);
     }
   };
@@ -100,7 +107,7 @@ export default function NoticesCategoriesList() {
       if (location.length > 6) {
         location = location.slice(0, 4) + '...';
       }
-      const categoryItem = categoryItems.find(item => item.name === category);
+      const categoryItem = categoryItems.find((item) => item.name === category);
       category = categoryItem.value;
       return (
         <NoticeCategoryItem
@@ -126,6 +133,9 @@ export default function NoticesCategoriesList() {
   return (
     <>
       <ul className={s.list}>{elements}</ul>
+      {notices.length > 0 && (
+        <Paginations getPage={getPage} count={Math.ceil(notices.length / data.limit)} />
+      )}
       {showModal && (
         <Modal className="css.noticeModal" onClose={onModalClose}>
           {isDelete ? (
