@@ -65,9 +65,8 @@ export const getFavoritesList = createAsyncThunk(
   'notices/favorite-ads',
   async (_, { rejectWithValue }) => {
     try {
-      const { data: result } = await api.getFavoritesList();
-      console.log(result);
-      return result;
+      const data = await api.getFavoritesList();
+      return data;
     } catch ({ response }) {
       Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
