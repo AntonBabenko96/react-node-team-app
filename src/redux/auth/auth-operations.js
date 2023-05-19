@@ -18,7 +18,6 @@ export const login = createAsyncThunk(
 export const register = createAsyncThunk(
   'user/register',
   async (data, { rejectWithValue, dispatch }) => {
-    console.log(data);
     try {
       const result = await api.register(data);
       dispatch(login(data));
@@ -94,11 +93,12 @@ export const updateUserInfo = createAsyncThunk(
 
 export const refresh = createAsyncThunk(
   'user/refresh',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
-      return await api.getCurrent();
+      const result = await api.getCurrent();
+      dispatch(getUserInfo());
+      return result;
     } catch ({ response }) {
-      Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
     }
   }

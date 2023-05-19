@@ -9,3 +9,5 @@ export const selectIsLogin = createSelector(selectAuth, auth => auth.isLogin);
 export const selectLoading = createSelector(selectAuth, auth => auth.loading);
 
 export const selectError = createSelector(selectAuth, auth => auth.error);
+
+export const selectNewUser = createSelector(selectAuth, auth => auth.newUser);

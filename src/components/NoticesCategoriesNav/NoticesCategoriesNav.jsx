@@ -28,7 +28,7 @@ export default function NoticesCategoriesNav() {
     const fetch = {
       category: value,
       page: 1,
-      limit: 20,
+      limit: 12,
     };
     dispatch(getNotices(fetch));
   };
