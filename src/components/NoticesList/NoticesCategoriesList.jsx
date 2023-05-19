@@ -46,6 +46,7 @@ export default function NoticesCategoriesList() {
   }, [dispatch, isLogin]);
 
   const handleLearnMoreBtnClick = id => {
+    setIsDelete(false);
     dispatch(getNoticeById(id));
     setShowModal(true);
   };
@@ -61,19 +62,11 @@ export default function NoticesCategoriesList() {
   };
 
   const handleFavoriteBtnClick = (id, favorite = false) => {
-    console.log(favorite);
     if (!isLogin) {
       Notify.info(
         'The option "Add to favorite" is available only to registered users'
       );
-    }
-    // else if (isFromModal) {
-    //   dispatch(addToFavorites(id));
-    //   setTimeout(() => {
-    //     dispatch(getNotices(data));
-    //   }, 500);
-    // }
-    else {
+    } else {
       favorite
         ? dispatch(removeFromFavorites(id))
         : dispatch(addToFavorites(id));
@@ -96,6 +89,7 @@ export default function NoticesCategoriesList() {
       favorite,
       own,
     }) => {
+      console.log(birth)
       const age = birth ? getDifference(birth) : 'no data';
       if (location.length > 6) {
         location = location.slice(0, 4) + '...';
