@@ -67,6 +67,14 @@ export const noticesSlice = createSlice({
       })
       .addCase(getFavoritesList.rejected, handleRejected);
   },
+  reducers: {
+    changeFavoriteStatus(state, { payload: { id, status } }) {
+      const notice = state.items.notices.find(item => item._id === id);
+      notice.favorite = status;
+    },
+  },
 });
+
+export const { changeFavoriteStatus } = noticesSlice.actions;
 
 export default noticesSlice.reducer;

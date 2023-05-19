@@ -1,16 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectNotice,
-  selectNotices,
-} from 'redux/notices/notices-selectors';
-import {
-  selectIsLogin,
-} from 'redux/auth/selectors';
-import {
-  getNoticeById,
-  getNotices,
-} from 'redux/notices/notices-operations';
+import { selectNotice, selectNotices } from 'redux/notices/notices-selectors';
+import { selectIsLogin } from 'redux/auth/selectors';
+import { getNoticeById, getNotices } from 'redux/notices/notices-operations';
 import {
   addToFavorites,
   removeFromFavorites,
@@ -24,6 +16,7 @@ import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
 import { getDifference } from 'shared/utils/getDateFormat';
 import { ModalApproveAction } from 'components/Modal/ModalApproveAction/ModalApproveAction';
 import Paginations from 'components/Pagination/Pagination';
+import { changeFavoriteStatus } from 'redux/notices/notices-slice';
 
 const data = {
   limit: 12,
@@ -41,7 +34,7 @@ export default function NoticesCategoriesList() {
 
   const [page, setPage] = useState(1);
 
-  const getPage = (paginationPage) => {
+  const getPage = paginationPage => {
     setPage(paginationPage);
   };
 
@@ -53,7 +46,6 @@ export default function NoticesCategoriesList() {
   const isLogin = useSelector(selectIsLogin);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(getNotices({ ...data, page }));
   }, [dispatch, page]);
@@ -64,13 +56,12 @@ export default function NoticesCategoriesList() {
     }
   }, [dispatch, isLogin, page]);
 
-
-  const handleLearnMoreBtnClick = (id) => {
+  const handleLearnMoreBtnClick = id => {
     dispatch(getNoticeById(id));
     setShowModal(true);
   };
 
-  const handleDeleteBtnClick = (id) => {
+  const handleDeleteBtnClick = id => {
     setIsDelete(true);
     dispatch(getNoticeById(id));
     setShowModal(true);
@@ -87,11 +78,12 @@ export default function NoticesCategoriesList() {
       );
     } else {
       favorite
-        ? dispatch(removeFromFavorites(id))
-        : dispatch(addToFavorites(id));
-      setTimeout(() => {
-        dispatch(getNotices({ ...data, page }));
-      }, 500);
+        ? dispatch(removeFromFavorites(id)).then(() => {
+            dispatch(changeFavoriteStatus({ id, status: false }));
+          })
+        : dispatch(addToFavorites(id)).then(() => {
+            dispatch(changeFavoriteStatus({ id, status: true }));
+          });
     }
   };
 
@@ -115,7 +107,7 @@ export default function NoticesCategoriesList() {
       if (age.length > 5) {
         age = age.slice(0, 4) + '...';
       }
-      const categoryItem = categoryItems.find((item) => item.name === category);
+      const categoryItem = categoryItems.find(item => item.name === category);
       category = categoryItem.value;
       return (
         <NoticeCategoryItem
