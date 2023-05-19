@@ -3,7 +3,7 @@
 .wrapper {
   @include media-max(tablet) {
     width: 280px;
-    padding-top: 24px;
+    padding-top: 44px;
     padding-right: 12px;
     padding-bottom: 16px;
     padding-left: 12px;
@@ -11,7 +11,7 @@
 
   @include media-min(tablet) {
     width: 681px;
-    padding-top: 12px;
+    padding-top: 32px;
     padding-right: 32px;
     padding-bottom: 24px;
     padding-left: 32px;
