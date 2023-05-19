@@ -89,6 +89,7 @@ export default function NoticesCategoriesList() {
       favorite,
       own,
     }) => {
+      console.log(birth)
       const age = birth ? getDifference(birth) : 'no data';
       if (location.length > 6) {
         location = location.slice(0, 4) + '...';
