@@ -64,6 +64,7 @@ export default function NoticesCategoriesList() {
     }
   }, [dispatch, isLogin, page]);
 
+
   const handleLearnMoreBtnClick = (id) => {
     dispatch(getNoticeById(id));
     setShowModal(true);
