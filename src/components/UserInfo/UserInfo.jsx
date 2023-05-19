@@ -138,7 +138,7 @@ export default function UserInfo() {
         <div className={styles.decktop}>
           <div className={styles.information}>
             <label className={styles.text}>
-              Name:
+              <p className={styles.inputTitle}>Name:</p>
               {editField === 'name' ? (
                 <>
                   <input
@@ -171,7 +171,7 @@ export default function UserInfo() {
             </label>
 
             <label className={styles.text}>
-              Email:
+              <p className={styles.inputTitle}>Email:</p>
               {editField === 'email' ? (
                 <>
                   <input
@@ -204,7 +204,7 @@ export default function UserInfo() {
             </label>
 
             <label className={styles.text}>
-              Birthday:
+              <p className={styles.inputTitle}>Birthday:</p>
               {editField === 'birthday' ? (
                 <>
                   <input
@@ -238,7 +238,7 @@ export default function UserInfo() {
             </label>
 
             <label className={styles.text}>
-              Phone:
+              <p className={styles.inputTitle}>Phone:</p>
               {editField === 'phone' ? (
                 <>
                   <input
@@ -271,7 +271,7 @@ export default function UserInfo() {
             </label>
 
             <label className={styles.text}>
-              City:
+              <p className={styles.inputTitle}>City:</p>
               {editField === 'city' ? (
                 <>
                   <input
@@ -303,11 +303,8 @@ export default function UserInfo() {
               )}
             </label>
           </div>
-          <div className={styles.logout}>
-            <LogoutIcon
-              className={styles.logout__icon}
-              onClick={handleLogoutClick}
-            />
+          <div className={styles.logout} onClick={handleLogoutClick}>
+            <LogoutIcon className={styles.logout__icon} />
             <p className={styles.logout__text}>Log Out</p>
           </div>
         </div>

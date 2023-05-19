@@ -31,13 +31,11 @@
   @media (min-width: 768px) {
     margin: 0 auto 15px;
   }
-  // @media (min-width: 1280px) {
-  //   margin: 0 107px 0 107px;
-  // }
 }
 .input {
   outline: none;
-  min-width: 190px;
+  width: 190px;
+  max-width: 450px;
   height: 28px;
   border-radius: 20px;
   border: 1px solid getColor('full-blue');
@@ -52,6 +50,7 @@
   overflow: hidden;
   white-space: nowrap;
   flex-grow: 1;
+  color: getColor('full-black');
 
   @media (min-width: 768px) {
     min-width: 255px;
@@ -107,9 +106,18 @@
   stroke: getColor('full-blue');
   fill: getColor('full-blue');
   cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+
   @media (min-width: 768px) {
     width: 24px;
     height: 24px;
+  }
+
+  &:hover,
+  &:focus {
+    fill: getColor('full-yellow');
+    stroke: getColor('full-yellow');
+    scale: 1.1;
   }
 }
 
@@ -132,8 +140,6 @@
 .user__icon {
   width: 182px;
   height: 182px;
-  //   stroke: getColor('full-blue');
-  //   fill: transparent;
 }
 
 .user__camera {
@@ -146,10 +152,20 @@
   @media (min-width: 1280px) {
     margin-top: 14px;
   }
+  &:hover,
+  &:focus {
+    stroke: getColor('full-yellow');
+    scale: 1.1;
+  }
 }
 .camera__title {
   display: flex;
   justify-content: center;
+
+  &:hover,
+  &:focus {
+    transform: rotate(360deg);
+  }
 }
 
 .logout {
@@ -175,6 +191,13 @@
   stroke: getColor('full-blue');
   fill: transparent;
   cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+  &:hover,
+  &:focus {
+    stroke: getColor('full-yellow');
+    scale: 1.1;
+    transform: rotate(360deg);
+  }
 }
 
 .userAvatar {
@@ -187,5 +210,14 @@
 input[type='date'] {
   &::-webkit-calendar-picker-indicator {
     display: none;
+  }
+}
+
+.inputTitle {
+  display: block;
+  width: 66px;
+  margin-right: 8px;
+  @media (min-width: 768px) {
+    margin-right: 28px;
   }
 }
