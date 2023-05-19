@@ -78,7 +78,13 @@ export default function UserInfo() {
   };
 
   const handleInputBlur = () => {
-    dispatch(updateUserInfo({ [editField]: fields[editField] }));
+    if (
+      editField &&
+      fields[editField] !== userInfo[editField] &&
+      fields[editField] !== ''
+    ) {
+      dispatch(updateUserInfo({ [editField]: fields[editField] }));
+    }
     setEditField('');
   };
 
@@ -120,8 +126,11 @@ export default function UserInfo() {
               style={{ display: 'none' }}
               onChange={handleFileChange}
             />
-            <div className={styles.camera__title} onClick={handleUploadClick}>
-              <CameraIcon className={styles.user__camera} />
+            <div className={styles.camera__title}>
+              <CameraIcon
+                className={styles.user__camera}
+                onClick={handleUploadClick}
+              />
               <p className={styles.edit}>Edit photo</p>
             </div>
           </div>
@@ -205,6 +214,7 @@ export default function UserInfo() {
                     name="birthday"
                     className={styles.input}
                     value={fields.birthday}
+                    type="date"
                   />
                   <CheckIcon
                     className={styles.check__icon}
@@ -293,8 +303,11 @@ export default function UserInfo() {
               )}
             </label>
           </div>
-          <div className={styles.logout} onClick={handleLogoutClick}>
-            <LogoutIcon className={styles.logout__icon} />
+          <div className={styles.logout}>
+            <LogoutIcon
+              className={styles.logout__icon}
+              onClick={handleLogoutClick}
+            />
             <p className={styles.logout__text}>Log Out</p>
           </div>
         </div>

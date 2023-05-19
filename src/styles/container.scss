@@ -4,7 +4,8 @@
   height: 100%;
   margin-left: auto;
   margin-right: auto;
-
+  outline: 2px solid red;
+  outline-offset: -2px;
   @include media-max(mobile) {
     min-width: 320px;
     max-width: 573px;

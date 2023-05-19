@@ -42,12 +42,16 @@
   border-radius: 20px;
   border: 1px solid getColor('full-blue');
   padding-left: 12px;
-  padding-right: 12px;
+  padding-right: 32px;
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
   letter-spacing: 0.04em;
   color: getColor('full-black');
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-grow: 1;
 
   @media (min-width: 768px) {
     min-width: 255px;
@@ -69,6 +73,7 @@
 }
 .text {
   position: relative;
+
   @include main-font(600, 14px, 1.35);
   color: getColor('full-black');
   display: flex;
@@ -95,8 +100,8 @@
 .edit__icon {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(500%, -50%);
+  right: 0;
+  transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
   stroke: getColor('full-blue');
@@ -105,7 +110,6 @@
   @media (min-width: 768px) {
     width: 24px;
     height: 24px;
-    transform: translate(570%, -50%);
   }
 }
 
@@ -137,6 +141,8 @@
   height: 24px;
   stroke: getColor('full-blue');
   fill: transparent;
+  cursor: pointer;
+
   @media (min-width: 1280px) {
     margin-top: 14px;
   }
@@ -144,7 +150,6 @@
 .camera__title {
   display: flex;
   justify-content: center;
-  cursor: pointer;
 }
 
 .logout {
@@ -152,7 +157,6 @@
   margin-bottom: 25px;
   display: flex;
   margin-left: 10px;
-  cursor: pointer;
   @media (min-width: 768px) {
     margin-top: 13px;
     margin-bottom: 0;
@@ -170,6 +174,7 @@
   height: 24px;
   stroke: getColor('full-blue');
   fill: transparent;
+  cursor: pointer;
 }
 
 .userAvatar {
@@ -177,4 +182,10 @@
   width: 182px;
   height: 182px;
   border-radius: 40px;
+}
+
+input[type='date'] {
+  &::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 }
