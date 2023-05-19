@@ -26,6 +26,7 @@
   line-height: 22px;
   letter-spacing: 0.04em;
   color: getColor('full-yellow');
+  transition: color 0.3s ease-in-out, scale 0.3s ease-in-out;
 }
 
 .avtarUser {
@@ -33,4 +34,14 @@
   height: 28px;
   border-radius: 50%;
   margin-right: 12px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.userLink:hover .userName {
+  color: getColor('full-blue');
+  scale: 1.1;
+}
+
+.userLink:hover .avtarUser {
+  transform: rotate(360deg);
 }
