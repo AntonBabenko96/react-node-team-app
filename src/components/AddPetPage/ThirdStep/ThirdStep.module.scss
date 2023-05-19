@@ -21,7 +21,7 @@
 
 .input {
   border-radius: 40px;
-  padding-left: 10px;
+  padding-left: 16px;
   border: 1px solid getColor(full-blue);
   height: 40px;
   @include media-min(tablet) {
@@ -35,7 +35,7 @@
 
 .errorField {
   border-radius: 40px;
-  padding-left: 10px;
+  padding-left: 16px;
   border: 1px solid getColor(full-red);
   height: 40px;
 
@@ -89,7 +89,6 @@ input[type='radio'] {
   display: flex;
   width: fit-content;
   background-color: transparent;
-  // padding: 8px 16px;
   border-radius: 40px;
   color: #888888;
 }
@@ -132,6 +131,7 @@ label:hover {
 }
 
 .hidden {
+  position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
@@ -235,6 +235,24 @@ label:hover {
   }
 }
 
+.loading {
+  @include main-font(700, 16px, 22px);
+  color: getColor(full-white);
+  margin-left: 12px;
+  width: 248px;
+  height: 40px;
+  background-color: getColor(full-green);
+  border-radius: 40px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  @include media-min(tablet) {
+    margin-left: 0px;
+  }
+}
+
 .next:hover,
 .next:focus {
   background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
@@ -277,33 +295,6 @@ label:hover {
   height: 24px;
   width: 24px;
   stroke: getColor(full-red);
-}
-
-.trashBtn {
-  background-color: transparent;
-  border-radius: 50%;
-  border: 1px solid getColor(full-blue);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: 300ms;
-  margin: auto;
-}
-
-.trashBtn:hover,
-.trashBtn:focus {
-  scale: 1.05;
-  outline: 1px solid getColor(full-blue);
-}
-
-.trash {
-  stroke: getColor(full-blue);
-  height: 24px;
-  width: 24px;
-  fill: none;
 }
 
 .plus {

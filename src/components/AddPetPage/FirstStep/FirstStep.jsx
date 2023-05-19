@@ -11,7 +11,6 @@ function FirstStep({ onSubmit, next, data, path }) {
     onSubmit(values.category);
     next(values);
   };
-
   const validationSchema = Yup.object({
     category: Yup.string().required('Choose category'),
   });

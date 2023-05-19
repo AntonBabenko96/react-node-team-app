@@ -9,7 +9,6 @@ import styles from './ThirdStep.module.scss';
 import { ReactComponent as Arrow } from '../../../img/svg/arrow-left.svg';
 import { ReactComponent as Paw } from '../../../img/svg/pawprint.svg';
 import { ReactComponent as Plus } from '../../../img/svg/plus.svg';
-import { ReactComponent as Trash } from '../../../img/svg/trash.svg';
 import { ReactComponent as Male } from '../../../img/svg/male.svg';
 import { ReactComponent as Female } from '../../../img/svg/female.svg';
 
@@ -19,6 +18,7 @@ function ThirdStep({ data, prev, finish }) {
   const price = data.category === 'sell' ? true : false;
 
   const isLoading = useSelector(addPetLoading);
+  const regEx = /^[0-9A-Za-z][A-Za-z0-9]*$/;
 
   const validationSchema = Yup.object({
     photo: Yup.mixed()
@@ -37,10 +37,14 @@ function ThirdStep({ data, prev, finish }) {
     comments: Yup.string()
       .min(8, '8 characters minimum')
       .max(160, '160 characters maximum')
+      .matches(regEx, `English letters and numbers only`)
       .required('Leave a comment'),
     sex: showSex ? Yup.string().required('Choose gender') : Yup.string(),
     location: location
-      ? Yup.string().required().label('Location')
+      ? Yup.string()
+          .required()
+          .label('Location')
+          .matches(regEx, `English letters and numbers only`)
       : Yup.string(),
     price: price
       ? Yup.number().required().label(`Price`).typeError(`Must be a number`)
@@ -98,17 +102,12 @@ function ThirdStep({ data, prev, finish }) {
                 <div className={styles.uploadwrapper}>
                   <p className={styles.uploadlabel}>Add photo</p>
                   {(values.photo && (
-                    <>
-                      <PreviewImage file={values.photo} />
-                      <button
-                        className={styles.trashBtn}
-                        onClick={() => {
-                          setFieldValue(`photo`, null);
-                        }}
-                      >
-                        <Trash className={styles.trash}></Trash>
-                      </button>
-                    </>
+                    <PreviewImage
+                      file={values.photo}
+                      clear={() => {
+                        setFieldValue(`photo`, null);
+                      }}
+                    />
                   )) || (
                     <>
                       <input
@@ -184,13 +183,12 @@ function ThirdStep({ data, prev, finish }) {
 
             <div className={styles.controls}>
               {isLoading ? (
-                <p>Loading...</p>
+                <button type="submit" disabled className={styles.loading}>
+                  Loading...
+                  <Paw className={styles.icon}></Paw>
+                </button>
               ) : (
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className={styles.next}
-                >
+                <button type="submit" className={styles.next}>
                   Done
                   <Paw className={styles.icon}></Paw>
                 </button>

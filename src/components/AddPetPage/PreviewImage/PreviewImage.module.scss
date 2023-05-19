@@ -1,5 +1,9 @@
 @import '../../../styles/styles.scss';
 
+.wrapper {
+  position: relative;
+}
+
 .photo {
   width: 112px;
   height: 112px;
@@ -7,4 +11,37 @@
     width: 182px;
     height: 182px;
   }
+}
+
+.trashBtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  border-radius: 50%;
+  border: 1px solid getColor(full-blue);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 300ms;
+  margin: auto;
+  @include media-min(tablet) {
+    top: 8px;
+    right: 8px;
+  }
+}
+
+.trashBtn:hover,
+.trashBtn:focus {
+  scale: 1.05;
+  outline: 1px solid getColor(full-blue);
+}
+
+.trash {
+  stroke: getColor(full-blue);
+  height: 24px;
+  width: 24px;
+  fill: none;
 }

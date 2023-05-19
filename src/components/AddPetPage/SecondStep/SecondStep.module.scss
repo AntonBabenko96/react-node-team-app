@@ -12,6 +12,9 @@
   border: 1px solid getColor(full-blue);
   height: 40px;
   width: 100%;
+  @include media-min(tablet) {
+    padding-left: 16px;
+  }
 }
 
 .errorField {
@@ -20,6 +23,9 @@
   border: 1px solid getColor(full-red);
   width: 100%;
   height: 40px;
+  @include media-min(tablet) {
+    padding-left: 16px;
+  }
 }
 
 .errorField:focus {

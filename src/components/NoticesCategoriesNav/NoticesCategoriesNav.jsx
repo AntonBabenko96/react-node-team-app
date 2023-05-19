@@ -58,18 +58,18 @@ export default function NoticesCategoriesNav() {
   const userCategories = userCategoriesList.map(({ id, value, name }) => (
     <NavLink to={`/notices/${value}`} key={id}>
       <button
-      key={id}
-      name={value}
-      type="button"
-      className={Style.categoriesbtn}
-      onClick={filterСhangeUser}
-    >
-      {name}
-    </button>
+        key={id}
+        name={value}
+        type="button"
+        className={Style.categoriesbtn}
+        onClick={filterСhangeUser}
+      >
+        {name}
+      </button>
     </NavLink>
   ));
 
-return (
+  return (
     <div className={Style.categoryBtns}>
       <div className={Style.filterCategories}>
         {mainCategories}
