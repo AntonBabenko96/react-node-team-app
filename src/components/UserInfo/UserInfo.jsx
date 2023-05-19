@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as CameraIcon } from 'img/svg/camera.svg';
 import { ReactComponent as EditIcon } from 'img/svg/edit.svg';
 import { ReactComponent as LogoutIcon } from 'img/svg/logout.svg';
@@ -10,14 +11,24 @@ import {
   getUserInfo,
   updateUserInfo,
   logout,
+  updateAvatar,
 } from 'redux/auth/auth-operations';
-import { updateUserAvatar } from 'api/auth-api';
 import styles from './UserInfo.module.scss';
+import React from 'react';
+import Modal from 'components/Modal/Modal';
+
 
 export default function UserInfo() {
+ const navigate = useNavigate();
   const userInfo = useSelector(selectUser);
   const isLogin = useSelector(selectIsLogin);
   const dispatch = useDispatch();
+
+  const [showModal, setShowModal] = useState(false);
+
+   const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const [fields, setFields] = useState({
     name: '',
@@ -47,7 +58,7 @@ export default function UserInfo() {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('avatar', file);
-    await updateUserAvatar(formData);
+    await dispatch(updateAvatar(formData));
   };
 
   useEffect(() => {
@@ -78,7 +89,13 @@ export default function UserInfo() {
   };
 
   const handleInputBlur = () => {
-    dispatch(updateUserInfo({ [editField]: fields[editField] }));
+    if (
+      editField &&
+      fields[editField] !== userInfo[editField] &&
+      fields[editField] !== ''
+    ) {
+      dispatch(updateUserInfo({ [editField]: fields[editField] }));
+    }
     setEditField('');
   };
 
@@ -93,6 +110,7 @@ export default function UserInfo() {
 
   const handleLogoutClick = () => {
     dispatch(logout());
+  navigate('/notices/sell');
   };
 
   return (
@@ -103,7 +121,7 @@ export default function UserInfo() {
             {userInfo && userInfo.avatarURL && userInfo.avatarURL !== '' ? (
               <img
                 className={styles.userAvatar}
-                src={`https://your-pet-backend.onrender.com/${userInfo.avatarURL}`}
+                src={userInfo.avatarURL}
                 alt="userAvatar"
                 width="182px"
                 height="182px"
@@ -120,8 +138,11 @@ export default function UserInfo() {
               style={{ display: 'none' }}
               onChange={handleFileChange}
             />
-            <div className={styles.camera__title} onClick={handleUploadClick}>
-              <CameraIcon className={styles.user__camera} />
+            <div className={styles.camera__title}>
+              <CameraIcon
+                className={styles.user__camera}
+                onClick={handleUploadClick}
+              />
               <p className={styles.edit}>Edit photo</p>
             </div>
           </div>
@@ -129,7 +150,7 @@ export default function UserInfo() {
         <div className={styles.decktop}>
           <div className={styles.information}>
             <label className={styles.text}>
-              Name:
+              <p className={styles.inputTitle}>Name:</p>
               {editField === 'name' ? (
                 <>
                   <input
@@ -162,7 +183,7 @@ export default function UserInfo() {
             </label>
 
             <label className={styles.text}>
-              Email:
+              <p className={styles.inputTitle}>Email:</p>
               {editField === 'email' ? (
                 <>
                   <input
@@ -195,7 +216,7 @@ export default function UserInfo() {
             </label>
 
             <label className={styles.text}>
-              Birthday:
+              <p className={styles.inputTitle}>Birthday:</p>
               {editField === 'birthday' ? (
                 <>
                   <input
@@ -205,6 +226,7 @@ export default function UserInfo() {
                     name="birthday"
                     className={styles.input}
                     value={fields.birthday}
+                    type="date"
                   />
                   <CheckIcon
                     className={styles.check__icon}
@@ -228,7 +250,7 @@ export default function UserInfo() {
             </label>
 
             <label className={styles.text}>
-              Phone:
+              <p className={styles.inputTitle}>Phone:</p>
               {editField === 'phone' ? (
                 <>
                   <input
@@ -261,7 +283,7 @@ export default function UserInfo() {
             </label>
 
             <label className={styles.text}>
-              City:
+              <p className={styles.inputTitle}>City:</p>
               {editField === 'city' ? (
                 <>
                   <input
@@ -293,9 +315,24 @@ export default function UserInfo() {
               )}
             </label>
           </div>
-          <div className={styles.logout} onClick={handleLogoutClick}>
+          <div className={styles.logout} onClick={toggleModal}>
             <LogoutIcon className={styles.logout__icon} />
             <p className={styles.logout__text}>Log Out</p>
+            {showModal && (
+              <Modal onClose={toggleModal}>
+                <div className={styles.modal__wrapper}>
+                  <p className={styles.question}> Already leaving ?</p>
+                  <div className={styles.button__wrapper}>
+                     <button className={styles.button__question_cancel} onClick={toggleModal}>
+                      Cancel
+                    </button>
+                    <button className={styles.button__question_yes} onClick={handleLogoutClick} >
+                      Yes
+                      <LogoutIcon className={styles.logout__icon_yes} />
+                    </button>
+                  </div>
+                </div>
+              </Modal>)}
           </div>
         </div>
       </div>

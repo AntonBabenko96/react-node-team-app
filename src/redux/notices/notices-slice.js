@@ -9,7 +9,7 @@ import {
 } from './notices-operations';
 
 const initialState = {
-  items: [],
+  items: {},
   item: {},
   myItems: [],
   isLoading: false,
@@ -56,7 +56,7 @@ export const noticesSlice = createSlice({
       .addCase(deleteMyNotice.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.items = state.items.filter(({ _id }) => _id !== payload);
+        state.items = state.items.notices.filter(({ _id }) => _id !== payload);
       })
       .addCase(deleteMyNotice.rejected, handleRejected)
       .addCase(getFavoritesList.pending, handlePending)
