@@ -6,7 +6,7 @@ import Modal from '../Modal';
 import { selectIsLogin, selectLoading } from '../../../redux/auth/selectors';
 import styles from './CongratsModal.module.scss'
 
-export const CongratsModal = () => {
+export default function CongratsModal () {
     const [showModal, setShowModal] = useState(false);
     const isLogin = useSelector(selectIsLogin);
     const isLoading = useSelector(selectLoading);
@@ -15,6 +15,7 @@ export const CongratsModal = () => {
   
    
     const isRedirectedFromRegister = location.pathname === '/register';
+    console.log(location)
   
     useEffect(() => {
       if (!isLoading && isLogin && isRedirectedFromRegister) {
@@ -27,7 +28,7 @@ export const CongratsModal = () => {
         {showModal && !isLoading && isLogin && (
           <Modal onClose={() => setShowModal(false)} style={{ width: '608px' }}>
             <h1>Congrats!</h1>
-            <p >Your registration is successful</p>
+            <p className={styles.text} >Your registration is successful</p>
             <button className={styles.modalBtn} onClick={() => setShowModal(false)}>
               Go to profile <PetsIcon className={styles.modalIcon} />
             </button>

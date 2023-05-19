@@ -3,12 +3,12 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import * as api from '../../api/auth-api';
 
-export const register = createAsyncThunk(
-  'user/register',
+
+export const login = createAsyncThunk(
+  'user/login',
   async (data, { rejectWithValue }) => {
-    console.log(data);
     try {
-      const result = await api.register(data);
+      const result = await api.login(data);
       return result;
     } catch ({ response }) {
       Notify.failure(response.data.message);
@@ -16,11 +16,13 @@ export const register = createAsyncThunk(
     }
   }
 );
-export const login = createAsyncThunk(
-  'user/login',
-  async (data, { rejectWithValue }) => {
+export const register = createAsyncThunk(
+  'user/register',
+  async (data, { rejectWithValue, dispatch }) => {
+    console.log(data);
     try {
-      const result = await api.login(data);
+      const result = await api.register(data);
+     dispatch(login(data))
       return result;
     } catch ({ response }) {
       Notify.failure(response.data.message);

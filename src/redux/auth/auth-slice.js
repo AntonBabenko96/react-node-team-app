@@ -22,6 +22,7 @@ const handlePending = state => {
   state.error = null;
 };
 
+
 const handleRejected = (state, { payload }) => {
   state.loading = false;
   state.error = payload;
@@ -37,7 +38,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = payload.user;
         state.error = null;
-        state.isLogin = true;
+       
       })
       .addCase(register.rejected, handleRejected)
       .addCase(login.pending, handlePending)
@@ -93,8 +94,6 @@ const authSlice = createSlice({
       .addCase(getUserInfo.rejected, handleRejected)
       .addCase(updateUserInfo.pending, handlePending)
       .addCase(updateUserInfo.fulfilled, (state, { payload }) => {
-        console.log('🆑  payload:', payload);
-
         state.loading = false;
         state.error = null;
         state.user = payload;
