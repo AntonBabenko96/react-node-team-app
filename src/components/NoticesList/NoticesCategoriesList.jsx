@@ -66,14 +66,7 @@ export default function NoticesCategoriesList() {
       Notify.info(
         'The option "Add to favorite" is available only to registered users'
       );
-    }
-    // else if (isFromModal) {
-    //   dispatch(addToFavorites(id));
-    //   setTimeout(() => {
-    //     dispatch(getNotices(data));
-    //   }, 500);
-    // }
-    else {
+    } else {
       favorite
         ? dispatch(removeFromFavorites(id))
         : dispatch(addToFavorites(id));

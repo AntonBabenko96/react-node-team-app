@@ -23,17 +23,11 @@ export default function NoticeModal({
   notices,
   onFavoriteBtnClick,
 }) {
-  const imgBeseURL = 'https://your-pet-backend.onrender.com/';
   const date = getDateFormat(birth);
   if (owner) {
     email = owner.email ? owner.email : 'no data';
     phone = owner.phone ? owner.phone : 'no data';
   }
-  // const isFromModal = true;
-  // console.log(notices)
-  // const notice = notices.findIndex(item => item._id === _id);
-  // const favorite = notice.favorite;
-  // console.log("favorite in modal", favorite)
 
   return (
     <>
@@ -42,7 +36,7 @@ export default function NoticeModal({
           <div className={Style.NoticePhotoWrapper}>
             <img
               className={Style.NoticePhoto}
-              src={photoURL ? `${imgBeseURL}${photoURL}` : placeholder}
+              src={photoURL ? `${photoURL}` : placeholder}
               alt="Pet"
             />
             <p className={Style.StickyValue}>{category}</p>
