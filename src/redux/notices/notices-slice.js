@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getNotices, getNoticeById, getMyNotices, deleteMyNotice } from './notices-operations';
+import {
+  getNotices,
+  getNoticeById,
+  getMyNotices,
+  deleteMyNotice,
+  getFavoritesList,
+} from './notices-operations';
 
 const initialState = {
   items: [],
@@ -47,12 +53,19 @@ export const noticesSlice = createSlice({
       })
       .addCase(getMyNotices.rejected, handleRejected)
       .addCase(deleteMyNotice.pending, handlePending)
-      .addCase(deleteMyNotice.fulfilled, (state, {payload}) => {
+      .addCase(deleteMyNotice.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
         state.items = state.items.filter(({ _id }) => _id !== payload);
       })
-      .addCase(deleteMyNotice.rejected, handleRejected);
+      .addCase(deleteMyNotice.rejected, handleRejected)
+      .addCase(getFavoritesList.pending, handlePending)
+      .addCase(getFavoritesList.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = payload;
+      })
+      .addCase(getFavoritesList.rejected, handleRejected);
   },
 });
 
