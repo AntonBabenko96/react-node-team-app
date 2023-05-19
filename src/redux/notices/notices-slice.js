@@ -12,6 +12,7 @@ const initialState = {
   items: {},
   item: {},
   myItems: [],
+  favorites: [],
   isLoading: false,
   error: null,
 };
@@ -63,7 +64,7 @@ export const noticesSlice = createSlice({
       .addCase(getFavoritesList.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.items = payload;
+        state.favorites = payload;
       })
       .addCase(getFavoritesList.rejected, handleRejected);
   },
@@ -74,6 +75,7 @@ export const noticesSlice = createSlice({
     },
   },
 });
+
 
 export const { changeFavoriteStatus } = noticesSlice.actions;
 
