@@ -83,7 +83,6 @@ export default function NoticesCategoriesList() {
     dispatch(getNotices({ ...data, page }));
   }, [dispatch, page]);
 
-  const isLogin = useSelector(selectIsLogin);
   useEffect(() => {
     if (isLogin) {
       dispatch(getNotices({ ...data, page }));
