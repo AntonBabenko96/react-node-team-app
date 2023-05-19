@@ -9,7 +9,7 @@ import { ReactComponent as Paw } from '../../../img/svg/pawprint.svg';
 
 function SecondStep({ data, prev, onSubmit }) {
   const title = data.category === 'my pet' ? false : true;
-  const regEx = /^[ 0-9A-Za-z ][ A-Za-z0-9 ]*$/;
+  const regEx = /^[` 0-9A-Za-z `][` A-Za-z0-9 `]*$/;
 
   const validationSchema = Yup.object({
     petName: Yup.string()
