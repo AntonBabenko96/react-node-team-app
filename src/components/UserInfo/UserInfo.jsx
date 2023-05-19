@@ -10,8 +10,8 @@ import {
   getUserInfo,
   updateUserInfo,
   logout,
+  updateAvatar,
 } from 'redux/auth/auth-operations';
-import { updateUserAvatar } from 'api/auth-api';
 import styles from './UserInfo.module.scss';
 
 export default function UserInfo() {
@@ -47,7 +47,7 @@ export default function UserInfo() {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('avatar', file);
-    await updateUserAvatar(formData);
+    await dispatch(updateAvatar(formData));
   };
 
   useEffect(() => {
@@ -103,7 +103,7 @@ export default function UserInfo() {
             {userInfo && userInfo.avatarURL && userInfo.avatarURL !== '' ? (
               <img
                 className={styles.userAvatar}
-                src={`https://your-pet-backend.onrender.com/${userInfo.avatarURL}`}
+                src={userInfo.avatarURL}
                 alt="userAvatar"
                 width="182px"
                 height="182px"
