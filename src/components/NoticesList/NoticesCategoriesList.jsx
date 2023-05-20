@@ -46,6 +46,7 @@ export default function NoticesCategoriesList() {
 
   const getPage = paginationPage => {
     setPage(paginationPage);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const myNotices = useSelector(selectMyNotices);
