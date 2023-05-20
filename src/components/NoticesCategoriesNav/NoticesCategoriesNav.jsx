@@ -1,9 +1,4 @@
 import Style from './NoticesCategoriesNav.module.scss';
-import {
-  getNotices,
-  getFavoritesList,
-  getMyNotices,
-} from '../../redux/notices/notices-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLogin } from '../../redux/auth/selectors';
 import { NavLink } from 'react-router-dom';
@@ -17,31 +12,11 @@ const mainCategoriesList = [
 ];
 const userCategoriesList = [
   { id: 4, value: 'favorite-ads', name: 'favorite ads' },
-  { id: 5, value: 'my-adss', name: 'my adss' },
+  { id: 5, value: 'my-ads', name: 'my ads' },
 ];
 
-export default function NoticesCategoriesNav() {
-  const dispatch = useDispatch();
+export default function NoticesCategoriesNav({ handleSubmit }) {
   const isLogin = useSelector(selectIsLogin);
-  const filterСhange = e => {
-    let value = e.target.name;
-    const fetch = {
-      category: value,
-      page: 1,
-      limit: 12,
-    };
-    dispatch(getNotices(fetch));
-  };
-  const filterСhangeUser = e => {
-    switch (e.target.name) {
-      case 'favorite-ads':
-        dispatch(getFavoritesList());
-        break;
-      default:
-        dispatch(getMyNotices());
-        break;
-    }
-  };
 
   const mainCategories = mainCategoriesList.map(({ id, value, name }) => (
     <NavLink to={`/notices/${value}`} key={id}>
@@ -49,7 +24,7 @@ export default function NoticesCategoriesNav() {
         name={value}
         type="button"
         className={Style.categoriesbtn}
-        onClick={filterСhange}
+        onClick={() => handleSubmit(value)}
       >
         {name}
       </button>
@@ -62,7 +37,7 @@ export default function NoticesCategoriesNav() {
         name={value}
         type="button"
         className={Style.categoriesbtn}
-        onClick={filterСhangeUser}
+        onClick={() => handleSubmit(value)}
       >
         {name}
       </button>

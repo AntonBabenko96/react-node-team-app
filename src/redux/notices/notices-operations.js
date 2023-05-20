@@ -31,20 +31,6 @@ export const getNoticeById = createAsyncThunk(
   }
 );
 
-// для отримання оголошень авторизованого кристувача створених цим же користувачем
-export const getMyNotices = createAsyncThunk(
-  'notices/getMyNotices',
-  async (_, { rejectWithValue }) => {
-    try {
-      const data = await api.getMyNotices();
-      return data;
-    } catch ({ response }) {
-      Notify.failure(response.data.message);
-      return rejectWithValue(response.data.message);
-    }
-  }
-);
-
 // для видалення оголошення авторизованого кристувача створеного цим же користувачем
 export const deleteMyNotice = createAsyncThunk(
   'notices/deleteMyNotice',
@@ -56,20 +42,6 @@ export const deleteMyNotice = createAsyncThunk(
     } catch ({ response }) {
       Notify.error('Something went wrong, please try again');
       return rejectWithValue(response);
-    }
-  }
-);
-
-// для отримання улюблених оголошень авторизованого кристувача
-export const getFavoritesList = createAsyncThunk(
-  'notices/favorite-ads',
-  async (_, { rejectWithValue }) => {
-    try {
-      const data = await api.getFavoritesList();
-      return data;
-    } catch ({ response }) {
-      Notify.failure(response.data.message);
-      return rejectWithValue(response.data.message);
     }
   }
 );
