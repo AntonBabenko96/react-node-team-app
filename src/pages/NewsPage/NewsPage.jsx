@@ -47,6 +47,10 @@ export default function NewsPage() {
         }
       }
     };
+
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
     fetchNews();
   }, [query, page]);
 
