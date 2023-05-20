@@ -6,6 +6,8 @@ import { userPetsList } from 'redux/pets/pets-selectors';
 import { selectIsLogin } from 'redux/auth/selectors';
 import styles from 'components/UserPetsList/UserPetsList.module.scss';
 
+import { ReactComponent as Puppy } from 'img/svg/puppy.svg';
+import { addPetLoading } from 'redux/pets/pets-selectors';
 // const pets = [
 //   {
 //     id: '1',
@@ -38,6 +40,7 @@ export default function UserPetsList() {
   const isLogin = useSelector(selectIsLogin);
   const dispatch = useDispatch();
 
+  const isLoading = useSelector(addPetLoading);
   useEffect(() => {
     if (isLogin) {
       dispatch(getPets());
@@ -59,9 +62,46 @@ export default function UserPetsList() {
       );
     }
   );
-
-  return <ul className={styles.list}>{elements}</ul>;
+  const showList =
+  elements.length === 0 ? (
+    <div className={styles.box}>
+      <p className={styles.message}>No pets of your own yet</p>
+      <div className={styles.pets__message}>
+        <div>
+          {' '}
+          <Puppy className={styles.puppy} />
+        </div>
+        <p className={styles.pets__text}>
+          <div className={styles.text__contain}>
+            <span className={styles.text__animation}>"I</span>
+            <span className={styles.text__animation}>believe</span>
+            <span className={styles.text__animation}>in</span>
+            <span className={styles.text__animation}>our</span>
+            <span className={styles.text__animation}>meeting,</span>
+            <span className={styles.text__animation}>and</span>
+            <span className={styles.text__animation}>I</span>
+            <span className={styles.text__animation}>am</span>
+            <span className={styles.text__animation}>still</span>
+            <span className={styles.text__animation}>waiting</span>
+            <span className={styles.text__animation}>for</span>
+            <span className={styles.text__animation}>you</span>
+            <span className={styles.text__animation}>.</span>
+            <span className={styles.text__animation}>.</span>
+            <span className={styles.text__animation}>."</span>
+          </div>
+        </p>
+      </div>
+    </div>
+  ) : (
+    
+    <ul className={styles.list}>{elements}</ul>
+  );
+  // return  showList
+return <div>{isLoading ? <p>Loading...</p> : showList}</div>;
 }
+
+
+
 
 // const UserPetsList = ({ pets = [] }) => {
 
