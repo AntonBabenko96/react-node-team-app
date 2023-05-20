@@ -31,11 +31,13 @@ export default function CongratsModal() {
     <>
       {showModal && (
         <Modal onClose={handleClose} style={{ width: '608px' }}>
-          <h1>Congrats!</h1>
-          <p className={styles.text}>Your registration is successful</p>
+          <div className={styles.congratsDiv}>
+          <h1 className={styles.congratsTitle}>Congrats!</h1>
+          <p className={styles.congratsText}>Your registration is successful</p>
           <button className={styles.modalBtn} onClick={handleClose}>
             Go to profile <PetsIcon className={styles.modalIcon} />
           </button>
+          </div>
         </Modal>
       )}
     </>
