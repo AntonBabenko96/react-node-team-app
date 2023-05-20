@@ -9,12 +9,13 @@ import {
 } from './notices-operations';
 
 const initialState = {
-  items: {},
-  item: {},
+  items: [],
+  item: [],
   myItems: [],
   favorites: [],
   isLoading: false,
   error: null,
+  total: null,
 };
 
 const handlePending = state => {
@@ -36,7 +37,9 @@ export const noticesSlice = createSlice({
       .addCase(getNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.items = payload;
+        state.items = payload.notices;
+        console.log();
+        state.total = payload.total;
       })
       .addCase(getNotices.rejected, handleRejected)
       .addCase(getNoticeById.pending, handlePending)
@@ -50,32 +53,34 @@ export const noticesSlice = createSlice({
       .addCase(getMyNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.myItems = payload;
+        state.total = payload.total;
+        state.items = payload.notices;
       })
       .addCase(getMyNotices.rejected, handleRejected)
       .addCase(deleteMyNotice.pending, handlePending)
       .addCase(deleteMyNotice.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.items = state.items.notices.filter(({ _id }) => _id !== payload);
+
+        state.items = state.items.filter(({ _id }) => _id !== payload);
       })
       .addCase(deleteMyNotice.rejected, handleRejected)
       .addCase(getFavoritesList.pending, handlePending)
       .addCase(getFavoritesList.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.favorites = payload;
+        state.total = payload.total;
+        state.items = payload.notices;
       })
       .addCase(getFavoritesList.rejected, handleRejected);
   },
   reducers: {
     changeFavoriteStatus(state, { payload: { id, status } }) {
-      const notice = state.items.notices.find(item => item._id === id);
+      const notice = state.items.find(item => item._id === id);
       notice.favorite = status;
     },
   },
 });
-
 
 export const { changeFavoriteStatus } = noticesSlice.actions;
 
