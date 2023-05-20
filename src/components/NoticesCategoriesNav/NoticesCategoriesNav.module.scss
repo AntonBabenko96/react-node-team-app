@@ -1,7 +1,10 @@
 @import '../../styles/styles.scss';
-.categoryBtns{
+.categoryBtns {
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
+  max-width: 280px;
+  margin-right: auto;
+  margin-left: auto;
   // gap:92px;
   // @include media-min(desktop) {
   //   gap: 403px;
@@ -22,7 +25,7 @@
   }
 }
 
-.filterBtnCategories{
+.filterBtnCategories {
   display: flex;
   flex-wrap: nowrap;
   gap: 8px;
@@ -38,8 +41,8 @@
   align-items: center;
   font-size: 14px;
   height: 35px;
-transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
   &:hover {
-background-color: #daeaf8;
-}
+    background-color: #daeaf8;
+  }
 }
