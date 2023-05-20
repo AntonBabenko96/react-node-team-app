@@ -48,6 +48,11 @@
   background: white;
   color: rgb(83, 83, 83);
 
+
+  &::placeholder {
+    font-family: 'Inter';
+  }
+
   @media screen and (min-width: 768px) {
     border-radius: 20px;
     width: 608px;
