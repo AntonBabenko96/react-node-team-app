@@ -59,11 +59,15 @@ export default function NoticesCategoriesList() {
 
   const favoriteNotices = useSelector(selectMyFavoriteNotices);
   useEffect(() => {
+    let withFavorites = [];
     const noticesList =
       Object.keys(favoriteNotices).length === 0 ? [] : favoriteNotices.notices;
     const total = favoriteNotices.total ?? '';
+    if (noticesList) {
+      withFavorites = noticesList.map(item => ({...item, favorite: true}))
+    }
     setCount(total);
-    setNotices(noticesList);
+    setNotices(withFavorites);
   }, [favoriteNotices]);
 
   const result = useSelector(selectNotices);
