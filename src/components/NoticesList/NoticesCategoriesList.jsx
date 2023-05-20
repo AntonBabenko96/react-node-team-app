@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import {
   selectNotice,
   selectNotices,
@@ -21,6 +22,7 @@ import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
 import { getDifference } from 'shared/utils/getDateFormat';
 import { ModalApproveAction } from 'components/Modal/ModalApproveAction/ModalApproveAction';
 import Paginations from 'components/Pagination/Pagination';
+import { changeFavoriteStatus } from 'redux/notices/notices-slice';
 
 const data = {
   page: 1,
@@ -74,11 +76,13 @@ export default function NoticesCategoriesList() {
 
   const notice = useSelector(selectNotice);
 
+  const isLogin = useSelector(selectIsLogin);
+
+
   useEffect(() => {
     dispatch(getNotices({ ...data, page }));
   }, [dispatch, page]);
 
-  const isLogin = useSelector(selectIsLogin);
   useEffect(() => {
     if (isLogin) {
       dispatch(getNotices({ ...data, page }));
@@ -107,11 +111,12 @@ export default function NoticesCategoriesList() {
       );
     } else {
       favorite
-        ? dispatch(removeFromFavorites(id))
-        : dispatch(addToFavorites(id));
-      setTimeout(() => {
-        dispatch(getNotices({ ...data, page }));
-      }, 500);
+        ? dispatch(removeFromFavorites(id)).then(() => {
+            dispatch(changeFavoriteStatus({ id, status: false }));
+          })
+        : dispatch(addToFavorites(id)).then(() => {
+            dispatch(changeFavoriteStatus({ id, status: true }));
+          });
     }
   };
 
