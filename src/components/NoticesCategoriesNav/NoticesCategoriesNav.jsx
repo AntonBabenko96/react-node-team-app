@@ -70,7 +70,7 @@ export default function NoticesCategoriesNav() {
   ));
 
   return (
-    <div className={Style.categoryBtns}>
+    <div className={`${Style.categoryBtns} container`}>
       <div className={Style.filterCategories}>
         {mainCategories}
         {isLogin && userCategories}
