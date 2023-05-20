@@ -1,12 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  selectNotice,
-  selectNotices,
-  selectMyFavoriteNotices,
-  selectMyNotices,
-} from 'redux/notices/notices-selectors';
+import { selectNotice, selectNotices } from 'redux/notices/notices-selectors';
 import { selectIsLogin } from 'redux/auth/selectors';
 import { getNoticeById, getNotices } from 'redux/notices/notices-operations';
 import {
@@ -23,6 +18,7 @@ import { getDifference } from 'shared/utils/getDateFormat';
 import { ModalApproveAction } from 'components/Modal/ModalApproveAction/ModalApproveAction';
 import Paginations from 'components/Pagination/Pagination';
 import { changeFavoriteStatus } from 'redux/notices/notices-slice';
+import { selectTotal } from 'redux/notices/notices-selectors';
 
 const data = {
   page: 1,
@@ -37,51 +33,50 @@ const categoryItems = [
 
 export default function NoticesCategoriesList() {
   const dispatch = useDispatch();
-
+  const count = useSelector(selectTotal);
+  const notices = useSelector(selectNotices);
   const [showModal, setShowModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [page, setPage] = useState(1);
-  const [count, setCount] = useState(1);
-  const [notices, setNotices] = useState([]);
-
+  // const [count, setCount] = useState(1);
+  // const [notices, setNotices] = useState([]);
   const getPage = paginationPage => {
     setPage(paginationPage);
   };
 
-  const myNotices = useSelector(selectMyNotices);
-  useEffect(() => {
-    const noticesList =
-      Object.keys(myNotices).length === 0 ? [] : myNotices.notices;
-    const total = myNotices.total ?? '';
-    setCount(total);
-    setNotices(noticesList);
-  }, [myNotices]);
+  // const myNotices = useSelector(selectMyNotices);
+  // useEffect(() => {
+  //   const noticesList =
+  //     Object.keys(myNotices).length === 0 ? [] : myNotices.notices;
+  //   const total = myNotices.total ?? '';
+  //   setCount(total);
+  //   setNotices(noticesList);
+  // }, [myNotices]);
 
-  const favoriteNotices = useSelector(selectMyFavoriteNotices);
-  useEffect(() => {
-    let withFavorites = [];
-    const noticesList =
-      Object.keys(favoriteNotices).length === 0 ? [] : favoriteNotices.notices;
-    const total = favoriteNotices.total ?? '';
-    if (noticesList) {
-      withFavorites = noticesList.map(item => ({...item, favorite: true}))
-    }
-    setCount(total);
-    setNotices(withFavorites);
-  }, [favoriteNotices]);
+  // const favoriteNotices = useSelector(selectMyFavoriteNotices);
+  // useEffect(() => {
+  //   let withFavorites = [];
+  //   const noticesList =
+  //     Object.keys(favoriteNotices).length === 0 ? [] : favoriteNotices.notices;
+  //   const total = favoriteNotices.total ?? '';
+  //   if (noticesList) {
+  //     withFavorites = noticesList.map(item => ({ ...item, favorite: true }));
+  //   }
+  //   setCount(total);
+  //   setNotices(withFavorites);
+  // }, [favoriteNotices]);
 
-  const result = useSelector(selectNotices);
-  useEffect(() => {
-    const noticesList = Object.keys(result).length === 0 ? [] : result.notices;
-    const total = result.total ?? '';
-    setCount(total);
-    setNotices(noticesList);
-  }, [result]);
+  // const result = useSelector(selectNotices);
+  // useEffect(() => {
+  //   const noticesList = Object.keys(result).length === 0 ? [] : result.notices;
+  //   const total = result.total ?? '';
+  //   setCount(total);
+  //   setNotices(noticesList);
+  // }, [result]);
 
   const notice = useSelector(selectNotice);
 
   const isLogin = useSelector(selectIsLogin);
-
 
   useEffect(() => {
     dispatch(getNotices({ ...data, page }));
