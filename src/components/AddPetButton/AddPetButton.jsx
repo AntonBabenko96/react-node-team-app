@@ -10,28 +10,26 @@ import styles from './AddPetButton.module.scss';
 
 const AddPetButton = () => {
   const isLogin = useSelector(selectIsLogin);
-  // const navigate = useNavigate();
   const location = useLocation();
+  const currentstyle =
+    location.pathname === '/user' ? styles.buttonOval : styles.buttonCircle;
+
   const handleButtonClick = () => {
-    // if (isLogin) {
-    //   navigate('/add-pet');
-    // } else {
     Notiflix.Notify.failure('Please login or register to add a pet.', {
       timeout: 5000,
     });
-    // }
   };
 
   return (
     <>
       {isLogin ? (
-        <Link className={styles.button} to="/add-pet" state={location}>
+        <Link className={currentstyle} to="/add-pet" state={location}>
           Add Pet
           <AddIcon className={styles.icon} />
         </Link>
       ) : (
         <button
-          className={styles.button}
+          className={currentstyle}
           state={location}
           onClick={handleButtonClick}
         >
