@@ -321,7 +321,7 @@ export default function UserInfo() {
             {showModal && (
               <Modal onClose={toggleModal}>
                 <div className={styles.modal__wrapper}>
-                  <p className={styles.question}> Already leaving ?</p>
+                  <p className={styles.question}> Already leaving?</p>
                   <div className={styles.button__wrapper}>
                      <button className={styles.button__question_cancel} onClick={toggleModal}>
                       Cancel
