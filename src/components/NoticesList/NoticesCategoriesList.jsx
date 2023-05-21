@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectNotice, selectNotices } from 'redux/notices/notices-selectors';
 import { selectIsLogin } from 'redux/auth/selectors';
-import { getNoticeById, getNotices } from 'redux/notices/notices-operations';
+import { getNoticeById } from 'redux/notices/notices-operations';
 import {
   addToFavorites,
   removeFromFavorites,
@@ -38,56 +38,14 @@ export default function NoticesCategoriesList() {
   const [showModal, setShowModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [page, setPage] = useState(1);
-  // const [count, setCount] = useState(1);
-  // const [notices, setNotices] = useState([]);
   const getPage = paginationPage => {
     setPage(paginationPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // const myNotices = useSelector(selectMyNotices);
-  // useEffect(() => {
-  //   const noticesList =
-  //     Object.keys(myNotices).length === 0 ? [] : myNotices.notices;
-  //   const total = myNotices.total ?? '';
-  //   setCount(total);
-  //   setNotices(noticesList);
-  // }, [myNotices]);
-
-  // const favoriteNotices = useSelector(selectMyFavoriteNotices);
-  // useEffect(() => {
-  //   let withFavorites = [];
-  //   const noticesList =
-  //     Object.keys(favoriteNotices).length === 0 ? [] : favoriteNotices.notices;
-  //   const total = favoriteNotices.total ?? '';
-  //   if (noticesList) {
-  //     withFavorites = noticesList.map(item => ({ ...item, favorite: true }));
-  //   }
-  //   setCount(total);
-  //   setNotices(withFavorites);
-  // }, [favoriteNotices]);
-
-  // const result = useSelector(selectNotices);
-  // useEffect(() => {
-  //   const noticesList = Object.keys(result).length === 0 ? [] : result.notices;
-  //   const total = result.total ?? '';
-  //   setCount(total);
-  //   setNotices(noticesList);
-  // }, [result]);
-
   const notice = useSelector(selectNotice);
 
   const isLogin = useSelector(selectIsLogin);
-
-  useEffect(() => {
-    dispatch(getNotices({ ...data, page }));
-  }, [dispatch, page]);
-
-  useEffect(() => {
-    if (isLogin) {
-      dispatch(getNotices({ ...data, page }));
-    }
-  }, [dispatch, isLogin, page]);
 
   const handleLearnMoreBtnClick = id => {
     dispatch(getNoticeById(id));
