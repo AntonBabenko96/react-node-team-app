@@ -13,7 +13,7 @@ export default function LogOutButton() {
 
   const handleLogoutClick = () => {
     dispatch(logout());
-    navigate('/notices/sell');
+    navigate('/notices');
   };
 
   return (

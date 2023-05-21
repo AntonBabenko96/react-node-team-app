@@ -117,7 +117,14 @@ export default function NoticesPage() {
             onChange={handleChangeSearch}
             onReset={handleResetSearch}
           />
-          <NoticesCategoriesNav handleSubmit={setCategory} />
+          <NoticesCategoriesNav
+            handleSubmit={setCategory}
+            active={
+              (category === 'all' ? null : category) ||
+              (favorite && 'favorite') ||
+              (onlyMine && 'only-mine')
+            }
+          />
           <NoticesCategoriesList />
         </div>
       </section>

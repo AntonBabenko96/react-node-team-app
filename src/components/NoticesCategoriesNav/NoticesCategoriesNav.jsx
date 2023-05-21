@@ -13,17 +13,20 @@ const categoriesList = [
   { id: 5, value: 'only-mine', name: 'my ads', auth: true },
 ];
 
-export default function NoticesCategoriesNav({ handleSubmit }) {
+export default function NoticesCategoriesNav({ handleSubmit, active }) {
   const isLogin = useSelector(selectIsLogin);
 
   const categoriesElements = categoriesList.map(({ id, value, name, auth }) => {
+    const classNames =
+      value === active ? `${Style.categoriesbtn} active` : Style.categoriesbtn;
+
     if ((auth && isLogin) || !auth) {
       return (
         <button
           key={id}
           name={value}
           type="button"
-          className={Style.categoriesbtn}
+          className={classNames}
           onClick={() => handleSubmit(value)}
         >
           {name}
