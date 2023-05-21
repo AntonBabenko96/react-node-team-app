@@ -37,7 +37,7 @@ export default function NoticesCategoriesList() {
   const notices = useSelector(selectNotices);
   const [showModal, setShowModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-  const [page, setPage] = useState(1);
+  const [_, setPage] = useState(1);
   const getPage = paginationPage => {
     setPage(paginationPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });

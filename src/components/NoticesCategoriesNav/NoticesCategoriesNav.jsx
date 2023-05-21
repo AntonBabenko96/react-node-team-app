@@ -1,7 +1,6 @@
 import Style from './NoticesCategoriesNav.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectIsLogin } from '../../redux/auth/selectors';
-import { NavLink } from 'react-router-dom';
 import AddPetButton from 'components/AddPetButton/AddPetButton';
 import FilterButton from 'components/FilterButton/FilterButton';
 
