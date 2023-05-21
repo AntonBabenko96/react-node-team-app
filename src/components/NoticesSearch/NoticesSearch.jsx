@@ -4,17 +4,17 @@ import { AiOutlineClose } from 'react-icons/ai';
 import style from './NoticesSearch.module.scss';
 
 export default function NoticesSearch({
-  value,
-  handleInput,
-  handleSubmit,
-  clearSearch,
+  onSubmit,
+  onChange,
+  onReset,
+  value = '',
 }) {
   return (
     <form
       className={style.box}
       onSubmit={e => {
         e.preventDefault();
-        handleSubmit();
+        onSubmit(value);
       }}
     >
       <input
@@ -23,7 +23,7 @@ export default function NoticesSearch({
         type="text"
         value={value}
         placeholder="Search"
-        onChange={e => handleInput(e.target.value)}
+        onChange={e => onChange(e.target.value)}
       />
       <button className={style.btn} type="submit">
         {value && (
@@ -39,7 +39,7 @@ export default function NoticesSearch({
               width: 19,
               height: 19,
             }}
-            onClick={clearSearch}
+            onClick={onReset}
           />
         )}
         <BsSearch

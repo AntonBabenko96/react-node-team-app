@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getNotices } from 'redux/notices/notices-operations';
 import s from './NoticesPage.module.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const initialState = {
   category: 'sell',
@@ -19,19 +19,34 @@ const initialState = {
 };
 
 export default function NoticesPage() {
-  const [params, setParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams(initialState);
   const dispatch = useDispatch();
 
-  const title = params.get('title');
-  const category = params.get('category');
-  const age = params.get('age');
-  const sex = params.get('sex');
-  const favorite = params.get('favorite');
-  const page = params.get('page');
-  const limit = params.get('limit');
-  const onlyMine = params.get('only-mine');
+  const title = searchParams.get('title') || initialState.title;
+  const category = searchParams.get('category') || initialState.category;
+  const age = searchParams.get('age') || initialState.age;
+  const sex = searchParams.get('sex') || initialState.sex;
+  const favorite = searchParams.get('favorite') || initialState.favorite;
+  const page = searchParams.get('page') || initialState.page;
+  const limit = searchParams.get('limit') || initialState.limit;
+  const onlyMine = searchParams.get('only-mine') || initialState['only-mine'];
 
-  const handleSubmit = () => {
+  const [query, setQuery] = useState(title);
+
+  const handleSubmitSearch = query => {
+    searchParams.set('title', query);
+    setSearchParams(searchParams);
+  };
+
+  const handleChangeSearch = query => {
+    setQuery(query);
+  };
+
+  const handleResetSearch = () => {
+    setQuery('');
+  };
+
+  const submit = () => {
     dispatch(
       getNotices({
         title,
@@ -41,67 +56,66 @@ export default function NoticesPage() {
         favorite,
         page,
         limit,
-        'only-mine': onlyMine,
+        onlyMine,
       })
     );
   };
 
-  const setCategory = category => {
-    const choice = {};
-    switch (category) {
+  const setCategory = value => {
+    handleSubmitSearch('');
+    handleResetSearch();
+
+    switch (value) {
       case 'sell':
-        choice.favorite = '';
-        choice['only-mine'] = '';
-        choice.category = 'sell';
+        searchParams.set('favorite', '');
+        searchParams.set('only-mine', '');
+        searchParams.set('category', 'sell');
         break;
       case 'lost-found':
-        choice.favorite = '';
-        choice['only-mine'] = '';
-        choice.category = 'lost-found';
+        searchParams.set('favorite', '');
+        searchParams.set('only-mine', '');
+        searchParams.set('category', 'lost-found');
         break;
       case 'for-free':
-        choice.favorite = '';
-        choice['only-mine'] = '';
-        choice.category = 'for-free';
+        searchParams.set('favorite', '');
+        searchParams.set('only-mine', '');
+        searchParams.set('category', 'for-free');
         break;
-      case 'favorite-ads':
-        choice.favorite = 'true';
-        choice['only-mine'] = '';
-        choice.category = '';
+      case 'favorite':
+        searchParams.set('only-mine', '');
+        searchParams.set('category', 'all');
+        searchParams.set('favorite', 'true');
         break;
-      case 'my-ads':
-        choice.favorite = '';
-        choice['only-mine'] = 'true';
-        choice.category = '';
+      case 'only-mine':
+        searchParams.set('category', 'all');
+        searchParams.set('favorite', '');
+        searchParams.set('only-mine', 'true');
         break;
     }
-    setParams({ ...Object.fromEntries([...params]), ...choice });
-    handleSubmit();
+
+    setSearchParams(searchParams);
   };
+
   useEffect(() => {
-    setParams(initialState);
-    handleSubmit();
+    submit();
   }, []);
 
-  const handleInput = searchString => {
-    setParams({ ...Object.fromEntries([...params]), title: searchString });
-  };
+  useEffect(() => {
+    submit();
+  }, [searchParams]);
 
-  const clearSearch = () => {
-    setParams(prevParams => {
-      return { ...prevParams, title: '' };
-    });
-  };
+  const resetSearchField = () => {};
+
   return (
     <>
       <section>
         <div className="container">
           <h1 className={s.title}>Find your favorite pet</h1>
           <NoticesSearch
-            handleInput={handleInput}
-            value={title}
-            handleSubmit={handleSubmit}
-            clearSearch={clearSearch}
+            value={query}
+            onSubmit={handleSubmitSearch}
+            onChange={handleChangeSearch}
+            onReset={handleResetSearch}
           />
           <NoticesCategoriesNav handleSubmit={setCategory} />
           <NoticesCategoriesList />

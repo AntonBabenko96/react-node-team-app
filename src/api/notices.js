@@ -2,14 +2,14 @@ import instance from './auth-api';
 
 // для отримання оголошень по заголовку та по категоріям + фільтр
 export async function getNotices({
-  category = 'sell',
+  category = '',
   title = '',
   age = '',
   sex = '',
   favorite = '',
   page = 1,
   limit = 12,
-  'only-mine': onlyMine = '',
+  onlyMine = '',
 }) {
   const { data: result } = await instance.get(
     `/notices?category=${category}&title=${title}&age=${age}&sex=${sex}&page=${page}&limit=${limit}&favorite=${favorite}&only-mine=${onlyMine}`
