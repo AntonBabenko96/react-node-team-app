@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getNotices } from 'redux/notices/notices-operations';
 import s from './NoticesPage.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const initialState = {
   category: 'sell',
@@ -46,7 +46,7 @@ export default function NoticesPage() {
     setQuery('');
   };
 
-  const submit = () => {
+  const submit = useCallback(() => {
     dispatch(
       getNotices({
         title,
@@ -59,7 +59,7 @@ export default function NoticesPage() {
         onlyMine,
       })
     );
-  };
+  }, [title, category, age, sex, favorite, page, limit, onlyMine]);
 
   const setCategory = value => {
     handleSubmitSearch('');
