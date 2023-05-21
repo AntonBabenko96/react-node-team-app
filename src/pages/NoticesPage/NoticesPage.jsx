@@ -91,6 +91,10 @@ export default function NoticesPage() {
         searchParams.set('favorite', '');
         searchParams.set('only-mine', 'true');
         break;
+      default:
+        searchParams.set('category', '');
+        searchParams.set('favorite', '');
+        searchParams.set('only-mine', '');
     }
 
     setSearchParams(searchParams);
@@ -98,13 +102,11 @@ export default function NoticesPage() {
 
   useEffect(() => {
     submit();
-  }, []);
+  }, [submit]);
 
   useEffect(() => {
     submit();
-  }, [searchParams]);
-
-  const resetSearchField = () => {};
+  }, [searchParams, submit]);
 
   return (
     <>
