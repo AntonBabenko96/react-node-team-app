@@ -59,7 +59,7 @@ export default function NoticesPage() {
         onlyMine,
       })
     );
-  }, [title, category, age, sex, favorite, page, limit, onlyMine]);
+  }, [title, category, age, sex, favorite, page, limit, onlyMine, dispatch]);
 
   const setCategory = value => {
     handleSubmitSearch('');
