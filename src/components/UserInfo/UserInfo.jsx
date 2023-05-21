@@ -17,16 +17,15 @@ import styles from './UserInfo.module.scss';
 import React from 'react';
 import Modal from 'components/Modal/Modal';
 
-
 export default function UserInfo() {
- const navigate = useNavigate();
+  const navigate = useNavigate();
   const userInfo = useSelector(selectUser);
   const isLogin = useSelector(selectIsLogin);
   const dispatch = useDispatch();
 
   const [showModal, setShowModal] = useState(false);
 
-   const toggleModal = () => {
+  const toggleModal = () => {
     setShowModal(!showModal);
   };
 
@@ -110,7 +109,7 @@ export default function UserInfo() {
 
   const handleLogoutClick = () => {
     dispatch(logout());
-  navigate('/notices/sell');
+    navigate('/notices');
   };
 
   return (
@@ -323,16 +322,23 @@ export default function UserInfo() {
                 <div className={styles.modal__wrapper}>
                   <p className={styles.question}> Already leaving?</p>
                   <div className={styles.button__wrapper}>
-                     <button className={styles.button__question_cancel} onClick={toggleModal}>
+                    <button
+                      className={styles.button__question_cancel}
+                      onClick={toggleModal}
+                    >
                       Cancel
                     </button>
-                    <button className={styles.button__question_yes} onClick={handleLogoutClick} >
+                    <button
+                      className={styles.button__question_yes}
+                      onClick={handleLogoutClick}
+                    >
                       Yes
                       <LogoutIcon className={styles.logout__icon_yes} />
                     </button>
                   </div>
                 </div>
-              </Modal>)}
+              </Modal>
+            )}
           </div>
         </div>
       </div>
