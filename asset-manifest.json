@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/react-node-team-app/static/css/main.1ce0ca5b.css",
-    "main.js": "/react-node-team-app/static/js/main.50330790.js",
-    "static/css/466.d84ee988.chunk.css": "/react-node-team-app/static/css/466.d84ee988.chunk.css",
-    "static/js/466.df86650d.chunk.js": "/react-node-team-app/static/js/466.df86650d.chunk.js",
+    "main.js": "/react-node-team-app/static/js/main.52219670.js",
+    "static/css/466.5bfcfd29.chunk.css": "/react-node-team-app/static/css/466.5bfcfd29.chunk.css",
+    "static/js/466.0f82bb19.chunk.js": "/react-node-team-app/static/js/466.0f82bb19.chunk.js",
     "static/css/920.3b6bf4b1.chunk.css": "/react-node-team-app/static/css/920.3b6bf4b1.chunk.css",
     "static/js/920.fde73624.chunk.js": "/react-node-team-app/static/js/920.fde73624.chunk.js",
     "static/css/664.be23b432.chunk.css": "/react-node-team-app/static/css/664.be23b432.chunk.css",
@@ -51,9 +51,9 @@
     "static/media/plus.svg": "/react-node-team-app/static/media/plus.b5e6410da4b4e6eccef3a4e839f4d4f7.svg",
     "static/media/arrow-left.svg": "/react-node-team-app/static/media/arrow-left.28e54c68d22316b0adad105367f7e8e0.svg",
     "main.1ce0ca5b.css.map": "/react-node-team-app/static/css/main.1ce0ca5b.css.map",
-    "main.50330790.js.map": "/react-node-team-app/static/js/main.50330790.js.map",
-    "466.d84ee988.chunk.css.map": "/react-node-team-app/static/css/466.d84ee988.chunk.css.map",
-    "466.df86650d.chunk.js.map": "/react-node-team-app/static/js/466.df86650d.chunk.js.map",
+    "main.52219670.js.map": "/react-node-team-app/static/js/main.52219670.js.map",
+    "466.5bfcfd29.chunk.css.map": "/react-node-team-app/static/css/466.5bfcfd29.chunk.css.map",
+    "466.0f82bb19.chunk.js.map": "/react-node-team-app/static/js/466.0f82bb19.chunk.js.map",
     "920.3b6bf4b1.chunk.css.map": "/react-node-team-app/static/css/920.3b6bf4b1.chunk.css.map",
     "920.fde73624.chunk.js.map": "/react-node-team-app/static/js/920.fde73624.chunk.js.map",
     "664.be23b432.chunk.css.map": "/react-node-team-app/static/css/664.be23b432.chunk.css.map",
@@ -79,6 +79,6 @@
   },
   "entrypoints": [
     "static/css/main.1ce0ca5b.css",
-    "static/js/main.50330790.js"
+    "static/js/main.52219670.js"
   ]
 }
