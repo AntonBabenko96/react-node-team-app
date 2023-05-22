@@ -14,10 +14,12 @@ export default function NewsPage() {
 
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams(``);
-  const title = searchParams.get('title');
+  const title = searchParams.get('title') || ``;
   const [query, setQuery] = useState(title);
 
   const handleSubmitSearch = query => {
+    setCount(1);
+    setPage(1);
     searchParams.set('title', query);
     setSearchParams(searchParams);
   };
@@ -28,6 +30,8 @@ export default function NewsPage() {
 
   const handleResetSearch = () => {
     setQuery('');
+    setCount(1);
+    setPage(1);
   };
 
   const getPage = paginationPage => {
@@ -42,7 +46,7 @@ export default function NewsPage() {
         //1) першим параметром приймає номер сторінки
         //2) другим параметром кількість новин на сторінці
         //3) третій параметр - це пошуковий запит по заголовку новини
-        const result = await getNews(page, 6, searchParams.get('title') || '');
+        const result = await getNews(page, 6, title);
         //У відповіді від бекенду повертається обєкт формату:
         // {
         //   total: 1151, <--- загальна кількість новин яка повернулась після пошуку
@@ -64,7 +68,7 @@ export default function NewsPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     fetchNews();
-  }, [searchParams, page]);
+  }, [title, page]);
 
   const newsMarkup = (
     <>
