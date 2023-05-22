@@ -46,6 +46,16 @@ export default function NoticesPage() {
     setQuery('');
   };
 
+  const handleAgeCheck = formattedData => {
+    searchParams.set('age', formattedData);
+    setSearchParams(searchParams);
+  };
+
+  const handleGenderCheck = formattedData => {
+    searchParams.set('sex', formattedData);
+    setSearchParams(searchParams);
+  };
+
   const submit = useCallback(() => {
     dispatch(
       getNotices({
@@ -126,6 +136,8 @@ export default function NoticesPage() {
               (favorite && 'favorite') ||
               (onlyMine && 'only-mine')
             }
+            onAgeCheck={handleAgeCheck}
+            onGenderCheck={handleGenderCheck}
           />
           <NoticesCategoriesList />
         </div>

@@ -1,239 +1,82 @@
 @import '/src/styles/styles.scss';
-// .button {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   gap: 8px;
-//   background-color: getColor('full-white');
-//   outline: transparent;
-//   border: 2px solid getColor('full-blue');
-//   border-radius: 40px;
-//   color: getColor('full-blue');
-//   width: 152px;
-//   height: 40px;
-//   margin-bottom: 10px;
-//   cursor: pointer;
-//   @include main-font(700, 16px, 22px, normal);
-//   &:hover {
-//     background-color: getColor('full-blue');
-//     border: 2px solid getColor('full-blue');
-//     color: getColor('full-white');
-//   }
 
-//   .icon {
-//     fill: getColor('full-blue');
-//     width: 24px;
-//     height: 24px;
-//   }
-//   .icon:hover,
-//   .icon.active {
-//     fill:getColor('full-white');
-//   }
-// }
-
-// .button {
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: center;
-//     align-items: center;
-//     gap: 8px;
-//     background-color: getColor('full-white');
-//     outline: transparent;
-//     border: 2px solid getColor('full-blue');
-//     border-radius: 40px;
-//     color: getColor('full-blue');
-//     width: 152px;
-//     height: 40px;
-//     margin-bottom: 10px;
-//     cursor: pointer;
-//     @include main-font(700, 16px, 22px, normal);
-  
-//     &:hover {
-//       background-color: getColor('full-blue');
-//       border: 2px solid getColor('full-blue');
-//       color: getColor('full-white');
-  
-//       .icon {
-//         fill: getColor('full-white');
-//       }
-      
-//     }
-  
-//     &.active {
-//       background-color: getColor('full-blue');
-//       border: 2px solid getColor('full-blue');
-//       color: getColor('full-white');
-  
-//       .icon {
-//         fill: getColor('full-white');
-//       }
-//     }
-  
-//     .icon {
-//       fill: getColor('full-blue');
-//       width: 24px;
-//       height: 24px;
-//     }
-
-//    }
-
-.button {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  background-color: getColor('full-white');
-  outline: transparent;
-  border: 2px solid getColor('full-blue');
-  border-radius: 40px;
-  color: getColor('full-blue');
+.dropdown {
+  position: relative;
   width: 152px;
   height: 40px;
-  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: calc(22 / 16);
+  letter-spacing: 0.04em;
+  color: getColor(full-blue);
+
+  background-color: transparent;
+
+  border: 2px solid currentColor;
+  border-radius: 40px;
+
   cursor: pointer;
-  @include main-font(700, 16px, 22px, normal);
-}
+  transition: 300ms color, 300ms background;
+  user-select: none;
 
-.button .icon {
-  fill: getColor('full-blue');
-  width: 24px;
-  height: 24px;
-}
-
-@media (hover: hover) {
-  .button:hover {
-    background-color: getColor('full-blue');
-    border: 2px solid getColor('full-blue');
-    color: getColor('full-white');
-  }
-
-  .button:hover .icon {
-    fill: getColor('full-white');
-  }
-}
-
-@media (max-width: 767px) {
-  .button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    padding: 0;
-    background-color: #C5DFF6;
-  }
-
-  .button .icon {
+  & > svg {
     width: 24px;
     height: 24px;
+    pointer-events: none;
+
+    & > * {
+      stroke: currentColor;
+    }
   }
 
-  .button span {
-    display: none;
+  &:hover,
+  &:focus,
+  &:global(.active) {
+    $gradient: linear-gradient(
+      290.46deg,
+      getColor(gr-blue-start) 0%,
+      getColor(gr-blue-end) 107.89%
+    );
+    background: $gradient;
+    border: none;
+    color: white;
   }
 }
 
-.filterButtons {
-  position: relative;
-  display: inline-block;
-}
+.modal {
+  position: absolute;
+  z-index: 3;
+  top: 52px;
+  left: 0;
 
-.filtersTitle {
-  color: getColor('full-blue');
-  @include main-font(700, 16px, 22px, normal);
-}
+  width: 152px;
+  padding: 8px;
 
-.filterDropdownBtn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  background-color: #cce4fb;
-  outline: transparent;
-  border: 2px solid #cce4fb;
-  border-radius: 40px;
-  color: getColor('full-blue');
-  width: 136px;
-  height: 40px;
-  @include main-font(400, 14px, 18.2px, normal);
-  cursor: pointer;
-}
-
-.arrowIcon {
-  fill: getColor('full-blue');
-  width: 24px;
-  height: 24px;
-}
-.dropdownContent {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 8px;
-  position: absolute;
+
   background-color: white;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 20px;
-  min-width: 152px;
-  padding: 8px;
-  align-items: center;
-  z-index: 1;
-}
 
-.ageDropdown,
-.genderDropdown {
-  display: flex;
-  flex-direction: column;
-  @include main-font(400, 12px, 16px, normal);
-  color: getColor('full-blue');
-  background-color: #cce4fb;
-  border-radius: 20px;
-  width: 136px;
-  padding: 8px;
-}
-.inputCheck {
-  width: 24px;
-  height: 24px;
-  background-color: #cce4fb;
-  outline: none;
-  border: 1px solid getColor('full-blue');
-  border-radius: 20px;
-}
+  cursor: auto;
 
-.filterOption {
-  display: flex;
-  gap: 12px;
-  margin-left: 30px;
-  &:not(:last-child) {
-    margin-bottom: 12px;
+  &:global(.active) {
+    display: flex;
   }
 }
 
-
-.customCheckbox {
-  position: relative;
-  display: flex;
-  vertical-align: middle;
-  align-items: center;
-  gap: 12px;
-}
-
-.customCheckbox input[type='checkbox'] {
-  position: absolute;
-  opacity: 0;
-}
-
-.customCheckbox .checkmark {
-  position: relative;
-  display: flex;
-  width: 16px;
-  height: 16px;
-  border: 2px solid getColor('full-blue');
-  border-radius: 4px;
-  transition: border-color 0.3s;
-  justify-content: center;
-  align-items: center;
-}
-
-.checkIcon {
-  width: 16px;
-  height: 16px;
+.title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: left;
+  color: getColor(full-blue);
 }

@@ -1,151 +1,191 @@
-import React, { useState} from 'react';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import CheckIcon from '@mui/icons-material/Check';
+import { useState, useEffect, useRef } from 'react';
+import { ReactComponent as FilterIcon } from '../../img/svg/filters-3.svg';
 
-// import { getNotices } from '../../api/notices';
 import styles from './FilterButton.module.scss';
 
-export default function FilterButton({ onFilter }) {
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [isAgeDropdownVisible, setAgeDropdownVisible] = useState(false);
-  const [isGenderDropdownVisible, setGenderDropdownVisible] = useState(false);
-  const [selectedAgeOptions, setSelectedAgeOptions] = useState([]);
-  const [selectedGenderOptions, setSelectedGenderOptions] = useState([]);
+import FilterBox from './FilterBox/FilterBox';
+
+const ageInitialState = [
+  {
+    id: 1,
+    value: '3-12m',
+    label: '3-12 m',
+    checked: false,
+  },
+  {
+    id: 2,
+    value: '1y',
+    label: '1 year',
+    checked: false,
+  },
+  {
+    id: 3,
+    value: '2y',
+    label: '2 years',
+    checked: false,
+  },
+  {
+    id: 4,
+    value: '3y',
+    label: '3 years',
+    checked: false,
+  },
+  {
+    id: 5,
+    value: '4y',
+    label: '4 years',
+    checked: false,
+  },
+  {
+    id: 6,
+    value: '5y',
+    label: '5 years',
+    checked: false,
+  },
+  {
+    id: 7,
+    value: '6y',
+    label: '6 years',
+    checked: false,
+  },
+  {
+    id: 8,
+    value: '7y',
+    label: '7 years',
+    checked: false,
+  },
+  {
+    id: 9,
+    value: '8plus',
+    label: '8 +',
+    checked: false,
+  },
+];
+
+const genderInitialState = [
+  {
+    id: 1,
+    value: 'male',
+    label: 'male',
+    checked: false,
+  },
+  {
+    id: 2,
+    value: 'female',
+    label: 'female',
+    checked: false,
+  },
+];
+
+export default function FilterButton({ onAgeCheck, onGenderCheck }) {
+  const [isDropdownActive, setDropdownActive] = useState(false);
+  const [isAgeDropdownActive, setAgeDropdownActive] = useState(false);
+  const [isGenderDropdownActive, setGenderDropdownActive] = useState(false);
+  const [genderFilters, setGenderFilters] = useState(genderInitialState);
+  const [ageFilters, setAgeFilters] = useState(ageInitialState);
+  const buttonElement = useRef();
 
   const toggleDropdown = () => {
-    setDropdownVisible(!isDropdownVisible);
+    setDropdownActive(prevState => !prevState);
   };
 
   const toggleAgeDropdown = () => {
-    setAgeDropdownVisible(!isAgeDropdownVisible);
+    setAgeDropdownActive(prevState => !prevState);
   };
 
   const toggleGenderDropdown = () => {
-    setGenderDropdownVisible(!isGenderDropdownVisible);
+    setGenderDropdownActive(prevState => !prevState);
   };
 
-  const handleOptionChange = (event, optionType) => {
-    const option = event.target.value;
-    if (optionType === 'age') {
-      const selectedOptions = selectedAgeOptions;
-      if (selectedOptions.includes(option)) {
-        setSelectedAgeOptions(selectedOptions.filter(item => item !== option));
-      } else {
-        setSelectedAgeOptions([...selectedOptions, option]);
-      }
-    } else if (optionType === 'gender') {
-      const selectedOptions = selectedGenderOptions;
-      if (selectedOptions.includes(option)) {
-        setSelectedGenderOptions(
-          selectedOptions.filter(item => item !== option)
-        );
-      } else {
-        setSelectedGenderOptions([...selectedOptions, option]);
-      }
+  const handleChecked = (group, filterID) => {
+    let handler;
+
+    if (group === 'age') {
+      handler = setAgeFilters;
+    } else if (group === 'gender') {
+      handler = setGenderFilters;
+    } else {
+      return console.error(`Group by name ${group} not exist`);
     }
+
+    handler(prevState => {
+      const state = prevState.map(state => {
+        if (state.id === filterID) {
+          state.checked = !state.checked;
+        }
+        return state;
+      });
+
+      return state;
+    });
   };
-  // const handleFilter = (result) => {
-  //   console.log(result);
-  // };
 
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const result = await getNotices({
-  //         sex: selectedGenderOptions.join(','),
-  //         age: selectedAgeOptions.join(','),
-  //       });
-  //       onFilter(result);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [selectedAgeOptions, selectedGenderOptions, onFilter]);
-
-  const renderCheckbox = (option, optionType) => {
-    const isChecked =
-      optionType === 'age'
-        ? selectedAgeOptions.includes(option)
-        : selectedGenderOptions.includes(option);
-    return (
-      <label className={styles.customCheckbox}>
-        <input
-          type="checkbox"
-          value={option}
-          checked={isChecked}
-          className={styles.inputCheck}
-          onChange={event => handleOptionChange(event, optionType)}
-        />
-        <span className={styles.checkmark}>
-          {isChecked && <CheckIcon className={styles.checkIcon} />}
-        </span>
-        {option}
-      </label>
-    );
+  const createCheckedList = filterList => {
+    const checkedList = filterList
+      .filter(state => state.checked)
+      .map(({ value }) => value);
+    return checkedList.join(',');
   };
+
+  useEffect(() => {
+    const formattedData = createCheckedList(ageFilters);
+    console.log(formattedData);
+
+    onAgeCheck(formattedData);
+  }, [ageFilters]);
+
+  useEffect(() => {
+    const formattedData = createCheckedList(genderFilters);
+    onGenderCheck(formattedData);
+  }, [genderFilters]);
+
+  useEffect(() => {
+    const handleClick = e => {
+      if (!e.composedPath().includes(buttonElement.current)) {
+        setDropdownActive(false);
+      }
+    };
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
+
+  const filterButtonClasses = isDropdownActive
+    ? `${styles.dropdown} active`
+    : styles.dropdown;
+
+  const modalClasses = isDropdownActive
+    ? `${styles.modal} active`
+    : styles.modal;
 
   return (
-    <div className={styles.filterButton} >
-      <div
-        className={`${styles.button} ${isDropdownVisible ? styles.active : ''}`}
-        onClick={toggleDropdown}
-      >
-        <span>Filters</span>
-        
-        <FilterAltOutlinedIcon className={styles.icon} />
+    <div
+      className={filterButtonClasses}
+      ref={buttonElement}
+      onClick={e => {
+        if (e.target === e.currentTarget) {
+          toggleDropdown();
+        }
+      }}
+    >
+      Filter
+      <FilterIcon />
+      <div className={modalClasses}>
+        <p className={styles.title}>Filters</p>
+        <FilterBox
+          items={ageFilters}
+          group="age"
+          isActive={isAgeDropdownActive}
+          onToggleActive={toggleAgeDropdown}
+          onChange={handleChecked}
+        />
+        <FilterBox
+          items={genderFilters}
+          group="gender"
+          isActive={isGenderDropdownActive}
+          onToggleActive={toggleGenderDropdown}
+          onChange={handleChecked}
+        />
       </div>
-      {isDropdownVisible && (
-        <div className={`${styles.dropdownContent} show`}>
-          <p className={styles.filtersTitle}>Filters</p>
-          <div className={styles.filterDropdownBtn} onClick={toggleAgeDropdown}>
-            {isAgeDropdownVisible ? (
-              <ExpandLessIcon className={styles.arrowIcon} />
-            ) : (
-              <ExpandMoreIcon className={styles.arrowIcon} />
-            )}
-            By age
-          </div>
-          {isAgeDropdownVisible && (
-            <div className={`${styles.ageDropdown} ${styles.show}`}>
-              <div className={styles.filterOption}>
-                {renderCheckbox('3-12 m', 'age')}
-              </div>
-              <div className={styles.filterOption}>
-                {renderCheckbox('1 year', 'age')}
-              </div>
-              <div className={styles.filterOption}>
-                {renderCheckbox('2 years', 'age')}
-              </div>
-            </div>
-          )}
-          <div
-            className={styles.filterDropdownBtn}
-            onClick={toggleGenderDropdown}
-          >
-            {isGenderDropdownVisible ? (
-              <ExpandLessIcon className={styles.arrowIcon} />
-            ) : (
-              <ExpandMoreIcon className={styles.arrowIcon} />
-            )}
-            By gender
-          </div>
-          {isGenderDropdownVisible && (
-            <div className={`${styles.genderDropdown} ${styles.show}`}>
-              <div className={styles.filterOption}>
-                {renderCheckbox('female', 'gender')}
-              </div>
-              <div className={styles.filterOption}>
-                {renderCheckbox('male', 'gender')}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
