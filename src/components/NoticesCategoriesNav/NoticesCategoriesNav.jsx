@@ -12,7 +12,12 @@ const categoriesList = [
   { id: 5, value: 'only-mine', name: 'my ads', auth: true },
 ];
 
-export default function NoticesCategoriesNav({ handleSubmit, active }) {
+export default function NoticesCategoriesNav({
+  handleSubmit,
+  active,
+  onAgeCheck,
+  onGenderCheck,
+}) {
   const isLogin = useSelector(selectIsLogin);
 
   const categoriesElements = categoriesList.map(({ id, value, name, auth }) => {
@@ -40,7 +45,7 @@ export default function NoticesCategoriesNav({ handleSubmit, active }) {
     <div className={`${Style.categoryBtns} container`}>
       <div className={Style.filterCategories}>{categoriesElements}</div>
       <div className={Style.filterBtnCategories}>
-        <FilterButton />
+        <FilterButton onAgeCheck={onAgeCheck} onGenderCheck={onGenderCheck} />
         <AddPetButton />
       </div>
     </div>

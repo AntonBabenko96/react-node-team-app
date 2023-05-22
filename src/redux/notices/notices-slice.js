@@ -36,7 +36,6 @@ export const noticesSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = payload.notices;
-        console.log();
         state.total = payload.total;
       })
       .addCase(getNotices.rejected, handleRejected)
