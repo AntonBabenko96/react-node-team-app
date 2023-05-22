@@ -5,6 +5,7 @@ import { getPets } from 'redux/pets/pets-operations';
 import { userPetsList } from 'redux/pets/pets-selectors';
 import { selectIsLogin } from 'redux/auth/selectors';
 import styles from 'components/UserPetsList/UserPetsList.module.scss';
+import notFoundImage from '../../img/notFound/notFound.png';
 
 // const pets = [
 //   {
@@ -37,21 +38,31 @@ export default function UserPetsList() {
   const pets = useSelector(userPetsList);
   const isLogin = useSelector(selectIsLogin);
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (isLogin) {
       dispatch(getPets());
     }
   }, [dispatch, isLogin]);
 
+  const getDateOfBirth = value => {
+    const date = new Date(value);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const birthDay = `${day.toString().padStart(2, `0`)}-${month
+      .toString()
+      .padStart(2, `0`)}-${year}`;
+    return birthDay;
+  };
   const elements = pets.map(
-    ({ _id, photoURL, name, date, breed, comments }) => {
+    ({ _id, photoURL, name, birth, breed, comments }) => {
+      const birthDay = getDateOfBirth(birth);
       return (
         <UserPetsItem
           key={_id}
           photoURL={photoURL}
           name={name}
-          date={date}
+          date={birthDay}
           breed={breed}
           comments={comments}
           id={_id}
@@ -60,7 +71,21 @@ export default function UserPetsList() {
     }
   );
 
-  return <ul className={styles.list}>{elements}</ul>;
+  return (
+    <>
+      {pets.length === 0 && (
+        <div className={styles.notFound}>
+          <p className={styles.notFoundText}>`Your pet list is empty :(`</p>
+          <img
+            className={styles.notFoundImg}
+            src={notFoundImage}
+            alt="Not Found"
+          />
+        </div>
+      )}
+      {pets && <ul className={styles.list}>{elements}</ul>}
+    </>
+  );
 }
 
 // const UserPetsList = ({ pets = [] }) => {

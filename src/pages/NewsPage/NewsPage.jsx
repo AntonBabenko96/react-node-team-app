@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import styles from './NewsPage.module.scss';
 import { getNews } from 'api/news';
 import notFoundImg from '../../img/notFound/notFound.png';
 import Paginations from 'components/Pagination/Pagination';
+import { useSearchParams } from 'react-router-dom';
 
 export default function NewsPage() {
   const [news, setNews] = useState([]);
@@ -12,10 +12,23 @@ export default function NewsPage() {
   const [notFound, setNotFound] = useState(false);
   const [showPagination, setShowPagination] = useState(false);
 
-  const { search } = useLocation();
-  let query = search.slice(8);
-
   const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams(``);
+  const title = searchParams.get('title');
+  const [query, setQuery] = useState(title);
+
+  const handleSubmitSearch = query => {
+    searchParams.set('title', query);
+    setSearchParams(searchParams);
+  };
+
+  const handleChangeSearch = query => {
+    setQuery(query);
+  };
+
+  const handleResetSearch = () => {
+    setQuery('');
+  };
 
   const getPage = paginationPage => {
     // Отримання даних з дочірнього компонента Pagination
@@ -29,7 +42,7 @@ export default function NewsPage() {
         //1) першим параметром приймає номер сторінки
         //2) другим параметром кількість новин на сторінці
         //3) третій параметр - це пошуковий запит по заголовку новини
-        const result = await getNews(page, 6, query);
+        const result = await getNews(page, 6, searchParams.get('title') || '');
         //У відповіді від бекенду повертається обєкт формату:
         // {
         //   total: 1151, <--- загальна кількість новин яка повернулась після пошуку
@@ -48,11 +61,10 @@ export default function NewsPage() {
       }
     };
 
-    
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    
+
     fetchNews();
-  }, [query, page]);
+  }, [searchParams, page]);
 
   const newsMarkup = (
     <>
@@ -113,7 +125,12 @@ export default function NewsPage() {
     <section className={styles.newsSection}>
       <div className="container">
         <h1 className={styles.newsMainTitle}>News</h1>
-        <NoticesSearch />
+        <NoticesSearch
+          onSubmit={handleSubmitSearch}
+          onChange={handleChangeSearch}
+          onReset={handleResetSearch}
+          value={query}
+        />
         {!notFound ? newsMarkup : notFoundMarkup}
         {showPagination && <Paginations getPage={getPage} count={count} />}
       </div>
