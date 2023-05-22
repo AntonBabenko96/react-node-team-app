@@ -5,84 +5,10 @@ import styles from './FilterButton.module.scss';
 
 import FilterBox from './FilterBox/FilterBox';
 
-const ageInitialState = [
-  {
-    id: 1,
-    value: '3-12m',
-    label: '3-12 m',
-    checked: false,
-  },
-  {
-    id: 2,
-    value: '1y',
-    label: '1 year',
-    checked: false,
-  },
-  {
-    id: 3,
-    value: '2y',
-    label: '2 years',
-    checked: false,
-  },
-  {
-    id: 4,
-    value: '3y',
-    label: '3 years',
-    checked: false,
-  },
-  {
-    id: 5,
-    value: '4y',
-    label: '4 years',
-    checked: false,
-  },
-  {
-    id: 6,
-    value: '5y',
-    label: '5 years',
-    checked: false,
-  },
-  {
-    id: 7,
-    value: '6y',
-    label: '6 years',
-    checked: false,
-  },
-  {
-    id: 8,
-    value: '7y',
-    label: '7 years',
-    checked: false,
-  },
-  {
-    id: 9,
-    value: '8plus',
-    label: '8 +',
-    checked: false,
-  },
-];
-
-const genderInitialState = [
-  {
-    id: 1,
-    value: 'male',
-    label: 'male',
-    checked: false,
-  },
-  {
-    id: 2,
-    value: 'female',
-    label: 'female',
-    checked: false,
-  },
-];
-
-export default function FilterButton({ onAgeCheck, onGenderCheck }) {
+export default function FilterButton({ genderFilters, ageFilters, onChange }) {
   const [isDropdownActive, setDropdownActive] = useState(false);
   const [isAgeDropdownActive, setAgeDropdownActive] = useState(false);
   const [isGenderDropdownActive, setGenderDropdownActive] = useState(false);
-  const [genderFilters, setGenderFilters] = useState(genderInitialState);
-  const [ageFilters, setAgeFilters] = useState(ageInitialState);
   const buttonElement = useRef();
 
   const toggleDropdown = () => {
@@ -96,48 +22,6 @@ export default function FilterButton({ onAgeCheck, onGenderCheck }) {
   const toggleGenderDropdown = () => {
     setGenderDropdownActive(prevState => !prevState);
   };
-
-  const handleChecked = (group, filterID) => {
-    let handler;
-
-    if (group === 'age') {
-      handler = setAgeFilters;
-    } else if (group === 'gender') {
-      handler = setGenderFilters;
-    } else {
-      return console.error(`Group by name ${group} not exist`);
-    }
-
-    handler(prevState => {
-      const state = prevState.map(state => {
-        if (state.id === filterID) {
-          state.checked = !state.checked;
-        }
-        return state;
-      });
-
-      return state;
-    });
-  };
-
-  const createCheckedList = filterList => {
-    const checkedList = filterList
-      .filter(state => state.checked)
-      .map(({ value }) => value);
-    return checkedList.join(',');
-  };
-
-  useEffect(() => {
-    const formattedData = createCheckedList(ageFilters);
-    console.log(formattedData);
-
-    onAgeCheck(formattedData);
-  }, [ageFilters, onAgeCheck]);
-
-  useEffect(() => {
-    const formattedData = createCheckedList(genderFilters);
-    onGenderCheck(formattedData);
-  }, [genderFilters, onGenderCheck]);
 
   useEffect(() => {
     const handleClick = e => {
@@ -176,14 +60,14 @@ export default function FilterButton({ onAgeCheck, onGenderCheck }) {
           group="age"
           isActive={isAgeDropdownActive}
           onToggleActive={toggleAgeDropdown}
-          onChange={handleChecked}
+          onChange={onChange}
         />
         <FilterBox
           items={genderFilters}
           group="gender"
           isActive={isGenderDropdownActive}
           onToggleActive={toggleGenderDropdown}
-          onChange={handleChecked}
+          onChange={onChange}
         />
       </div>
     </div>

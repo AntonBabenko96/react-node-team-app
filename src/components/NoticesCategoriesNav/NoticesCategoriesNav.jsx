@@ -13,10 +13,11 @@ const categoriesList = [
 ];
 
 export default function NoticesCategoriesNav({
-  handleSubmit,
+  onCategoryCLick,
   active,
-  onAgeCheck,
-  onGenderCheck,
+  onFilterCheck,
+  genderFilters,
+  ageFilters,
 }) {
   const isLogin = useSelector(selectIsLogin);
 
@@ -31,7 +32,7 @@ export default function NoticesCategoriesNav({
           name={value}
           type="button"
           className={classNames}
-          onClick={() => handleSubmit(value)}
+          onClick={() => onCategoryCLick(value)}
         >
           {name}
         </button>
@@ -45,7 +46,11 @@ export default function NoticesCategoriesNav({
     <div className={`${Style.categoryBtns} container`}>
       <div className={Style.filterCategories}>{categoriesElements}</div>
       <div className={Style.filterBtnCategories}>
-        <FilterButton onAgeCheck={onAgeCheck} onGenderCheck={onGenderCheck} />
+        <FilterButton
+          onChange={onFilterCheck}
+          genderFilters={genderFilters}
+          ageFilters={ageFilters}
+        />
         <AddPetButton />
       </div>
     </div>
