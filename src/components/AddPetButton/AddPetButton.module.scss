@@ -16,6 +16,7 @@
     right: 20px;
     z-index: 5;
     color: getColor('full-white');
+    border: none;
   }
   @include media-min(tablet) {
     @include main-font(700, 16px, 22px);
@@ -31,6 +32,7 @@
     color: getColor('full-white');
     width: 129px;
     height: 40px;
+    border: none;
   }
 }
 
@@ -49,6 +51,7 @@
   color: getColor('full-white');
   width: 129px;
   height: 40px;
+  border: none;
 }
 
 .buttonCircle:hover,

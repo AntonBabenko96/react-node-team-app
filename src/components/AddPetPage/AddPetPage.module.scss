@@ -1,5 +1,19 @@
 @import '/src/styles/styles.scss';
 
+.petSection {
+  background-image: url('../../img/mainPage/bg.png');
+  background-repeat: no-repeat;
+  background-position: top right;
+  position: relative;
+
+  @include media-min(tablet) {
+    background-image: url('../../img/mainPage/bgTablet.png');
+  }
+  @include media-min(desktop) {
+    background-image: url('../../img/mainPage/bgDesktop.png');
+  }
+}
+
 .form {
   border-radius: 40px;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);

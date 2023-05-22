@@ -18,7 +18,8 @@ function ThirdStep({ data, prev, finish }) {
   const price = data.category === 'sell' ? true : false;
 
   const isLoading = useSelector(addPetLoading);
-  const regEx = /^[` 0-9A-Za-z `][` A-Za-z0-9 `]*$/;
+  // const regEx = /^[` 0-9A-Za-z `][` A-Za-z0-9 `]*$/;
+  const regEx = /^[^\u0400-\u04FF]*$/;
 
   const validationSchema = Yup.object({
     photo: Yup.mixed()
