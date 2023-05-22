@@ -34,9 +34,10 @@ export default function NoticeModal({
     phone = owner.phone ? owner.phone : 'no data';
   }
 
+  if(category) {
   const categoryItem = categoryItems.find(item => item.name === category);
-  console.log(categoryItem)
   category = categoryItem.value;
+  }
 
   return (
       <div className={Style.wrapper}>
