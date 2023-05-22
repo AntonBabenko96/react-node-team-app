@@ -132,12 +132,12 @@ export default function FilterButton({ onAgeCheck, onGenderCheck }) {
     console.log(formattedData);
 
     onAgeCheck(formattedData);
-  }, [ageFilters]);
+  }, [ageFilters, onAgeCheck]);
 
   useEffect(() => {
     const formattedData = createCheckedList(genderFilters);
     onGenderCheck(formattedData);
-  }, [genderFilters]);
+  }, [genderFilters, onGenderCheck]);
 
   useEffect(() => {
     const handleClick = e => {
