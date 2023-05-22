@@ -124,7 +124,7 @@ export default function AddPetPage() {
   };
 
   return (
-    <>
+    <section className={styles.petSection}>
       {created && !isLoading && (
         <Navigate to={location.state?.pathname || `/`} />
       )}
@@ -149,6 +149,6 @@ export default function AddPetPage() {
           {steps[currentStep]}
         </div>
       </div>
-    </>
+    </section>
   );
 }

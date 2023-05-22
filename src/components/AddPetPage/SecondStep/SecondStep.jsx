@@ -9,7 +9,8 @@ import { ReactComponent as Paw } from '../../../img/svg/pawprint.svg';
 
 function SecondStep({ data, prev, onSubmit }) {
   const title = data.category === 'my pet' ? false : true;
-  const regEx = /^[` 0-9A-Za-z `][` A-Za-z0-9 `]*$/;
+  // const regEx = /^[` 0-9A-Za-z `][` A-Za-z0-9 `] *$/;
+  const regEx = /^[^\u0400-\u04FF]*$/;
 
   const validationSchema = Yup.object({
     petName: Yup.string()
@@ -43,7 +44,7 @@ function SecondStep({ data, prev, onSubmit }) {
           .required()
           .min(2, '2 characters minimum')
           .max(120, '120 characters maximum')
-          .matches(regEx, `English letters and numbers only`)
+          .matches(regEx, `English letters only`)
           .label(`Title`)
       : Yup.string().label(`Title`),
   });
@@ -100,7 +101,7 @@ function SecondStep({ data, prev, onSubmit }) {
                 <FormError className={styles.error} name="petName" />
               </label>
 
-              <label htmlFor="" className={styles.field}>
+              <label className={styles.field}>
                 Date of birth
                 <Field
                   name="dateOfBirth"
