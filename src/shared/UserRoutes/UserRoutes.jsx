@@ -11,7 +11,7 @@ import Loader from 'shared/Loder/Loader';
 // import OurFriendsPage from 'pages/OurFriendsPage/OurFriendsPage';
 // import RegisterPage from 'pages/RegisterPage/RegisterPage';
 // import SharedLayout from 'components/SharedLayout/SharedLayout';
-// import PrivateRoute from 'shared/privateRoute/privateRoute';
+import PrivateRoute from 'shared/privateRoute/privateRoute';
 
 const UserPage = lazy(() => import('pages/UserPage/UserPage'));
 const AddPetPage = lazy(() => import('pages/AddPetPage/AddPetPage'));
@@ -32,10 +32,10 @@ export default function UserRoutes() {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<MainPage />} />
-          {/* <Route element={<PrivateRoute redirect="/login" />}> */}
-          <Route path="user" element={<UserPage />} />
-          <Route path="add-pet" element={<AddPetPage />} />
-          {/* </Route> */}
+          <Route element={<PrivateRoute redirect="/login" />}>
+            <Route path="user" element={<UserPage />} />
+            <Route path="add-pet" element={<AddPetPage />} />
+          </Route>
           <Route path="login" element={<LoginPage />} />
           <Route path="main" element={<MainPage />} />
           <Route path="news" element={<NewsPage />} />
