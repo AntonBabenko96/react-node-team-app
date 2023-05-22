@@ -3,6 +3,7 @@ import { ReactComponent as TrashIcon } from 'img/svg/trash.svg';
 import { ReactComponent as LocationIcon } from 'img/svg/location.svg';
 import { ReactComponent as ClockIcon } from 'img/svg/clock.svg';
 import { ReactComponent as MaleIcon } from 'img/svg/male.svg';
+import { ReactComponent as FemaleIcon } from 'img/svg/female.svg';
 import placeholder from 'img/placeholder.png';
 
 import s from './NoticeCategoryItem.module.scss';
@@ -22,7 +23,6 @@ export default function NoticeCategoryItem({
   onFavoriteBtnClick,
   onDeleteBtnClick,
 }) {
-
   return (
     <li className={s.item}>
       <div className={s.category}>
@@ -42,11 +42,7 @@ export default function NoticeCategoryItem({
           <TrashIcon className={s.icon} />
         </button>
       )}
-      <img
-        className={s.img}
-        src={img ? `${img}` : placeholder}
-        alt="Pet"
-      />
+      <img className={s.img} src={img ? `${img}` : placeholder} alt="Pet" />
       <div className={s.wrapper}>
         <div className={s.box}>
           <LocationIcon className={`${s.icon} ${s.infoIcon}`} />
@@ -57,7 +53,11 @@ export default function NoticeCategoryItem({
           <p className={s.info}>{age}</p>
         </div>
         <div className={s.box}>
-          <MaleIcon className={`${s.icon} ${s.infoIcon}`} />
+          {sex === 'male' ? (
+            <MaleIcon className={`${s.icon} ${s.infoIcon}`} />
+            ) : (
+            <FemaleIcon className={`${s.icon} ${s.infoIcon}`} />
+          )}
           <p className={s.info}>{sex}</p>
         </div>
       </div>

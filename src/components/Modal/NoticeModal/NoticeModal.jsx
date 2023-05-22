@@ -3,11 +3,15 @@ import {ReactComponent as Heart} from "img/svg/heart.svg";
 import placeholder from 'img/placeholder.png';
 
 import Style from './NoticeModal.module.scss';
-// import { BsHeart } from 'react-icons/bs';
 
 
 let email = '';
 let phone = '';
+const categoryItems = [
+  { name: 'sell', value: 'sell' },
+  { name: 'lost-found', value: 'lost/found' },
+  { name: 'for-free', value: 'in good hands' },
+];
 
 export default function NoticeModal({
   _id,
@@ -22,7 +26,6 @@ export default function NoticeModal({
   comments,
   birth,
   owner,
-  notices,
   onFavoriteBtnClick,
 }) {
   const date = getDateFormat(birth);
@@ -30,6 +33,10 @@ export default function NoticeModal({
     email = owner.email ? owner.email : 'no data';
     phone = owner.phone ? owner.phone : 'no data';
   }
+
+  const categoryItem = categoryItems.find(item => item.name === category);
+  console.log(categoryItem)
+  category = categoryItem.value;
 
   return (
       <div className={Style.wrapper}>
