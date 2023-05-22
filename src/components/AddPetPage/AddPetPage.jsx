@@ -93,7 +93,7 @@ export default function AddPetPage() {
       name="firstStep"
       onSubmit={handleCategory}
       next={handleNextStep}
-      path={location.state?.pathname || `/`}
+      path={`${location.state?.pathname}${location.state?.search}` || `/`}
     />,
     <SecondStep
       data={state}
@@ -126,7 +126,9 @@ export default function AddPetPage() {
   return (
     <section className={styles.petSection}>
       {created && !isLoading && (
-        <Navigate to={location.state?.pathname || `/`} />
+        <Navigate
+          to={`${location.state?.pathname}${location.state?.search}` || `/`}
+        />
       )}
       <div className="container" style={{ marginTop: `40px` }}>
         <div className={styles.form}>
