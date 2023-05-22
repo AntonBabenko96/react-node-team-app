@@ -154,13 +154,13 @@ export default function NoticesPage() {
     const formattedData = createCheckedList(ageFilters);
     searchParams.set('age', formattedData);
     setSearchParams(searchParams);
-  }, [ageFilters]);
+  }, [ageFilters, searchParams, setSearchParams]);
 
   useEffect(() => {
     const formattedData = createCheckedList(genderFilters);
     searchParams.set('sex', formattedData);
     setSearchParams(searchParams);
-  }, [genderFilters]);
+  }, [genderFilters,searchParams, setSearchParams]);
 
   const submit = useCallback(() => {
     dispatch(
