@@ -11,3 +11,12 @@
   gap: 20px;
   align-items: center;
 }
+
+.notFound {
+  text-align: center;
+}
+
+.notFoundText {
+  margin-bottom: 30px;
+  @include main-font(500, 20px, 30px);
+}
