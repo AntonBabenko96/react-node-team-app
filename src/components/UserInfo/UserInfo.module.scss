@@ -224,13 +224,22 @@ input[type='date'] {
 
 .button__wrapper {
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+  gap:8px;
+  padding: 0 35px;
+  @media (min-width: 768px) {
+    padding-left: 166px;
+    padding-right: 166px;
+  }
+  
+  justify-content: space-between;
 }
 .question {
+  padding-top: 68px;
   @include main-font(500, 24px, 33px);
   text-align: center;
-  margin-bottom: 30px;
-  @media (min-width: 1280px) {
+  margin-bottom: 60px;
+  @media (min-width: 768px) {
     @include main-font(500, 36px, 49px);
     padding-top: 108px;
     margin-bottom: 48px;
@@ -242,7 +251,7 @@ input[type='date'] {
   border-radius: 40px;
   width: 100px;
   height: 40px;
-  @media (min-width: 1280px) {
+  @media (min-width: 768px) {
     width: 129px;
     height: 40px;
   }
@@ -257,7 +266,7 @@ input[type='date'] {
   width: 100px;
   height: 40px;
   border: none;
-  @media (min-width: 1280px) {
+  @media (min-width: 768px) {
     width: 129px;
     height: 40px;
   }
@@ -273,7 +282,10 @@ input[type='date'] {
   fill: transparent;
 }
 .modal__wrapper {
-  @media (min-width: 1280px) {
+  width: 280px;
+  height: 287px;
+  @media (min-width: 768px) {
     height: 354px;
+    width: 608px;
   }
 }

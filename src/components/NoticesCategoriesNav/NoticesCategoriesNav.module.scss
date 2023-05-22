@@ -1,32 +1,36 @@
 @import '../../styles/styles.scss';
-.categoryBtns{
+.categoryBtns {
   display: flex;
-  justify-content: space-between
-  // gap:92px;
-  // @include media-min(desktop) {
-  //   gap: 403px;
-  // }
+  justify-content: space-between;
 }
 
 .filterCategories {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  width: 210px;
+  width: 215px;
   margin-bottom: 50px;
-  @media screen and (min-width: 340px) {
-    width: 300px;
+
+  @include media-min(tablet) {
+    width: 320px;
+    gap: 12px;
   }
-  @media screen and (min-width: 1200px) {
+
+  @include media-min(desktop) {
     width: auto;
   }
 }
 
-.filterBtnCategories{
+.filterBtnCategories {
   display: flex;
   flex-wrap: nowrap;
   gap: 8px;
+
+  @include media-min(tablet) {
+    gap: 12px;
+  }
 }
+
 .categoriesbtn {
   cursor: pointer;
   background-color: getColor('light-blue');
@@ -36,10 +40,16 @@
   padding: 8px 16px;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
+  @include main-font(500, 14px, calc(19 / 14));
   height: 35px;
-transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
+
   &:hover {
-background-color: #daeaf8;
-}
+    background-color: #daeaf8;
+  }
+
+  &:global(.active) {
+    background-color: getColor(full-blue);
+    color: #fef9f9;
+  }
 }
