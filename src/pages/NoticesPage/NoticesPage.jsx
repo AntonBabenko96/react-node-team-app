@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNotices } from 'redux/notices/notices-operations';
 import s from './NoticesPage.module.scss';
 import { useEffect, useState, useCallback } from 'react';
-import { selectFavoriteStatus } from 'redux/notices/notices-selectors';
+import { selectFavoriteStatus, selectNotices, selectTotal } from 'redux/notices/notices-selectors';
+import Paginations from 'components/Pagination/Pagination';
 
 const initialState = {
   category: 'sell',
@@ -97,6 +98,8 @@ export default function NoticesPage() {
   const favoriteStatus = useSelector(selectFavoriteStatus);
   const [genderFilters, setGenderFilters] = useState(genderInitialState);
   const [ageFilters, setAgeFilters] = useState(ageInitialState);
+  const notices = useSelector(selectNotices);
+  const count = useSelector(selectTotal);
 
   const title = searchParams.get('title') || initialState.title;
   const category = searchParams.get('category') || initialState.category;
@@ -218,13 +221,16 @@ export default function NoticesPage() {
     setSearchParams(searchParams);
   };
 
-  // useEffect(() => {
-  //    submit();
-  // }, [submit]);
-
   useEffect(() => {
     submit();
   }, [searchParams, submit, favoriteStatus]);
+
+  const getPage = useCallback( paginationPage => {
+    searchParams.set('page', paginationPage);
+    setSearchParams(searchParams);
+    submit();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [searchParams, setSearchParams, submit]);
 
   return (
     <>
@@ -249,6 +255,10 @@ export default function NoticesPage() {
             ageFilters={ageFilters}
           />
           <NoticesCategoriesList />
+          {notices?.length > 0 && (
+        <Paginations getPage={getPage} count={Math.ceil(count / limit)} />
+      )}
+
         </div>
       </section>
     </>
