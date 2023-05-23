@@ -55,6 +55,7 @@ export default function NoticesCategoriesList() {
   const handleLearnMoreBtnClick = id => {
     dispatch(getNoticeById(id));
     setId(id);
+    setIsDelete(false);
     setShowModal(true);
   };
 
