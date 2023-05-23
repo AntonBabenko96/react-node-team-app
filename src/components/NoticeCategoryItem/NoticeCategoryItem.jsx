@@ -55,7 +55,7 @@ export default function NoticeCategoryItem({
         <div className={s.box}>
           {sex === 'male' ? (
             <MaleIcon className={`${s.icon} ${s.infoIcon}`} />
-            ) : (
+          ) : (
             <FemaleIcon className={`${s.icon} ${s.infoIcon}`} />
           )}
           <p className={s.info}>{sex}</p>

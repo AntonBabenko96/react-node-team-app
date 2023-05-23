@@ -18,7 +18,6 @@ export default function NewsPage() {
   const [query, setQuery] = useState(title);
 
   const handleSubmitSearch = query => {
-    setCount(1);
     setPage(1);
     searchParams.set('title', query);
     setSearchParams(searchParams);
@@ -30,13 +29,11 @@ export default function NewsPage() {
 
   const handleResetSearch = () => {
     setQuery('');
-    setCount(1);
     setPage(1);
   };
 
-  const getPage = paginationPage => {
-    // Отримання даних з дочірнього компонента Pagination
-    setPage(paginationPage);
+  const handleChangePage = newPage => {
+    setPage(newPage);
   };
 
   useEffect(() => {
@@ -136,7 +133,13 @@ export default function NewsPage() {
           value={query}
         />
         {!notFound ? newsMarkup : notFoundMarkup}
-        {showPagination && <Paginations getPage={getPage} count={count} />}
+        {showPagination && (
+          <Paginations
+            onChangePage={handleChangePage}
+            page={page}
+            count={count}
+          />
+        )}
       </div>
     </section>
   );

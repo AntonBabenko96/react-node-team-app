@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import {
   Container,
   Pagination,
@@ -19,13 +18,7 @@ const theme = createTheme({
   },
 });
 
-export default function Paginations({ getPage, count }) {
-  const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    getPage(page);
-  }, [getPage, page]);
-
+export default function Paginations({ onChangePage, page, count }) {
   return (
     <Container>
       <Stack spacing={2}>
@@ -54,7 +47,7 @@ export default function Paginations({ getPage, count }) {
             count={count}
             color="primary"
             page={page}
-            onChange={(_, num) => setPage(num)}
+            onChange={(_, num) => onChangePage(num)}
             size="large"
           />
         </ThemeProvider>

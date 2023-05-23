@@ -28,6 +28,7 @@ const Nav = ({ onShowMenu, active, setActive }) => {
         {isMobile && <AuthNav setActive={setActive} />}
         {elements}
       </ul>
+      <button></button>
       <div
         className={`${style.burger} burger ${
           active === true ? 'headerNavActive' : ''

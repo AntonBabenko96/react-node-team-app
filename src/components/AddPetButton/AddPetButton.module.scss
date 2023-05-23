@@ -1,6 +1,8 @@
 @import '/src/styles/styles.scss';
 
 .buttonCircle {
+  cursor: pointer;
+
   @include media-max(mobile) {
     @include main-font(700, 12px, 16px);
     border-radius: 50%;
