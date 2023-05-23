@@ -195,26 +195,33 @@ export default function NoticesPage() {
         searchParams.set('favorite', '');
         searchParams.set('only-mine', '');
         searchParams.set('category', 'sell');
+        searchParams.set(`page`, 1);
         break;
       case 'lost-found':
         searchParams.set('favorite', '');
         searchParams.set('only-mine', '');
         searchParams.set('category', 'lost-found');
+        searchParams.set(`page`, 1);
+
         break;
       case 'for-free':
         searchParams.set('favorite', '');
         searchParams.set('only-mine', '');
         searchParams.set('category', 'for-free');
+        searchParams.set(`page`, 1);
+
         break;
       case 'favorite':
         searchParams.set('only-mine', '');
         searchParams.set('category', 'all');
         searchParams.set('favorite', 'true');
+        searchParams.set(`page`, 1);
         break;
       case 'only-mine':
         searchParams.set('category', 'all');
         searchParams.set('favorite', '');
         searchParams.set('only-mine', 'true');
+        searchParams.set(`page`, 1);
         break;
       default:
         searchParams.set('category', '');

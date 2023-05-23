@@ -36,6 +36,7 @@ export const getNoticeById = createAsyncThunk(
 export const deleteMyNotice = createAsyncThunk(
   'notices/deleteMyNotice',
   async (data, { rejectWithValue }) => {
+    console.log(data);
     try {
       await notices.deleteMyNotice(data);
       Notify.success('The notice has been successfully removed');
