@@ -23,8 +23,9 @@ export default function Paginations({ getPage, count }) {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
+    setPage(page);
     getPage(page);
-  }, [getPage, page]);
+  }, [page, getPage]);
 
   return (
     <Container>

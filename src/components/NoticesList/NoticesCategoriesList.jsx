@@ -18,15 +18,8 @@ import Modal from 'components/Modal/Modal';
 import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
 import { getDifference } from 'shared/utils/getDateFormat';
 import { ModalApproveAction } from 'components/Modal/ModalApproveAction/ModalApproveAction';
-import Paginations from 'components/Pagination/Pagination';
 import { changeFavoriteStatus } from 'redux/notices/notices-slice';
-import { selectTotal } from 'redux/notices/notices-selectors';
 import { useEffect } from 'react';
-
-const data = {
-  page: 1,
-  limit: 12,
-};
 
 const categoryItems = [
   { name: 'sell', value: 'sell' },
@@ -34,22 +27,14 @@ const categoryItems = [
   { name: 'for-free', value: 'in good hands' },
 ];
 
-export default function NoticesCategoriesList() {
+export default function NoticesCategoriesList({ setPages }) {
   const dispatch = useDispatch();
-  const count = useSelector(selectTotal);
   const notices = useSelector(selectNotices);
   const favoriteItem = useSelector(selectMyFavoriteNotices);
   const [showModal, setShowModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-  const [, setPage] = useState(1);
   const [idState, setId] = useState('');
-  const getPage = paginationPage => {
-    setPage(paginationPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const notice = useSelector(selectNotice);
-
   const isLogin = useSelector(selectIsLogin);
 
   const handleLearnMoreBtnClick = id => {
@@ -136,9 +121,9 @@ export default function NoticesCategoriesList() {
   return (
     <>
       <ul className={s.list}>{elements}</ul>
-      {notices?.length > 0 && (
+      {/* {notices?.length > 0 && (
         <Paginations getPage={getPage} count={Math.ceil(count / data.limit)} />
-      )}
+      )} */}
       {showModal && (
         <Modal className="css.noticeModal" onClose={onModalClose}>
           {isDelete ? (

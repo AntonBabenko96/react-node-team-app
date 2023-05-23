@@ -6,7 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNotices } from 'redux/notices/notices-operations';
 import s from './NoticesPage.module.scss';
 import { useEffect, useState, useCallback } from 'react';
-import { selectFavoriteStatus } from 'redux/notices/notices-selectors';
+import {
+  selectFavoriteStatus,
+  selectTotal,
+  selectNotices,
+} from 'redux/notices/notices-selectors';
+import Paginations from 'components/Pagination/Pagination';
+
+const data = {
+  page: 1,
+  limit: 12,
+};
 
 const initialState = {
   category: 'sell',
@@ -97,7 +107,7 @@ export default function NoticesPage() {
   const favoriteStatus = useSelector(selectFavoriteStatus);
   const [genderFilters, setGenderFilters] = useState(genderInitialState);
   const [ageFilters, setAgeFilters] = useState(ageInitialState);
-
+  const count = useSelector(selectTotal);
   const title = searchParams.get('title') || initialState.title;
   const category = searchParams.get('category') || initialState.category;
   const age = searchParams.get('age') || initialState.age;
@@ -106,6 +116,8 @@ export default function NoticesPage() {
   const page = searchParams.get('page') || initialState.page;
   const limit = searchParams.get('limit') || initialState.limit;
   const onlyMine = searchParams.get('only-mine') || initialState['only-mine'];
+  const notices = useSelector(selectNotices);
+  const [pageNum, setPageNum] = useState(1);
 
   const [query, setQuery] = useState(title);
 
@@ -179,6 +191,16 @@ export default function NoticesPage() {
     );
   }, [title, category, age, sex, favorite, page, limit, onlyMine, dispatch]);
 
+  const handleGetPage = paginationPage => {
+    searchParams.set('page', paginationPage);
+    setSearchParams(searchParams);
+    setPageNum(paginationPage);
+  };
+
+  useEffect(() => {
+    handleGetPage(pageNum);
+  }, [pageNum, handleGetPage]);
+
   const setCategory = value => {
     handleSubmitSearch('');
     handleResetSearch();
@@ -249,6 +271,12 @@ export default function NoticesPage() {
             ageFilters={ageFilters}
           />
           <NoticesCategoriesList />
+          {notices?.length > 0 && (
+            <Paginations
+              getPage={handleGetPage}
+              count={Math.ceil(count / data.limit)}
+            />
+          )}
         </div>
       </section>
     </>
