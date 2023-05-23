@@ -22,11 +22,17 @@
 }
 
 .userName {
+  margin-right: 8px;
+
   font-size: 16px;
   line-height: 22px;
   letter-spacing: 0.04em;
   color: getColor('full-yellow');
   transition: color 0.3s ease-in-out, scale 0.3s ease-in-out;
+
+  @media (min-width: 768px) {
+    margin-right: 0;
+  }
 }
 
 .avtarUser {
