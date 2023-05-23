@@ -46,6 +46,7 @@ export const addToFavorites = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       await api.addToFavorites(data);
+      return data;
     } catch ({ response }) {
       Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);
@@ -58,6 +59,7 @@ export const removeFromFavorites = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       await api.removeFromFavorites(data);
+      return data;
     } catch ({ response }) {
       Notify.failure(response.data.message);
       return rejectWithValue(response.data.message);

@@ -2,10 +2,11 @@ import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategor
 import NoticesCategoriesList from 'components/NoticesList/NoticesCategoriesList';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import { useSearchParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getNotices } from 'redux/notices/notices-operations';
 import s from './NoticesPage.module.scss';
 import { useEffect, useState, useCallback } from 'react';
+import { selectFavorite } from 'redux/auth/selectors';
 
 const initialState = {
   category: 'sell',
@@ -21,6 +22,7 @@ const initialState = {
 export default function NoticesPage() {
   const [searchParams, setSearchParams] = useSearchParams(initialState);
   const dispatch = useDispatch();
+  const favoriteList = useSelector(selectFavorite);
 
   const title = searchParams.get('title') || initialState.title;
   const category = searchParams.get('category') || initialState.category;
@@ -112,7 +114,7 @@ export default function NoticesPage() {
 
   useEffect(() => {
     submit();
-  }, [submit]);
+  }, [submit, favoriteList]);
 
   useEffect(() => {
     submit();

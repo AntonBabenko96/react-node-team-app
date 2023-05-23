@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectNotice, selectNotices } from 'redux/notices/notices-selectors';
-import { selectIsLogin } from 'redux/auth/selectors';
+import { selectIsLogin, selectFavorite } from 'redux/auth/selectors';
 import { getNoticeById } from 'redux/notices/notices-operations';
 import {
   addToFavorites,
@@ -10,7 +10,6 @@ import {
 } from 'redux/auth/auth-operations';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import NoticeCategoryItem from 'components/NoticeCategoryItem/NoticeCategoryItem';
-
 import s from './NoticesCategoriesList.module.scss';
 import Modal from 'components/Modal/Modal';
 import NoticeModal from 'components/Modal/NoticeModal/NoticeModal';
@@ -19,6 +18,7 @@ import { ModalApproveAction } from 'components/Modal/ModalApproveAction/ModalApp
 import Paginations from 'components/Pagination/Pagination';
 import { changeFavoriteStatus } from 'redux/notices/notices-slice';
 import { selectTotal } from 'redux/notices/notices-selectors';
+import { useEffect } from 'react';
 
 const data = {
   page: 1,
@@ -35,9 +35,11 @@ export default function NoticesCategoriesList() {
   const dispatch = useDispatch();
   const count = useSelector(selectTotal);
   const notices = useSelector(selectNotices);
+  const favoriteItem = useSelector(selectFavorite);
   const [showModal, setShowModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [, setPage] = useState(1);
+  const [idState, setId] = useState('');
   const getPage = paginationPage => {
     setPage(paginationPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -49,8 +51,13 @@ export default function NoticesCategoriesList() {
 
   const handleLearnMoreBtnClick = id => {
     dispatch(getNoticeById(id));
+    setId(id);
     setShowModal(true);
   };
+
+  useEffect(() => {
+    dispatch(getNoticeById(idState));
+  }, [favoriteItem, idState, dispatch]);
 
   const handleDeleteBtnClick = id => {
     setIsDelete(true);
@@ -59,6 +66,7 @@ export default function NoticesCategoriesList() {
   };
 
   const onModalClose = () => {
+    setId('');
     setShowModal(false);
   };
 
@@ -98,6 +106,7 @@ export default function NoticesCategoriesList() {
       if (age.length > 5) {
         age = age.slice(0, 4) + '...';
       }
+
       const categoryItem = categoryItems.find(item => item.name === category);
       category = categoryItem.value;
       return (
