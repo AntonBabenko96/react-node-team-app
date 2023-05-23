@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -21,8 +21,6 @@ import './AuthForm.scss';
 export const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [currentPath] = useState(window.location.pathname);
