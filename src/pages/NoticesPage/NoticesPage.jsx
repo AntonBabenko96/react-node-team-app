@@ -172,18 +172,7 @@ export default function NoticesPage() {
   }, [genderFilters, searchParams, setSearchParams]);
 
   const submit = useCallback(() => {
-    dispatch(
-      getNotices({
-        title,
-        category,
-        age,
-        sex,
-        favorite,
-        page,
-        limit,
-        onlyMine,
-      })
-    );
+    dispatch(getNotices(searchParams));
   }, [title, category, age, sex, favorite, page, limit, onlyMine, dispatch]);
 
   const setCategory = value => {

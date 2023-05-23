@@ -1,18 +1,15 @@
 import instance from './auth-api';
 
 // для отримання оголошень по заголовку та по категоріям + фільтр
-export async function getNotices({
-  category = '',
-  title = '',
-  age = '',
-  sex = '',
-  favorite = '',
-  page = 1,
-  limit = 12,
-  onlyMine = '',
-}) {
+export async function getNotices(searchParams) {
+  // const params = new URLSearchParams([]);
+
+  // if (category.length) {
+  //   params;
+  // }
+
   const { data: result } = await instance.get(
-    `/notices?category=${category}&title=${title}&age=${age}&sex=${sex}&page=${page}&limit=${limit}&favorite=${favorite}&only-mine=${onlyMine}`
+    `/notices?${searchParams.toString()}`
   );
   return result;
 }
