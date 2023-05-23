@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-import { selectNotice, selectNotices } from 'redux/notices/notices-selectors';
-import { selectIsLogin, selectFavorite } from 'redux/auth/selectors';
+import {
+  selectNotice,
+  selectNotices,
+  selectMyFavoriteNotices,
+} from 'redux/notices/notices-selectors';
+import { selectIsLogin } from 'redux/auth/selectors';
 import { getNoticeById } from 'redux/notices/notices-operations';
 import {
   addToFavorites,
   removeFromFavorites,
-} from 'redux/auth/auth-operations';
+} from 'redux/notices/notices-operations';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import NoticeCategoryItem from 'components/NoticeCategoryItem/NoticeCategoryItem';
 import s from './NoticesCategoriesList.module.scss';
@@ -35,7 +38,7 @@ export default function NoticesCategoriesList() {
   const dispatch = useDispatch();
   const count = useSelector(selectTotal);
   const notices = useSelector(selectNotices);
-  const favoriteItem = useSelector(selectFavorite);
+  const favoriteItem = useSelector(selectMyFavoriteNotices);
   const [showModal, setShowModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [, setPage] = useState(1);
