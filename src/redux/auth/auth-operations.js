@@ -41,32 +41,6 @@ export const logout = createAsyncThunk(
   }
 );
 
-export const addToFavorites = createAsyncThunk(
-  'user/addToFavorites',
-  async (data, { rejectWithValue }) => {
-    try {
-      await api.addToFavorites(data);
-      return data;
-    } catch ({ response }) {
-      Notify.failure(response.data.message);
-      return rejectWithValue(response.data.message);
-    }
-  }
-);
-
-export const removeFromFavorites = createAsyncThunk(
-  'user/removeFromFavorites',
-  async (data, { rejectWithValue }) => {
-    try {
-      await api.removeFromFavorites(data);
-      return data;
-    } catch ({ response }) {
-      Notify.failure(response.data.message);
-      return rejectWithValue(response.data.message);
-    }
-  }
-);
-
 export const getUserInfo = createAsyncThunk(
   'user/getUserInfo',
   async (_, { rejectWithValue }) => {

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNotices } from 'redux/notices/notices-operations';
 import s from './NoticesPage.module.scss';
 import { useEffect, useState, useCallback } from 'react';
-import { selectFavorite } from 'redux/auth/selectors';
+import { selectFavoriteStatus } from 'redux/notices/notices-selectors';
 
 const initialState = {
   category: 'sell',
@@ -94,10 +94,9 @@ const genderInitialState = [
 export default function NoticesPage() {
   const [searchParams, setSearchParams] = useSearchParams(initialState);
   const dispatch = useDispatch();
-  const favoriteList = useSelector(selectFavorite);
+  const favoriteStatus = useSelector(selectFavoriteStatus);
   const [genderFilters, setGenderFilters] = useState(genderInitialState);
   const [ageFilters, setAgeFilters] = useState(ageInitialState);
-
 
   const title = searchParams.get('title') || initialState.title;
   const category = searchParams.get('category') || initialState.category;
@@ -163,7 +162,7 @@ export default function NoticesPage() {
     const formattedData = createCheckedList(genderFilters);
     searchParams.set('sex', formattedData);
     setSearchParams(searchParams);
-  }, [genderFilters,searchParams, setSearchParams]);
+  }, [genderFilters, searchParams, setSearchParams]);
 
   const submit = useCallback(() => {
     dispatch(
@@ -219,13 +218,13 @@ export default function NoticesPage() {
     setSearchParams(searchParams);
   };
 
-  useEffect(() => {
-    submit();
-  }, [submit, favoriteList]);
+  // useEffect(() => {
+  //    submit();
+  // }, [submit]);
 
   useEffect(() => {
     submit();
-  }, [searchParams, submit]);
+  }, [searchParams, submit, favoriteStatus]);
 
   return (
     <>
