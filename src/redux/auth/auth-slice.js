@@ -16,6 +16,7 @@ const initialState = {
   isLogin: false,
   loading: false,
   error: null,
+  favorite: [],
   newUser: false,
 };
 
@@ -74,15 +75,20 @@ const authSlice = createSlice({
         state.isLogin = false;
       })
       .addCase(addToFavorites.pending, handlePending)
-      .addCase(addToFavorites.fulfilled, state => {
+      .addCase(addToFavorites.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.error = null;
+        state.favorite.push(payload);
       })
       .addCase(addToFavorites.rejected, handleRejected)
       .addCase(removeFromFavorites.pending, handlePending)
-      .addCase(removeFromFavorites.fulfilled, state => {
+      .addCase(removeFromFavorites.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.error = null;
+        const index = state.favorite.findIndex(cardId => cardId === payload);
+        if (index !== -1) {
+          state.favorite.splice(index, 1);
+        }
       })
       .addCase(removeFromFavorites.rejected, handleRejected)
 
