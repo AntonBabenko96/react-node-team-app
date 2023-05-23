@@ -19,10 +19,85 @@ const initialState = {
   'only-mine': '',
 };
 
+const ageInitialState = [
+  {
+    id: 1,
+    value: '3-12m',
+    label: '3-12 m',
+    checked: false,
+  },
+  {
+    id: 2,
+    value: '1y',
+    label: '1 year',
+    checked: false,
+  },
+  {
+    id: 3,
+    value: '2y',
+    label: '2 years',
+    checked: false,
+  },
+  {
+    id: 4,
+    value: '3y',
+    label: '3 years',
+    checked: false,
+  },
+  {
+    id: 5,
+    value: '4y',
+    label: '4 years',
+    checked: false,
+  },
+  {
+    id: 6,
+    value: '5y',
+    label: '5 years',
+    checked: false,
+  },
+  {
+    id: 7,
+    value: '6y',
+    label: '6 years',
+    checked: false,
+  },
+  {
+    id: 8,
+    value: '7y',
+    label: '7 years',
+    checked: false,
+  },
+  {
+    id: 9,
+    value: '8plus',
+    label: '8 +',
+    checked: false,
+  },
+];
+
+const genderInitialState = [
+  {
+    id: 1,
+    value: 'male',
+    label: 'male',
+    checked: false,
+  },
+  {
+    id: 2,
+    value: 'female',
+    label: 'female',
+    checked: false,
+  },
+];
+
 export default function NoticesPage() {
   const [searchParams, setSearchParams] = useSearchParams(initialState);
   const dispatch = useDispatch();
   const favoriteList = useSelector(selectFavorite);
+  const [genderFilters, setGenderFilters] = useState(genderInitialState);
+  const [ageFilters, setAgeFilters] = useState(ageInitialState);
+
 
   const title = searchParams.get('title') || initialState.title;
   const category = searchParams.get('category') || initialState.category;
@@ -48,15 +123,47 @@ export default function NoticesPage() {
     setQuery('');
   };
 
-  const handleAgeCheck = formattedData => {
-    searchParams.set('age', formattedData);
-    setSearchParams(searchParams);
+  const handleFilterCheck = (group, filterID) => {
+    let handler;
+
+    if (group === 'age') {
+      handler = setAgeFilters;
+    } else if (group === 'gender') {
+      handler = setGenderFilters;
+    } else {
+      return console.error(`Group by name ${group} not exist`);
+    }
+
+    handler(prevState => {
+      const state = prevState.map(state => {
+        if (state.id === filterID) {
+          state.checked = !state.checked;
+        }
+        return state;
+      });
+
+      return state;
+    });
   };
 
-  const handleGenderCheck = formattedData => {
+  const createCheckedList = filterList => {
+    const checkedList = filterList
+      .filter(state => state.checked)
+      .map(({ value }) => value);
+    return checkedList.join(',');
+  };
+
+  useEffect(() => {
+    const formattedData = createCheckedList(ageFilters);
+    searchParams.set('age', formattedData);
+    setSearchParams(searchParams);
+  }, [ageFilters, searchParams, setSearchParams]);
+
+  useEffect(() => {
+    const formattedData = createCheckedList(genderFilters);
     searchParams.set('sex', formattedData);
     setSearchParams(searchParams);
-  };
+  }, [genderFilters,searchParams, setSearchParams]);
 
   const submit = useCallback(() => {
     dispatch(
@@ -132,14 +239,15 @@ export default function NoticesPage() {
             onReset={handleResetSearch}
           />
           <NoticesCategoriesNav
-            handleSubmit={setCategory}
+            onCategoryCLick={setCategory}
             active={
               (category === 'all' ? null : category) ||
               (favorite && 'favorite') ||
               (onlyMine && 'only-mine')
             }
-            onAgeCheck={handleAgeCheck}
-            onGenderCheck={handleGenderCheck}
+            onFilterCheck={handleFilterCheck}
+            genderFilters={genderFilters}
+            ageFilters={ageFilters}
           />
           <NoticesCategoriesList />
         </div>
