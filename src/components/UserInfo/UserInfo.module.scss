@@ -94,10 +94,6 @@
   @media (min-width: 768px) {
     margin-bottom: 0;
   }
-  @media (min-width: 1280px) {
-    margin-bottom: 26px;
-    margin-top: 14px;
-  }
 }
 .edit__icon {
   position: absolute;
@@ -151,23 +147,29 @@
   stroke: getColor('full-blue');
   fill: transparent;
   cursor: pointer;
-
-  @media (min-width: 1280px) {
-    margin-top: 14px;
-  }
-  &:hover,
-  &:focus {
-    stroke: getColor('full-yellow');
-    scale: 1.1;
-  }
 }
+
 .camera__title {
   display: flex;
   justify-content: center;
+  width: 94px;
+  margin-left: auto;
+  margin-right: auto;
 
   &:hover,
   &:focus {
-    transform: rotate(360deg);
+    .edit {
+      color: getColor('full-yellow');
+      scale: 1.1;
+    }
+    .user__camera {
+      stroke: getColor('full-yellow');
+      scale: 1.1;
+    }
+  }
+  @media (min-width: 1280px) {
+    margin-bottom: 26px;
+    margin-top: 14px;
   }
 }
 
@@ -180,13 +182,25 @@
     margin-top: 13px;
     margin-bottom: 0;
   }
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    .logout__text {
+      color: getColor('full-yellow');
+      scale: 1.1;
+    }
+    .logout__icon {
+      stroke: getColor('full-yellow');
+      scale: 1.1;
+      transform: rotate(360deg);
+    }
+  }
 }
 
 .logout__text {
   @include main-font(500, 16px, 1.36);
   color: #888888;
   margin-left: 12px;
-  cursor: pointer;
 }
 
 .logout__icon {
@@ -194,14 +208,7 @@
   height: 24px;
   stroke: getColor('full-blue');
   fill: transparent;
-  cursor: pointer;
   transition: transform 0.5s ease-in-out;
-  &:hover,
-  &:focus {
-    stroke: getColor('full-yellow');
-    scale: 1.1;
-    transform: rotate(360deg);
-  }
 }
 
 .userAvatar {
