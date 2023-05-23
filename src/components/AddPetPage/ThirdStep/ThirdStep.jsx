@@ -48,7 +48,11 @@ function ThirdStep({ data, prev, finish }) {
           .matches(regEx, `English letters and numbers only`)
       : Yup.string(),
     price: price
-      ? Yup.number().required().label(`Price`).typeError(`Must be a number`)
+      ? Yup.number()
+          .positive()
+          .required()
+          .label(`Price`)
+          .typeError(`Must be a number`)
       : Yup.string(),
   });
 
