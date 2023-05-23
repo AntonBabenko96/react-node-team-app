@@ -51,7 +51,7 @@ export default function FilterButton({ genderFilters, ageFilters, onChange }) {
         }
       }}
     >
-      Filter
+      <span className={styles.header}>Filter</span>
       <FilterIcon />
       <div className={modalClasses}>
         <p className={styles.title}>Filters</p>

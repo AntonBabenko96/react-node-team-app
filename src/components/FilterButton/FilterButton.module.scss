@@ -2,7 +2,7 @@
 
 .dropdown {
   position: relative;
-  width: 152px;
+  width: 40px;
   height: 40px;
 
   display: flex;
@@ -16,10 +16,11 @@
   letter-spacing: 0.04em;
   color: getColor(full-blue);
 
-  background-color: transparent;
+  background-color: #c5dff6;
 
-  border: 2px solid currentColor;
-  border-radius: 40px;
+  border: none;
+
+  border-radius: 1000px;
 
   cursor: pointer;
   transition: 300ms color, 300ms background;
@@ -49,11 +50,16 @@
   }
 }
 
+.header {
+  display: none;
+  pointer-events: none;
+}
+
 .modal {
   position: absolute;
   z-index: 3;
   top: 52px;
-  left: 0;
+  left: -102px;
 
   width: 152px;
   padding: 8px;
@@ -79,4 +85,23 @@
   line-height: 22px;
   text-align: left;
   color: getColor(full-blue);
+}
+
+@media screen and (min-width: 480px) {
+  .dropdown {
+    width: 152px;
+
+    background-color: transparent;
+
+    border: 2px solid currentColor;
+    border-radius: 40px;
+  }
+
+  .modal {
+    left: 0;
+  }
+
+  .header {
+    display: inline;
+  }
 }
