@@ -265,7 +265,7 @@ export default function NoticesPage() {
           {notices?.length > 0 && (
             <Paginations
               onChangePage={handleChangePage}
-              page={page}
+              page={Number(page)}
               count={Math.ceil(count / limit)}
             />
           )}
