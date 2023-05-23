@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -46,13 +46,16 @@ export const AuthForm = () => {
 
     if (isLoginPath) {
       dispatch(login({ email: values.email, password: values.password }));
-     
     }
     resetForm();
   };
 
+  // if (isLogin) {
+  //   navigate('/user');
+  // }
+
   if (isLogin) {
-    navigate('/user');
+    return <Navigate to={`/user`} />;
   }
 
   return (

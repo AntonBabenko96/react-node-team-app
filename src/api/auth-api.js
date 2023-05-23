@@ -41,7 +41,7 @@ export async function login(data) {
 
 export async function logout() {
   const { data } = await instance.post('/users/logout');
-   localStorage.setItem('refreshToken', "");
+  localStorage.setItem('refreshToken', '');
   setToken();
   return data;
 }
@@ -57,6 +57,7 @@ export async function getCurrent() {
     return data;
   } catch (error) {
     setToken();
+    localStorage.setItem('refreshToken', '');
     throw error;
   }
 }

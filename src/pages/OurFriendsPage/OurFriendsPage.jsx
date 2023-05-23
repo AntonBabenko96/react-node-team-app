@@ -10,10 +10,8 @@ export default function OurFriendsPage() {
     const fetchSponsor = async () => {
       try {
         const ourFriends = await getSponsors();
-        // console.log(ourFriends);
         setSponsors([...ourFriends]);
       } catch (error) {
-        console.log(error.name);
         console.log(error.message);
       }
     };
