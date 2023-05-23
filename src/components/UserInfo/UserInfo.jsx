@@ -142,7 +142,9 @@ export default function UserInfo() {
                 className={styles.user__camera}
                 onClick={handleUploadClick}
               />
-              <p className={styles.edit}>Edit photo</p>
+              <button className={styles.edit} onClick={handleUploadClick}>
+                Edit photo
+              </button>
             </div>
           </div>
         </div>
