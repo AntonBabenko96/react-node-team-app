@@ -88,6 +88,9 @@
   margin-bottom: 21px;
   text-align: center;
   margin-left: 8px;
+  background-color: #fff;
+  border: #fff;
+  cursor: pointer;
   @media (min-width: 768px) {
     margin-bottom: 0;
   }
@@ -183,6 +186,7 @@
   @include main-font(500, 16px, 1.36);
   color: #888888;
   margin-left: 12px;
+  cursor: pointer;
 }
 
 .logout__icon {
@@ -225,13 +229,13 @@ input[type='date'] {
 .button__wrapper {
   display: flex;
   flex-direction: row;
-  gap:8px;
+  gap: 8px;
   padding: 0 35px;
   @media (min-width: 768px) {
     padding-left: 166px;
     padding-right: 166px;
   }
-  
+
   justify-content: space-between;
 }
 .question {
