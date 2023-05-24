@@ -107,8 +107,6 @@ export default function NoticesPage() {
 
   const title = searchParams.get('title') || initialState.title;
   const category = searchParams.get('category') || initialState.category;
-  const age = searchParams.get('age') || initialState.age;
-  const sex = searchParams.get('sex') || initialState.sex;
   const favorite = searchParams.get('favorite') || initialState.favorite;
   const page = searchParams.get('page') || initialState.page;
   const limit = searchParams.get('limit') || initialState.limit;
