@@ -173,7 +173,7 @@ export default function NoticesPage() {
 
   const submit = useCallback(() => {
     dispatch(getNotices(searchParams));
-  }, [title, category, age, sex, favorite, page, limit, onlyMine, dispatch]);
+  }, [searchParams, dispatch]);
 
   const setCategory = value => {
     handleSubmitSearch('');
