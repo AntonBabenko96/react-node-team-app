@@ -117,7 +117,9 @@ export default function UserInfo() {
       <div className={styles.infobox}>
         <div className={styles.decktop}>
           <div className={styles.photo}>
-            {userInfo && userInfo.avatarURL && userInfo.avatarURL !== '' ? (
+            {userInfo &&
+            userInfo.avatarURL &&
+            !userInfo.avatarURL.includes('gravatar') ? (
               <img
                 className={styles.userAvatar}
                 src={userInfo.avatarURL}
